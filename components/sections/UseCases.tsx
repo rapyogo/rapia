@@ -1,100 +1,82 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Card } from "@/components/ui/Card";
-import { Badge } from "@/components/ui/Badge";
-import { USE_CASES } from "@/lib/constants";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { USE_CASES } from "@/lib/constants";
 
-const sectorColors: Record<string, "indigo" | "amber" | "emerald" | "deep"> = {
-  "Ressources Humaines": "indigo",
-  "Commercial": "amber",
-  "Service Client": "emerald",
-  "ONG": "deep",
-  "Finance & Administration": "indigo",
-  "Direction": "amber",
-};
+const sectorAccents = [
+  "border-l-[var(--color-indigo)]",
+  "border-l-[var(--color-amber)]",
+  "border-l-[var(--color-emerald)]",
+  "border-l-[var(--color-deep)]",
+  "border-l-[var(--color-indigo)]",
+  "border-l-[var(--color-amber)]",
+];
 
 export function UseCases() {
-  const [activeCase, setActiveCase] = useState<number | null>(null);
-
   return (
-    <section className="section-padding" id="use-cases" aria-label="Cas d'usage concrets">
+    <section className="section section-alt" id="use-cases" aria-label="Cas d'usage">
       <div className="container-site">
-        <SectionHeading
-          title={USE_CASES.heading}
-          subtitle={USE_CASES.subtitle}
-          align="center"
-        />
+        <motion.div
+          className="max-w-2xl mb-16"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5 }}
+        >
+          <p className="text-xs font-semibold tracking-[0.1em] uppercase text-[var(--color-indigo)] mb-4">
+            Cas concrets
+          </p>
+          <h2
+            className="text-[var(--color-text)] leading-[1.12] tracking-[-0.02em]"
+            style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: "700" }}
+          >
+            {USE_CASES.heading}
+          </h2>
+          <p className="text-[var(--color-text-secondary)] text-lg mt-4">{USE_CASES.subtitle}</p>
+        </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {USE_CASES.cases.map((c, i) => (
             <motion.div
               key={c.sector}
-              initial={{ opacity: 0, y: 24 }}
+              className={`bg-[var(--color-surface)] rounded-[var(--radius-lg)] border border-[var(--color-border)] ${sectorAccents[i]} border-l-[3px] p-6 group hover:shadow-[var(--shadow-md)] transition-all duration-300`}
+              initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
-              onMouseEnter={() => setActiveCase(i)}
-              onMouseLeave={() => setActiveCase(null)}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.4, delay: i * 0.06 }}
             >
-              <Card
-                hover
-                padding="lg"
-                className="h-full flex flex-col relative overflow-hidden cursor-default"
-              >
-                <Badge
-                  color={sectorColors[c.sector] || "indigo"}
-                  className="mb-3 self-start"
-                >
-                  {c.sector}
-                </Badge>
+              <span className="text-xs font-bold tracking-[0.08em] uppercase text-[var(--color-text-muted)]">
+                {c.sector}
+              </span>
 
-                {/* Default view: problem */}
-                <div
-                  className={`transition-all duration-300 ${
-                    activeCase === i
-                      ? "opacity-0 h-0 overflow-hidden"
-                      : "opacity-100"
-                  }`}
-                >
-                  <p className="text-[var(--color-on-surface-variant)] text-sm leading-relaxed">
-                    <span className="font-medium text-[var(--color-on-surface)] block mb-1">
-                      Avant
-                    </span>
+              <div className="mt-4 space-y-3">
+                <div>
+                  <span className="text-xs font-semibold text-[var(--color-text-muted)]">
+                    Avant
+                  </span>
+                  <p className="text-sm text-[var(--color-text-secondary)] mt-0.5">
                     {c.before}
                   </p>
                 </div>
-
-                {/* Hover view: intervention + result */}
-                <div
-                  className={`transition-all duration-300 ${
-                    activeCase === i
-                      ? "opacity-100"
-                      : "opacity-0 h-0 overflow-hidden"
-                  }`}
-                >
-                  <p className="text-sm leading-relaxed mb-3">
-                    <span className="font-medium text-[var(--color-secondary)] block mb-1">
-                      Intervention IA
-                    </span>
+                <div className="w-8 h-[1px] bg-[var(--color-border)]" />
+                <div>
+                  <span className="text-xs font-semibold text-[var(--color-indigo)]">
+                    Intervention IA
+                  </span>
+                  <p className="text-sm text-[var(--color-text-secondary)] mt-0.5">
                     {c.intervention}
                   </p>
-                  <p className="text-sm leading-relaxed text-[var(--color-emerald)]">
-                    <span className="font-medium block mb-1">
-                      Résultat
-                    </span>
+                </div>
+                <div className="w-8 h-[1px] bg-[var(--color-border)]" />
+                <div>
+                  <span className="text-xs font-semibold text-[var(--color-emerald)]">
+                    Résultat
+                  </span>
+                  <p className="text-sm text-[var(--color-text-secondary)] mt-0.5">
                     {c.result}
                   </p>
                 </div>
-
-                <div className="mt-auto pt-4 flex items-center gap-1 text-xs text-[var(--color-secondary)] font-medium">
-                  <span>Survoler pour voir l'impact</span>
-                  <ArrowRight size={12} />
-                </div>
-              </Card>
+              </div>
             </motion.div>
           ))}
         </div>

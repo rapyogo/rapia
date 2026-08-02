@@ -1,14 +1,12 @@
 "use client";
 
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Card } from "@/components/ui/Card";
-import { WHY_RAPIA } from "@/lib/constants";
 import { motion } from "framer-motion";
-import { Target, Users, Layers, Cpu, Handshake } from "lucide-react";
+import { Target, Layers, Users, Globe, Handshake } from "lucide-react";
+import { WHY_RAPIA } from "@/lib/constants";
 
-const icons: Record<string, React.ComponentType<{ size?: number }>> = {
-  "Compréhension du terrain africain": Target,
-  "Approche orientée résultats": Cpu,
+const argIcons: Record<string, React.ComponentType<{ size?: number }>> = {
+  "Compréhension du terrain africain": Globe,
+  "Approche orientée résultats": Target,
   "Formation + Implémentation": Layers,
   "Technologies multiples": Users,
   "Accompagnement humain": Handshake,
@@ -16,42 +14,51 @@ const icons: Record<string, React.ComponentType<{ size?: number }>> = {
 
 export function WhyRapia() {
   return (
-    <section className="section-padding" id="why-rapia" aria-label="Pourquoi choisir RAPIA">
+    <section className="section" id="why-rapia" aria-label="Pourquoi RAPIA">
       <div className="container-site">
-        <SectionHeading
-          title={WHY_RAPIA.heading}
-          subtitle={WHY_RAPIA.subtitle}
-          align="center"
-        />
+        <motion.div
+          className="max-w-2xl mb-16"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5 }}
+        >
+          <p className="text-xs font-semibold tracking-[0.1em] uppercase text-[var(--color-indigo)] mb-4">
+            Différenciation
+          </p>
+          <h2
+            className="text-[var(--color-text)] leading-[1.12] tracking-[-0.02em]"
+            style={{
+              fontSize: "clamp(28px, 4vw, 48px)",
+              fontWeight: "700",
+            }}
+          >
+            {WHY_RAPIA.heading}
+          </h2>
+          <p className="text-[var(--color-text-secondary)] text-lg mt-4">
+            {WHY_RAPIA.subtitle}
+          </p>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {WHY_RAPIA.arguments.map((arg, i) => {
-            const Icon = icons[arg.title] || Target;
+            const Icon = argIcons[arg.title] || Target;
             return (
               <motion.div
                 key={arg.title}
+                className="group bg-[var(--color-surface)] border border-[var(--color-border)] rounded-[var(--radius-lg)] p-6 hover:border-[var(--color-indigo)]/30 hover:shadow-[var(--shadow-md)] transition-all duration-300"
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.4, delay: i * 0.07 }}
               >
-                <Card padding="lg" className="h-full">
-                  <div className="w-10 h-10 rounded-[4px] bg-[var(--color-deep-profond)]/10 text-[var(--color-deep-profond)] flex items-center justify-center mb-4">
-                    <Icon size={20} />
-                  </div>
-                  <h3
-                    className="text-[var(--color-on-background)] mb-2"
-                    style={{
-                      fontSize: "var(--font-body-lg-size)",
-                      fontWeight: "600",
-                    }}
-                  >
-                    {arg.title}
-                  </h3>
-                  <p className="text-sm text-[var(--color-on-surface-variant)] leading-relaxed">
-                    {arg.description}
-                  </p>
-                </Card>
+                <div className="w-10 h-10 rounded-[var(--radius-md)] bg-[var(--color-deep)]/5 text-[var(--color-deep)] flex items-center justify-center mb-4">
+                  <Icon size={18} />
+                </div>
+                <h3 className="text-[var(--color-text)] font-bold mb-2">{arg.title}</h3>
+                <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+                  {arg.description}
+                </p>
               </motion.div>
             );
           })}

@@ -1,83 +1,62 @@
 "use client";
 
 import { GraduationCap, ArrowRight } from "lucide-react";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Card } from "@/components/ui/Card";
-import { Badge } from "@/components/ui/Badge";
-import { Button } from "@/components/ui/Button";
-import { ACADEMY } from "@/lib/constants";
 import { motion } from "framer-motion";
+import { ACADEMY } from "@/lib/constants";
 
 export function Academy() {
   return (
-    <section
-      className="section-padding bg-[var(--color-surface-container-low)]"
-      id="academy"
-      aria-label="RAPIA Academy — Formation"
-    >
+    <section className="section section-dark" id="academy" aria-label="RAPIA Academy">
       <div className="container-site">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left — text */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* Gauche */}
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6 }}
           >
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-[4px] bg-[var(--color-secondary)]/10 flex items-center justify-center text-[var(--color-secondary)]">
-                <GraduationCap size={24} />
-              </div>
-              <p className="text-[var(--color-secondary)] text-sm font-medium tracking-[0.05em] uppercase">
-                RAPIA Academy
-              </p>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-white/60 mb-8">
+              <GraduationCap size={14} className="text-[var(--color-amber)]" />
+              RAPIA Academy
             </div>
 
             <h2
-              className="text-[var(--color-on-background)] mb-4 max-w-md"
-              style={{
-                fontSize: "clamp(24px, 4vw, var(--font-headline-md-size))",
-                fontWeight: "var(--font-headline-md-weight)",
-                lineHeight: "var(--font-headline-md-line-height)",
-              }}
+              className="text-white leading-[1.1] tracking-[-0.02em] mb-4 max-w-lg"
+              style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: "700" }}
             >
               {ACADEMY.heading}
             </h2>
-            <p
-              className="text-[var(--color-on-surface-variant)] mb-8 max-w-md"
-              style={{
-                fontSize: "var(--font-body-lg-size)",
-                lineHeight: "var(--font-body-lg-line-height)",
-              }}
-            >
+            <p className="text-white/50 text-lg mb-8 max-w-md">
               {ACADEMY.subtitle}
             </p>
-            <Button variant="primary" size="md" href="/contact" icon={<ArrowRight size={16} />}>
+            <a
+              href="/contact"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--color-amber)] text-[var(--color-deep)] font-semibold text-sm rounded-[var(--radius-md)] hover:bg-[var(--color-amber-light)] transition-colors"
+            >
               {ACADEMY.cta}
-            </Button>
+              <ArrowRight size={16} />
+            </a>
           </motion.div>
 
-          {/* Right — formation grid */}
+          {/* Droite — grille formations */}
           <motion.div
             className="grid grid-cols-1 sm:grid-cols-2 gap-3"
             initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6 }}
           >
             {ACADEMY.formations.map((formation, i) => (
-              <Card
+              <div
                 key={formation}
-                padding="sm"
-                className="flex items-center gap-3 hover:border-[var(--color-secondary)]/30 transition-colors"
+                className="flex items-center gap-3 px-5 py-4 rounded-[var(--radius-md)] bg-white/5 border border-white/5 hover:bg-white/8 hover:border-white/10 transition-all"
               >
-                <span className="flex-shrink-0 w-8 h-8 rounded-[4px] bg-[var(--color-secondary)]/10 text-[var(--color-secondary)] flex items-center justify-center text-xs font-bold">
+                <span className="flex-shrink-0 w-8 h-8 rounded-[var(--radius-sm)] bg-[var(--color-indigo)]/30 text-white flex items-center justify-center text-xs font-bold">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <span className="text-sm font-medium text-[var(--color-on-surface)]">
-                  {formation}
-                </span>
-              </Card>
+                <span className="text-sm font-medium text-white/80">{formation}</span>
+              </div>
             ))}
           </motion.div>
         </div>

@@ -1,134 +1,155 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { HERO } from "@/lib/constants";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
+import { HERO } from "@/lib/constants";
+import { cn } from "@/lib/utils";
+
+function CTAButton({
+  children,
+  primary = false,
+  href,
+}: {
+  children: React.ReactNode;
+  primary?: boolean;
+  href: string;
+}) {
+  return (
+    <a
+      href={href}
+      className={cn(
+        "inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold rounded-[var(--radius-md)] transition-all duration-300 cursor-pointer select-none min-h-[48px]",
+        primary
+          ? "bg-[var(--color-indigo)] text-white hover:bg-[var(--color-indigo-light)] shadow-[var(--shadow-lg)] hover:shadow-[var(--shadow-xl)] hover:-translate-y-0.5"
+          : "bg-white/10 text-white border border-white/20 hover:bg-white/15 hover:border-white/30 backdrop-blur-sm"
+      )}
+    >
+      {children}
+    </a>
+  );
+}
 
 export function Hero() {
   return (
     <section
-      className="relative overflow-hidden bg-[var(--color-background)]"
+      className="relative overflow-hidden bg-[var(--color-deep)] text-white"
       aria-label="Présentation de RAPIA"
     >
-      {/* Fond : grille subtile */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage:
-            "linear-gradient(var(--color-outline-variant) 1px, transparent 1px), linear-gradient(90deg, var(--color-outline-variant) 1px, transparent 1px)",
-          backgroundSize: "64px 64px",
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Accent décoratif : nœuds de connexion (rappel du logo) */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden lg:block opacity-[0.06]" aria-hidden="true">
-        <svg width="480" height="480" viewBox="0 0 480 480" fill="none">
-          <circle cx="240" cy="240" r="220" stroke="var(--color-secondary)" strokeWidth="2" />
-          <circle cx="240" cy="240" r="180" stroke="var(--color-secondary)" strokeWidth="1" strokeDasharray="6 10" />
-          <circle cx="240" cy="80" r="12" fill="var(--color-secondary)" />
-          <circle cx="380" cy="180" r="12" fill="var(--color-secondary)" />
-          <circle cx="400" cy="320" r="12" fill="var(--color-secondary)" />
-          <circle cx="300" cy="420" r="12" fill="var(--color-amber)" />
-          <circle cx="120" cy="420" r="12" fill="var(--color-amber)" />
-          <circle cx="40" cy="280" r="12" fill="var(--color-emerald)" />
-          <circle cx="120" cy="100" r="12" fill="var(--color-emerald)" />
-          <line x1="248" y1="90" x2="372" y2="182" stroke="var(--color-secondary)" strokeWidth="2" />
-          <line x1="388" y1="190" x2="396" y2="312" stroke="var(--color-secondary)" strokeWidth="2" />
-          <line x1="392" y1="328" x2="308" y2="416" stroke="var(--color-secondary)" strokeWidth="2" />
-          <line x1="292" y1="420" x2="128" y2="420" stroke="var(--color-amber)" strokeWidth="2" />
-          <line x1="112" y1="416" x2="48" y2="286" stroke="var(--color-amber)" strokeWidth="2" />
-          <line x1="44" y1="274" x2="116" y2="106" stroke="var(--color-emerald)" strokeWidth="2" />
-        </svg>
+      {/* Fond texturé */}
+      <div className="absolute inset-0" aria-hidden="true">
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 25% 25%, white 1px, transparent 1px), radial-gradient(circle at 75% 75%, white 1px, transparent 1px)",
+            backgroundSize: "80px 80px",
+          }}
+        />
+        {/* Gradient orbs */}
+        <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-[var(--color-indigo)]/10 blur-[120px]" />
+        <div className="absolute bottom-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[var(--color-amber)]/5 blur-[100px]" />
       </div>
 
       <div className="container-site relative">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh] py-20 md:py-24">
-          {/* Colonne texte */}
-          <div className="flex flex-col items-start justify-center max-w-2xl">
-            {/* Eyebrow */}
-            <motion.p
-              className="text-[var(--color-secondary)] text-sm font-medium tracking-[0.05em] uppercase mb-6"
-              initial={{ opacity: 0, y: 16 }}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-[90vh] py-24 md:py-32">
+          {/* Colonne gauche — Texte */}
+          <div className="flex flex-col justify-center max-w-xl">
+            {/* Badge */}
+            <motion.div
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-medium tracking-[0.08em] uppercase text-white/60 mb-8 w-fit"
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
+              <Sparkles size={14} className="text-[var(--color-amber)]" />
               {HERO.eyebrow}
-            </motion.p>
+            </motion.div>
 
-            {/* Title */}
+            {/* Titre */}
             <motion.h1
-              className="text-[var(--color-on-background)] mb-6 max-w-xl"
+              className="mb-6 leading-[1.08] tracking-[-0.025em]"
               style={{
-                fontSize: "clamp(36px, 5vw, var(--font-display-lg-size))",
-                fontWeight: "var(--font-display-lg-weight)",
-                lineHeight: "1.15",
-                letterSpacing: "var(--font-display-lg-letter-spacing)",
+                fontSize: "clamp(44px, 6vw, 72px)",
+                fontWeight: "800",
               }}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             >
               {HERO.title}
             </motion.h1>
 
-            {/* Subtitle */}
+            {/* Sous-titre */}
             <motion.p
-              className="text-[var(--color-on-surface-variant)] mb-8 max-w-lg"
-              style={{
-                fontSize: "var(--font-body-lg-size)",
-                lineHeight: "var(--font-body-lg-line-height)",
-              }}
+              className="text-white/55 text-lg leading-relaxed mb-10 max-w-lg"
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             >
               {HERO.subtitle}
             </motion.p>
 
             {/* CTAs */}
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 mb-10"
+              className="flex flex-col sm:flex-row gap-4 mb-12"
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
+              transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             >
-              <Button variant="primary" size="lg" href="/contact" icon={<ArrowRight size={18} />}>
+              <CTAButton primary href="/contact">
                 {HERO.primaryCta}
-              </Button>
-              <Button variant="ghost" size="lg" href="/#services">
-                {HERO.secondaryCta}
-              </Button>
+                <ArrowRight size={16} />
+              </CTAButton>
+              <CTAButton href="/#services">{HERO.secondaryCta}</CTAButton>
             </motion.div>
 
-            {/* Credibility */}
+            {/* Crédibilité */}
             <motion.p
-              className="text-sm text-[var(--color-on-surface-variant)] font-medium tracking-[0.05em]"
+              className="text-sm text-white/40 font-medium tracking-[0.06em] uppercase"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
+              transition={{ duration: 0.7, delay: 0.5 }}
             >
               {HERO.credibility}
             </motion.p>
           </div>
 
-          {/* Colonne visuelle — logo mark agrandi */}
+          {/* Colonne droite — Visuel */}
           <motion.div
             className="hidden lg:flex items-center justify-center"
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           >
-            <img
-              src="/rapia-mark.svg"
-              alt=""
-              className="w-80 h-80 opacity-90"
-              aria-hidden="true"
-            />
+            {/* Logo mark agrandi avec glow */}
+            <div className="relative">
+              <div className="absolute inset-0 bg-[var(--color-indigo)]/20 blur-[80px] rounded-full scale-150" />
+              <img
+                src="/rapia-mark.svg"
+                alt=""
+                className="relative w-96 h-96 opacity-90"
+                aria-hidden="true"
+              />
+            </div>
           </motion.div>
         </div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:block"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 0.8 }}
+      >
+        <div className="w-5 h-8 rounded-full border border-white/20 flex items-start justify-center p-1">
+          <motion.div
+            className="w-1 h-2 rounded-full bg-white/40"
+            animate={{ y: [0, 12, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </div>
+      </motion.div>
     </section>
   );
 }
