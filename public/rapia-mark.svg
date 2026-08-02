@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Cercle extérieur — connexion globale -->
+  <circle cx="60" cy="60" r="56" stroke="#021E2D" stroke-width="2.5" />
+  <circle cx="60" cy="60" r="48" stroke="#021E2D" stroke-width="0.75" stroke-dasharray="4 6" opacity="0.4" />
+
+  <!-- Points de connexion — intelligence distribuée -->
+  <circle cx="60" cy="20" r="5" fill="#5E53A4" />
+  <circle cx="90" cy="40" r="5" fill="#5E53A4" />
+  <circle cx="98" cy="72" r="5" fill="#5E53A4" />
+  <circle cx="72" cy="100" r="5" fill="#5E53A4" />
+  <circle cx="30" cy="100" r="5" fill="#B87500" />
+  <circle cx="12" cy="60" r="5" fill="#10B881" />
+  <circle cx="30" cy="28" r="5" fill="#B87500" />
+
+  <!-- Lignes de connexion — flux -->
+  <line x1="60" y1="25" x2="85" y2="42" stroke="#5E53A4" stroke-width="1.5" opacity="0.4" />
+  <line x1="93" y1="43" x2="96" y2="68" stroke="#5E53A4" stroke-width="1.5" opacity="0.4" />
+  <line x1="95" y1="76" x2="76" y2="98" stroke="#5E53A4" stroke-width="1.5" opacity="0.4" />
+  <line x1="68" y1="100" x2="34" y2="100" stroke="#B87500" stroke-width="1.5" opacity="0.4" />
+  <line x1="26" y1="98" x2="14" y2="64" stroke="#10B881" stroke-width="1.5" opacity="0.4" />
+  <line x1="14" y1="56" x2="28" y2="30" stroke="#B87500" stroke-width="1.5" opacity="0.4" />
+
+  <!-- R central — abstrait -->
+  <text x="60" y="78" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="48" font-weight="700" fill="#021E2D" letter-spacing="-0.02em">R</text>
+</svg>

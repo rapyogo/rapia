@@ -109,11 +109,21 @@ export default function ContactPage() {
               Retour à l'accueil
             </a>
 
-            <SectionHeading
-              title={CONTACT.heading}
-              subtitle={CONTACT.subtitle}
-              align="left"
-            />
+            <h1 className="text-[var(--color-on-background)] mb-2" style={{
+              fontSize: "clamp(24px, 4vw, var(--font-headline-md-size))",
+              fontWeight: "var(--font-headline-md-weight)",
+              lineHeight: "var(--font-headline-md-line-height)",
+            }}>
+              {CONTACT.heading}
+            </h1>
+            {CONTACT.subtitle && (
+              <p className="text-[var(--color-on-surface-variant)] mb-8" style={{
+                fontSize: "var(--font-body-lg-size)",
+                lineHeight: "var(--font-body-lg-line-height)",
+              }}>
+                {CONTACT.subtitle}
+              </p>
+            )}
 
             {/* Success state */}
             {formState === "success" && (

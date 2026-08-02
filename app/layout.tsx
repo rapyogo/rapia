@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Space_Grotesk } from "next/font/google";
+import { MotionConfig } from "framer-motion";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -91,7 +92,12 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col font-sans">
-        {children}
+        <MotionConfig reducedMotion="user">
+          <a href="#main-content" className="skip-to-content">
+            Aller au contenu principal
+          </a>
+          {children}
+        </MotionConfig>
       </body>
     </html>
   );

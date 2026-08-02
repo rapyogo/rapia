@@ -15,7 +15,7 @@ const variantStyles: Record<Variant, string> = {
   primary:
     "bg-[var(--color-secondary)] text-white hover:bg-[#4A4290] active:bg-[#3A3270] shadow-sm",
   secondary:
-    "bg-[var(--color-amber)] text-[var(--color-deep-profond)] hover:bg-[#A06500] active:bg-[#8A5500] font-semibold shadow-sm",
+    "bg-[var(--color-amber)] text-[var(--color-deep-profond)] hover:bg-[#9A5A00] active:bg-[#8A5000] font-semibold shadow-sm",
   ghost:
     "bg-transparent text-[var(--color-secondary)] border border-[var(--color-secondary)] hover:bg-[var(--color-secondary)]/5 active:bg-[var(--color-secondary)]/10",
 };

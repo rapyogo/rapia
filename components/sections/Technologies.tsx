@@ -60,20 +60,6 @@ export function Technologies() {
           })}
         </div>
 
-        {/* Key message */}
-        <motion.p
-          className="text-center mt-10 text-[var(--color-on-surface-variant)] italic"
-          style={{
-            fontSize: "var(--font-body-lg-size)",
-            lineHeight: "var(--font-body-lg-line-height)",
-          }}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-        >
-          Nous choisissons la technologie en fonction du problème, pas l'inverse.
-        </motion.p>
       </div>
     </section>
   );

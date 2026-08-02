@@ -88,7 +88,7 @@ export const SERVICES = {
         "Feuille de route IA",
       ],
       cta: "Découvrir le conseil",
-      href: "/#contact",
+      href: "/contact",
     },
     {
       id: "formation",
