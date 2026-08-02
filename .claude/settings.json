@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init *)",
+      "Bash(git checkout *)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir=false --import-alias=\"@/*\" --use-npm --no-turbopack)",
+      "Bash(mkdir ../rapia-temp)",
+      "Bash(mv DESIGN.md ../rapia-temp/)",
+      "Bash(mv SECURITY_rules.md ../rapia-temp/)",
+      "Bash(mv ../rapia-temp/DESIGN.md .)",
+      "Bash(mv ../rapia-temp/SECURITY_rules.md .)",
+      "Bash(rmdir ../rapia-temp)"
+    ]
+  }
+}

@@ -1,0 +1,245 @@
+@import "tailwindcss";
+
+/* =============================================
+   RAPIA — Design Tokens (Kinshasa Modern)
+   Source: DESIGN.md
+   ============================================= */
+
+:root {
+  /* Surface */
+  --color-surface: #F8F9FB;
+  --color-surface-dim: #D8DADC;
+  --color-surface-bright: #F8F9FB;
+  --color-surface-container-lowest: #FFFFFF;
+  --color-surface-container-low: #F2F4F6;
+  --color-surface-container: #ECEFF0;
+  --color-surface-container-high: #E6E8EA;
+  --color-surface-container-highest: #E0E3E5;
+  --color-on-surface: #191C1E;
+  --color-on-surface-variant: #42474C;
+
+  /* Background */
+  --color-background: #F8F9FB;
+  --color-on-background: #191C1E;
+
+  /* Inverse */
+  --color-inverse-surface: #2D3133;
+  --color-inverse-on-surface: #EFF1F3;
+
+  /* Outline */
+  --color-outline: #73787C;
+  --color-outline-variant: #C3C7CC;
+  --color-surface-tint: #496173;
+
+  /* Primary — Deep Profond */
+  --color-primary: #000000;
+  --color-on-primary: #FFFFFF;
+  --color-primary-container: #021E2D;
+  --color-on-primary-container: #6E8799;
+  --color-inverse-primary: #B0CADE;
+  --color-primary-fixed: #CCE6FB;
+  --color-primary-fixed-dim: #B0CADE;
+  --color-on-primary-fixed: #021E2D;
+  --color-on-primary-fixed-variant: #314A5A;
+
+  /* Secondary — Indigo */
+  --color-secondary: #5E53A4;
+  --color-on-secondary: #FFFFFF;
+  --color-secondary-container: #B1A6FE;
+  --color-on-secondary-container: #433787;
+  --color-secondary-fixed: #E5DEFF;
+  --color-secondary-fixed-dim: #C8BFFF;
+  --color-on-secondary-fixed: #19055E;
+  --color-on-secondary-fixed-variant: #463B8B;
+
+  /* Tertiary — Amber/Gold */
+  --color-tertiary: #000000;
+  --color-on-tertiary: #FFFFFF;
+  --color-tertiary-container: #2A1700;
+  --color-on-tertiary-container: #B87500;
+  --color-tertiary-fixed: #FFDDB8;
+  --color-tertiary-fixed-dim: #FFB95F;
+  --color-on-tertiary-fixed: #2A1700;
+  --color-on-tertiary-fixed-variant: #653E00;
+
+  /* Error */
+  --color-error: #BA1A1A;
+  --color-on-error: #FFFFFF;
+  --color-error-container: #FFDAD6;
+  --color-on-error-container: #93000A;
+
+  /* Brand aliases */
+  --color-deep-profond: #021E2D;
+  --color-indigo: #5E53A4;
+  --color-amber: #B87500;
+  --color-emerald: #10B881;
+  --color-border-light: #E2E8F0;
+  --color-off-white: #F4F6F8;
+
+  /* Typography */
+  --font-display-lg-size: 56px;
+  --font-display-lg-line-height: 64px;
+  --font-display-lg-weight: 700;
+  --font-display-lg-letter-spacing: -0.02em;
+
+  --font-display-lg-mobile-size: 40px;
+  --font-display-lg-mobile-line-height: 48px;
+
+  --font-headline-md-size: 32px;
+  --font-headline-md-line-height: 40px;
+  --font-headline-md-weight: 600;
+
+  --font-headline-sm-size: 24px;
+  --font-headline-sm-line-height: 32px;
+  --font-headline-sm-weight: 600;
+
+  --font-body-lg-size: 18px;
+  --font-body-lg-line-height: 28px;
+
+  --font-body-md-size: 16px;
+  --font-body-md-line-height: 24px;
+
+  --font-label-md-size: 14px;
+  --font-label-md-line-height: 20px;
+  --font-label-md-weight: 500;
+  --font-label-md-letter-spacing: 0.05em;
+
+  --font-caption-size: 12px;
+  --font-caption-line-height: 16px;
+
+  /* Spacing */
+  --spacing-container-max: 1280px;
+  --spacing-gutter: 24px;
+  --spacing-margin-desktop: 64px;
+  --spacing-margin-mobile: 20px;
+
+  /* Radius */
+  --radius-sm: 0.125rem;
+  --radius-default: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+}
+
+/* =============================================
+   Theme Tailwind v4
+   ============================================= */
+
+@theme inline {
+  --color-surface: var(--color-surface);
+  --color-on-surface: var(--color-on-surface);
+  --color-primary: var(--color-secondary);
+  --color-primary-hover: #4A4290;
+  --color-on-primary: var(--color-on-secondary);
+  --color-accent: var(--color-amber);
+  --color-deep: var(--color-deep-profond);
+  --color-border-light: var(--color-border-light);
+  --font-sans: "Space Grotesk", "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+}
+
+/* =============================================
+   Styles de base
+   ============================================= */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+  font-family: var(--font-sans);
+  font-size: var(--font-body-md-size);
+  line-height: var(--font-body-md-line-height);
+}
+
+/* Focus visible */
+:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Skip to content */
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 1000;
+  padding: 8px 16px;
+  background: var(--color-secondary);
+  color: white;
+  border-radius: var(--radius-default);
+  font-weight: 500;
+  transition: top 200ms ease;
+}
+.skip-to-content:focus {
+  top: 8px;
+}
+
+/* Sélection */
+::selection {
+  background-color: var(--color-secondary-container);
+  color: var(--color-on-secondary-container);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-outline-variant);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-outline);
+}
+
+/* Réduire les animations si l'utilisateur le demande */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =============================================
+   Utilitaires custom
+   ============================================= */
+
+.section-padding {
+  padding: var(--spacing-margin-mobile) var(--spacing-gutter);
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding: var(--spacing-margin-desktop) calc(var(--spacing-gutter) * 2);
+  }
+}
+
+.container-site {
+  width: 100%;
+  max-width: var(--spacing-container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--spacing-gutter);
+  padding-right: var(--spacing-gutter);
+}
+
+@media (min-width: 768px) {
+  .container-site {
+    padding-left: calc(var(--spacing-gutter) * 2);
+    padding-right: calc(var(--spacing-gutter) * 2);
+  }
+}
