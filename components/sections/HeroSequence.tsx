@@ -103,6 +103,7 @@ export function HeroSequence() {
         frameSrc={frameSrc}
         scrollLength={4}
         scrollLengthMobile={3}
+        eager
         aria-label="Présentation de RAPIA"
         className="relative text-white"
       >

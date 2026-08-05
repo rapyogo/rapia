@@ -2,6 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { HeroSequence } from "@/components/sections/HeroSequence";
+import { StoryFlow } from "@/components/sections/StoryFlow";
 import { Services } from "@/components/sections/Services";
 import { ProblemLevels } from "@/components/sections/ProblemLevels";
 import { Process } from "@/components/sections/Process";
@@ -20,6 +21,7 @@ export default function Home() {
       <Header />
       <main id="main-content">
         <HeroSequence />
+        <StoryFlow />
         <ProblemLevels />
         <Services />
         <Process />

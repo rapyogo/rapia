@@ -20,6 +20,8 @@ export interface ScrollSequenceProps {
   staticFrame?: number;
   /** Progression du scrub (0 → 1), à chaque frame rendue. */
   onProgress?: (progress: number) => void;
+  /** Charge les frames dès le montage, sans attendre l'approche du viewport. */
+  eager?: boolean;
   /** Contenu superposé au canvas, dans le conteneur sticky. */
   children?: React.ReactNode;
   className?: string;
@@ -39,6 +41,7 @@ export function ScrollSequence({
   scrollLengthMobile = 2.5,
   staticFrame = 1,
   onProgress,
+  eager = false,
   children,
   className,
   "aria-label": ariaLabel,
@@ -51,6 +54,25 @@ export function ScrollSequence({
   const [ready, setReady] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [shouldLoad, setShouldLoad] = useState(eager);
+
+  // Une page enchaînant plusieurs séquences ne doit charger que celles
+  // que le visiteur approche — sinon tout part au montage.
+  useEffect(() => {
+    if (eager || !sectionRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "150% 0px" },
+    );
+    observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, [eager]);
 
   useEffect(() => {
     const motionMq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -99,6 +121,7 @@ export function ScrollSequence({
 
   // Préchargement : la première frame débloque l'affichage, le reste suit.
   useEffect(() => {
+    if (!shouldLoad) return;
     let cancelled = false;
 
     const load = (index: number) =>
@@ -128,7 +151,7 @@ export function ScrollSequence({
     return () => {
       cancelled = true;
     };
-  }, [frameCount, frameSrc, staticFrame, draw, resize]);
+  }, [shouldLoad, frameCount, frameSrc, staticFrame, draw, resize]);
 
   useEffect(() => {
     window.addEventListener("resize", resize);
