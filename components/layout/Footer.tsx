@@ -28,6 +28,7 @@ export function Footer() {
             <h3 className="text-xs font-semibold text-white/30 uppercase tracking-[0.1em] mb-5">En savoir plus</h3>
             <ul className="space-y-2.5">
               <li><a href="/#why-rapia" className="text-sm text-white/50 hover:text-white transition-colors">À propos</a></li>
+              <li><a href="/notre-vision" className="text-sm text-white/50 hover:text-white transition-colors">Notre vision</a></li>
               <li><a href="/#academy" className="text-sm text-white/50 hover:text-white transition-colors">RAPIA Academy</a></li>
               <li><a href="/contact" className="text-sm text-white/50 hover:text-white transition-colors">Contact</a></li>
             </ul>
