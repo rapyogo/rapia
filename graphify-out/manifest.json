@@ -1,0 +1,297 @@
+{
+  "C:\\Users\\RAPYOGO\\rapia\\.claude\\settings.json": {
+    "mtime": 1785682346.396156,
+    "ast_hash": "c009b5bc6d57a485dab09e01704916b9",
+    "semantic_hash": "c009b5bc6d57a485dab09e01704916b9"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\app\\[locale]\\contact\\page.tsx": {
+    "mtime": 1785964685.7049391,
+    "ast_hash": "091f2598a8547e246a592eacd78fe33c",
+    "semantic_hash": "091f2598a8547e246a592eacd78fe33c"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\app\\[locale]\\layout.tsx": {
+    "mtime": 1785947658.615975,
+    "ast_hash": "e8c2bba716c874de407de688970703ab",
+    "semantic_hash": "e8c2bba716c874de407de688970703ab"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\app\\[locale]\\notre-vision\\layout.tsx": {
+    "mtime": 1785944673.4449828,
+    "ast_hash": "133dd29c4c6ac717188719bee0ed5c53",
+    "semantic_hash": "133dd29c4c6ac717188719bee0ed5c53"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\app\\[locale]\\notre-vision\\page.tsx": {
+    "mtime": 1785946345.60577,
+    "ast_hash": "29ae127dfd66d5697eb83fd43254ff86",
+    "semantic_hash": "29ae127dfd66d5697eb83fd43254ff86"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\app\\[locale]\\page.tsx": {
+    "mtime": 1785947658.6585186,
+    "ast_hash": "957f2dab31f2b12f24bad723ff6d8395",
+    "semantic_hash": "957f2dab31f2b12f24bad723ff6d8395"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\app\\api\\contact\\route.ts": {
+    "mtime": 1785966496.7124963,
+    "ast_hash": "a82f0741810bf341531b0c2ed7b8e183",
+    "semantic_hash": "a82f0741810bf341531b0c2ed7b8e183"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\app\\error.tsx": {
+    "mtime": 1785944673.4649868,
+    "ast_hash": "96bdcd062161a4e8ac35a647eb17a86c",
+    "semantic_hash": "96bdcd062161a4e8ac35a647eb17a86c"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\app\\layout.tsx": {
+    "mtime": 1785944673.4689815,
+    "ast_hash": "6afc850936385c9b67b47af8b9976cb4",
+    "semantic_hash": "6afc850936385c9b67b47af8b9976cb4"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\app\\not-found.tsx": {
+    "mtime": 1785944673.4709897,
+    "ast_hash": "f182f7cdc52853930d7b6439d9d479fe",
+    "semantic_hash": "f182f7cdc52853930d7b6439d9d479fe"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\app\\robots.ts": {
+    "mtime": 1785681878.6193628,
+    "ast_hash": "a5b5104dd59d237313f3beb74aa20fc6",
+    "semantic_hash": "a5b5104dd59d237313f3beb74aa20fc6"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\app\\sitemap.ts": {
+    "mtime": 1785944673.4739833,
+    "ast_hash": "43fb0b8782430e9f91133c6696adf028",
+    "semantic_hash": "43fb0b8782430e9f91133c6696adf028"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\layout\\Footer.tsx": {
+    "mtime": 1785944673.4789817,
+    "ast_hash": "a7daf3e2554752915838140f72e7288a",
+    "semantic_hash": "a7daf3e2554752915838140f72e7288a"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\layout\\Header.tsx": {
+    "mtime": 1785946345.6097703,
+    "ast_hash": "60a0290239e2e9173fad1d0e4e884e14",
+    "semantic_hash": "60a0290239e2e9173fad1d0e4e884e14"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\layout\\LanguageSwitcher.tsx": {
+    "mtime": 1785944673.4839816,
+    "ast_hash": "832aea548a16dc7ca8ee16771ffa43c9",
+    "semantic_hash": "832aea548a16dc7ca8ee16771ffa43c9"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\layout\\MobileNav.tsx": {
+    "mtime": 1785946345.6127698,
+    "ast_hash": "a66cbe9c27e6983eeaef60806e9e7d6b",
+    "semantic_hash": "a66cbe9c27e6983eeaef60806e9e7d6b"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\sections\\Academy.tsx": {
+    "mtime": 1785950501.194926,
+    "ast_hash": "e15c60fe41187faa5da0e32e90674a76",
+    "semantic_hash": "e15c60fe41187faa5da0e32e90674a76"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\sections\\Content.tsx": {
+    "mtime": 1785944673.489986,
+    "ast_hash": "52a2a0393446e548114b0506f4b38d54",
+    "semantic_hash": "52a2a0393446e548114b0506f4b38d54"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\sections\\FinalCTA.tsx": {
+    "mtime": 1785946345.6197703,
+    "ast_hash": "e4e987aca0151dfeacb10e27a8ec71d5",
+    "semantic_hash": "e4e987aca0151dfeacb10e27a8ec71d5"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\sections\\ForWhom.tsx": {
+    "mtime": 1785950501.2329235,
+    "ast_hash": "b256ba3ac88381b83d15193f742467dd",
+    "semantic_hash": "b256ba3ac88381b83d15193f742467dd"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\sections\\HeroSequence.tsx": {
+    "mtime": 1785946345.6237748,
+    "ast_hash": "8bf5a6a7274fa081fe263bf4899606da",
+    "semantic_hash": "8bf5a6a7274fa081fe263bf4899606da"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\sections\\ProblemLevels.tsx": {
+    "mtime": 1785954815.5238683,
+    "ast_hash": "e336cbef7cb72a0ecfa28b1806222f65",
+    "semantic_hash": "e336cbef7cb72a0ecfa28b1806222f65"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\sections\\Process.tsx": {
+    "mtime": 1785950501.3449235,
+    "ast_hash": "8054d1623371c5603fd43e46926a9232",
+    "semantic_hash": "8054d1623371c5603fd43e46926a9232"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\sections\\Services.tsx": {
+    "mtime": 1785950501.453923,
+    "ast_hash": "dd1c3905ee93736e491484dade57ae58",
+    "semantic_hash": "dd1c3905ee93736e491484dade57ae58"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\sections\\SocialProof.tsx": {
+    "mtime": 1785954815.5318663,
+    "ast_hash": "3d260336491da2a30ac492297410cabf",
+    "semantic_hash": "3d260336491da2a30ac492297410cabf"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\sections\\StoryFlow.tsx": {
+    "mtime": 1785946345.655768,
+    "ast_hash": "e9e4e3c01aaed98b91f76c4647b382f8",
+    "semantic_hash": "e9e4e3c01aaed98b91f76c4647b382f8"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\sections\\Technologies.tsx": {
+    "mtime": 1785944673.530986,
+    "ast_hash": "e94c4476d07a9c6045ba6f1a48e475a4",
+    "semantic_hash": "e94c4476d07a9c6045ba6f1a48e475a4"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\sections\\UseCases.tsx": {
+    "mtime": 1785950501.4579268,
+    "ast_hash": "f9d232a2601fb9d6bc82207c52c121f9",
+    "semantic_hash": "f9d232a2601fb9d6bc82207c52c121f9"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\sections\\WhyRapia.tsx": {
+    "mtime": 1785944673.5349839,
+    "ast_hash": "56fd7e98377603bedc8c24ba1b864f69",
+    "semantic_hash": "56fd7e98377603bedc8c24ba1b864f69"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\ui\\Button.tsx": {
+    "mtime": 1785946345.65777,
+    "ast_hash": "f0ff571c007de476ab0c4322c0889cae",
+    "semantic_hash": "f0ff571c007de476ab0c4322c0889cae"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\ui\\Card.tsx": {
+    "mtime": 1785946345.6597693,
+    "ast_hash": "f8934bf8681bec6cb24b0f13be13ac69",
+    "semantic_hash": "f8934bf8681bec6cb24b0f13be13ac69"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\ui\\Input.tsx": {
+    "mtime": 1785946345.6617684,
+    "ast_hash": "3ba9555f5c93a90980cec53e46b04d48",
+    "semantic_hash": "3ba9555f5c93a90980cec53e46b04d48"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\ui\\parallax-fond.tsx": {
+    "mtime": 1785946345.6657763,
+    "ast_hash": "d67cd506c9c4d0d93650c1c114ab6af8",
+    "semantic_hash": "d67cd506c9c4d0d93650c1c114ab6af8"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\ui\\parallax-formes.tsx": {
+    "mtime": 1785946345.6677732,
+    "ast_hash": "5b79fcd094c6a30ee4e8485f2b1b72dd",
+    "semantic_hash": "5b79fcd094c6a30ee4e8485f2b1b72dd"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\ui\\parallax-layer.tsx": {
+    "mtime": 1785944673.5409834,
+    "ast_hash": "209a6f4e06d172e7e9c2b1cd629eb706",
+    "semantic_hash": "209a6f4e06d172e7e9c2b1cd629eb706"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\ui\\scroll-sequence.tsx": {
+    "mtime": 1785944673.5429876,
+    "ast_hash": "2923fb73f51bce58a6128f4da5f4fc24",
+    "semantic_hash": "2923fb73f51bce58a6128f4da5f4fc24"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\ui\\smooth-scroll.tsx": {
+    "mtime": 1785947658.7555182,
+    "ast_hash": "34ab6c34885a696ca25f2eece65f3210",
+    "semantic_hash": "34ab6c34885a696ca25f2eece65f3210"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\ui\\story-scroll.tsx": {
+    "mtime": 1785924484.9158201,
+    "ast_hash": "e5b13086e677b53604b8a12386fba649",
+    "semantic_hash": "e5b13086e677b53604b8a12386fba649"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\eslint.config.mjs": {
+    "mtime": 1785679779.5523365,
+    "ast_hash": "dfa1f5f6a7037bf39dc510f30b180002",
+    "semantic_hash": "dfa1f5f6a7037bf39dc510f30b180002"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\i18n\\navigation.ts": {
+    "mtime": 1785944673.5479853,
+    "ast_hash": "3ab9561fc91d92e830d44435876e220f",
+    "semantic_hash": "3ab9561fc91d92e830d44435876e220f"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\i18n\\request.ts": {
+    "mtime": 1785944673.5499828,
+    "ast_hash": "deb5c32fb7510529f44c459e8828c873",
+    "semantic_hash": "deb5c32fb7510529f44c459e8828c873"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\i18n\\routing.ts": {
+    "mtime": 1785944673.5509832,
+    "ast_hash": "577067a2192590bb01e7a4971bd3bcff",
+    "semantic_hash": "577067a2192590bb01e7a4971bd3bcff"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\lib\\email.ts": {
+    "mtime": 1785968463.546327,
+    "ast_hash": "7bf7ef69352e2f0afa337f2ce409f631",
+    "semantic_hash": "7bf7ef69352e2f0afa337f2ce409f631"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\lib\\utils.ts": {
+    "mtime": 1785681461.3885128,
+    "ast_hash": "2ef94df9d7f472b4a9158749ad95c707",
+    "semantic_hash": "2ef94df9d7f472b4a9158749ad95c707"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\messages\\en.json": {
+    "mtime": 1785964685.721939,
+    "ast_hash": "9e7c9f1ca0edf6e76bb74848b7858794",
+    "semantic_hash": "9e7c9f1ca0edf6e76bb74848b7858794"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\messages\\fr.json": {
+    "mtime": 1785964685.7239363,
+    "ast_hash": "48f2c350120172e0652c0fb1f0f3e11d",
+    "semantic_hash": "48f2c350120172e0652c0fb1f0f3e11d"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\next.config.ts": {
+    "mtime": 1785944673.5709825,
+    "ast_hash": "26b76749f6d2d644eae91f7d968a0873",
+    "semantic_hash": "26b76749f6d2d644eae91f7d968a0873"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\package.json": {
+    "mtime": 1785964685.729936,
+    "ast_hash": "fe1b21fb205cb5804528aab85fc27d56",
+    "semantic_hash": "fe1b21fb205cb5804528aab85fc27d56"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\postcss.config.mjs": {
+    "mtime": 1785679779.7213407,
+    "ast_hash": "239f3ebf717465dc636818a1a619398d",
+    "semantic_hash": "239f3ebf717465dc636818a1a619398d"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\proxy.ts": {
+    "mtime": 1785944673.5799818,
+    "ast_hash": "240cc25210592bdb5e6bb29e6a2c9c08",
+    "semantic_hash": "240cc25210592bdb5e6bb29e6a2c9c08"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\tsconfig.json": {
+    "mtime": 1785679843.3542583,
+    "ast_hash": "02fc19ad21338c2ab820a70136310db4",
+    "semantic_hash": "02fc19ad21338c2ab820a70136310db4"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\.impeccable\\critique\\2026-08-02T16-16-29Z__app-page-tsx.md": {
+    "mtime": 1785687389.100372,
+    "ast_hash": "fdd9b6262cf9857934787eb6db9bc13f",
+    "semantic_hash": "fdd9b6262cf9857934787eb6db9bc13f"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\DESIGN.md": {
+    "mtime": 1785946345.5507693,
+    "ast_hash": "d4698acf8b055ed2fa1b74257fbfe920",
+    "semantic_hash": "d4698acf8b055ed2fa1b74257fbfe920"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\PRODUCT.md": {
+    "mtime": 1785686657.8366103,
+    "ast_hash": "1f82340008a411d7fd99613562d58eba",
+    "semantic_hash": "1f82340008a411d7fd99613562d58eba"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\README.md": {
+    "mtime": 1785964685.7019374,
+    "ast_hash": "534471f2407d26b2045b571d6c0eb5e5",
+    "semantic_hash": "534471f2407d26b2045b571d6c0eb5e5"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\SECURITY_rules.md": {
+    "mtime": 1785679104.453442,
+    "ast_hash": "e80876fcb2aaa436f32735f61477be12",
+    "semantic_hash": "e80876fcb2aaa436f32735f61477be12"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\docs\\HANDOFF.md": {
+    "mtime": 1785969260.8388302,
+    "ast_hash": "d8c36e8fd9b509d5c3e9d75cd0216d68",
+    "semantic_hash": "d8c36e8fd9b509d5c3e9d75cd0216d68"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\docs\\superpowers\\plans\\2026-08-05-email-contact-form.md": {
+    "mtime": 1785964685.713944,
+    "ast_hash": "83b805c93f7169ad723280ae8b48d124",
+    "semantic_hash": "83b805c93f7169ad723280ae8b48d124"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\docs\\superpowers\\specs\\2026-08-05-email-contact-form-design.md": {
+    "mtime": 1785964685.715937,
+    "ast_hash": "473078c511dc996f55098675d5f0e3b9",
+    "semantic_hash": "473078c511dc996f55098675d5f0e3b9"
+  }
+}
