@@ -125,20 +125,23 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true });
   }
 
-  // 4. Rate limiting
-  if (isRateLimited(ip)) {
-    return NextResponse.json(
-      { error: "Trop de requêtes. Veuillez patienter une minute." },
-      { status: 429 }
-    );
-  }
-
-  // 5. Validation
+  // 4. Validation — avant le rate limiting, pour qu'une faute de frappe
+  // (email mal saisi, champ oublié) ne bloque pas le visiteur pendant 60s.
+  // Une soumission invalide n'envoie aucun email : elle ne coûte rien au quota.
   const validation = validate(body);
   if (!validation.valid) {
     return NextResponse.json(
       { error: validation.error },
       { status: validation.status }
+    );
+  }
+
+  // 5. Rate limiting — ne compte que les soumissions valides, celles qui
+  // déclenchent réellement un envoi.
+  if (isRateLimited(ip)) {
+    return NextResponse.json(
+      { error: "Trop de requêtes. Veuillez patienter une minute." },
+      { status: 429 }
     );
   }
 
