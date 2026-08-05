@@ -85,18 +85,10 @@ function StoryAct({
         <ParallaxFond variant={fondVariant} />
         <ParallaxFormes side={formesSide} />
 
+        {/* Voile de lisibilité — aplat uni, pas un dégradé décoratif */}
         <div
           aria-hidden="true"
-          className={cn(
-            "absolute inset-0 z-30",
-            align === "left"
-              ? "bg-gradient-to-r from-[var(--color-deep)]/92 via-[var(--color-deep)]/55 to-transparent"
-              : "bg-gradient-to-l from-[var(--color-deep)]/92 via-[var(--color-deep)]/55 to-transparent",
-          )}
-        />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 z-30 bg-gradient-to-t from-[var(--color-deep)]/90 via-transparent to-[var(--color-deep)]/45"
+          className="absolute inset-0 z-30 bg-[var(--color-deep)]/70"
         />
 
         {chapters.map((ch, i) => (
@@ -302,7 +294,7 @@ export function StoryFlow() {
                 <div className="mt-10 flex justify-start md:justify-end">
                   <a
                     href={`${prefix}/contact`}
-                    className="inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold rounded-[var(--radius-md)] bg-[var(--color-indigo)] text-white hover:bg-[var(--color-indigo-light)] shadow-[var(--shadow-lg)] hover:shadow-[var(--shadow-xl)] hover:-translate-y-0.5 transition-all duration-300 min-h-[48px]"
+                    className="inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold rounded-[var(--radius-md)] bg-[var(--color-indigo)] text-white hover:bg-[var(--color-indigo-light)] transition-colors duration-300 min-h-[48px]"
                   >
                     {t("act5.cta")}
                     <ArrowRight size={16} />

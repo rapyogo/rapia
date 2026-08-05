@@ -1,19 +1,20 @@
 import type { Metadata, Viewport } from "next";
 import { getTranslations } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
-import { Space_Grotesk } from "next/font/google";
+import { Inter } from "next/font/google";
 import { MotionConfig } from "framer-motion";
 
-const spaceGrotesk = Space_Grotesk({
+const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-space-grotesk",
+  variable: "--font-inter",
 });
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: "#F8F9FB",
+  colorScheme: "light",
 };
 
 export async function generateMetadata({
@@ -113,7 +114,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${spaceGrotesk.variable} h-full antialiased`}
+      className={`${inter.variable} h-full antialiased`}
     >
       <head>
         <script

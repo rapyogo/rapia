@@ -26,14 +26,13 @@ export function Input(props: InputProps) {
     props;
 
   const inputClasses = cn(
-    "w-full px-4 py-3 bg-white border border-[var(--color-border-light)] rounded-[4px]",
-    "text-[var(--color-on-background)]",
+    "w-full px-4 py-3 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-[var(--radius-md)]",
+    "text-[var(--color-text)]",
     "font-sans text-base leading-6",
-    "transition-all duration-200",
-    "placeholder:text-[var(--color-outline)]",
-    "focus:outline-none focus:border-[var(--color-secondary)]",
-    "focus:shadow-[0_0_0_2px_var(--color-secondary)/0.1]",
-    error && "border-[var(--color-error)] focus:border-[var(--color-error)] focus:shadow-[0_0_0_2px_var(--color-error)/0.1]",
+    "transition-colors duration-200",
+    "placeholder:text-[var(--color-text-muted)]",
+    "focus:outline-none focus:border-[var(--color-indigo)]",
+    error && "border-[var(--color-error)] focus:border-[var(--color-error)]",
     textarea && "min-h-[120px] resize-y",
     className
   );
@@ -42,7 +41,7 @@ export function Input(props: InputProps) {
     <div className="flex flex-col gap-1.5">
       <label
         htmlFor={id}
-        className="text-sm font-medium text-[var(--color-on-surface)]"
+        className="text-sm font-medium text-[var(--color-text)]"
       >
         {label}
       </label>
@@ -73,7 +72,7 @@ export function Input(props: InputProps) {
         </p>
       )}
       {helperText && !error && (
-        <p id={`${id}-helper`} className="text-sm text-[var(--color-on-surface-variant)]">
+        <p id={`${id}-helper`} className="text-sm text-[var(--color-text-secondary)]">
           {helperText}
         </p>
       )}

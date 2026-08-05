@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { useTranslations, useLocale } from "next-intl";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollSequence } from "@/components/ui/scroll-sequence";
@@ -29,8 +29,8 @@ function CTAButton({
       className={cn(
         "inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold rounded-[var(--radius-md)] transition-all duration-300 cursor-pointer select-none min-h-[48px]",
         primary
-          ? "bg-[var(--color-indigo)] text-white hover:bg-[var(--color-indigo-light)] shadow-[var(--shadow-lg)] hover:shadow-[var(--shadow-xl)] hover:-translate-y-0.5"
-          : "bg-white/10 text-white border border-white/20 hover:bg-white/15 hover:border-white/30 backdrop-blur-sm"
+          ? "bg-[var(--color-indigo)] text-white hover:bg-[var(--color-indigo-light)]"
+          : "text-white border border-white/25 hover:bg-white/10"
       )}
     >
       {children}
@@ -116,22 +116,18 @@ export function HeroSequence() {
         <ParallaxFond variant="indigo" />
         <ParallaxFormes side="left" />
 
-        {/* Voile de lisibilité — assombrit l'image sous le texte */}
+        {/* Voile de lisibilité — aplat uni, pas un dégradé décoratif :
+            il sert le contraste du texte sur l'image, rien d'autre. */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 z-30 bg-gradient-to-r from-[var(--color-deep)]/92 via-[var(--color-deep)]/55 to-transparent"
-        />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 z-30 bg-gradient-to-t from-[var(--color-deep)]/90 via-transparent to-[var(--color-deep)]/45"
+          className="absolute inset-0 z-30 bg-[var(--color-deep)]/70"
         />
 
         {/* Chapitre 1 — l'accroche de marque */}
         <Chapter index={0}>
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-medium tracking-[0.08em] uppercase text-white/60 mb-8 w-fit backdrop-blur-sm">
-            <Sparkles size={14} className="text-[var(--color-amber)]" />
+          <p className="text-xs font-semibold tracking-[0.1em] uppercase text-white/60 mb-8">
             {t("eyebrow")}
-          </div>
+          </p>
           <h1
             className="leading-[1.08] tracking-[-0.025em] font-extrabold"
             style={{ fontSize: "clamp(36px, 6vw, 72px)" }}

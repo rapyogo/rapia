@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslations, useLocale } from "next-intl";
 
@@ -9,12 +9,8 @@ export function FinalCTA() {
   const locale = useLocale();
 
   return (
-    <section className="section section-dark relative overflow-hidden" aria-label="Appel à l'action">
-      {/* Orbs décoratifs */}
-      <div className="absolute top-[-30%] left-[-20%] w-[500px] h-[500px] rounded-full bg-[var(--color-indigo)]/10 blur-[100px]" aria-hidden="true" />
-      <div className="absolute bottom-[-30%] right-[-10%] w-[400px] h-[400px] rounded-full bg-[var(--color-amber)]/5 blur-[80px]" aria-hidden="true" />
-
-      <div className="container-site relative">
+    <section className="section section-dark" aria-label="Appel à l'action">
+      <div className="container-site">
         <motion.div
           className="max-w-3xl mx-auto text-center"
           initial={{ opacity: 0, y: 40 }}
@@ -22,11 +18,9 @@ export function FinalCTA() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-white/60 mb-8">
-            <Sparkles size={14} className="text-[var(--color-amber)]" />
+          <p className="text-xs font-semibold tracking-[0.1em] uppercase text-white/50 mb-6">
             {t("eyebrow")}
-          </div>
+          </p>
 
           <h2
             className="text-white leading-[1.08] tracking-[-0.02em] mb-6"
@@ -41,14 +35,14 @@ export function FinalCTA() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href={`/${locale}/contact`}
-              className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--color-amber)] text-[var(--color-deep)] font-bold text-sm rounded-[var(--radius-md)] hover:bg-[var(--color-amber-light)] transition-all hover:-translate-y-0.5 shadow-[var(--shadow-lg)]"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--color-amber)] text-[var(--color-deep)] font-bold text-sm rounded-[var(--radius-md)] hover:bg-[var(--color-amber-light)] transition-colors"
             >
               {t("primaryCta")}
               <ArrowRight size={16} />
             </a>
             <a
               href={`/${locale}/contact`}
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white/5 text-white border border-white/10 font-semibold text-sm rounded-[var(--radius-md)] hover:bg-white/10 hover:border-white/20 transition-all"
+              className="inline-flex items-center gap-2 px-8 py-4 text-white border border-white/25 font-semibold text-sm rounded-[var(--radius-md)] hover:bg-white/10 transition-colors"
             >
               {t("secondaryCta")}
             </a>

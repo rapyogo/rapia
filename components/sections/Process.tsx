@@ -6,10 +6,10 @@ import { useTranslations } from "next-intl";
 
 const stepIcons = [Search, Lightbulb, Wrench, GraduationCap];
 const stepColors = [
-  "bg-[var(--color-indigo)]/10 text-[var(--color-indigo)]",
-  "bg-[var(--color-amber)]/10 text-[var(--color-amber)]",
-  "bg-[var(--color-emerald)]/10 text-[var(--color-emerald)]",
-  "bg-[var(--color-deep)]/10 text-[var(--color-deep)]",
+  "bg-[var(--color-indigo)]/8 text-[var(--color-indigo)] border-[var(--color-indigo)]/20",
+  "bg-[var(--color-amber)]/8 text-[var(--color-amber)] border-[var(--color-amber)]/20",
+  "bg-[var(--color-emerald)]/8 text-[var(--color-emerald)] border-[var(--color-emerald)]/20",
+  "bg-[var(--color-deep)]/8 text-[var(--color-deep)] border-[var(--color-deep)]/20",
 ];
 
 interface ProcessStep {
@@ -22,7 +22,7 @@ export function Process() {
   const steps = t.raw("steps") as ProcessStep[];
 
   return (
-    <section className="section section-dark" aria-label="Notre méthodologie">
+    <section className="section section-alt" aria-label="Notre méthodologie">
       <div className="container-site">
         {/* En-tête */}
         <motion.div
@@ -32,11 +32,11 @@ export function Process() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
         >
-          <p className="text-xs font-semibold tracking-[0.1em] uppercase text-white/40 mb-4">
+          <p className="text-xs font-semibold tracking-[0.1em] uppercase text-[var(--color-indigo)] mb-4">
             {t("eyebrow")}
           </p>
           <h2
-            className="text-white leading-[1.12] tracking-[-0.02em]"
+            className="text-[var(--color-text)] leading-[1.12] tracking-[-0.02em]"
             style={{
               fontSize: "clamp(28px, 4vw, 48px)",
               fontWeight: "700",
@@ -44,13 +44,13 @@ export function Process() {
           >
             {t("heading")}
           </h2>
-          <p className="text-white/50 text-lg mt-4">{t("subtitle")}</p>
+          <p className="text-[var(--color-text-secondary)] text-lg mt-4">{t("subtitle")}</p>
         </motion.div>
 
         {/* Timeline desktop */}
         <div className="hidden md:block relative">
           {/* Ligne de connexion */}
-          <div className="absolute top-10 left-0 right-0 h-[2px] bg-white/10" aria-hidden="true" />
+          <div className="absolute top-10 left-0 right-0 h-[2px] bg-[var(--color-border)]" aria-hidden="true" />
 
           <div className="grid grid-cols-4 gap-8">
             {steps.map((step, i) => {
@@ -66,15 +66,15 @@ export function Process() {
                   transition={{ duration: 0.5, delay: i * 0.12 }}
                 >
                   <div
-                    className={`relative z-10 w-20 h-20 rounded-2xl flex items-center justify-center mb-6 border border-white/10 backdrop-blur-sm ${stepColors[i]}`}
+                    className={`relative z-10 w-20 h-20 rounded-[var(--radius-lg)] flex items-center justify-center mb-6 border ${stepColors[i]}`}
                   >
                     <Icon size={28} />
                   </div>
-                  <span className="text-xs font-bold tracking-[0.1em] text-white/30 mb-2">
+                  <span className="text-xs font-bold tracking-[0.1em] text-[var(--color-text-muted)] mb-2">
                     {number}
                   </span>
-                  <h3 className="text-white font-bold text-lg mb-2">{step.title}</h3>
-                  <p className="text-white/50 text-sm leading-relaxed">
+                  <h3 className="text-[var(--color-text)] font-bold text-lg mb-2">{step.title}</h3>
+                  <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed">
                     {step.description}
                   </p>
                 </motion.div>
@@ -98,16 +98,16 @@ export function Process() {
                 transition={{ duration: 0.4, delay: i * 0.1 }}
               >
                 <div
-                  className={`flex-shrink-0 w-14 h-14 rounded-xl flex items-center justify-center border border-white/10 ${stepColors[i]}`}
+                  className={`flex-shrink-0 w-14 h-14 rounded-xl flex items-center justify-center border ${stepColors[i]}`}
                 >
                   <Icon size={22} />
                 </div>
                 <div>
-                  <span className="text-xs font-bold tracking-[0.1em] text-white/30">
+                  <span className="text-xs font-bold tracking-[0.1em] text-[var(--color-text-muted)]">
                     {number}
                   </span>
-                  <h3 className="text-white font-bold text-lg mt-1">{step.title}</h3>
-                  <p className="text-white/50 text-sm mt-1">{step.description}</p>
+                  <h3 className="text-[var(--color-text)] font-bold text-lg mt-1">{step.title}</h3>
+                  <p className="text-[var(--color-text-secondary)] text-sm mt-1">{step.description}</p>
                 </div>
               </motion.div>
             );

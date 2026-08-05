@@ -71,10 +71,10 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 transition-all duration-500",
+        "sticky top-0 z-50 bg-[var(--color-deep)] transition-colors duration-300",
         isScrolled
-          ? "bg-[var(--color-deep)]/95 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_4px_24px_rgba(2,30,45,0.3)]"
-          : "bg-[var(--color-deep)] border-b border-transparent"
+          ? "border-b border-white/10"
+          : "border-b border-transparent"
       )}
     >
       <div className="container-site flex items-center justify-between h-16 md:h-20">

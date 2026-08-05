@@ -22,10 +22,10 @@ export function Card({
   return (
     <div
       className={cn(
-        "bg-white border border-[var(--color-border-light)] rounded-[8px]",
+        "bg-[var(--color-surface)] border border-[var(--color-border)] rounded-[var(--radius-lg)]",
         paddingStyles[padding],
         hover &&
-          "transition-all duration-300 hover:border-[var(--color-secondary)]/30 hover:-translate-y-0.5",
+          "transition-colors duration-300 hover:border-[var(--color-indigo)]/40",
         className
       )}
       {...props}

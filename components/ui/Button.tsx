@@ -13,11 +13,11 @@ interface ButtonBaseProps {
 
 const variantStyles: Record<Variant, string> = {
   primary:
-    "bg-[var(--color-indigo)] text-white hover:bg-[var(--color-indigo-light)] shadow-[var(--shadow-md)] hover:shadow-[var(--shadow-lg)]",
+    "bg-[var(--color-indigo)] text-white hover:bg-[var(--color-indigo-light)]",
   secondary:
-    "bg-[var(--color-amber)] text-[var(--color-deep)] hover:bg-[var(--color-amber-light)] font-bold shadow-[var(--shadow-md)]",
+    "bg-[var(--color-amber)] text-[var(--color-deep)] hover:bg-[var(--color-amber-light)] font-bold",
   ghost:
-    "bg-transparent text-white border border-white/20 hover:bg-white/10 hover:border-white/30",
+    "bg-transparent text-[var(--color-indigo)] border border-[var(--color-indigo)] hover:bg-[var(--color-indigo)]/5",
 };
 
 const sizeStyles: Record<Size, string> = {
@@ -33,10 +33,9 @@ function getButtonClasses(variant: Variant, size: Size, className?: string, load
     "disabled:opacity-50 disabled:cursor-not-allowed",
     "cursor-pointer select-none font-semibold",
     "min-h-[44px] min-w-[44px]",
-    "hover:-translate-y-0.5",
     variantStyles[variant],
     sizeStyles[size],
-    loading && "cursor-wait opacity-70 !translate-y-0",
+    loading && "cursor-wait opacity-70",
     className
   );
 }

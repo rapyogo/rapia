@@ -37,7 +37,7 @@ export default function NotreVisionPage() {
       {/* Retour — flottant au-dessus des sections empilées (z-index le plus haut) */}
       <Link
         href={prefix}
-        className="fixed top-6 left-6 z-[100] inline-flex items-center gap-2 px-4 py-2.5 rounded-[var(--radius-md)] bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-medium hover:bg-white/20 transition-colors"
+        className="fixed top-6 left-6 z-[100] inline-flex items-center gap-2 px-4 py-2.5 rounded-[var(--radius-md)] bg-[var(--color-deep)] border border-white/25 text-white text-sm font-medium hover:bg-[var(--color-deep-light)] transition-colors"
       >
         <ArrowLeft size={16} />
         {t("back")}

@@ -89,7 +89,7 @@ export function Services() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
               >
                 <div
-                  className={`bg-[var(--color-surface)] rounded-[var(--radius-lg)] border border-[var(--color-border)] ${borderColors[i]} border-l-[3px] p-8 h-full flex flex-col group transition-all duration-300 hover:shadow-[var(--shadow-md)] hover:-translate-y-0.5`}
+                  className={`bg-[var(--color-surface)] rounded-[var(--radius-lg)] border border-[var(--color-border)] ${borderColors[i]} border-l-[3px] p-8 h-full flex flex-col group transition-all duration-300 hover:shadow-[var(--shadow-md)] hover:-translate-y-1`}
                 >
                   {/* Header */}
                   <div className="flex items-start gap-4 mb-5">

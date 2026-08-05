@@ -6,16 +6,18 @@ import { cn } from "@/lib/utils";
 
 interface ParallaxFormesProps {
   speed?: number;
-  /** Côté où placer les cercles géométriques. */
+  /** Côté où placer les formes géométriques. */
   side?: "left" | "right";
   className?: string;
 }
 
 /**
- * Couche de formes géométriques en premier plan visuel.
+ * Couche de formes géométriques : grille et cercles en traits fins.
  *
- * Grille tech + cercles/bagues flottants, tout en CSS pur.
- * Mobile : grille uniquement, pas de cercles (trop chargé).
+ * Vocabulaire « systèmes et connexions » du cahier des charges — des lignes et
+ * des nœuds, jamais de robot, de cerveau numérique ni de circuit imprimé.
+ * Traits pleins uniquement : ni gradient, ni glow.
+ * Mobile : grille seule, les cercles surchargent un petit écran.
  */
 export function ParallaxFormes({
   speed = 0.6,
@@ -40,13 +42,12 @@ export function ParallaxFormes({
       className={cn("parallax-formes z-20 pointer-events-none", className)}
       aria-hidden="true"
     >
-      {/* Grille tech — lignes fines */}
+      {/* Grille — SVG de lignes fines. Pas un gradient : le cahier des charges
+          les interdit, et un trait SVG est de toute facon plus net au rendu. */}
       <div
         className="absolute inset-0 parallax-formes-grid"
         style={{
-          backgroundImage:
-            "linear-gradient(rgba(94,83,164,0.06) 1px, transparent 1px), " +
-            "linear-gradient(90deg, rgba(94,83,164,0.06) 1px, transparent 1px)",
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M80 0H0v80' fill='none' stroke='%233A2E7E' stroke-opacity='0.06' stroke-width='1'/%3E%3C/svg%3E")`,
           backgroundSize: "80px 80px",
         }}
       />
@@ -65,22 +66,18 @@ export function ParallaxFormes({
           {/* Bague secondaire — plus petite, décalée */}
           <div
             className={cn(
-              "absolute w-[320px] h-[320px] rounded-full border border-[var(--color-amber)]/8",
+              "absolute w-[320px] h-[320px] rounded-full border border-[var(--color-amber)]/10",
               side === "left"
                 ? "-bottom-[120px] -left-[60px]"
                 : "-bottom-[120px] -right-[60px]",
             )}
           />
-          {/* Ligne horizontale décorative */}
+          {/* Ligne de liaison — trait plein, pas de dégradé */}
           <div
             className={cn(
-              "absolute h-px w-[120%]",
+              "absolute h-px w-[120%] bg-[var(--color-indigo)]/10",
               side === "left" ? "-right-[10%] top-[30%]" : "-left-[10%] top-[60%]",
             )}
-            style={{
-              background:
-                "linear-gradient(90deg, transparent, rgba(94,83,164,0.15) 40%, rgba(94,83,164,0.05) 80%, transparent)",
-            }}
           />
         </>
       )}
