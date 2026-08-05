@@ -319,6 +319,31 @@ Plan gratuit Brevo : **300 emails/jour**. Chaque soumission en consomme **2**
 Si ça sature : passer en notification seule, ou au plan payant Brevo
 (5 000/jour, ~10 €/mois). Ne jamais mettre d'envoi en boucle.
 
+### Authentification du domaine (DNS Cloudflare)
+
+Vérifiée le 2026-08-06 par interrogation directe des DNS :
+
+| Enregistrement | État | Valeur |
+|----------------|------|--------|
+| Propriété Brevo | ✅ | `brevo-code:5ce60e41...` sur `rapyogo.com` |
+| **SPF** | ✅ | `v=spf1 include:_spf.mx.cloudflare.net include:spf.brevo.com ~all` |
+| **DKIM** | ✅ | `brevo1` et `brevo2._domainkey` → CNAME vers `bN.rapyogo-com.dkim.brevo.com`, clés RSA 2048 bits valides |
+| **DMARC** | ⚠️ | `v=DMARC1; p=none; rua=mailto:rua@dmarc.brevo.com` — `p=none` à durcir |
+
+**Le sélecteur DKIM de Brevo est `brevo1` / `brevo2`**, pas `mail._domainkey`
+comme sur d'anciennes documentations Sendinblue. Chercher au mauvais endroit
+fait conclure à tort que le DKIM est absent.
+
+Commande de contrôle :
+```bash
+nslookup -type=CNAME brevo1._domainkey.rapyogo.com 8.8.8.8
+nslookup -type=TXT rapyogo.com 8.8.8.8 | grep spf
+nslookup -type=TXT _dmarc.rapyogo.com 8.8.8.8
+```
+
+Sur Cloudflare, ces enregistrements doivent rester en **DNS only (nuage gris)** :
+un proxy actif casse la résolution.
+
 ### Variables d'environnement
 
 Les 6 sont posées sur **Production, Preview et Development** (via `vercel env add`) :
@@ -417,10 +442,10 @@ filesystem avant d'appliquer les règles d'ignore.
 
 ### Email — à traiter en priorité
 
-- **Authentifier le domaine dans Brevo (SPF, DKIM, DMARC).** Non vérifié à ce
-  jour. Sans ces enregistrements DNS chez Cloudflare, Gmail et Outlook peuvent
-  classer les emails en indésirables malgré un contenu correct. C'est le point
-  qui conditionne la délivrabilité réelle. → Brevo → Senders & Domains
+- **Passer DMARC de `p=none` à `p=quarantine`.** SPF et DKIM sont en place
+  (voir « Authentification du domaine » ci-dessous), mais `p=none` ne demande
+  aucune action en cas d'échec : le domaine reste usurpable. Passer à
+  `quarantine`, observer les rapports `rua` quelques semaines, puis `reject`.
 - **Tester le rendu sous Outlook desktop** — Gmail est permissif, Outlook non.
   Le gabarit est construit pour lui, mais ça n'a pas été vérifié de visu.
 - **Supprimer `RESEND_API_KEY` et `CONTACT_EMAIL`** des variables Vercel
