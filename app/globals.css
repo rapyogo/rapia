@@ -77,8 +77,10 @@
    Base
    ============================================= */
 
+/* Pas de `scroll-behavior: smooth` ici : Lenis pilote le scroll et la
+   navigation par ancre (voir components/ui/smooth-scroll.tsx). Les deux
+   ensemble se disputent la meme animation. */
 html {
-  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

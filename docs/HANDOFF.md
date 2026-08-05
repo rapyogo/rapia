@@ -24,19 +24,24 @@ mesuré **~15-20 % d'alignement** avec le site d'alors. Migration progressive en
 | Phase | Contenu | État |
 |-------|---------|------|
 | 1 | i18n FR/EN | ✅ Fait |
-| 2 | Design System « Corporate Clair » (Inter, thème clair, zéro gradient/glow) | ⬜ À faire |
+| 2 | Design System « Corporate Clair » (Inter, thème clair, zéro gradient/glow) | ✅ Fait |
 | 3 | Photographie Higgsfield (30+ assets) en remplacement des séquences canvas | ⬜ Bloqué sur génération des assets |
 | 4 | « La Transformation » — vidéo showpiece pinned, cartes pilotées par `timeupdate` | ⬜ Bloqué sur génération vidéo |
-| 5 | Lenis, ordre des sections, SEO, déploiement | ⬜ À faire |
+| 5 | Lenis, ordre des sections, SEO, déploiement | 🟡 Lenis et ordre faits ; déploiement à décider |
 
-**Écarts connus restants** (le site actuel les contredit encore) : thème dark au
-lieu de clair, Space Grotesk au lieu d'Inter, gradients/orbes/blur présents,
-aucune photographie, 5 séquences canvas au lieu d'une vidéo showpiece, Lenis absent.
+**Écarts restants avec le cahier des charges :** aucune photographie (les 5
+séquences canvas tiennent la place), pas encore de vidéo showpiece unique, et
+les sections Preuves / Contenu restent masquées faute de contenu réel.
+
+**Le MCP Higgsfield est connecté mais demande une autorisation** que seul
+l'utilisateur peut accorder via ses réglages de connecteurs claude.ai. Tant
+qu'elle n'est pas donnée, les phases 3 et 4 ne peuvent pas démarrer.
 
 ## Stack technique
 
 - **Next.js 16** (App Router, Turbopack) + **React 19** + **TypeScript 5**
 - **next-intl v4** — bilinguisme FR/EN, routes `/fr` et `/en` (voir « Bilinguisme »)
+- **Lenis** — scroll fluide global, synchronisé avec ScrollTrigger (voir « Scroll fluide »)
 - **Tailwind CSS v4** (via `@theme inline`, pas de `tailwind.config.js` — tokens dans `app/globals.css`)
 - **Framer Motion** — animations scroll-reveal, `MotionConfig reducedMotion="user"` dans `app/[locale]/layout.tsx`
 - **GSAP + @gsap/react** — scroll storytelling sur `/notre-vision` (ScrollTrigger pin/rotate)
@@ -190,6 +195,36 @@ originaux sont aussi conservés dans `public/` (fallback).
 Voir [`PRODUCT.md`](../PRODUCT.md) (créé via `/impeccable init`) pour : personas (4 publics à égalité — entreprises, ONG, institutions, professionnels), positionnement, principes produit, contraintes.
 
 **Règle critique à ne jamais enfreindre :** aucune preuve sociale n'est disponible (témoignages, stats, logos clients). Les sections `SocialProof` et `Content` **retournent `null`** tant que du vrai contenu n'existe pas (leur copy attend dans `messages/*.json` sous la clé `placeholder: true`). Ne jamais réactiver avec du contenu inventé.
+
+## Scroll fluide (Lenis)
+
+`components/ui/smooth-scroll.tsx`, monté une fois dans le layout de locale.
+
+**Trois pièges à connaître avant d'y toucher :**
+
+- **Lenis est avancé depuis le ticker GSAP**, pas depuis son propre `requestAnimationFrame`.
+  Deux boucles concurrentes décalent la position de scroll d'une frame par rapport
+  aux séquences canvas — visible comme un tremblement pendant le scrub.
+- **`gsap.ticker.lagSmoothing(0)`** est obligatoire : sans lui, GSAP rattrape les
+  frames perdues et fait sauter les séquences après un freeze.
+- **`scroll-behavior: smooth` a été retiré de `globals.css`** et ne doit pas
+  revenir : il se dispute les ancres avec Lenis. La navigation par ancre est gérée
+  dans le composant, avec un décalage de 80px pour le header sticky.
+
+`prefers-reduced-motion` : Lenis n'est pas monté du tout, le scroll natif reprend.
+
+## Ordre des sections
+
+Fixé par le cahier des charges, à ne pas réarranger sans raison :
+
+```
+Hero → Le Problème → La Transformation → Services → Méthode → Cas d'usage →
+Academy → Pourquoi RAPIA → Technologies → Pour qui → Preuves → Contenu → CTA final
+```
+
+`StoryFlow` (les 4 actes vidéo) tient la place de « La Transformation » jusqu'à
+la phase 4. **Le constat vient donc avant le récit** — l'inverse de ce qui était
+en place avant le 2026-08-05 : on nomme le problème, puis on montre la sortie.
 
 ## Bilinguisme FR/EN
 

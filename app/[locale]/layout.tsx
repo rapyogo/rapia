@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { Inter } from "next/font/google";
 import { MotionConfig } from "framer-motion";
+import { SmoothScroll } from "@/components/ui/smooth-scroll";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -125,6 +126,7 @@ export default async function LocaleLayout({
       <body className="min-h-full flex flex-col font-sans">
         <NextIntlClientProvider>
           <MotionConfig reducedMotion="user">
+            <SmoothScroll />
             <a href="#main-content" className="skip-to-content">
               {locale === "fr"
                 ? "Aller au contenu principal"

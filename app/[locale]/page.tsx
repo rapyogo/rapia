@@ -15,14 +15,24 @@ import { SocialProof } from "@/components/sections/SocialProof";
 import { Content } from "@/components/sections/Content";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 
+/**
+ * Ordre des sections impose par le cahier des charges :
+ * Hero -> Le Probleme -> La Transformation -> Services -> Methode ->
+ * Cas d'usage -> Academy -> Pourquoi RAPIA -> Technologies -> Pour qui ->
+ * Preuves -> Contenu -> CTA final.
+ *
+ * `StoryFlow` tient la place de « La Transformation » jusqu'a ce que la video
+ * showpiece la remplace (phase 4). Le constat vient donc avant le recit, et
+ * non l'inverse : on nomme le probleme, puis on montre la sortie.
+ */
 export default function Home() {
   return (
     <>
       <Header />
       <main id="main-content">
         <HeroSequence />
-        <StoryFlow />
         <ProblemLevels />
+        <StoryFlow />
         <Services />
         <Process />
         <UseCases />
