@@ -43,3 +43,8 @@ next-env.d.ts
 
 .vercel
 .gstack/
+
+# graphify — chemins propres a la machine et cache d'extraction
+graphify-out/.graphify_python
+graphify-out/.graphify_root
+graphify-out/cache/
