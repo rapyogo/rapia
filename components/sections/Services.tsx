@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { ArrowRight, MessageSquare, BookOpen, Cpu, Cog } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslations, useLocale } from "next-intl";
@@ -16,6 +17,14 @@ const hrefMap: Record<string, string> = {
   formation: "/#academy",
   implementation: "/contact",
   automatisation: "/contact",
+};
+
+/** Photos generees a partir du meme master : lumiere et grain identiques. */
+const photoMap: Record<string, string> = {
+  conseil: "/images/photos/service-conseil.webp",
+  formation: "/images/photos/service-formation.webp",
+  implementation: "/images/photos/service-implementation.webp",
+  automatisation: "/images/photos/service-automatisation.webp",
 };
 
 
@@ -89,8 +98,20 @@ export function Services() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
               >
                 <div
-                  className={`bg-[var(--color-surface)] rounded-[var(--radius-lg)] border border-[var(--color-border)] ${borderColors[i]} border-l-[3px] p-8 h-full flex flex-col group transition-all duration-300 hover:shadow-[var(--shadow-md)] hover:-translate-y-1`}
+                  className={`bg-[var(--color-surface)] rounded-[var(--radius-lg)] border border-[var(--color-border)] ${borderColors[i]} border-l-[3px] h-full flex flex-col group overflow-hidden transition-all duration-300 hover:shadow-[var(--shadow-md)] hover:-translate-y-1`}
                 >
+                  {/* Photo — meme univers visuel pour les quatre services */}
+                  <div className="relative aspect-[3/2] w-full overflow-hidden bg-[var(--color-bg-alt)]">
+                    <Image
+                      src={photoMap[service.id]}
+                      alt=""
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover"
+                    />
+                  </div>
+
+                  <div className="p-8 flex flex-col flex-1">
                   {/* Header */}
                   <div className="flex items-start gap-4 mb-5">
                     <div className={`w-12 h-12 rounded-[var(--radius-md)] flex items-center justify-center ${bgColors[i]}`}>
@@ -133,6 +154,7 @@ export function Services() {
                     {service.cta}
                     <ArrowRight size={14} />
                   </a>
+                  </div>
                 </div>
               </motion.div>
             );

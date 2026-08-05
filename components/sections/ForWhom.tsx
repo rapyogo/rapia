@@ -1,11 +1,18 @@
 "use client";
 
+import Image from "next/image";
 import { Building2, Heart, Landmark, User, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslations, useLocale } from "next-intl";
 
 const audienceIcons = [Building2, Heart, Landmark, User];
 const audienceHrefs = ["/contact", "/contact", "/contact", "/#academy"];
+const audiencePhotos = [
+  "/images/photos/public-entreprises.webp",
+  "/images/photos/public-ong.webp",
+  "/images/photos/public-institutions.webp",
+  "/images/photos/public-professionnels.webp",
+];
 
 interface Audience {
   title: string;
@@ -53,28 +60,40 @@ export function ForWhom() {
             return (
               <motion.div
                 key={audience.title}
-                className={`bg-[var(--color-surface)] border border-[var(--color-border)] rounded-[var(--radius-lg)] p-8 text-center flex flex-col items-center group transition-all duration-300 ${audienceAccents[i]} hover:shadow-[var(--shadow-md)] hover:-translate-y-1`}
+                className={`bg-[var(--color-surface)] border border-[var(--color-border)] rounded-[var(--radius-lg)] overflow-hidden flex flex-col group transition-all duration-300 ${audienceAccents[i]} hover:shadow-[var(--shadow-md)] hover:-translate-y-1`}
                 initial={{ opacity: 0, y: 32 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
               >
-                <div className="w-16 h-16 rounded-2xl bg-[var(--color-deep)]/5 text-[var(--color-deep)] flex items-center justify-center mb-5">
-                  <Icon size={28} />
+                <div className="relative aspect-[4/5] w-full overflow-hidden bg-[var(--color-bg-alt)]">
+                  <Image
+                    src={audiencePhotos[i]}
+                    alt=""
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    className="object-cover"
+                  />
                 </div>
-                <h3 className="text-[var(--color-text)] font-bold text-lg mb-2">
-                  {audience.title}
-                </h3>
-                <p className="text-sm text-[var(--color-text-secondary)] mb-6 flex-1">
-                  {audience.description}
-                </p>
-                <a
-                  href={`/${locale}${audienceHrefs[i] || "/contact"}`}
-                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--color-indigo)] hover:text-[var(--color-indigo-light)] transition-colors"
-                >
-                  {audience.cta}
-                  <ArrowRight size={14} />
-                </a>
+
+                <div className="p-6 flex flex-col flex-1">
+                  <div className="w-10 h-10 rounded-[var(--radius-md)] bg-[var(--color-deep)]/5 text-[var(--color-deep)] flex items-center justify-center mb-4">
+                    <Icon size={20} />
+                  </div>
+                  <h3 className="text-[var(--color-text)] font-bold text-lg mb-2">
+                    {audience.title}
+                  </h3>
+                  <p className="text-sm text-[var(--color-text-secondary)] mb-6 flex-1">
+                    {audience.description}
+                  </p>
+                  <a
+                    href={`/${locale}${audienceHrefs[i] || "/contact"}`}
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--color-indigo)] hover:text-[var(--color-indigo-light)] transition-colors"
+                  >
+                    {audience.cta}
+                    <ArrowRight size={14} />
+                  </a>
+                </div>
               </motion.div>
             );
           })}

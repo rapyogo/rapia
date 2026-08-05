@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { GraduationCap, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslations, useLocale } from "next-intl";
@@ -43,14 +44,24 @@ export function Academy() {
             </a>
           </motion.div>
 
-          {/* Droite — grille formations */}
+          {/* Droite — la photo puis la grille des formations */}
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 gap-3"
             initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6 }}
           >
+          <div className="relative aspect-video w-full mb-6 overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-alt)]">
+            <Image
+              src="/images/photos/academy.webp"
+              alt=""
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {formations.map((formation, i) => (
               <div
                 key={formation}
@@ -62,6 +73,7 @@ export function Academy() {
                 <span className="text-sm font-medium text-[var(--color-text)]">{formation}</span>
               </div>
             ))}
+          </div>
           </motion.div>
         </div>
       </div>

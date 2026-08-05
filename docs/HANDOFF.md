@@ -196,6 +196,55 @@ Voir [`PRODUCT.md`](../PRODUCT.md) (créé via `/impeccable init`) pour : person
 
 **Règle critique à ne jamais enfreindre :** aucune preuve sociale n'est disponible (témoignages, stats, logos clients). Les sections `SocialProof` et `Content` **retournent `null`** tant que du vrai contenu n'existe pas (leur copy attend dans `messages/*.json` sous la clé `placeholder: true`). Ne jamais réactiver avec du contenu inventé.
 
+## Photographie (assets Higgsfield)
+
+28 visuels générés le 2026-08-05, dans `public/images/photos/`. **1,52 Mo au
+total** — les 28 photos pèsent moins que les 250 frames des séquences canvas.
+
+### La règle qui tient tout
+
+**Un seul master, tout le reste en image-to-image depuis lui.** C'est ce qui
+donne au site une lumière, un grain et une palette identiques d'une section à
+l'autre — et le même consultant d'une photo à l'autre.
+
+| Fichier | Rôle |
+|---------|------|
+| `master.webp` | **L'image maîtresse.** Consultant devant un whiteboard, bureau de Kinshasa. Toute nouvelle photo doit en dériver. |
+| `service-*.webp` (4) | Cartes services (3:2) |
+| `cas-*.webp` (6) | Cas d'usage, carré |
+| `methode-{1..4}-*.webp` | Les 4 moments de la méthode, en fondu enchaîné |
+| `academy.webp`, `contexte-africain.webp`, `banniere-ressources.webp` | Supports |
+| `equipe.webp` | **Provisoire** — voir l'avertissement ci-dessous |
+| `public-*.webp` (4) | Les 4 publics (4:5) |
+| `detail-*.webp` (3) | Respirations visuelles |
+| `graphique-systemes.webp` | Nœuds et courbes — le vocabulaire visuel de l'IA sur ce site |
+| `dashboard-mockup.webp` | Interface générique |
+
+### Contraintes à ne pas relâcher
+
+- **Aucun robot, cerveau numérique, circuit imprimé ni interface holographique.**
+  L'IA se représente par des systèmes et des connexions — `graphique-systemes.webp`
+  est le gabarit à suivre. Cet interdit couvre aussi les icônes.
+- **Aucun texte lisible ni logo** dans les visuels : les écrans et whiteboards
+  ne portent que des formes abstraites. Les prompts l'exigent explicitement ;
+  le vérifier sur toute nouvelle génération.
+- **`equipe.webp` est un placeholder** : les visages n'y sont pas
+  individuellement identifiables. À remplacer par une vraie photo d'équipe dès
+  qu'elle existe, et **à ne jamais présenter comme des personnes nommées**.
+
+### Régénérer ou compléter
+
+```bash
+node scripts/optimize-photos.cjs   # PNG bruts -> WebP dimensionnés par usage
+```
+
+Le script porte la largeur cible de chaque image ; ajouter une entrée pour tout
+nouveau visuel. Les PNG sources ne sont pas versionnés (172 Mo).
+
+**Budget crédits Higgsfield :** 2 crédits par image. La vidéo showpiece de la
+phase 4 demande Seedance 2.0 à **22,5 crédits les 5 secondes**, soit 112,5
+crédits pour les 5 actes — c'est ce qui bloque la phase 4, pas la technique.
+
 ## Scroll fluide (Lenis)
 
 `components/ui/smooth-scroll.tsx`, monté une fois dans le layout de locale.

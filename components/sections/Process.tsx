@@ -1,8 +1,22 @@
 "use client";
 
+import { useRef, useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import { Search, Lightbulb, Wrench, GraduationCap } from "lucide-react";
 import { useTranslations } from "next-intl";
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
+
+const stepPhotos = [
+  "/images/photos/methode-1-comprendre.webp",
+  "/images/photos/methode-2-identifier.webp",
+  "/images/photos/methode-3-construire.webp",
+  "/images/photos/methode-4-former.webp",
+];
 
 const stepIcons = [Search, Lightbulb, Wrench, GraduationCap];
 const stepColors = [
@@ -20,6 +34,40 @@ interface ProcessStep {
 export function Process() {
   const t = useTranslations("process");
   const steps = t.raw("steps") as ProcessStep[];
+  const crossfadeRef = useRef<HTMLDivElement>(null);
+  const [activeStep, setActiveStep] = useState(0);
+
+  useGSAP(
+    () => {
+      const layers = gsap.utils.toArray<HTMLElement>("[data-crossfade]");
+      if (layers.length === 0) return;
+
+      // Une seule ScrollTrigger pilote l'opacite des quatre calques : la
+      // progression 0 -> 1 est decoupee en autant de segments que d'etapes.
+      ScrollTrigger.create({
+        trigger: crossfadeRef.current,
+        start: "top 75%",
+        end: "bottom 25%",
+        scrub: 0.6,
+        onUpdate: (self) => {
+          const exact = self.progress * (layers.length - 1);
+          const index = Math.min(Math.floor(exact), layers.length - 2);
+          const blend = exact - index;
+
+          layers.forEach((layer, i) => {
+            let opacity = 0;
+            if (i === index) opacity = 1 - blend;
+            else if (i === index + 1) opacity = blend;
+            else if (i < index) opacity = 0;
+            gsap.set(layer, { opacity });
+          });
+
+          setActiveStep(Math.round(exact));
+        },
+      });
+    },
+    { scope: crossfadeRef, dependencies: [steps.length] },
+  );
 
   return (
     <section className="section section-alt" aria-label="Notre méthodologie">
@@ -46,6 +94,31 @@ export function Process() {
           </h2>
           <p className="text-[var(--color-text-secondary)] text-lg mt-4">{t("subtitle")}</p>
         </motion.div>
+
+        {/* Les quatre moments, en fondu enchaine au scroll. Comme les quatre
+            photos derivent du meme master, le fondu lit comme une scene qui
+            evolue, pas comme un diaporama. */}
+        <div ref={crossfadeRef} className="hidden md:block relative aspect-[21/9] w-full mb-16 overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-alt)]">
+          {stepPhotos.map((src, i) => (
+            <Image
+              key={src}
+              data-crossfade={i}
+              src={src}
+              alt=""
+              fill
+              sizes="100vw"
+              priority={i === 0}
+              className="object-cover"
+              style={{ opacity: i === 0 ? 1 : 0 }}
+            />
+          ))}
+          <div className="absolute bottom-6 left-6 z-10 rounded-[var(--radius-md)] bg-[var(--color-deep)] px-5 py-3">
+            <span className="text-xs font-bold tracking-[0.1em] text-white/50">
+              {activeStep + 1} / {steps.length}
+            </span>
+            <p className="text-white font-semibold">{steps[activeStep]?.title}</p>
+          </div>
+        </div>
 
         {/* Timeline desktop */}
         <div className="hidden md:block relative">

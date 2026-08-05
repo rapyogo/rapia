@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
@@ -9,6 +10,16 @@ interface UseCase {
   intervention: string;
   result: string;
 }
+
+/** Un visuel carre par secteur, dans l'ordre des cas traduits. */
+const photos = [
+  "/images/photos/cas-rh.webp",
+  "/images/photos/cas-commercial.webp",
+  "/images/photos/cas-service-client.webp",
+  "/images/photos/cas-ong.webp",
+  "/images/photos/cas-finance.webp",
+  "/images/photos/cas-direction.webp",
+];
 
 const sectorAccents = [
   "border-l-[var(--color-indigo)]",
@@ -49,12 +60,23 @@ export function UseCases() {
           {cases.map((c, i) => (
             <motion.div
               key={c.sector}
-              className={`bg-[var(--color-surface)] rounded-[var(--radius-lg)] border border-[var(--color-border)] ${sectorAccents[i]} border-l-[3px] p-6 group hover:shadow-[var(--shadow-md)] transition-all duration-300`}
+              className={`bg-[var(--color-surface)] rounded-[var(--radius-lg)] border border-[var(--color-border)] ${sectorAccents[i]} border-l-[3px] overflow-hidden group hover:shadow-[var(--shadow-md)] transition-all duration-300`}
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.4, delay: i * 0.06 }}
             >
+              <div className="relative aspect-square w-full overflow-hidden bg-[var(--color-bg-alt)]">
+                <Image
+                  src={photos[i]}
+                  alt=""
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover"
+                />
+              </div>
+
+              <div className="p-6">
               <span className="text-xs font-bold tracking-[0.08em] uppercase text-[var(--color-text-muted)]">
                 {c.sector}
               </span>
@@ -86,6 +108,7 @@ export function UseCases() {
                     {c.result}
                   </p>
                 </div>
+              </div>
               </div>
             </motion.div>
           ))}
