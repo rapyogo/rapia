@@ -11,6 +11,12 @@ import type { ContactFormData } from "@/lib/email";
 
 // ---------------------------------------------------------------------------
 // Rate limiting in-memory (1 soumission / 60 secondes par IP)
+//
+// LIMITE CONNUE — Vercel serverless : chaque instance a sa propre mémoire.
+// Deux instances chaudes en parallèle = deux soumissions possibles dans la même
+// fenêtre de 60s pour la même IP. C'est acceptable au volume actuel (le quota
+// Brevo de 300 emails/jour est la vraie borne). Si le spam devient un problème,
+// remplacer cette Map par Vercel KV ou Upstash Redis — le reste du code ne bouge pas.
 // ---------------------------------------------------------------------------
 
 const RATE_LIMIT_WINDOW = 60_000; // 1 minute
@@ -136,29 +142,48 @@ export async function POST(request: Request) {
     );
   }
 
-  const data = validation.data;
+  // Page d'origine de la demande — utile pour suivre d'où viennent les contacts.
+  const referer = request.headers.get("referer");
+  const data: ContactFormData = {
+    ...validation.data,
+    source: referer ? referer.slice(0, 300) : "Formulaire de contact",
+  };
 
-  // 6. Envoi des emails (notification + confirmation)
+  // 6. Envoi des emails (notification interne + confirmation visiteur)
+  // La notification est prioritaire : c'est elle qui achemine réellement la demande.
   const [notifResult, confirmResult] = await Promise.allSettled([
     sendContactNotification(data),
     sendContactConfirmation(data),
   ]);
 
-  // Log des résultats pour diagnostic
-  if (notifResult.status === "rejected" || (notifResult.value && !notifResult.value.success)) {
-    console.error("[contact] Échec notification:", notifResult);
+  const notifOk =
+    notifResult.status === "fulfilled" && notifResult.value.success;
+
+  // Les détails d'erreur (SMTP, credentials, etc.) restent côté serveur.
+  // Le client ne reçoit jamais qu'un message générique.
+  if (!notifOk) {
+    console.error(
+      "[contact] Échec de la notification interne:",
+      notifResult.status === "rejected" ? notifResult.reason : notifResult.value.error
+    );
   }
-  if (confirmResult.status === "rejected" || (confirmResult.value && !confirmResult.value.success)) {
-    console.error("[contact] Échec confirmation:", confirmResult);
+  if (confirmResult.status === "rejected" || !confirmResult.value.success) {
+    console.error(
+      "[contact] Échec de la confirmation visiteur:",
+      confirmResult.status === "rejected" ? confirmResult.reason : confirmResult.value.error
+    );
   }
 
-  // On retourne un succès même si l'email de confirmation échoue
-  // (le visiteur ne doit pas être pénalisé par un souci SMTP)
-  if (notifResult.status === "fulfilled" && notifResult.value.success) {
-    return NextResponse.json({ success: true });
+  // Si la notification interne a échoué, la demande n'est parvenue à personne :
+  // on le dit au visiteur plutôt que de lui laisser croire que c'est parti.
+  if (!notifOk) {
+    return NextResponse.json(
+      { error: "Une erreur est survenue lors de l'envoi. Veuillez réessayer." },
+      { status: 500 }
+    );
   }
 
-  // Si la notification a échoué, on log mais on ne bloque pas l'UX
-  console.warn("[contact] Notification interne échouée — le message est peut-être perdu.");
+  // La notification est partie. Un échec de la confirmation visiteur n'est pas
+  // bloquant : la demande est bien arrivée chez nous.
   return NextResponse.json({ success: true });
 }

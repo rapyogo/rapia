@@ -57,6 +57,8 @@ export interface ContactFormData {
   orgType?: string;
   need?: string;
   message: string;
+  /** Page d'origine de la demande — sert à savoir d'où vient le contact. */
+  source?: string;
 }
 
 /** Réservé — inscriptions aux formations. */
@@ -154,6 +156,8 @@ export async function sendContactNotification(
     <tr><td style="padding: 8px 0; font-weight: 600;">Téléphone</td><td>${escapeHtml(data.phone || "Non renseigné")}</td></tr>
     <tr><td style="padding: 8px 0; font-weight: 600;">Type d'organisation</td><td>${escapeHtml(data.orgType || "Non renseigné")}</td></tr>
     <tr><td style="padding: 8px 0; font-weight: 600;">Besoin</td><td>${escapeHtml(data.need || "Non renseigné")}</td></tr>
+    <tr><td style="padding: 8px 0; font-weight: 600;">Reçu de</td><td>${escapeHtml(data.source || "Formulaire de contact")}</td></tr>
+    <tr><td style="padding: 8px 0; font-weight: 600;">Reçu le</td><td>${now}</td></tr>
   </table>
   <hr style="margin: 20px 0; border: none; border-top: 1px solid #e2e8f0;">
   <h3 style="color: #021E2D; margin-bottom: 8px;">Message</h3>
@@ -172,11 +176,11 @@ export async function sendContactNotification(
     `Téléphone: ${data.phone || "Non renseigné"}`,
     `Type d'organisation: ${data.orgType || "Non renseigné"}`,
     `Besoin: ${data.need || "Non renseigné"}`,
+    `Reçu de: ${data.source || "Formulaire de contact"}`,
+    `Reçu le: ${now}`,
     ``,
     `Message:`,
     data.message,
-    ``,
-    `Reçu le ${now}`,
   ].join("\n");
 
   return sendEmail(contactEmail, subject, html, text);
