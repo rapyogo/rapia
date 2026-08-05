@@ -111,6 +111,37 @@ const BRAND = {
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ia.rapyogo.com";
 
 /**
+ * Coordonnées légales de l'entreprise.
+ *
+ * Elles ne sont pas décoratives : les filtres anti-spam accordent de la
+ * confiance aux expéditeurs qui s'identifient physiquement, avec une adresse
+ * et des identifiants vérifiables. Elles figurent donc dans chaque email.
+ */
+const COMPANY = {
+  phone: "+243 856 474 500",
+  /** Format sans espaces ni ponctuation, requis par les liens `tel:`. */
+  phoneLink: "+243856474500",
+  email: "ia@rapyogo.com",
+  offices: [
+    { city: "Goma (siège)", address: "Av. Rwamichacha n° 30, Keshero" },
+    { city: "Kinshasa", address: "01, Av. OUA, Concession Procoki, Q. Basoko" },
+    { city: "Lubumbashi", address: "170, Av. Maniema, Q. Makutano" },
+  ],
+  legal: "RCCM : CD/GOM/RCCM/23-B-00261 · ID Nat : 19-H5300-N42287N · NIF : A2215930Q",
+} as const;
+
+/** Pied de page des versions texte — pendant du pied de page HTML. */
+const FOOTER_TEXT = [
+  `RapIA — un service de Rapyogo SARL`,
+  `Conseil • Formation • Implémentation • Automatisation`,
+  ``,
+  ...COMPANY.offices.map((o) => `${o.city} : ${o.address}`),
+  ``,
+  `Tél : ${COMPANY.phone} • E-mail : ${COMPANY.email} • Web : ia.rapyogo.com`,
+  `Rapyogo SARL — ${COMPANY.legal.replace(/ · /g, " | ")}`,
+].join("\n");
+
+/**
  * Gabarit commun à tous les emails du site : bandeau logo, carte de contenu, pied de page.
  *
  * Contraintes email respectées ici (ne pas « moderniser » sans vérifier dans Outlook) :
@@ -168,21 +199,44 @@ function emailLayout({
           <!-- Pied de page -->
           <tr>
             <td style="background-color:${BRAND.deep}; border-radius:0 0 12px 12px; padding:28px 32px;">
-              <p style="margin:0 0 6px; font-family:${BRAND.font}; font-size:15px; font-weight:600; color:#FFFFFF;">
+
+              <p style="margin:0 0 4px; font-family:${BRAND.font}; font-size:15px; font-weight:600; color:#FFFFFF;">
                 RapIA
               </p>
-              <p style="margin:0 0 16px; font-family:${BRAND.font}; font-size:13px; line-height:1.5; color:#94A3B8;">
+              <p style="margin:0 0 4px; font-family:${BRAND.font}; font-size:13px; color:#94A3B8;">
+                Un service de Rapyogo SARL
+              </p>
+              <p style="margin:0 0 20px; font-family:${BRAND.font}; font-size:12px; color:#64748B;">
                 Conseil &bull; Formation &bull; Implémentation &bull; Automatisation
               </p>
-              <p style="margin:0 0 16px; font-family:${BRAND.font}; font-size:13px; line-height:1.7; color:#94A3B8;">
-                Rapyogo SARL &mdash; Goma, République Démocratique du Congo<br>
-                <a href="mailto:ia@rapyogo.com" style="color:#FFFFFF; text-decoration:none;">ia@rapyogo.com</a>
-                &nbsp;&bull;&nbsp;
+
+              <!-- Implantations : ville à gauche, adresse à droite -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 20px;">
+                ${COMPANY.offices
+                  .map(
+                    (o) => `
+                <tr>
+                  <td style="padding:0 12px 6px 0; font-family:${BRAND.font}; font-size:12px; font-weight:600; color:#CBD5E1; vertical-align:top; white-space:nowrap;">${escapeHtml(o.city)}</td>
+                  <td style="padding:0 0 6px; font-family:${BRAND.font}; font-size:12px; line-height:1.5; color:#94A3B8; vertical-align:top;">${escapeHtml(o.address)}</td>
+                </tr>`
+                  )
+                  .join("")}
+              </table>
+
+              <p style="margin:0 0 18px; font-family:${BRAND.font}; font-size:13px; line-height:1.8; color:#94A3B8;">
+                Tél :
+                <a href="tel:${COMPANY.phoneLink}" style="color:#FFFFFF; text-decoration:none;">${COMPANY.phone}</a><br>
+                E-mail :
+                <a href="mailto:${COMPANY.email}" style="color:#FFFFFF; text-decoration:none;">${COMPANY.email}</a><br>
+                Web :
                 <a href="${SITE_URL}/fr" style="color:#FFFFFF; text-decoration:none;">ia.rapyogo.com</a>
               </p>
-              <p style="margin:0; padding-top:16px; border-top:1px solid #123044; font-family:${BRAND.font}; font-size:12px; line-height:1.5; color:#64748B;">
+
+              <p style="margin:0; padding-top:16px; border-top:1px solid #123044; font-family:${BRAND.font}; font-size:11px; line-height:1.6; color:#64748B;">
+                Rapyogo SARL &mdash; ${COMPANY.legal}<br>
                 Vous recevez ce message parce que vous avez utilisé un formulaire sur ia.rapyogo.com.
               </p>
+
             </td>
           </tr>
 
@@ -320,6 +374,9 @@ export async function sendContactNotification(
     ``,
     `Message:`,
     data.message,
+    ``,
+    `--`,
+    FOOTER_TEXT,
   ].join("\n");
 
   return sendEmail(contactEmail, subject, html, text);
@@ -394,9 +451,8 @@ export async function sendContactConfirmation(
     ``,
     `Une précision à ajouter ? Répondez simplement à cet email.`,
     ``,
-    `RapIA — Conseil • Formation • Implémentation • Automatisation`,
-    `Rapyogo SARL — Goma, République Démocratique du Congo`,
-    `ia@rapyogo.com • ia.rapyogo.com`,
+    `--`,
+    FOOTER_TEXT,
   ].join("\n");
 
   return sendEmail(data.email, subject, html, text);
