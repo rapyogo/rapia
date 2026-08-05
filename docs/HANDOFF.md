@@ -68,7 +68,7 @@ placeholders en attendant du contenu réel vérifié.
 - **Framer Motion** — animations scroll-reveal, `MotionConfig reducedMotion="user"`
 - **GSAP + @gsap/react** — ScrollTrigger pin/scrub sur ProblemLevels, StoryFlow, Notre Vision
 - **Lucide React** — icônes
-- **Resend** — envoi email formulaire contact (clé API dans Vercel + `.env.local`)
+- **Nodemailer + Brevo SMTP** — tous les envois d'emails, centralisés dans `lib/email.ts`
 - Hébergement **Vercel** (projet `rapia`, lié à GitHub `rapyogo/rapia`)
 
 ## Design system
@@ -242,7 +242,7 @@ Section Preuves & Crédibilité, entre ForWhom et Content.
 | Route | Contenu |
 |-------|---------|
 | `/[locale]` | Landing page complète (13 sections dans l'ordre ci-dessus) |
-| `/[locale]/contact` | Formulaire contact → `/api/contact` (Resend + rate limiting) |
+| `/[locale]/contact` | Formulaire contact → `/api/contact` (Brevo SMTP, honeypot, rate limiting) |
 | `/[locale]/notre-vision` | Page immersive GSAP, 5 sections |
 | `/sitemap.xml`, `/robots.txt` | Générés dynamiquement, bilingues |
 
@@ -277,7 +277,11 @@ Régénération : `node scripts/optimize-photos.cjs`
 - **GitHub :** connecté à `rapyogo/rapia` — les pushes sur `master` peuvent
   déclencher un build automatique
 - **Domaines :** `ia.rapyogo.com` (custom, CNAME Cloudflare), `rapia.vercel.app`
-- **Variables d'env :** `RESEND_API_KEY`, `CONTACT_EMAIL=contact@rapyogo.com`
+- **Variables d'env email** (Production + Preview + Development, posées le 2026-08-05) :
+  `BREVO_SMTP_HOST`, `BREVO_SMTP_PORT`, `BREVO_SMTP_LOGIN`, `BREVO_SMTP_PASSWORD`,
+  `IA_FROM_EMAIL`, `IA_FROM_NAME` — détail dans le [README](../README.md)
+- `RESEND_API_KEY` et `CONTACT_EMAIL` traînent encore en Production mais **plus
+  aucun code ne les lit** — à supprimer depuis le dashboard Vercel
 
 ### ⚠️ Déploiement local — piège .gstack
 
