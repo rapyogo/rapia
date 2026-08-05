@@ -1,0 +1,281 @@
+{
+  "site": {
+    "name": "RAPIA",
+    "tagline": "Consulting. Training. Implementation. Automation.",
+    "description": "RAPIA helps companies, organizations, and professionals integrate artificial intelligence into their operations.",
+    "location": "Democratic Republic of the Congo",
+    "positioning": "Artificial intelligence that works for your organization."
+  },
+  "nav": {
+    "label": "ARTIFICIAL INTELLIGENCE AGENCY | DRC",
+    "home": "Home",
+    "services": "Services",
+    "training": "Training",
+    "about": "About",
+    "contact": "Contact",
+    "cta": "Talk to an AI expert",
+    "languageFr": "Français",
+    "languageEn": "English",
+    "switchTo": "Passer en français",
+    "skipToContent": "Skip to main content"
+  },
+  "hero": {
+    "eyebrow": "ARTIFICIAL INTELLIGENCE AGENCY | DRC",
+    "title": "AI shouldn't just answer. It should work for you.",
+    "subtitle": "RAPIA helps companies, organizations, and professionals integrate artificial intelligence into their operations, train their teams, and build systems capable of automating real tasks.",
+    "primaryCta": "Talk to an AI expert",
+    "secondaryCta": "Discover our services",
+    "credibility": "Consulting • Training • Implementation • Automation",
+    "chapter2Line1": "Hours spent on repetitive tasks.",
+    "chapter2Line2": "Files piling up.",
+    "chapter2Line3": "Decisions left waiting.",
+    "chapter3Intro": "That's exactly where RAPIA steps in."
+  },
+  "problem": {
+    "eyebrow": "The reality",
+    "title": "Having ChatGPT isn't the same as having integrated AI.",
+    "level1": "Chat",
+    "level2": "Connect",
+    "level3": "Delegate",
+    "level1Desc": "The user asks questions to an AI. This is the basic level most organizations know today.",
+    "level2Desc": "The AI begins communicating with the organization's tools and data. Responses become contextualized and relevant.",
+    "level3Desc": "AI agents execute tasks and complete workflows with human supervision. AI becomes an active team member.",
+    "highlight": "RAPIA guides organizations toward levels 2 and 3."
+  },
+  "services": {
+    "eyebrow": "What we do",
+    "heading": "What we do",
+    "subtitle": "Four pillars to turn artificial intelligence into concrete results.",
+    "items": [
+      {
+        "id": "conseil",
+        "title": "AI Consulting",
+        "description": "Identify the tasks, processes, and functions where AI can create the most value.",
+        "features": ["AI Audit", "Adoption Strategy", "Process Mapping", "Opportunity Identification", "AI Roadmap"],
+        "cta": "Explore consulting"
+      },
+      {
+        "id": "formation",
+        "title": "AI Training",
+        "description": "Train teams in professional, secure, and productive use of artificial intelligence.",
+        "features": ["Enterprise Training", "Practical Workshops", "Executive Training", "Prompt Engineering", "Professional AI Assistant Use"],
+        "cta": "View trainings"
+      },
+      {
+        "id": "implementation",
+        "title": "AI Implementation",
+        "description": "Build and integrate AI systems tailored to the organization's real needs.",
+        "features": ["AI Assistants", "RAG Systems", "Knowledge Bases", "AI Model Integration", "Intelligent Document Systems"],
+        "cta": "Discuss a project"
+      },
+      {
+        "id": "automatisation",
+        "title": "Automation & AI Agents",
+        "description": "Automate repetitive tasks and build agents capable of executing workflows.",
+        "features": ["Process Automation", "AI Agents", "Lead Qualification", "Document Processing", "Customer Support & Reporting"],
+        "cta": "Automate a process"
+      }
+    ]
+  },
+  "process": {
+    "eyebrow": "Methodology",
+    "heading": "How we work",
+    "subtitle": "A proven methodology to go from problem to solution, with teams at the center.",
+    "steps": [
+      {"title": "Understand", "description": "We analyze your goals, processes, and challenges."},
+      {"title": "Identify", "description": "We identify the tasks and processes with the highest potential for AI use."},
+      {"title": "Build", "description": "We design and implement the right solution."},
+      {"title": "Train", "description": "We support teams so the technology is genuinely adopted."}
+    ]
+  },
+  "useCases": {
+    "eyebrow": "Concrete cases",
+    "heading": "Concrete use cases",
+    "subtitle": "AI isn't an abstract concept. Here's how it transforms entire sectors.",
+    "beforeLabel": "Before",
+    "interventionLabel": "AI Intervention",
+    "resultLabel": "Result",
+    "cases": [
+      {"sector": "Human Resources", "before": "Time-consuming manual CV and HR document sorting.", "intervention": "Automated sorting, document synthesis, and card preparation assistance.", "result": "Faster processing, HR team refocused on people."},
+      {"sector": "Sales", "before": "Unqualified leads, time wasted searching for information.", "intervention": "Automatic lead qualification and information preparation.", "result": "Better-prepared salespeople, shorter sales cycle."},
+      {"sector": "Customer Service", "before": "Frequent questions overwhelming support teams.", "intervention": "AI assistant that answers common questions and escalates complex cases.", "result": "Reduced response time, improved customer satisfaction."},
+      {"sector": "NGOs", "before": "Manual project data collection and analysis.", "intervention": "Accelerated collection, analysis, and synthesis of information.", "result": "Faster reporting, better resource allocation."},
+      {"sector": "Finance & Admin", "before": "Repetitive manual document tasks and reports.", "intervention": "Automation of document tasks, reports, and internal workflows.", "result": "Reduced errors, significant time savings."},
+      {"sector": "Leadership", "before": "Decisions based on fragmented information.", "intervention": "Synthesis and analysis systems for quick overview.", "result": "Faster, better-informed decisions."}
+    ]
+  },
+  "academy": {
+    "heading": "Training the people who will work with AI.",
+    "subtitle": "RAPIA Academy: training designed for every level, from executives to operational teams.",
+    "formations": ["AI Fundamentals", "Generative AI", "ChatGPT, Claude, Gemini, and other LLMs", "Automation", "AI Agents", "AI for Executives", "AI for Admin Teams", "AI for NGOs", "AI for Entrepreneurs"],
+    "cta": "View trainings"
+  },
+  "whyRapia": {
+    "eyebrow": "Differentiation",
+    "heading": "Why RAPIA?",
+    "subtitle": "In a market saturated with promises, here's what makes the difference.",
+    "arguments": [
+      {"title": "African-context expertise", "description": "Our solutions are designed around the operational realities of organizations in the DRC and across Africa."},
+      {"title": "Results-first approach", "description": "We don't start with the tool. We start with the problem."},
+      {"title": "Training + Implementation", "description": "We don't just build a solution. We help teams adopt it."},
+      {"title": "Technology-agnostic", "description": "RAPIA is tool-agnostic. The best model depends on the problem to solve."},
+      {"title": "Human-centered", "description": "The goal isn't to replace teams. It's to let them work better, faster, and with greater capacity."}
+    ]
+  },
+  "technologies": {
+    "eyebrow": "Technologies",
+    "heading": "Our technology ecosystem",
+    "subtitle": "We choose the technology based on the problem, not the other way around.",
+    "techLine": "We choose the technology based on the problem, not the other way around.",
+    "categories": [
+      {"title": "LLMs", "description": "ChatGPT, Claude, Gemini, Mistral, DeepSeek, and other relevant models."},
+      {"title": "Automation", "description": "Custom workflows, APIs, integrations, and automation."},
+      {"title": "Data", "description": "Databases, documents, knowledge bases, and RAG systems."},
+      {"title": "Agents", "description": "AI agents capable of executing tasks and workflows autonomously."}
+    ]
+  },
+  "forWhom": {
+    "eyebrow": "Audiences",
+    "heading": "Who is it for?",
+    "subtitle": "Whatever your organization, we have a tailored approach.",
+    "audiences": [
+      {"title": "Businesses", "description": "Improve productivity and automate your operations.", "cta": "Talk to an expert"},
+      {"title": "NGOs", "description": "Optimize your processes, documentation, reporting, and knowledge management.", "cta": "Discover how"},
+      {"title": "Institutions", "description": "Train your teams and build an AI adoption strategy.", "cta": "Train my teams"},
+      {"title": "Professionals", "description": "Develop skills directly applicable to your work.", "cta": "View trainings"}
+    ]
+  },
+  "socialProof": {
+    "heading": "They trust us",
+    "subtitle": "Organizations that have chosen to integrate AI with RAPIA.",
+    "placeholder": true
+  },
+  "content": {
+    "heading": "Understand AI before adopting it.",
+    "subtitle": "Articles, analysis, and resources to demystify artificial intelligence.",
+    "categories": ["Artificial Intelligence", "Automation", "AI Agents", "Productivity", "Digital Transformation", "AI in Africa", "Training"],
+    "placeholder": true
+  },
+  "finalCta": {
+    "eyebrow": "Taking action",
+    "title": "Is your organization really using AI?",
+    "text": "Let's talk about your processes, your challenges, and the opportunities artificial intelligence can create for your organization.",
+    "primaryCta": "Request an AI diagnostic",
+    "secondaryCta": "Contact us"
+  },
+  "contact": {
+    "heading": "Let's talk about your project",
+    "subtitle": "Tell us what you'd like to improve with AI. We'll respond within 24 hours.",
+    "email": "contact@rapyogo.com",
+    "question": "What would you like to improve with AI?",
+    "submitCta": "Send my request",
+    "formLabels": {
+      "name": "Name",
+      "organization": "Organization",
+      "email": "Email",
+      "phone": "Phone",
+      "orgType": "Organization type",
+      "need": "Primary need",
+      "message": "Message"
+    },
+    "orgTypes": ["Company", "NGO", "Public Institution", "Startup", "Independent Professional", "Other"],
+    "needs": ["Train my team", "Automate a process", "Set up an AI system", "Develop an AI agent", "Develop an AI strategy", "Other"],
+    "backHome": "Back to home",
+    "placeholders": {
+      "name": "Your full name",
+      "organization": "Your organization's name",
+      "email": "you@organization.cd",
+      "phone": "+243 ...",
+      "message": "Describe your need, your project, or your questions..."
+    },
+    "errors": {
+      "name": "Name is required.",
+      "organization": "Organization is required.",
+      "email": "Email is required.",
+      "emailFormat": "Invalid email format.",
+      "message": "Message is required."
+    },
+    "successTitle": "Message sent successfully",
+    "successBody": "Thank you for your message. We'll respond within 24 hours at",
+    "sendAnother": "Send another message",
+    "errorBody": "An error occurred while sending. Please try again or contact us directly at",
+    "sending": "Sending...",
+    "directEmail": "Or write to us directly at"
+  },
+  "footer": {
+    "servicesTitle": "Services",
+    "aboutTitle": "Learn more",
+    "contactTitle": "Contact",
+    "copyright": "All rights reserved."
+  },
+  "vision": {
+    "back": "Back",
+    "ariaLabel": "Our vision — RAPIA",
+    "s1Eyebrow": "01 — Who we are",
+    "s1TitleA": "AI that",
+    "s1TitleB": "works",
+    "s1TitleC": "for you",
+    "s1Body": "RAPIA supports companies, NGOs, institutions, and professionals across the DRC and Africa in the concrete adoption of artificial intelligence — consulting, training, implementation, and automation.",
+    "s2Eyebrow": "02 — The reality",
+    "levelPrefix": "Level",
+    "s3Eyebrow": "03 — Our method",
+    "s3TitleA": "Understand",
+    "s3TitleB": "Build",
+    "s3TitleC": "Train",
+    "s4Eyebrow": "04 — Our difference",
+    "s4TitleA": "The problem",
+    "s4TitleB": "before",
+    "s4TitleC": "the tool",
+    "s5Eyebrow": "05 — Taking action",
+    "s5TitleA": "Ready to",
+    "s5TitleB": "get started?"
+  },
+  "storyFlow": {
+    "act2": {
+      "ariaLabel": "The reality: operational overload",
+      "line1a": "You're not short on skills.",
+      "line1b": "You're short on",
+      "line1Highlight": "hours",
+      "line2a": "Follow-ups. Data entry.",
+      "line2b": "Reports. Checks.",
+      "sub2": "The same tasks, every day. They don't move the business forward, but no one else will do them.",
+      "line3a": "And evening falls before",
+      "line3b": "the real work even starts."
+    },
+    "act3": {
+      "ariaLabel": "The proposal: an AI that takes the load",
+      "line1": "What if you didn't have to carry it all alone?",
+      "line2a": "Not another piece of software.",
+      "line2b": "A system that does the work.",
+      "sub": "AI isn't here to take your place. It's here to take your load."
+    },
+    "act4": {
+      "ariaLabel": "The handoff: you decide, the system executes",
+      "line1a": "You decide.",
+      "line1b": "It executes.",
+      "line2a": "Red becomes",
+      "line2Highlight": "green",
+      "line2b": "Without you lifting a finger.",
+      "sub": "Tasks run overnight, on weekends, during your meetings. You keep control of what matters: the decisions."
+    },
+    "act5": {
+      "ariaLabel": "The result: time reclaimed for what matters",
+      "line1a": "You get back the one thing",
+      "line1b": "that can't be delegated:",
+      "line1Highlight": "your attention.",
+      "line2a": "That's what AI",
+      "line2b": "working for you looks like.",
+      "sub": "Let's talk about your operations. Together we'll identify what can be automated right now.",
+      "cta": "Talk to an AI expert"
+    }
+  },
+  "transformation": {
+    "scenes": [
+      {"label": "THE OVERLOAD", "line": "Overload becomes the norm."},
+      {"label": "THE ARRIVAL", "line": "A system can take over."},
+      {"label": "THE HANDOFF", "line": "The transition is smooth, not a replacement."},
+      {"label": "THE EXECUTION", "line": "Tasks get done, continuously."},
+      {"label": "THE RESULT", "line": "Time reclaimed changes everything."}
+    ]
+  }
+}

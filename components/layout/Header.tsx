@@ -1,12 +1,24 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useTranslations, useLocale } from "next-intl";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { NAVIGATION } from "@/lib/constants";
+import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { cn } from "@/lib/utils";
 
 export function Header() {
+  const t = useTranslations("nav");
+  const locale = useLocale();
+  const prefix = `/${locale}`;
+  const navLinks = [
+    { label: t("home"), href: prefix },
+    { label: t("services"), href: `${prefix}/#services` },
+    { label: t("training"), href: `${prefix}/#academy` },
+    { label: t("about"), href: `${prefix}/#why-rapia` },
+    { label: t("contact"), href: `${prefix}/contact` },
+  ];
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
@@ -67,14 +79,14 @@ export function Header() {
     >
       <div className="container-site flex items-center justify-between h-16 md:h-20">
         {/* Logo */}
-        <a href="/" className="flex items-center gap-2.5 font-bold select-none group" aria-label="RAPIA — Accueil">
-          <img src="/rapia-mark.svg" alt="" className="w-8 h-8 flex-shrink-0 transition-transform group-hover:scale-105" aria-hidden="true" />
+        <a href={prefix} className="flex items-center gap-2.5 font-bold select-none group" aria-label="RAPIA">
+          <img src="/icone-rapia_dark-mode.webp" alt="" className="w-8 h-8 flex-shrink-0 transition-transform group-hover:scale-105" aria-hidden="true" />
           <span className="text-white text-xl tracking-[-0.01em] font-bold">RAPIA</span>
         </a>
 
         {/* Nav desktop */}
         <nav className="hidden md:flex items-center gap-8" aria-label="Navigation principale">
-          {NAVIGATION.main.map((link) => (
+          {navLinks.map((link) => (
             <a key={link.href} href={link.href} className="text-sm font-medium text-white/55 hover:text-white transition-colors">
               {link.label}
             </a>
@@ -82,9 +94,10 @@ export function Header() {
         </nav>
 
         {/* CTA desktop */}
-        <div className="hidden md:block">
-          <Button variant="primary" size="sm" href={NAVIGATION.cta.href}>
-            {NAVIGATION.cta.label}
+        <div className="hidden md:flex items-center gap-4">
+          <LanguageSwitcher />
+          <Button variant="primary" size="sm" href={`${prefix}/contact`}>
+            {t("cta")}
           </Button>
         </div>
 
@@ -112,14 +125,17 @@ export function Header() {
           className="md:hidden fixed inset-0 top-16 z-40 bg-[var(--color-deep)]"
         >
           <nav className="flex flex-col p-6 gap-1" aria-label="Navigation mobile">
-            {NAVIGATION.main.map((link) => (
+            {navLinks.map((link) => (
               <a key={link.href} href={link.href} className="py-3 px-4 text-base font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-[var(--radius-md)] transition-colors" onClick={closeMenu}>
                 {link.label}
               </a>
             ))}
             <div className="mt-4 pt-4 border-t border-white/10">
-              <Button variant="primary" size="md" href={NAVIGATION.cta.href} className="w-full" onClick={closeMenu}>
-                {NAVIGATION.cta.label}
+              <div className="mb-4 flex justify-center">
+                <LanguageSwitcher />
+              </div>
+              <Button variant="primary" size="md" href={`${prefix}/contact`} className="w-full" onClick={closeMenu}>
+                {t("cta")}
               </Button>
             </div>
           </nav>

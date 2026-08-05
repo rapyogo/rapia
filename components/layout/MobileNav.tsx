@@ -1,16 +1,24 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { useTranslations, useLocale } from "next-intl";
 import { Home, Briefcase, GraduationCap, Mail } from "lucide-react";
-import { NAVIGATION } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
-const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
-  Home, Briefcase, GraduationCap, Mail,
-};
+const icons = [Home, Briefcase, GraduationCap, Mail];
 
 export function MobileNav() {
+  const t = useTranslations("nav");
+  const locale = useLocale();
+  const prefix = `/${locale}`;
   const pathname = usePathname();
+
+  const links = [
+    { label: t("home"), href: prefix },
+    { label: t("services"), href: `${prefix}/#services` },
+    { label: t("training"), href: `${prefix}/#academy` },
+    { label: t("contact"), href: `${prefix}/contact` },
+  ];
 
   return (
     <nav
@@ -18,9 +26,12 @@ export function MobileNav() {
       aria-label="Navigation mobile"
     >
       <div className="flex items-center justify-around h-16 px-2">
-        {NAVIGATION.mobile.map((link) => {
-          const Icon = iconMap[link.icon];
-          const isActive = link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+        {links.map((link, i) => {
+          const Icon = icons[i];
+          const isActive =
+            link.href === prefix
+              ? pathname === prefix
+              : pathname.startsWith(link.href.split("#")[0]);
 
           return (
             <a

@@ -47,6 +47,7 @@ export function ScrollSequence({
   "aria-label": ariaLabel,
 }: ScrollSequenceProps) {
   const sectionRef = useRef<HTMLElement>(null);
+  const stickyRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
   const currentFrame = useRef(-1);
@@ -173,7 +174,14 @@ export function ScrollSequence({
           start: "top top",
           end: "bottom bottom",
           scrub: 0.5,
-          onUpdate: (self) => onProgress?.(self.progress),
+          onUpdate: (self) => {
+            onProgress?.(self.progress);
+            // Injecte la progression pour les couches de parallaxe.
+            stickyRef.current?.style.setProperty(
+              "--parallax-progress",
+              String(self.progress),
+            );
+          },
         },
         onUpdate: () => {
           const next = Math.round(state.frame);
@@ -193,13 +201,17 @@ export function ScrollSequence({
       className={className}
       style={{ height: reducedMotion ? "100vh" : `${length * 100}vh` }}
     >
-      <div className="sticky top-0 h-[100svh] w-full overflow-hidden">
+      <div
+        ref={stickyRef}
+        className="sticky top-0 h-[100svh] w-full overflow-hidden"
+      >
         <canvas
           ref={canvasRef}
           aria-hidden="true"
-          className={`absolute inset-0 h-full w-full transition-opacity duration-700 ${
+          className={`absolute inset-x-0 z-10 parallax-canvas transition-opacity duration-700 ${
             ready ? "opacity-100" : "opacity-0"
           }`}
+          style={{ height: "calc(100% + 60px)", top: "-30px" }}
         />
         {children}
       </div>

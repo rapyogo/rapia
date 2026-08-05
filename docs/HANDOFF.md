@@ -1,23 +1,44 @@
 # RAPIA — Handoff de session
 
 > À lire en premier au début de chaque session (voir CLAUDE.md).
-> Dernière mise à jour : 2026-08-05
+> Dernière mise à jour : 2026-08-05 (soir)
 
 ## État actuel
 
-Site web de **RAPIA** (agence IA en RDC) — MVP fonctionnel, déployé en production, design premium appliqué, une page immersive additionnelle en place.
+Site web de **RAPIA** (agence IA en RDC) — MVP fonctionnel, déployé en production, design premium appliqué, **bilingue FR/EN**, parallaxe multi-couches sur les 5 actes du récit.
 
-**Depuis le 2026-08-05, la landing page s'ouvre sur un récit vidéo en 5 actes** piloté au scroll (canvas + GSAP). Voir la section « Séquences vidéo au scroll » plus bas — c'est le morceau le plus structurant du site aujourd'hui.
+**Depuis le 2026-08-05 (soir) :** parallaxe CSS multi-couches sur les 5 actes (section « Parallaxe ») **et bilinguisme FR/EN complet** (section « Bilinguisme »).
+
+**La landing page s'ouvre sur un récit vidéo en 5 actes** piloté au scroll (canvas + GSAP) avec 4 couches de profondeur par acte (fond → canvas → formes → texte).
 
 **Production :** [`https://ia.rapyogo.com`](https://ia.rapyogo.com) (alias Vercel vérifié) · aussi accessible sur `https://rapia.vercel.app`
 **Repo GitHub :** [`https://github.com/rapyogo/rapia`](https://github.com/rapyogo/rapia) — branche `master` synchronisée
-**Branche de session locale :** `session-2026-08-02` (créée en début de session, contient les mêmes commits que `master`)
+**Branche de session locale :** `feat/i18n-bilingue`
+
+## Migration en cours vers le cahier des charges
+
+Un cahier des charges détaillé a été fourni le 2026-08-05. L'audit d'écart a
+mesuré **~15-20 % d'alignement** avec le site d'alors. Migration progressive en
+5 phases, plan complet dans `~/.claude/plans/veuillez-fait-un-site-clever-lollipop.md`.
+
+| Phase | Contenu | État |
+|-------|---------|------|
+| 1 | i18n FR/EN | ✅ Fait |
+| 2 | Design System « Corporate Clair » (Inter, thème clair, zéro gradient/glow) | ⬜ À faire |
+| 3 | Photographie Higgsfield (30+ assets) en remplacement des séquences canvas | ⬜ Bloqué sur génération des assets |
+| 4 | « La Transformation » — vidéo showpiece pinned, cartes pilotées par `timeupdate` | ⬜ Bloqué sur génération vidéo |
+| 5 | Lenis, ordre des sections, SEO, déploiement | ⬜ À faire |
+
+**Écarts connus restants** (le site actuel les contredit encore) : thème dark au
+lieu de clair, Space Grotesk au lieu d'Inter, gradients/orbes/blur présents,
+aucune photographie, 5 séquences canvas au lieu d'une vidéo showpiece, Lenis absent.
 
 ## Stack technique
 
 - **Next.js 16** (App Router, Turbopack) + **React 19** + **TypeScript 5**
+- **next-intl v4** — bilinguisme FR/EN, routes `/fr` et `/en` (voir « Bilinguisme »)
 - **Tailwind CSS v4** (via `@theme inline`, pas de `tailwind.config.js` — tokens dans `app/globals.css`)
-- **Framer Motion** — animations scroll-reveal, `MotionConfig reducedMotion="user"` dans `app/layout.tsx`
+- **Framer Motion** — animations scroll-reveal, `MotionConfig reducedMotion="user"` dans `app/[locale]/layout.tsx`
 - **GSAP + @gsap/react** — scroll storytelling sur `/notre-vision` (ScrollTrigger pin/rotate)
 - **Lucide React** — icônes
 - **Resend** — envoi email formulaire contact (clé API configurée dans Vercel + `.env.local`)
@@ -102,6 +123,60 @@ narration avant les services. C'est assumé pour le genre, mais si l'utilisateur
 trouve ça trop long : baisser `scrollLength` (2.8 → 2) dans `StoryAct`, une seule
 valeur à changer pour les 4 actes.
 
+## Parallaxe multi-couches
+
+Ajouté le 2026-08-05 (soir). Chaque acte a 4 couches qui défilent à des vitesses
+différentes, pilotées par **un seul ScrollTrigger** (celui de `ScrollSequence`).
+
+### Emplilement (z-index)
+
+| Couche | Composant | z-index | Vitesse | Rôle |
+|--------|-----------|---------|---------|------|
+| Fond | `ParallaxFond` | z-0 | 0.15 | Orbes CSS radial-gradient (3 variantes : indigo/emerald/amber) |
+| Canvas | `ScrollSequence` | z-10 | 0.30 | Vidéo existante, inchangée |
+| Formes | `ParallaxFormes` | z-20 | 0.60 | Grille tech + cercles CSS |
+| Voiles | Inline dans chaque acte | z-30 | — | Gradients de lisibilité |
+| Texte | Chapters | z-40 | ancré | Titres, sous-titres, CTA |
+
+### Mobile
+
+- Canvas réduit à 0.20 (media query CSS)
+- Fond et formes atténués (opacité réduite)
+- Cercles géométriques masqués (trop chargés)
+
+### Fichiers du système
+
+| Fichier | Rôle |
+|---------|------|
+| `components/ui/parallax-layer.tsx` | Moteur générique : lit `--parallax-progress`, applique `translate3d` |
+| `components/ui/parallax-fond.tsx` | Fond cosmique avec orbes (prop `variant`) |
+| `components/ui/parallax-formes.tsx` | Grille + cercles (prop `side` pour alterner) |
+| `components/ui/scroll-sequence.tsx` | Injecte `--parallax-progress` dans `onUpdate` + canvas élargi (+60px) |
+| `app/globals.css` | Styles `.parallax-canvas`, mobile, reduced-motion |
+
+### Précautions
+
+- **Ne pas changer l'ordre z-index sans vérifier visuellement les 5 actes.**
+  L'échelle z-0→z-40 est délibérée : fond derrière canvas, formes devant canvas
+  mais sous les voiles, texte au-dessus de tout.
+- `prefers-reduced-motion` désactive tous les transforms (JS + CSS `!important`).
+- Le canvas est élargi de 60px (`height: calc(100% + 60px); top: -30px`) pour
+  absorber le décalage du translateY — ne pas réduire sans ajuster la vitesse.
+
+## Logos
+
+Les logos ont été mis à jour le 2026-08-05. Fichiers dans `public/` :
+
+| Fichier | Usage |
+|---------|-------|
+| `icone-rapia_dark-mode.webp` | Header, Footer, favicon, Apple touch icon |
+| `icone-rapia_ligth-mode.webp` | Sections claires (si besoin) |
+| `logo-horisontale-rapia-dark_mode.webp` | OG image, partage réseaux sociaux |
+| `logo-horisontale-rapia-ligth_mode.webp` | Usage futur sections claires |
+
+L'ancien `rapia-mark.svg` est conservé dans `public/` mais plus utilisé. Les PNG
+originaux sont aussi conservés dans `public/` (fallback).
+
 ## Design system
 
 - **Nom :** "Kinshasa Modern" — documenté dans [`DESIGN.md`](../DESIGN.md)
@@ -114,16 +189,50 @@ valeur à changer pour les 4 actes.
 
 Voir [`PRODUCT.md`](../PRODUCT.md) (créé via `/impeccable init`) pour : personas (4 publics à égalité — entreprises, ONG, institutions, professionnels), positionnement, principes produit, contraintes.
 
-**Règle critique à ne jamais enfreindre :** aucune preuve sociale n'est disponible (témoignages, stats, logos clients). Les sections `SocialProof` et `Content` sont **volontairement masquées** (`return null` conditionné par `placeholder: true` dans `lib/constants.ts`) tant que du vrai contenu n'existe pas. Ne jamais réactiver avec du contenu inventé.
+**Règle critique à ne jamais enfreindre :** aucune preuve sociale n'est disponible (témoignages, stats, logos clients). Les sections `SocialProof` et `Content` **retournent `null`** tant que du vrai contenu n'existe pas (leur copy attend dans `messages/*.json` sous la clé `placeholder: true`). Ne jamais réactiver avec du contenu inventé.
+
+## Bilinguisme FR/EN
+
+Ajouté le 2026-08-05 (soir). Le site est entièrement bilingue via **`next-intl` v4**.
+
+### Architecture
+
+| Fichier | Rôle |
+|---------|------|
+| `i18n/routing.ts` | Locales (`fr`, `en`), défaut `fr`, `localePrefix: "always"` |
+| `i18n/request.ts` | Charge `messages/{locale}.json` par requête |
+| `i18n/navigation.ts` | `Link`, `useRouter`, `usePathname` conscients de la locale |
+| `proxy.ts` | Détection de locale + redirection (ex-`middleware.ts`, renommé pour Next.js 16) |
+| `messages/fr.json`, `messages/en.json` | **Toute la copy du site** — 164 clés, parité stricte |
+| `components/layout/LanguageSwitcher.tsx` | Bascule FR ⇄ EN en préservant la route |
+
+### Règles à respecter
+
+- **`messages/*.json` est l'unique source de vérité de la copy.** L'ancien
+  `lib/constants.ts` a été supprimé — ne pas le recréer, ce serait une seconde
+  source de vérité qui divergerait.
+- **Toute clé ajoutée en FR doit l'être en EN** (et inversement). Vérification :
+  ```bash
+  node -e "const f=require('./messages/fr.json'),e=require('./messages/en.json');const k=(o,p='')=>Object.entries(o).flatMap(([x,v])=>v&&typeof v==='object'&&!Array.isArray(v)?k(v,p+x+'.'):[p+x]);const a=k(f),b=k(e);console.log(a.length===b.length&&a.every(x=>b.includes(x))?'OK':'DESYNC')"
+  ```
+- **Les liens internes doivent porter la locale** : `` href={`/${locale}/contact`} ``
+  et non `href="/contact"`. Sinon le visiteur anglophone est renvoyé en français.
+- Les tableaux (`services.items`, `useCases.cases`…) se lisent avec `t.raw(...)`
+  et un type explicite. Les icônes sont mappées **par index**, jamais par libellé
+  traduit — un mapping par titre casserait en anglais.
+- `localePrefix: "always"` : `/fr` et `/en` ont tous deux un préfixe. Les
+  canonicals doivent donc toujours le porter (`https://rapia.cd/fr`).
 
 ## Pages existantes
 
+Toutes les routes sont préfixées par la locale (`/fr/…`, `/en/…`). `/` redirige (307).
+
 | Route | Contenu |
 |-------|---------|
-| `/` | Landing page (**HeroSequence, StoryFlow** — récit vidéo au scroll —, ProblemLevels, Services, Process, UseCases, Academy, WhyRapia, Technologies, ForWhom, FinalCTA — SocialProof et Content masqués) |
-| `/contact` | Formulaire contact → `/api/contact` (Resend + rate limiting in-memory) |
-| `/notre-vision` | Page immersive scroll storytelling (GSAP), 5 sections liées au footer |
-| `/sitemap.xml`, `/robots.txt` | Générés dynamiquement |
+| `/[locale]` | Landing page (**HeroSequence, StoryFlow** — récit vidéo au scroll —, ProblemLevels, Services, Process, UseCases, Academy, WhyRapia, Technologies, ForWhom, FinalCTA — SocialProof et Content masqués) |
+| `/[locale]/contact` | Formulaire contact → `/api/contact` (Resend + rate limiting in-memory) |
+| `/[locale]/notre-vision` | Page immersive scroll storytelling (GSAP), 5 sections liées au footer |
+| `/sitemap.xml`, `/robots.txt` | Générés dynamiquement — sitemap bilingue avec alternates réciproques |
 
 ## Historique de critique design
 
@@ -157,4 +266,4 @@ Une revue `/impeccable critique` a été menée sur `app/page.tsx` (score 24/32,
 - Re-lancer `/impeccable critique` sur le design premium pour valider les contrastes du thème dark
 - Contenu réel pour RAPIA Academy, articles, témoignages (dès qu'ils existent → réactiver `SocialProof`/`Content`)
 - CI/CD GitHub → Vercel automatique (actuellement déploiement manuel via CLI)
-- Domaine `rapia.cd` mentionné dans `SITE.url` (constants.ts) mais le site tourne sur `ia.rapyogo.com` — clarifier avec l'utilisateur si `rapia.cd` doit être acheté/pointé
+- Domaine `rapia.cd` utilisé comme `metadataBase` (canonicals, sitemap, hreflang) mais le site tourne sur `ia.rapyogo.com` — clarifier si `rapia.cd` doit être acheté/pointé, sinon corriger `baseUrl` dans `app/[locale]/layout.tsx` et `app/sitemap.ts`

@@ -2,9 +2,13 @@
 
 import { GraduationCap, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-import { ACADEMY } from "@/lib/constants";
+import { useTranslations, useLocale } from "next-intl";
 
 export function Academy() {
+  const t = useTranslations("academy");
+  const locale = useLocale();
+  const formations = t.raw("formations") as string[];
+
   return (
     <section className="section section-dark" id="academy" aria-label="RAPIA Academy">
       <div className="container-site">
@@ -25,16 +29,16 @@ export function Academy() {
               className="text-white leading-[1.1] tracking-[-0.02em] mb-4 max-w-lg"
               style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: "700" }}
             >
-              {ACADEMY.heading}
+              {t("heading")}
             </h2>
             <p className="text-white/50 text-lg mb-8 max-w-md">
-              {ACADEMY.subtitle}
+              {t("subtitle")}
             </p>
             <a
-              href="/contact"
+              href={`/${locale}/contact`}
               className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--color-amber)] text-[var(--color-deep)] font-semibold text-sm rounded-[var(--radius-md)] hover:bg-[var(--color-amber-light)] transition-colors"
             >
-              {ACADEMY.cta}
+              {t("cta")}
               <ArrowRight size={16} />
             </a>
           </motion.div>
@@ -47,7 +51,7 @@ export function Academy() {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6 }}
           >
-            {ACADEMY.formations.map((formation, i) => (
+            {formations.map((formation, i) => (
               <div
                 key={formation}
                 className="flex items-center gap-3 px-5 py-4 rounded-[var(--radius-md)] bg-white/5 border border-white/5 hover:bg-white/8 hover:border-white/10 transition-all"

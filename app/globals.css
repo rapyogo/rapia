@@ -180,3 +180,53 @@ body {
 .safe-area-bottom {
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
+
+/* =============================================
+   Parallaxe — Couches multi-profondeur
+   ============================================= */
+
+/* Fond cosmique : couleur de base derrière les orbes */
+.parallax-fond-orbes {
+  background-color: var(--color-deep);
+}
+
+/* Canvas : légèrement plus grand que son conteneur pour absorber
+   le décalage du translateY sans créer de gap visuel. */
+.parallax-canvas {
+  transform: translate3d(
+    0,
+    calc(var(--parallax-progress, 0) * 0.30 * 100 * -1px),
+    0
+  );
+  will-change: transform;
+}
+
+/* Mobile : canvas réduit à 0.20, couches décoratives atténuées */
+@media (max-width: 767px) {
+  .parallax-fond-mobile .parallax-fond-orbes {
+    opacity: 0.6;
+  }
+
+  .parallax-formes-grid {
+    opacity: 0.5;
+  }
+
+  .parallax-canvas {
+    transform: translate3d(
+      0,
+      calc(var(--parallax-progress, 0) * 0.20 * 100 * -1px),
+      0
+    );
+  }
+}
+
+/* Reduced motion : tout est statique. La prop CSS --parallax-progress
+   n'est pas injectée par ScrollSequence, donc les calc() donnent 0. */
+
+@media (prefers-reduced-motion: reduce) {
+  .parallax-layer,
+  .parallax-canvas {
+    transform: none !important;
+    will-change: auto !important;
+  }
+}

@@ -2,9 +2,12 @@
 
 import { ArrowRight, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
-import { FINAL_CTA } from "@/lib/constants";
+import { useTranslations, useLocale } from "next-intl";
 
 export function FinalCTA() {
+  const t = useTranslations("finalCta");
+  const locale = useLocale();
+
   return (
     <section className="section section-dark relative overflow-hidden" aria-label="Appel à l'action">
       {/* Orbs décoratifs */}
@@ -22,32 +25,32 @@ export function FinalCTA() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-white/60 mb-8">
             <Sparkles size={14} className="text-[var(--color-amber)]" />
-            Passage à l'action
+            {t("eyebrow")}
           </div>
 
           <h2
             className="text-white leading-[1.08] tracking-[-0.02em] mb-6"
             style={{ fontSize: "clamp(32px, 5vw, 56px)", fontWeight: "800" }}
           >
-            {FINAL_CTA.title}
+            {t("title")}
           </h2>
           <p className="text-white/50 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
-            {FINAL_CTA.text}
+            {t("text")}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="/contact"
+              href={`/${locale}/contact`}
               className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--color-amber)] text-[var(--color-deep)] font-bold text-sm rounded-[var(--radius-md)] hover:bg-[var(--color-amber-light)] transition-all hover:-translate-y-0.5 shadow-[var(--shadow-lg)]"
             >
-              {FINAL_CTA.primaryCta}
+              {t("primaryCta")}
               <ArrowRight size={16} />
             </a>
             <a
-              href="/contact"
+              href={`/${locale}/contact`}
               className="inline-flex items-center gap-2 px-8 py-4 bg-white/5 text-white border border-white/10 font-semibold text-sm rounded-[var(--radius-md)] hover:bg-white/10 hover:border-white/20 transition-all"
             >
-              {FINAL_CTA.secondaryCta}
+              {t("secondaryCta")}
             </a>
           </div>
         </motion.div>

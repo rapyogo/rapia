@@ -1,49 +1,48 @@
 "use client";
 
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { MobileNav } from "@/components/layout/MobileNav";
-import { Button } from "@/components/ui/Button";
-import { AlertCircle, RotateCcw, Home } from "lucide-react";
-
 export default function ErrorPage({
-  error,
   reset,
 }: {
   error: Error & { digest?: string };
   reset: () => void;
 }) {
   return (
-    <>
-      <Header />
-      <main className="flex-1 flex items-center justify-center section-padding min-h-[70vh]">
-        <div className="text-center max-w-md">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[var(--color-error-container)] text-[var(--color-on-error-container)] mb-6">
+    <html lang="fr">
+      <body className="bg-[var(--color-bg)] text-[var(--color-text)] font-sans min-h-screen flex items-center justify-center">
+        <main className="text-center max-w-md px-6">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[var(--color-error-bg)] text-[var(--color-error)] mb-6">
             <AlertCircle size={28} />
           </div>
-          <h1 className="text-2xl font-semibold text-[var(--color-on-background)] mb-3">
-            Une erreur est survenue
-          </h1>
-          <p className="text-[var(--color-on-surface-variant)] mb-8">
-            Quelque chose s'est mal passé. Veuillez réessayer ou revenir à
-            l'accueil.
+          <h1 className="text-2xl font-semibold mb-3">Une erreur est survenue</h1>
+          <p className="text-[var(--color-text-secondary)] mb-8">
+            Quelque chose s&apos;est mal passé. Veuillez réessayer.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button
-              variant="primary"
+            <button
               onClick={reset}
-              icon={<RotateCcw size={16} />}
+              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold rounded-[var(--radius-md)] bg-[var(--color-indigo)] text-white hover:bg-[var(--color-indigo-light)] transition-colors cursor-pointer"
             >
               Réessayer
-            </Button>
-            <Button variant="ghost" href="/" icon={<Home size={16} />}>
-              Retour à l'accueil
-            </Button>
+            </button>
+            <a
+              href="/"
+              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold rounded-[var(--radius-md)] border border-[var(--color-border)] hover:bg-[var(--color-bg-alt)] transition-colors"
+            >
+              Retour à l&apos;accueil
+            </a>
           </div>
-        </div>
-      </main>
-      <Footer />
-      <MobileNav />
-    </>
+        </main>
+      </body>
+    </html>
+  );
+}
+
+function AlertCircle({ size = 24 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <line x1="12" y1="8" x2="12" y2="12" />
+      <line x1="12" y1="16" x2="12.01" y2="16" />
+    </svg>
   );
 }

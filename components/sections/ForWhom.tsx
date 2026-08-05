@@ -2,14 +2,16 @@
 
 import { Building2, Heart, Landmark, User, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-import { FOR_WHOM } from "@/lib/constants";
+import { useTranslations, useLocale } from "next-intl";
 
-const audienceIcons: Record<string, React.ComponentType<{ size?: number }>> = {
-  Entreprises: Building2,
-  ONG: Heart,
-  Institutions: Landmark,
-  Professionnels: User,
-};
+const audienceIcons = [Building2, Heart, Landmark, User];
+const audienceHrefs = ["/contact", "/contact", "/contact", "/#academy"];
+
+interface Audience {
+  title: string;
+  description: string;
+  cta: string;
+}
 
 const audienceAccents = [
   "hover:border-[var(--color-indigo)]/40",
@@ -19,6 +21,10 @@ const audienceAccents = [
 ];
 
 export function ForWhom() {
+  const t = useTranslations("forWhom");
+  const locale = useLocale();
+  const audiences = t.raw("audiences") as Audience[];
+
   return (
     <section className="section section-alt" id="for-whom" aria-label="Pour qui">
       <div className="container-site">
@@ -30,20 +36,20 @@ export function ForWhom() {
           transition={{ duration: 0.5 }}
         >
           <p className="text-xs font-semibold tracking-[0.1em] uppercase text-[var(--color-indigo)] mb-4">
-            Publics
+            {t("eyebrow")}
           </p>
           <h2
             className="text-[var(--color-text)] leading-[1.12] tracking-[-0.02em]"
             style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: "700" }}
           >
-            {FOR_WHOM.heading}
+            {t("heading")}
           </h2>
-          <p className="text-[var(--color-text-secondary)] text-lg mt-4">{FOR_WHOM.subtitle}</p>
+          <p className="text-[var(--color-text-secondary)] text-lg mt-4">{t("subtitle")}</p>
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {FOR_WHOM.audiences.map((audience, i) => {
-            const Icon = audienceIcons[audience.title] || User;
+          {audiences.map((audience, i) => {
+            const Icon = audienceIcons[i] || User;
             return (
               <motion.div
                 key={audience.title}
@@ -63,7 +69,7 @@ export function ForWhom() {
                   {audience.description}
                 </p>
                 <a
-                  href={audience.href}
+                  href={`/${locale}${audienceHrefs[i] || "/contact"}`}
                   className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--color-indigo)] hover:text-[var(--color-indigo-light)] transition-colors"
                 >
                   {audience.cta}

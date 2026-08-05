@@ -1,15 +1,14 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { useTranslations, useLocale } from "next-intl";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Card } from "@/components/ui/Card";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { CONTACT } from "@/lib/constants";
-import { Mail, CheckCircle, AlertCircle, ArrowLeft, Loader2 } from "lucide-react";
+import { Mail, CheckCircle, AlertCircle, ArrowLeft } from "lucide-react";
 
 type FormState = "idle" | "loading" | "success" | "error";
 
@@ -34,6 +33,12 @@ const initialFormData: FormData = {
 };
 
 export default function ContactPage() {
+  const t = useTranslations("contact");
+  const locale = useLocale();
+  const email = t("email");
+  const orgTypes = t.raw("orgTypes") as string[];
+  const needs = t.raw("needs") as string[];
+
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [formState, setFormState] = useState<FormState>("idle");
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
@@ -42,18 +47,18 @@ export default function ContactPage() {
     const newErrors: Partial<Record<keyof FormData, string>> = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = "Le nom est requis.";
+      newErrors.name = t("errors.name");
     }
     if (!formData.organization.trim()) {
-      newErrors.organization = "L'organisation est requise.";
+      newErrors.organization = t("errors.organization");
     }
     if (!formData.email.trim()) {
-      newErrors.email = "L'email est requis.";
+      newErrors.email = t("errors.email");
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Format d'email invalide.";
+      newErrors.email = t("errors.emailFormat");
     }
     if (!formData.message.trim()) {
-      newErrors.message = "Le message est requis.";
+      newErrors.message = t("errors.message");
     }
 
     setErrors(newErrors);
@@ -98,50 +103,43 @@ export default function ContactPage() {
     <>
       <Header />
       <main id="main-content" className="pb-24 md:pb-0">
-        <div className="section-padding">
+        <div className="section">
           <div className="container-site max-w-3xl">
             {/* Back link */}
             <a
-              href="/"
-              className="inline-flex items-center gap-1.5 text-sm text-[var(--color-on-surface-variant)] hover:text-[var(--color-on-surface)] transition-colors mb-8"
+              href={`/${locale}`}
+              className="inline-flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors mb-8"
             >
               <ArrowLeft size={16} />
-              Retour à l'accueil
+              {t("backHome")}
             </a>
 
-            <h1 className="text-[var(--color-on-background)] mb-2" style={{
-              fontSize: "clamp(24px, 4vw, var(--font-headline-md-size))",
-              fontWeight: "var(--font-headline-md-weight)",
-              lineHeight: "var(--font-headline-md-line-height)",
-            }}>
-              {CONTACT.heading}
+            <h1
+              className="text-[var(--color-text)] mb-2 leading-[1.12] tracking-[-0.02em]"
+              style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: "700" }}
+            >
+              {t("heading")}
             </h1>
-            {CONTACT.subtitle && (
-              <p className="text-[var(--color-on-surface-variant)] mb-8" style={{
-                fontSize: "var(--font-body-lg-size)",
-                lineHeight: "var(--font-body-lg-line-height)",
-              }}>
-                {CONTACT.subtitle}
-              </p>
-            )}
+            <p className="text-[var(--color-text-secondary)] text-lg mb-8">
+              {t("subtitle")}
+            </p>
 
             {/* Success state */}
             {formState === "success" && (
               <Card padding="lg" className="border-[var(--color-emerald)]/50 bg-[var(--color-emerald)]/5">
                 <div className="flex items-center gap-3 mb-3">
                   <CheckCircle size={24} className="text-[var(--color-emerald)]" />
-                  <h2 className="text-lg font-semibold text-[var(--color-on-background)]">
-                    Message envoyé avec succès
+                  <h2 className="text-lg font-semibold text-[var(--color-text)]">
+                    {t("successTitle")}
                   </h2>
                 </div>
-                <p className="text-[var(--color-on-surface-variant)] mb-4">
-                  Merci pour votre message. Nous vous répondrons dans les 24h
-                  à l'adresse{" "}
+                <p className="text-[var(--color-text-secondary)] mb-4">
+                  {t("successBody")}{" "}
                   <a
-                    href={`mailto:${CONTACT.email}`}
-                    className="text-[var(--color-secondary)] hover:underline"
+                    href={`mailto:${email}`}
+                    className="text-[var(--color-indigo)] hover:underline"
                   >
-                    {CONTACT.email}
+                    {email}
                   </a>
                   .
                 </p>
@@ -150,23 +148,22 @@ export default function ContactPage() {
                   size="sm"
                   onClick={() => setFormState("idle")}
                 >
-                  Envoyer un autre message
+                  {t("sendAnother")}
                 </Button>
               </Card>
             )}
 
             {/* Error state */}
             {formState === "error" && (
-              <div className="mb-6 p-4 rounded-[4px] bg-[var(--color-error-container)] text-[var(--color-on-error-container)] flex items-center gap-3">
+              <div className="mb-6 p-4 rounded-[var(--radius-md)] bg-[var(--color-error-bg)] text-[var(--color-error)] flex items-center gap-3">
                 <AlertCircle size={20} />
                 <p className="text-sm">
-                  Une erreur est survenue lors de l'envoi. Veuillez réessayer
-                  ou nous contacter directement à{" "}
+                  {t("errorBody")}{" "}
                   <a
-                    href={`mailto:${CONTACT.email}`}
+                    href={`mailto:${email}`}
                     className="font-semibold underline"
                   >
-                    {CONTACT.email}
+                    {email}
                   </a>
                   .
                 </p>
@@ -179,8 +176,8 @@ export default function ContactPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <Input
                     id="name"
-                    label={CONTACT.formLabels.name}
-                    placeholder="Votre nom complet"
+                    label={t("formLabels.name")}
+                    placeholder={t("placeholders.name")}
                     value={formData.name}
                     onChange={(e) => updateField("name", e.target.value)}
                     error={errors.name}
@@ -188,8 +185,8 @@ export default function ContactPage() {
                   />
                   <Input
                     id="organization"
-                    label={CONTACT.formLabels.organization}
-                    placeholder="Nom de votre organisation"
+                    label={t("formLabels.organization")}
+                    placeholder={t("placeholders.organization")}
                     value={formData.organization}
                     onChange={(e) => updateField("organization", e.target.value)}
                     error={errors.organization}
@@ -197,9 +194,9 @@ export default function ContactPage() {
                   />
                   <Input
                     id="email"
-                    label={CONTACT.formLabels.email}
+                    label={t("formLabels.email")}
                     type="email"
-                    placeholder="vous@organisation.cd"
+                    placeholder={t("placeholders.email")}
                     value={formData.email}
                     onChange={(e) => updateField("email", e.target.value)}
                     error={errors.email}
@@ -207,9 +204,9 @@ export default function ContactPage() {
                   />
                   <Input
                     id="phone"
-                    label={CONTACT.formLabels.phone}
+                    label={t("formLabels.phone")}
                     type="tel"
-                    placeholder="+243 ..."
+                    placeholder={t("placeholders.phone")}
                     value={formData.phone}
                     onChange={(e) => updateField("phone", e.target.value)}
                   />
@@ -217,19 +214,19 @@ export default function ContactPage() {
 
                 {/* Organization type */}
                 <fieldset>
-                  <legend className="text-sm font-medium text-[var(--color-on-surface)] mb-3">
-                    {CONTACT.formLabels.orgType}
+                  <legend className="text-sm font-medium text-[var(--color-text)] mb-3">
+                    {t("formLabels.orgType")}
                   </legend>
                   <div className="flex flex-wrap gap-2">
-                    {CONTACT.orgTypes.map((type) => (
+                    {orgTypes.map((type) => (
                       <button
                         key={type}
                         type="button"
                         onClick={() => updateField("orgType", type)}
-                        className={`px-4 py-2 text-sm rounded-[4px] border transition-all duration-200 ${
+                        className={`px-4 py-2 text-sm rounded-[var(--radius-md)] border transition-all duration-200 ${
                           formData.orgType === type
-                            ? "border-[var(--color-secondary)] bg-[var(--color-secondary)]/10 text-[var(--color-secondary)] font-medium"
-                            : "border-[var(--color-border-light)] text-[var(--color-on-surface-variant)] hover:border-[var(--color-secondary)]/50"
+                            ? "border-[var(--color-indigo)] bg-[var(--color-indigo)]/10 text-[var(--color-indigo)] font-medium"
+                            : "border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-indigo)]/50"
                         }`}
                       >
                         {type}
@@ -240,19 +237,19 @@ export default function ContactPage() {
 
                 {/* Need */}
                 <fieldset>
-                  <legend className="text-sm font-medium text-[var(--color-on-surface)] mb-3">
-                    {CONTACT.mainQuestion}
+                  <legend className="text-sm font-medium text-[var(--color-text)] mb-3">
+                    {t("question")}
                   </legend>
                   <div className="flex flex-wrap gap-2">
-                    {CONTACT.needs.map((need) => (
+                    {needs.map((need) => (
                       <button
                         key={need}
                         type="button"
                         onClick={() => updateField("need", need)}
-                        className={`px-4 py-2 text-sm rounded-[4px] border transition-all duration-200 ${
+                        className={`px-4 py-2 text-sm rounded-[var(--radius-md)] border transition-all duration-200 ${
                           formData.need === need
-                            ? "border-[var(--color-secondary)] bg-[var(--color-secondary)]/10 text-[var(--color-secondary)] font-medium"
-                            : "border-[var(--color-border-light)] text-[var(--color-on-surface-variant)] hover:border-[var(--color-secondary)]/50"
+                            ? "border-[var(--color-indigo)] bg-[var(--color-indigo)]/10 text-[var(--color-indigo)] font-medium"
+                            : "border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-indigo)]/50"
                         }`}
                       >
                         {need}
@@ -263,9 +260,9 @@ export default function ContactPage() {
 
                 <Input
                   id="message"
-                  label={CONTACT.formLabels.message}
+                  label={t("formLabels.message")}
                   textarea
-                  placeholder="Décrivez votre besoin, votre projet ou vos questions..."
+                  placeholder={t("placeholders.message")}
                   value={formData.message}
                   onChange={(e) => updateField("message", e.target.value)}
                   error={errors.message}
@@ -280,16 +277,16 @@ export default function ContactPage() {
                   loading={formState === "loading"}
                   icon={formState !== "loading" ? <Mail size={18} /> : undefined}
                 >
-                  {formState === "loading" ? "Envoi en cours..." : CONTACT.submitCta}
+                  {formState === "loading" ? t("sending") : t("submitCta")}
                 </Button>
 
-                <p className="text-xs text-[var(--color-on-surface-variant)]">
-                  Ou écrivez-nous directement à{" "}
+                <p className="text-xs text-[var(--color-text-secondary)]">
+                  {t("directEmail")}{" "}
                   <a
-                    href={`mailto:${CONTACT.email}`}
-                    className="text-[var(--color-secondary)] hover:underline font-medium"
+                    href={`mailto:${email}`}
+                    className="text-[var(--color-indigo)] hover:underline font-medium"
                   >
-                    {CONTACT.email}
+                    {email}
                   </a>
                 </p>
               </form>

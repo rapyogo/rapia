@@ -2,7 +2,7 @@
 
 import { ArrowRight, MessageSquare, BookOpen, Cpu, Cog } from "lucide-react";
 import { motion } from "framer-motion";
-import { SERVICES } from "@/lib/constants";
+import { useTranslations, useLocale } from "next-intl";
 
 const iconMap: Record<string, React.ComponentType<{ size?: number }>> = {
   conseil: MessageSquare,
@@ -10,6 +10,14 @@ const iconMap: Record<string, React.ComponentType<{ size?: number }>> = {
   implementation: Cpu,
   automatisation: Cog,
 };
+
+const hrefMap: Record<string, string> = {
+  conseil: "/contact",
+  formation: "/#academy",
+  implementation: "/contact",
+  automatisation: "/contact",
+};
+
 
 const borderColors = [
   "border-l-[var(--color-indigo)]",
@@ -25,7 +33,19 @@ const bgColors = [
   "bg-[var(--color-deep)]/5",
 ];
 
+interface ServiceItem {
+  id: string;
+  title: string;
+  description: string;
+  features: string[];
+  cta: string;
+}
+
 export function Services() {
+  const t = useTranslations("services");
+  const locale = useLocale();
+  const items = t.raw("items") as ServiceItem[];
+
   return (
     <section className="section section-alt" id="services" aria-label="Nos services">
       <div className="container-site">
@@ -39,7 +59,7 @@ export function Services() {
         >
           <div className="flex-1">
             <p className="text-xs font-semibold tracking-[0.1em] uppercase text-[var(--color-indigo)] mb-4">
-              Ce que nous faisons
+              {t("eyebrow")}
             </p>
             <h2
               className="text-[var(--color-text)] leading-[1.12] tracking-[-0.02em] max-w-2xl"
@@ -48,17 +68,17 @@ export function Services() {
                 fontWeight: "700",
               }}
             >
-              {SERVICES.heading}
+              {t("heading")}
             </h2>
           </div>
           <p className="text-[var(--color-text-secondary)] text-lg max-w-md">
-            {SERVICES.subtitle}
+            {t("subtitle")}
           </p>
         </motion.div>
 
         {/* Grille services */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {SERVICES.items.map((service, i) => {
+          {items.map((service, i) => {
             const Icon = iconMap[service.id] || Cpu;
             return (
               <motion.div
@@ -78,7 +98,7 @@ export function Services() {
                     </div>
                     <div>
                       <span className="text-xs font-bold tracking-[0.1em] text-[var(--color-text-muted)]">
-                        {service.number}
+                        {String(i + 1).padStart(2, "0")}
                       </span>
                       <h3
                         className="text-[var(--color-text)] mt-1"
@@ -107,7 +127,7 @@ export function Services() {
                   </ul>
 
                   <a
-                    href={service.href}
+                    href={`/${locale}${hrefMap[service.id] || "/contact"}`}
                     className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-indigo)] hover:text-[var(--color-indigo-light)] transition-colors"
                   >
                     {service.cta}

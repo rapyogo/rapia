@@ -2,16 +2,19 @@
 
 import { Brain, Workflow, Database, Bot } from "lucide-react";
 import { motion } from "framer-motion";
-import { TECHNOLOGIES } from "@/lib/constants";
+import { useTranslations } from "next-intl";
 
-const catIcons: Record<string, React.ComponentType<{ size?: number }>> = {
-  LLM: Brain,
-  Automatisation: Workflow,
-  Données: Database,
-  Agents: Bot,
-};
+const catIcons = [Brain, Workflow, Database, Bot];
+
+interface TechCategory {
+  title: string;
+  description: string;
+}
 
 export function Technologies() {
+  const t = useTranslations("technologies");
+  const categories = t.raw("categories") as TechCategory[];
+
   return (
     <section className="section" aria-label="Écosystème technologique">
       <div className="container-site">
@@ -23,20 +26,20 @@ export function Technologies() {
           transition={{ duration: 0.5 }}
         >
           <p className="text-xs font-semibold tracking-[0.1em] uppercase text-[var(--color-indigo)] mb-4">
-            Technologies
+            {t("eyebrow")}
           </p>
           <h2
             className="text-[var(--color-text)] leading-[1.12] tracking-[-0.02em]"
             style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: "700" }}
           >
-            {TECHNOLOGIES.heading}
+            {t("heading")}
           </h2>
-          <p className="text-[var(--color-text-secondary)] text-lg mt-4">{TECHNOLOGIES.subtitle}</p>
+          <p className="text-[var(--color-text-secondary)] text-lg mt-4">{t("subtitle")}</p>
         </motion.div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {TECHNOLOGIES.categories.map((cat, i) => {
-            const Icon = catIcons[cat.title] || Brain;
+          {categories.map((cat, i) => {
+            const Icon = catIcons[i] || Brain;
             return (
               <motion.div
                 key={cat.title}

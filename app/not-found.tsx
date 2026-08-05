@@ -1,34 +1,21 @@
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { MobileNav } from "@/components/layout/MobileNav";
-import { Button } from "@/components/ui/Button";
-import { ArrowLeft, Home } from "lucide-react";
-
 export default function NotFound() {
   return (
-    <>
-      <Header />
-      <main className="flex-1 flex items-center justify-center section-padding min-h-[70vh]">
-        <div className="text-center max-w-md">
-          <p className="text-6xl font-bold text-[var(--color-secondary)]/20 mb-4">404</p>
-          <h1 className="text-2xl font-semibold text-[var(--color-on-background)] mb-3">
-            Page introuvable
-          </h1>
-          <p className="text-[var(--color-on-surface-variant)] mb-8">
-            La page que vous recherchez n'existe pas ou a été déplacée.
+    <html lang="fr">
+      <body className="bg-[var(--color-bg)] text-[var(--color-text)] font-sans min-h-screen flex items-center justify-center">
+        <main className="text-center max-w-md px-6">
+          <p className="text-6xl font-bold text-[var(--color-indigo)]/20 mb-4">404</p>
+          <h1 className="text-2xl font-semibold mb-3">Page introuvable</h1>
+          <p className="text-[var(--color-text-secondary)] mb-8">
+            La page que vous recherchez n&apos;existe pas ou a été déplacée.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button variant="primary" href="/" icon={<Home size={16} />}>
-              Retour à l'accueil
-            </Button>
-            <Button variant="ghost" href="/contact">
-              Nous contacter
-            </Button>
-          </div>
-        </div>
-      </main>
-      <Footer />
-      <MobileNav />
-    </>
+          <a
+            href="/"
+            className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold rounded-[var(--radius-md)] bg-[var(--color-indigo)] text-white hover:bg-[var(--color-indigo-light)] transition-colors"
+          >
+            Retour à l&apos;accueil
+          </a>
+        </main>
+      </body>
+    </html>
   );
 }

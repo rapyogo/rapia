@@ -2,17 +2,19 @@
 
 import { motion } from "framer-motion";
 import { Target, Layers, Users, Globe, Handshake } from "lucide-react";
-import { WHY_RAPIA } from "@/lib/constants";
+import { useTranslations } from "next-intl";
 
-const argIcons: Record<string, React.ComponentType<{ size?: number }>> = {
-  "Compréhension du terrain africain": Globe,
-  "Approche orientée résultats": Target,
-  "Formation + Implémentation": Layers,
-  "Technologies multiples": Users,
-  "Accompagnement humain": Handshake,
-};
+const argIcons = [Globe, Target, Layers, Users, Handshake];
+
+interface WhyArgument {
+  title: string;
+  description: string;
+}
 
 export function WhyRapia() {
+  const t = useTranslations("whyRapia");
+  const args = t.raw("arguments") as WhyArgument[];
+
   return (
     <section className="section" id="why-rapia" aria-label="Pourquoi RAPIA">
       <div className="container-site">
@@ -24,7 +26,7 @@ export function WhyRapia() {
           transition={{ duration: 0.5 }}
         >
           <p className="text-xs font-semibold tracking-[0.1em] uppercase text-[var(--color-indigo)] mb-4">
-            Différenciation
+            {t("eyebrow")}
           </p>
           <h2
             className="text-[var(--color-text)] leading-[1.12] tracking-[-0.02em]"
@@ -33,16 +35,16 @@ export function WhyRapia() {
               fontWeight: "700",
             }}
           >
-            {WHY_RAPIA.heading}
+            {t("heading")}
           </h2>
           <p className="text-[var(--color-text-secondary)] text-lg mt-4">
-            {WHY_RAPIA.subtitle}
+            {t("subtitle")}
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {WHY_RAPIA.arguments.map((arg, i) => {
-            const Icon = argIcons[arg.title] || Target;
+          {args.map((arg, i) => {
+            const Icon = argIcons[i] || Target;
             return (
               <motion.div
                 key={arg.title}

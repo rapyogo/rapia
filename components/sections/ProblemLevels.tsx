@@ -2,7 +2,7 @@
 
 import { ArrowRight, MessageCircle, Plug, Workflow } from "lucide-react";
 import { motion } from "framer-motion";
-import { PROBLEM_LEVELS } from "@/lib/constants";
+import { useTranslations } from "next-intl";
 
 const icons = [MessageCircle, Plug, Workflow];
 const colors = [
@@ -12,6 +12,13 @@ const colors = [
 ];
 
 export function ProblemLevels() {
+  const t = useTranslations("problem");
+  const levels = [
+    { number: "01", title: t("level1"), description: t("level1Desc") },
+    { number: "02", title: t("level2"), description: t("level2Desc") },
+    { number: "03", title: t("level3"), description: t("level3Desc") },
+  ];
+
   return (
     <section className="section bg-[var(--color-bg)]" aria-label="Les trois niveaux d'intégration IA">
       <div className="container-site">
@@ -24,7 +31,7 @@ export function ProblemLevels() {
           transition={{ duration: 0.5 }}
         >
           <p className="text-xs font-semibold tracking-[0.1em] uppercase text-[var(--color-indigo)] mb-4">
-            Le constat
+            {t("eyebrow")}
           </p>
           <h2
             className="text-[var(--color-text)] mb-4 leading-[1.12] tracking-[-0.02em]"
@@ -33,13 +40,13 @@ export function ProblemLevels() {
               fontWeight: "700",
             }}
           >
-            {PROBLEM_LEVELS.heading}
+            {t("title")}
           </h2>
         </motion.div>
 
         {/* Niveaux */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {PROBLEM_LEVELS.levels.map((level, i) => {
+          {levels.map((level, i) => {
             const Icon = icons[i];
             return (
               <motion.div
@@ -95,7 +102,7 @@ export function ProblemLevels() {
         >
           <ArrowRight size={20} className="text-[var(--color-amber)] mt-1 sm:mt-0 flex-shrink-0" />
           <p className="text-lg font-semibold">
-            {PROBLEM_LEVELS.highlight}
+            {t("highlight")}
           </p>
         </motion.div>
       </div>

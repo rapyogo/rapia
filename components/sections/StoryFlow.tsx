@@ -4,7 +4,10 @@ import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useTranslations, useLocale } from "next-intl";
 import { ScrollSequence } from "@/components/ui/scroll-sequence";
+import { ParallaxFond } from "@/components/ui/parallax-fond";
+import { ParallaxFormes } from "@/components/ui/parallax-formes";
 import { cn } from "@/lib/utils";
 
 /** Un palier de texte, positionné sur la progression du scrub (0 → 1). */
@@ -22,6 +25,8 @@ interface StoryActProps {
   align?: "left" | "right";
   ariaLabel: string;
   frameCount?: number;
+  fondVariant?: "indigo" | "emerald" | "amber";
+  formesSide?: "left" | "right";
 }
 
 function StoryAct({
@@ -30,6 +35,8 @@ function StoryAct({
   align = "left",
   ariaLabel,
   frameCount = 50,
+  fondVariant = "indigo",
+  formesSide = "left",
 }: StoryActProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -74,10 +81,14 @@ function StoryAct({
         aria-label={ariaLabel}
         className="relative text-white"
       >
+        {/* Couches de parallaxe */}
+        <ParallaxFond variant={fondVariant} />
+        <ParallaxFormes side={formesSide} />
+
         <div
           aria-hidden="true"
           className={cn(
-            "absolute inset-0",
+            "absolute inset-0 z-30",
             align === "left"
               ? "bg-gradient-to-r from-[var(--color-deep)]/92 via-[var(--color-deep)]/55 to-transparent"
               : "bg-gradient-to-l from-[var(--color-deep)]/92 via-[var(--color-deep)]/55 to-transparent",
@@ -85,14 +96,14 @@ function StoryAct({
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-t from-[var(--color-deep)]/90 via-transparent to-[var(--color-deep)]/45"
+          className="absolute inset-0 z-30 bg-gradient-to-t from-[var(--color-deep)]/90 via-transparent to-[var(--color-deep)]/45"
         />
 
         {chapters.map((ch, i) => (
           <div
             key={i}
             data-chapter={i}
-            className="container-site absolute inset-0 flex flex-col justify-center pointer-events-none"
+            className="container-site absolute inset-0 z-40 flex flex-col justify-center pointer-events-none"
           >
             <div
               className={cn(
@@ -137,23 +148,29 @@ function Sub({ children }: { children: React.ReactNode }) {
  * rouge au vert — le texte s'appuie dessus.
  */
 export function StoryFlow() {
+  const t = useTranslations("storyFlow");
+  const locale = useLocale();
+  const prefix = `/${locale}`;
+
   return (
     <>
       {/* Acte 2 — la surcharge */}
       <StoryAct
         slug="acte-2-surcharge"
-        ariaLabel="Le constat : la surcharge opérationnelle"
+        ariaLabel={t("act2.ariaLabel")}
         align="left"
+        fondVariant="indigo"
+        formesSide="left"
         chapters={[
           {
             at: 0,
             until: 0.3,
             content: (
               <Line>
-                Vous ne manquez pas de compétences.
+                {t("act2.line1a")}
                 <br />
-                Vous manquez{" "}
-                <span className="text-[var(--color-error)]">d&apos;heures</span>.
+                {t("act2.line1b")}{" "}
+                <span className="text-[var(--color-error)]">{t("act2.line1Highlight")}</span>.
               </Line>
             ),
           },
@@ -163,14 +180,11 @@ export function StoryFlow() {
             content: (
               <>
                 <Line>
-                  Les relances. Les saisies.
+                  {t("act2.line2a")}
                   <br />
-                  Les rapports. Les contrôles.
+                  {t("act2.line2b")}
                 </Line>
-                <Sub>
-                  Chaque jour, les mêmes gestes. Ils ne font pas avancer
-                  l&apos;entreprise, mais personne d&apos;autre ne les fera.
-                </Sub>
+                <Sub>{t("act2.sub2")}</Sub>
               </>
             ),
           },
@@ -178,9 +192,9 @@ export function StoryFlow() {
             at: 0.76,
             content: (
               <Line>
-                Et le soir tombe avant
+                {t("act2.line3a")}
                 <br />
-                que le vrai travail commence.
+                {t("act2.line3b")}
               </Line>
             ),
           },
@@ -190,27 +204,26 @@ export function StoryFlow() {
       {/* Acte 3 — la rencontre */}
       <StoryAct
         slug="acte-3-rencontre"
-        ariaLabel="La proposition : une IA qui prend la charge"
+        ariaLabel={t("act3.ariaLabel")}
         align="right"
+        fondVariant="emerald"
+        formesSide="right"
         chapters={[
           {
             at: 0,
             until: 0.42,
-            content: <Line>Et si vous n&apos;aviez plus à tout porter seul&nbsp;?</Line>,
+            content: <Line>{t("act3.line1")}</Line>,
           },
           {
             at: 0.5,
             content: (
               <>
                 <Line>
-                  Pas un logiciel de plus.
+                  {t("act3.line2a")}
                   <br />
-                  Un système qui fait le travail.
+                  {t("act3.line2b")}
                 </Line>
-                <Sub>
-                  L&apos;IA ne vient pas prendre votre place. Elle vient prendre
-                  votre charge.
-                </Sub>
+                <Sub>{t("act3.sub")}</Sub>
               </>
             ),
           },
@@ -220,17 +233,19 @@ export function StoryFlow() {
       {/* Acte 4 — la délégation */}
       <StoryAct
         slug="acte-4-delegation"
-        ariaLabel="La délégation : vous décidez, le système exécute"
+        ariaLabel={t("act4.ariaLabel")}
         align="left"
+        fondVariant="amber"
+        formesSide="left"
         chapters={[
           {
             at: 0,
             until: 0.42,
             content: (
               <Line>
-                Vous décidez.
+                {t("act4.line1a")}
                 <br />
-                Il exécute.
+                {t("act4.line1b")}
               </Line>
             ),
           },
@@ -239,15 +254,12 @@ export function StoryFlow() {
             content: (
               <>
                 <Line>
-                  Le rouge devient{" "}
-                  <span className="text-[var(--color-emerald-light)]">vert</span>.
+                  {t("act4.line2a")}{" "}
+                  <span className="text-[var(--color-emerald-light)]">{t("act4.line2Highlight")}</span>.
                   <br />
-                  Sans que vous y touchiez.
+                  {t("act4.line2b")}
                 </Line>
-                <Sub>
-                  Les tâches tournent la nuit, le week-end, pendant vos réunions.
-                  Vous gardez la main sur ce qui compte : les décisions.
-                </Sub>
+                <Sub>{t("act4.sub")}</Sub>
               </>
             ),
           },
@@ -257,20 +269,22 @@ export function StoryFlow() {
       {/* Acte 5 — la liberté retrouvée */}
       <StoryAct
         slug="acte-5-liberte"
-        ariaLabel="Le résultat : du temps rendu à l'essentiel"
+        ariaLabel={t("act5.ariaLabel")}
         align="right"
+        fondVariant="indigo"
+        formesSide="right"
         chapters={[
           {
             at: 0,
             until: 0.4,
             content: (
               <Line>
-                Vous récupérez la seule chose
+                {t("act5.line1a")}
                 <br />
-                qui ne se délègue pas :
+                {t("act5.line1b")}
                 <br />
                 <span className="text-[var(--color-amber-light)]">
-                  votre attention.
+                  {t("act5.line1Highlight")}
                 </span>
               </Line>
             ),
@@ -280,20 +294,17 @@ export function StoryFlow() {
             content: (
               <>
                 <Line>
-                  C&apos;est ça, une IA
+                  {t("act5.line2a")}
                   <br />
-                  qui travaille pour vous.
+                  {t("act5.line2b")}
                 </Line>
-                <Sub>
-                  Parlons de vos opérations. Nous identifions ensemble ce qui
-                  peut être automatisé dès maintenant.
-                </Sub>
+                <Sub>{t("act5.sub")}</Sub>
                 <div className="mt-10 flex justify-start md:justify-end">
                   <a
-                    href="/contact"
+                    href={`${prefix}/contact`}
                     className="inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold rounded-[var(--radius-md)] bg-[var(--color-indigo)] text-white hover:bg-[var(--color-indigo-light)] shadow-[var(--shadow-lg)] hover:shadow-[var(--shadow-xl)] hover:-translate-y-0.5 transition-all duration-300 min-h-[48px]"
                   >
-                    Parler à un expert IA
+                    {t("act5.cta")}
                     <ArrowRight size={16} />
                   </a>
                 </div>

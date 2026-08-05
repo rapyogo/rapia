@@ -1,11 +1,13 @@
 "use client";
 
 import { useRef } from "react";
+import { useTranslations, useLocale } from "next-intl";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollSequence } from "@/components/ui/scroll-sequence";
-import { HERO } from "@/lib/constants";
+import { ParallaxFond } from "@/components/ui/parallax-fond";
+import { ParallaxFormes } from "@/components/ui/parallax-formes";
 import { cn } from "@/lib/utils";
 
 const FRAME_COUNT = 50;
@@ -50,7 +52,7 @@ function Chapter({
     <div
       data-chapter={index}
       className={cn(
-        "container-site absolute inset-0 flex flex-col justify-center pointer-events-none",
+        "container-site absolute inset-0 z-40 flex flex-col justify-center pointer-events-none",
         className
       )}
     >
@@ -60,6 +62,9 @@ function Chapter({
 }
 
 export function HeroSequence() {
+  const t = useTranslations("hero");
+  const locale = useLocale();
+  const prefix = `/${locale}`;
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -107,27 +112,31 @@ export function HeroSequence() {
         aria-label="Présentation de RAPIA"
         className="relative text-white"
       >
+        {/* Couches de parallaxe */}
+        <ParallaxFond variant="indigo" />
+        <ParallaxFormes side="left" />
+
         {/* Voile de lisibilité — assombrit l'image sous le texte */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-r from-[var(--color-deep)]/92 via-[var(--color-deep)]/55 to-transparent"
+          className="absolute inset-0 z-30 bg-gradient-to-r from-[var(--color-deep)]/92 via-[var(--color-deep)]/55 to-transparent"
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-t from-[var(--color-deep)]/90 via-transparent to-[var(--color-deep)]/45"
+          className="absolute inset-0 z-30 bg-gradient-to-t from-[var(--color-deep)]/90 via-transparent to-[var(--color-deep)]/45"
         />
 
         {/* Chapitre 1 — l'accroche de marque */}
         <Chapter index={0}>
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-medium tracking-[0.08em] uppercase text-white/60 mb-8 w-fit backdrop-blur-sm">
             <Sparkles size={14} className="text-[var(--color-amber)]" />
-            {HERO.eyebrow}
+            {t("eyebrow")}
           </div>
           <h1
             className="leading-[1.08] tracking-[-0.025em] font-extrabold"
             style={{ fontSize: "clamp(36px, 6vw, 72px)" }}
           >
-            {HERO.title}
+            {t("title")}
           </h1>
         </Chapter>
 
@@ -137,12 +146,12 @@ export function HeroSequence() {
             className="leading-[1.15] tracking-[-0.02em] font-bold text-white/95"
             style={{ fontSize: "clamp(30px, 4.6vw, 56px)" }}
           >
-            Des heures sur des tâches répétitives.
+            {t("chapter2Line1")}
             <br />
-            Des dossiers qui s&apos;empilent.
+            {t("chapter2Line2")}
             <br />
             <span className="text-[var(--color-amber-light)]">
-              Des décisions qui attendent.
+              {t("chapter2Line3")}
             </span>
           </p>
         </Chapter>
@@ -153,20 +162,20 @@ export function HeroSequence() {
             className="leading-[1.15] tracking-[-0.02em] font-bold mb-6"
             style={{ fontSize: "clamp(28px, 4.2vw, 52px)" }}
           >
-            C&apos;est exactement là que RAPIA intervient.
+            {t("chapter3Intro")}
           </p>
           <p className="text-white/60 text-base md:text-lg leading-relaxed mb-10 max-w-xl">
-            {HERO.subtitle}
+            {t("subtitle")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mb-10">
-            <CTAButton primary href="/contact">
-              {HERO.primaryCta}
+            <CTAButton primary href={`${prefix}/contact`}>
+              {t("primaryCta")}
               <ArrowRight size={16} />
             </CTAButton>
-            <CTAButton href="/#services">{HERO.secondaryCta}</CTAButton>
+            <CTAButton href={`${prefix}/#services`}>{t("secondaryCta")}</CTAButton>
           </div>
           <p className="text-xs md:text-sm text-white/40 font-medium tracking-[0.06em] uppercase">
-            {HERO.credibility}
+            {t("credibility")}
           </p>
         </Chapter>
 

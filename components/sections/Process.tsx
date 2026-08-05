@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Search, Lightbulb, Wrench, GraduationCap } from "lucide-react";
-import { PROCESS } from "@/lib/constants";
+import { useTranslations } from "next-intl";
 
 const stepIcons = [Search, Lightbulb, Wrench, GraduationCap];
 const stepColors = [
@@ -12,7 +12,15 @@ const stepColors = [
   "bg-[var(--color-deep)]/10 text-[var(--color-deep)]",
 ];
 
+interface ProcessStep {
+  title: string;
+  description: string;
+}
+
 export function Process() {
+  const t = useTranslations("process");
+  const steps = t.raw("steps") as ProcessStep[];
+
   return (
     <section className="section section-dark" aria-label="Notre méthodologie">
       <div className="container-site">
@@ -25,7 +33,7 @@ export function Process() {
           transition={{ duration: 0.5 }}
         >
           <p className="text-xs font-semibold tracking-[0.1em] uppercase text-white/40 mb-4">
-            Méthodologie
+            {t("eyebrow")}
           </p>
           <h2
             className="text-white leading-[1.12] tracking-[-0.02em]"
@@ -34,9 +42,9 @@ export function Process() {
               fontWeight: "700",
             }}
           >
-            {PROCESS.heading}
+            {t("heading")}
           </h2>
-          <p className="text-white/50 text-lg mt-4">{PROCESS.subtitle}</p>
+          <p className="text-white/50 text-lg mt-4">{t("subtitle")}</p>
         </motion.div>
 
         {/* Timeline desktop */}
@@ -45,11 +53,12 @@ export function Process() {
           <div className="absolute top-10 left-0 right-0 h-[2px] bg-white/10" aria-hidden="true" />
 
           <div className="grid grid-cols-4 gap-8">
-            {PROCESS.steps.map((step, i) => {
+            {steps.map((step, i) => {
               const Icon = stepIcons[i];
+              const number = String(i + 1).padStart(2, "0");
               return (
                 <motion.div
-                  key={step.number}
+                  key={number}
                   className="relative flex flex-col items-center text-center"
                   initial={{ opacity: 0, y: 32 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -62,7 +71,7 @@ export function Process() {
                     <Icon size={28} />
                   </div>
                   <span className="text-xs font-bold tracking-[0.1em] text-white/30 mb-2">
-                    {step.number}
+                    {number}
                   </span>
                   <h3 className="text-white font-bold text-lg mb-2">{step.title}</h3>
                   <p className="text-white/50 text-sm leading-relaxed">
@@ -76,11 +85,12 @@ export function Process() {
 
         {/* Mobile vertical */}
         <div className="md:hidden space-y-8">
-          {PROCESS.steps.map((step, i) => {
+          {steps.map((step, i) => {
             const Icon = stepIcons[i];
+            const number = String(i + 1).padStart(2, "0");
             return (
               <motion.div
-                key={step.number}
+                key={number}
                 className="flex items-start gap-5"
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -94,7 +104,7 @@ export function Process() {
                 </div>
                 <div>
                   <span className="text-xs font-bold tracking-[0.1em] text-white/30">
-                    {step.number}
+                    {number}
                   </span>
                   <h3 className="text-white font-bold text-lg mt-1">{step.title}</h3>
                   <p className="text-white/50 text-sm mt-1">{step.description}</p>
