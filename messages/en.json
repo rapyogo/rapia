@@ -146,9 +146,21 @@
     ]
   },
   "socialProof": {
+    "eyebrow": "Proof & credibility",
     "heading": "They trust us",
     "subtitle": "Organizations that have chosen to integrate AI with RAPIA.",
-    "placeholder": true
+    "toConfirm": "[TO CONFIRM]",
+    "emptyState": "Figures will be published once verified. No data on this site is invented.",
+    "stats": [
+      {"key": "projets", "label": "Projects delivered", "suffix": ""},
+      {"key": "equipes", "label": "People trained", "suffix": ""},
+      {"key": "processus", "label": "Processes automated", "suffix": ""},
+      {"key": "organisations", "label": "Organizations supported", "suffix": ""}
+    ],
+    "testimonialsLabel": "Testimonials",
+    "clientsLabel": "Clients",
+    "partnersLabel": "Partners",
+    "certificationsLabel": "Certifications"
   },
   "content": {
     "heading": "Understand AI before adopting it.",

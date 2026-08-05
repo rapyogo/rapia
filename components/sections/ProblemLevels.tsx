@@ -1,110 +1,140 @@
 "use client";
 
+import { useRef, useState } from "react";
 import { ArrowRight, MessageCircle, Plug, Workflow } from "lucide-react";
-import { motion } from "framer-motion";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import { useTranslations } from "next-intl";
 
+gsap.registerPlugin(ScrollTrigger, useGSAP);
+
 const icons = [MessageCircle, Plug, Workflow];
-const colors = [
-  "bg-[var(--color-indigo)]/10 text-[var(--color-indigo)] border-[var(--color-indigo)]/20",
-  "bg-[var(--color-amber)]/10 text-[var(--color-amber)] border-[var(--color-amber)]/20",
-  "bg-[var(--color-emerald)]/10 text-[var(--color-emerald)] border-[var(--color-emerald)]/20",
-];
 
 export function ProblemLevels() {
   const t = useTranslations("problem");
+  const sectionRef = useRef<HTMLElement>(null);
+  const railRef = useRef<HTMLDivElement>(null);
+  const [activeIdx, setActiveIdx] = useState(0);
+
   const levels = [
     { number: "01", title: t("level1"), description: t("level1Desc") },
     { number: "02", title: t("level2"), description: t("level2Desc") },
     { number: "03", title: t("level3"), description: t("level3Desc") },
   ];
 
+  useGSAP(
+    () => {
+      if (!sectionRef.current) return;
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        // Rien à épingler : tous les niveaux sont visibles, le rail est plein.
+        setActiveIdx(levels.length - 1);
+        if (railRef.current) railRef.current.style.transform = "scaleY(1)";
+        return;
+      }
+
+      // Le pin se termine avant la section suivante, qui pilote ses propres
+      // sequences en `sticky` — les deux ne se chevauchent jamais.
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top top",
+        end: () => "+=" + window.innerHeight * 2.2,
+        pin: true,
+        scrub: true,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          if (railRef.current) {
+            railRef.current.style.transform = `scaleY(${progress})`;
+          }
+          const idx = Math.min(
+            levels.length - 1,
+            Math.floor(progress * levels.length),
+          );
+          setActiveIdx(idx);
+        },
+      });
+    },
+    { scope: sectionRef, dependencies: [levels.length] },
+  );
+
   return (
-    <section className="section bg-[var(--color-bg)]" aria-label="Les trois niveaux d'intégration IA">
-      <div className="container-site">
-        {/* Titre */}
-        <motion.div
-          className="max-w-3xl mb-16"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5 }}
-        >
+    <section
+      ref={sectionRef}
+      className="relative flex min-h-[100svh] items-center bg-[var(--color-bg)] py-20"
+      aria-label="Les trois niveaux d'intégration IA"
+    >
+      <div className="container-site w-full">
+        <div className="max-w-3xl mb-14">
           <p className="text-xs font-semibold tracking-[0.1em] uppercase text-[var(--color-indigo)] mb-4">
             {t("eyebrow")}
           </p>
           <h2
-            className="text-[var(--color-text)] mb-4 leading-[1.12] tracking-[-0.02em]"
-            style={{
-              fontSize: "clamp(28px, 4vw, 48px)",
-              fontWeight: "700",
-            }}
+            className="text-[var(--color-text)] leading-[1.12] tracking-[-0.02em]"
+            style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: "700" }}
           >
             {t("title")}
           </h2>
-        </motion.div>
-
-        {/* Niveaux */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {levels.map((level, i) => {
-            const Icon = icons[i];
-            return (
-              <motion.div
-                key={level.number}
-                className="relative group"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.5, delay: i * 0.12 }}
-              >
-                <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-[var(--radius-lg)] p-8 h-full transition-all duration-300 group-hover:border-[var(--color-indigo)]/30 group-hover:shadow-[var(--shadow-lg)] group-hover:-translate-y-1">
-                  {/* Icône */}
-                  <div
-                    className={`w-14 h-14 rounded-[var(--radius-md)] flex items-center justify-center mb-6 border ${colors[i]}`}
-                  >
-                    <Icon size={24} />
-                  </div>
-
-                  {/* Numéro */}
-                  <span className="text-xs font-bold tracking-[0.1em] text-[var(--color-text-muted)] mb-3 block">
-                    NIVEAU {level.number}
-                  </span>
-
-                  {/* Titre */}
-                  <h3
-                    className="text-[var(--color-text)] mb-3"
-                    style={{
-                      fontSize: "clamp(20px, 2vw, 28px)",
-                      fontWeight: "700",
-                      letterSpacing: "-0.01em",
-                    }}
-                  >
-                    {level.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-[var(--color-text-secondary)] leading-relaxed">
-                    {level.description}
-                  </p>
-                </div>
-              </motion.div>
-            );
-          })}
         </div>
 
-        {/* Highlight */}
-        <motion.div
-          className="bg-[var(--color-deep)] text-white rounded-[var(--radius-lg)] px-8 py-6 flex flex-col sm:flex-row items-start sm:items-center gap-4"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-        >
-          <ArrowRight size={20} className="text-[var(--color-amber)] mt-1 sm:mt-0 flex-shrink-0" />
-          <p className="text-lg font-semibold">
-            {t("highlight")}
-          </p>
-        </motion.div>
+        <div className="relative">
+          {/* Rail de progression — se remplit au fil du scroll dans la section */}
+          <div
+            className="absolute left-0 top-0 hidden h-full w-px bg-[var(--color-border)] sm:block"
+            aria-hidden="true"
+          >
+            <div
+              ref={railRef}
+              className="h-full w-full origin-top bg-[var(--color-amber)]"
+              style={{ transform: "scaleY(0)" }}
+            />
+          </div>
+
+          <ol className="space-y-8 sm:pl-10">
+            {levels.map((level, i) => {
+              const Icon = icons[i];
+              const active = i <= activeIdx;
+              return (
+                <li
+                  key={level.number}
+                  className={`grid gap-x-8 gap-y-2 border-t border-[var(--color-border)] pt-6 transition-opacity duration-500 lg:grid-cols-12 ${
+                    active ? "opacity-100" : "opacity-30"
+                  }`}
+                >
+                  <div className="flex items-baseline gap-4 lg:col-span-4">
+                    <span
+                      className={`text-xs font-bold tracking-[0.1em] transition-colors duration-500 ${
+                        active
+                          ? "text-[var(--color-amber)]"
+                          : "text-[var(--color-text-muted)]"
+                      }`}
+                    >
+                      {level.number}
+                    </span>
+                    <h3 className="flex items-center gap-3 text-[var(--color-text)] font-bold text-2xl">
+                      <Icon size={20} />
+                      {level.title}
+                    </h3>
+                  </div>
+                  <div className="lg:col-span-8">
+                    <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                      {level.description}
+                    </p>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+
+        <p className="mt-12 flex items-start gap-3 border-l-2 border-[var(--color-amber)] pl-5 text-lg font-semibold text-[var(--color-text)] sm:ml-10">
+          <ArrowRight
+            size={20}
+            className="mt-1 flex-shrink-0 text-[var(--color-amber)]"
+          />
+          {t("highlight")}
+        </p>
       </div>
     </section>
   );

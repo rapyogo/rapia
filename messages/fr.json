@@ -146,9 +146,21 @@
     ]
   },
   "socialProof": {
+    "eyebrow": "Preuves & crédibilité",
     "heading": "Ils nous font confiance",
     "subtitle": "Des organisations qui ont choisi d'intégrer l'IA avec RAPIA.",
-    "placeholder": true
+    "toConfirm": "[À CONFIRMER]",
+    "emptyState": "Les chiffres seront publiés dès qu'ils seront vérifiés. Aucune donnée n'est inventée sur ce site.",
+    "stats": [
+      {"key": "projets", "label": "Projets livrés", "suffix": ""},
+      {"key": "equipes", "label": "Personnes formées", "suffix": ""},
+      {"key": "processus", "label": "Processus automatisés", "suffix": ""},
+      {"key": "organisations", "label": "Organisations accompagnées", "suffix": ""}
+    ],
+    "testimonialsLabel": "Témoignages",
+    "clientsLabel": "Clients",
+    "partnersLabel": "Partenaires",
+    "certificationsLabel": "Certifications"
   },
   "content": {
     "heading": "Comprendre l'IA avant de l'adopter.",
