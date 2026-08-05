@@ -1,11 +1,20 @@
-import { NextResponse } from "next/server";
+// app/api/contact/route.ts
+// Route API du formulaire de contact.
+// Orchestration : validation → honeypot check → rate limiting → notification → confirmation.
 
-/**
- * Rate limiting simple (in-memory).
- * En production, utiliser Vercel KV ou Upstash Redis.
- */
+import { NextResponse } from "next/server";
+import {
+  sendContactNotification,
+  sendContactConfirmation,
+} from "@/lib/email";
+import type { ContactFormData } from "@/lib/email";
+
+// ---------------------------------------------------------------------------
+// Rate limiting in-memory (1 soumission / 60 secondes par IP)
+// ---------------------------------------------------------------------------
+
 const RATE_LIMIT_WINDOW = 60_000; // 1 minute
-const RATE_LIMIT_MAX = 3; // max 3 soumissions par minute
+const RATE_LIMIT_MAX = 1; // 1 soumission par fenêtre
 
 const requestCounts = new Map<string, { count: number; resetAt: number }>();
 
@@ -26,22 +35,75 @@ function isRateLimited(ip: string): boolean {
   return false;
 }
 
+// ---------------------------------------------------------------------------
+// Validation serveur
+// ---------------------------------------------------------------------------
+
+const MAX_LENGTHS: Record<string, number> = {
+  name: 200,
+  organization: 200,
+  email: 320,
+  phone: 50,
+  orgType: 100,
+  need: 100,
+  message: 5000,
+};
+
+function validate(body: Record<string, unknown>): { valid: true; data: ContactFormData } | { valid: false; error: string; status: number } {
+  const { name, organization, email, phone, orgType, need, message } = body;
+
+  // Champs requis
+  if (!name || typeof name !== "string" || !name.trim()) {
+    return { valid: false, error: "Le nom est requis.", status: 400 };
+  }
+  if (!organization || typeof organization !== "string" || !organization.trim()) {
+    return { valid: false, error: "L'organisation est requise.", status: 400 };
+  }
+  if (!email || typeof email !== "string" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return { valid: false, error: "Email invalide.", status: 400 };
+  }
+  if (!message || typeof message !== "string" || !message.trim()) {
+    return { valid: false, error: "Le message est requis.", status: 400 };
+  }
+
+  // Longueurs max
+  for (const [field, max] of Object.entries(MAX_LENGTHS)) {
+    const value = (body as Record<string, unknown>)[field];
+    if (typeof value === "string" && value.length > max) {
+      return { valid: false, error: `Le champ ${field} est trop long (max ${max} caractères).`, status: 400 };
+    }
+  }
+
+  // Sanitization
+  const sanitize = (s: string) => s.trim().slice(0, 5000);
+
+  return {
+    valid: true,
+    data: {
+      name: (name as string).trim().slice(0, MAX_LENGTHS.name),
+      organization: (organization as string).trim().slice(0, MAX_LENGTHS.organization),
+      email: (email as string).trim().toLowerCase().slice(0, MAX_LENGTHS.email),
+      phone: typeof phone === "string" ? phone.trim().slice(0, MAX_LENGTHS.phone) : undefined,
+      orgType: typeof orgType === "string" ? orgType.trim().slice(0, MAX_LENGTHS.orgType) : undefined,
+      need: typeof need === "string" ? need.trim().slice(0, MAX_LENGTHS.need) : undefined,
+      message: sanitize(message as string),
+    },
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Handler POST
+// ---------------------------------------------------------------------------
+
 export async function POST(request: Request) {
-  // Rate limiting
+  // 1. Extraire l'IP pour le rate limiting
   const ip =
     request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
     request.headers.get("x-real-ip") ||
     "unknown";
 
-  if (isRateLimited(ip)) {
-    return NextResponse.json(
-      { error: "Trop de requêtes. Veuillez patienter une minute." },
-      { status: 429 }
-    );
-  }
-
-  // Parse body
-  let body: Record<string, string>;
+  // 2. Parser le body
+  let body: Record<string, unknown>;
   try {
     body = await request.json();
   } catch {
@@ -51,98 +113,52 @@ export async function POST(request: Request) {
     );
   }
 
-  // Validation serveur
-  const { name, organization, email, phone, orgType, need, message } = body;
+  // 3. Honeypot anti-spam — champ caché, si rempli → succès silencieux
+  if (body._website && typeof body._website === "string" && body._website.trim() !== "") {
+    // Le spammer croit avoir réussi, on ne consomme pas le quota Brevo
+    return NextResponse.json({ success: true });
+  }
 
-  if (!name || typeof name !== "string" || !name.trim()) {
+  // 4. Rate limiting
+  if (isRateLimited(ip)) {
     return NextResponse.json(
-      { error: "Le nom est requis." },
-      { status: 400 }
-    );
-  }
-  if (!organization || typeof organization !== "string" || !organization.trim()) {
-    return NextResponse.json(
-      { error: "L'organisation est requise." },
-      { status: 400 }
-    );
-  }
-  if (
-    !email ||
-    typeof email !== "string" ||
-    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-  ) {
-    return NextResponse.json(
-      { error: "Email invalide." },
-      { status: 400 }
-    );
-  }
-  if (!message || typeof message !== "string" || !message.trim()) {
-    return NextResponse.json(
-      { error: "Le message est requis." },
-      { status: 400 }
+      { error: "Trop de requêtes. Veuillez patienter une minute." },
+      { status: 429 }
     );
   }
 
-  // Sanitization basique
-  const sanitize = (s: string) => s.trim().slice(0, 5000);
-  const sanitizedMessage = sanitize(message);
-
-  // Envoi email via Resend (si configuré)
-  const resendApiKey = process.env.RESEND_API_KEY;
-  const contactEmail = process.env.CONTACT_EMAIL || "contact@rapyogo.com";
-
-  if (resendApiKey) {
-    try {
-      const res = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${resendApiKey}`,
-        },
-        body: JSON.stringify({
-          from: "RAPIA Contact <contact@rapia.cd>",
-          to: [contactEmail],
-          subject: `Nouveau message de ${sanitize(name)} — ${sanitize(organization)}`,
-          text: `
-Nom: ${sanitize(name)}
-Organisation: ${sanitize(organization)}
-Email: ${email}
-Téléphone: ${phone || "Non renseigné"}
-Type d'organisation: ${orgType || "Non renseigné"}
-Besoin: ${need || "Non renseigné"}
-
-Message:
-${sanitizedMessage}
-          `.trim(),
-        }),
-      });
-
-      if (!res.ok) {
-        console.error("Resend API error:", await res.text());
-        return NextResponse.json(
-          { error: "Erreur lors de l'envoi de l'email." },
-          { status: 500 }
-        );
-      }
-    } catch (err) {
-      console.error("Resend send error:", err);
-      return NextResponse.json(
-        { error: "Erreur lors de l'envoi de l'email." },
-        { status: 500 }
-      );
-    }
-  } else {
-    // Fallback : log en console (dev uniquement)
-    console.log("--- Nouveau message de contact RAPIA ---");
-    console.log("Nom:", sanitize(name));
-    console.log("Organisation:", sanitize(organization));
-    console.log("Email:", email);
-    console.log("Téléphone:", phone);
-    console.log("Type:", orgType);
-    console.log("Besoin:", need);
-    console.log("Message:", sanitizedMessage);
-    console.log("--- Fin message ---");
+  // 5. Validation
+  const validation = validate(body);
+  if (!validation.valid) {
+    return NextResponse.json(
+      { error: validation.error },
+      { status: validation.status }
+    );
   }
 
+  const data = validation.data;
+
+  // 6. Envoi des emails (notification + confirmation)
+  const [notifResult, confirmResult] = await Promise.allSettled([
+    sendContactNotification(data),
+    sendContactConfirmation(data),
+  ]);
+
+  // Log des résultats pour diagnostic
+  if (notifResult.status === "rejected" || (notifResult.value && !notifResult.value.success)) {
+    console.error("[contact] Échec notification:", notifResult);
+  }
+  if (confirmResult.status === "rejected" || (confirmResult.value && !confirmResult.value.success)) {
+    console.error("[contact] Échec confirmation:", confirmResult);
+  }
+
+  // On retourne un succès même si l'email de confirmation échoue
+  // (le visiteur ne doit pas être pénalisé par un souci SMTP)
+  if (notifResult.status === "fulfilled" && notifResult.value.success) {
+    return NextResponse.json({ success: true });
+  }
+
+  // Si la notification a échoué, on log mais on ne bloque pas l'UX
+  console.warn("[contact] Notification interne échouée — le message est peut-être perdu.");
   return NextResponse.json({ success: true });
 }

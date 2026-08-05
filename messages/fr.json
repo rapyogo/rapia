@@ -209,6 +209,7 @@
     },
     "successTitle": "Message envoyé avec succès",
     "successBody": "Merci pour votre message. Nous vous répondrons dans les 24h à l'adresse",
+    "successConfirmation": "Vous allez recevoir un email de confirmation dans quelques instants.",
     "sendAnother": "Envoyer un autre message",
     "errorBody": "Une erreur est survenue lors de l'envoi. Veuillez réessayer ou nous contacter directement à",
     "sending": "Envoi en cours...",

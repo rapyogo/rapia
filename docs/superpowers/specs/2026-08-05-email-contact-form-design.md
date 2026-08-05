@@ -118,3 +118,12 @@ Toutes listées dans le README. À configurer dans Vercel → Settings → Envir
 4. Remplir le honeypot → succès silencieux (pas d'email envoyé)
 5. Soumettre 2 fois en <60s → 429 rate limit
 6. Variables d'env manquantes → l'API route log l'erreur et retourne un statut propre (pas de crash)
+
+⚠️ Corriger (bloquant) :
+
+Typo nodemailer : @file:"types/nodemailer" n'existe pas → c'est @types/nodemailer. Commande correcte :
+npm i nodemailer && npm i -D @types/nodemailer
+Rate limiting in-memory sur Vercel : chaque instance serverless a sa propre mémoire → le 1/60s par IP n'est pas garanti à 100 % (2 instances = 2 soumissions possibles). Acceptable pour ton volume, mais demande à Claude de commenter clairement ce point (passage à Vercel KV si besoin).
+➕ Ajouter (recommandé) : 3. Réponse client en cas d'erreur serveur : ne jamais renvoyer le détail de l'erreur SMTP au navigateur (risque de fuite d'infos). Message générique « Une erreur est survenue, réessayez » + log côté serveur. 4. Dans l'email de notification interne : ajouter le Reçu de : (ex. contact / devis / page d'origine) et l'heure — utile pour suivre les demandes. 5. Test du quota : la spec le dit bien — 2 emails/soumission = max 150 formulaires/jour. OK pour le début ; si tu dépasses, on passera en notification seule ou on activera l'option payante Brevo (5 000/jour à ~10 €/mois).
+
+Le reste est bon : honeypot _website, singleton Nodemailer (pool:true), fallback texte, stubs pour formations/devis/newsletter, env vars sans hardcode.

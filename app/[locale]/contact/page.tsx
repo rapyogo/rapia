@@ -20,6 +20,7 @@ type FormData = {
   orgType: string;
   need: string;
   message: string;
+  _website: string;
 };
 
 const initialFormData: FormData = {
@@ -30,6 +31,7 @@ const initialFormData: FormData = {
   orgType: "",
   need: "",
   message: "",
+  _website: "",
 };
 
 export default function ContactPage() {
@@ -134,7 +136,8 @@ export default function ContactPage() {
                   </h2>
                 </div>
                 <p className="text-[var(--color-text-secondary)] mb-4">
-                  {t("successBody")}{" "}
+                  {t("successBody")}.{" "}
+                  {t("successConfirmation")}{" "}
                   <a
                     href={`mailto:${email}`}
                     className="text-[var(--color-indigo)] hover:underline"
@@ -173,6 +176,23 @@ export default function ContactPage() {
             {/* Form */}
             {formState !== "success" && (
               <form onSubmit={handleSubmit} noValidate className="space-y-6">
+                {/* Honeypot anti-spam — invisible pour les humains */}
+                <input
+                  type="text"
+                  name="_website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={formData._website}
+                  onChange={(e) => updateField("_website", e.target.value)}
+                  style={{
+                    position: "absolute",
+                    left: "-9999px",
+                    opacity: 0,
+                    height: 0,
+                    width: 0,
+                  }}
+                  aria-hidden="true"
+                />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <Input
                     id="name"

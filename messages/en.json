@@ -209,6 +209,7 @@
     },
     "successTitle": "Message sent successfully",
     "successBody": "Thank you for your message. We'll respond within 24 hours at",
+    "successConfirmation": "You will receive a confirmation email shortly.",
     "sendAnother": "Send another message",
     "errorBody": "An error occurred while sending. Please try again or contact us directly at",
     "sending": "Sending...",
