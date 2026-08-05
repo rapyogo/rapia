@@ -84,6 +84,119 @@ export interface NewsletterData {
 }
 
 // ---------------------------------------------------------------------------
+// Identité visuelle — miroir des tokens de `app/globals.css`
+//
+// Les emails ne peuvent pas lire les variables CSS du site : les valeurs sont
+// donc recopiées ici. Si la palette change dans `globals.css`, la mettre à jour
+// ici aussi — c'est le seul endroit du module qui porte des couleurs.
+// ---------------------------------------------------------------------------
+
+const BRAND = {
+  deep: "#001B2A",
+  indigo: "#3A2E7E",
+  amber: "#F59E0B",
+  emerald: "#10B881",
+  bg: "#F8F9FB",
+  surface: "#FFFFFF",
+  border: "#E2E8F0",
+  text: "#191C1E",
+  textSecondary: "#42474C",
+  textMuted: "#73787C",
+  // Les polices web ne se chargent pas dans la plupart des clients mail :
+  // Inter est demandée, la chaîne de repli fait le vrai travail.
+  font: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+} as const;
+
+/** URL publique du site — les images d'un email doivent être en absolu. */
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ia.rapyogo.com";
+
+/**
+ * Gabarit commun à tous les emails du site : bandeau logo, carte de contenu, pied de page.
+ *
+ * Contraintes email respectées ici (ne pas « moderniser » sans vérifier dans Outlook) :
+ * - mise en page en `<table>` : ni flexbox ni grid ne sont fiables sous Outlook
+ * - styles en ligne : les balises `<style>` sont dépouillées par Gmail
+ * - logo en PNG : le WebP ne s'affiche pas dans Outlook desktop
+ * - bandeau sombre : le logo blanc reste lisible même quand un client force le mode sombre
+ */
+function emailLayout({
+  preheader,
+  bodyHtml,
+}: {
+  /** Texte d'aperçu affiché dans la liste des messages, avant ouverture. */
+  preheader: string;
+  bodyHtml: string;
+}): string {
+  return `<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>RapIA</title>
+</head>
+<body style="margin:0; padding:0; background-color:${BRAND.bg}; font-family:${BRAND.font};">
+
+  <!-- Aperçu dans la boîte de réception, invisible à l'ouverture -->
+  <div style="display:none; max-height:0; overflow:hidden; opacity:0;">${escapeHtml(preheader)}</div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:${BRAND.bg}; padding:24px 12px;">
+    <tr>
+      <td align="center">
+
+        <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%; max-width:600px;">
+
+          <!-- Bandeau logo -->
+          <tr>
+            <td align="center" style="background-color:${BRAND.deep}; border-radius:12px 12px 0 0; padding:28px 24px;">
+              <img src="${SITE_URL}/logo-horisontale-rapia-dark_mode.png"
+                   alt="RapIA" width="180"
+                   style="display:block; width:180px; max-width:60%; height:auto; border:0;">
+            </td>
+          </tr>
+
+          <!-- Filet ambre : rappel de la couleur de conversion du site -->
+          <tr><td style="background-color:${BRAND.amber}; height:3px; line-height:3px; font-size:0;">&nbsp;</td></tr>
+
+          <!-- Contenu -->
+          <tr>
+            <td style="background-color:${BRAND.surface}; padding:36px 32px; color:${BRAND.text};">
+              ${bodyHtml}
+            </td>
+          </tr>
+
+          <!-- Pied de page -->
+          <tr>
+            <td style="background-color:${BRAND.deep}; border-radius:0 0 12px 12px; padding:28px 32px;">
+              <p style="margin:0 0 6px; font-family:${BRAND.font}; font-size:15px; font-weight:600; color:#FFFFFF;">
+                RapIA
+              </p>
+              <p style="margin:0 0 16px; font-family:${BRAND.font}; font-size:13px; line-height:1.5; color:#94A3B8;">
+                Conseil &bull; Formation &bull; Implémentation &bull; Automatisation
+              </p>
+              <p style="margin:0 0 16px; font-family:${BRAND.font}; font-size:13px; line-height:1.7; color:#94A3B8;">
+                Rapyogo SARL &mdash; Goma, République Démocratique du Congo<br>
+                <a href="mailto:ia@rapyogo.com" style="color:#FFFFFF; text-decoration:none;">ia@rapyogo.com</a>
+                &nbsp;&bull;&nbsp;
+                <a href="${SITE_URL}/fr" style="color:#FFFFFF; text-decoration:none;">ia.rapyogo.com</a>
+              </p>
+              <p style="margin:0; padding-top:16px; border-top:1px solid #123044; font-family:${BRAND.font}; font-size:12px; line-height:1.5; color:#64748B;">
+                Vous recevez ce message parce que vous avez utilisé un formulaire sur ia.rapyogo.com.
+              </p>
+            </td>
+          </tr>
+
+        </table>
+
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>`;
+}
+
+// ---------------------------------------------------------------------------
 // Fonction générique bas niveau
 // ---------------------------------------------------------------------------
 
@@ -143,29 +256,55 @@ export async function sendContactNotification(
 
   const subject = `Nouveau message de ${data.name} — ${data.organization}`;
 
-  const html = `
-<!DOCTYPE html>
-<html lang="fr">
-<head><meta charset="UTF-8"></head>
-<body style="font-family: system-ui, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px;">
-  <h2 style="color: #5E53A4; margin-bottom: 16px;">Nouveau message de contact</h2>
-  <table style="width: 100%; border-collapse: collapse;">
-    <tr><td style="padding: 8px 0; font-weight: 600; width: 180px;">Nom</td><td>${escapeHtml(data.name)}</td></tr>
-    <tr><td style="padding: 8px 0; font-weight: 600;">Organisation</td><td>${escapeHtml(data.organization)}</td></tr>
-    <tr><td style="padding: 8px 0; font-weight: 600;">Email</td><td>${escapeHtml(data.email)}</td></tr>
-    <tr><td style="padding: 8px 0; font-weight: 600;">Téléphone</td><td>${escapeHtml(data.phone || "Non renseigné")}</td></tr>
-    <tr><td style="padding: 8px 0; font-weight: 600;">Type d'organisation</td><td>${escapeHtml(data.orgType || "Non renseigné")}</td></tr>
-    <tr><td style="padding: 8px 0; font-weight: 600;">Besoin</td><td>${escapeHtml(data.need || "Non renseigné")}</td></tr>
-    <tr><td style="padding: 8px 0; font-weight: 600;">Reçu de</td><td>${escapeHtml(data.source || "Formulaire de contact")}</td></tr>
-    <tr><td style="padding: 8px 0; font-weight: 600;">Reçu le</td><td>${now}</td></tr>
-  </table>
-  <hr style="margin: 20px 0; border: none; border-top: 1px solid #e2e8f0;">
-  <h3 style="color: #021E2D; margin-bottom: 8px;">Message</h3>
-  <p style="white-space: pre-wrap; line-height: 1.6;">${escapeHtml(data.message)}</p>
-  <hr style="margin: 20px 0; border: none; border-top: 1px solid #e2e8f0;">
-  <p style="color: #64748b; font-size: 12px;">Reçu le ${now} • Formulaire de contact RapIA</p>
-</body>
-</html>`.trim();
+  /** Une ligne du tableau récapitulatif. */
+  const row = (label: string, value: string) => `
+                <tr>
+                  <td style="padding:10px 0; border-bottom:1px solid ${BRAND.border}; font-family:${BRAND.font}; font-size:13px; font-weight:600; color:${BRAND.textMuted}; vertical-align:top; width:150px;">${label}</td>
+                  <td style="padding:10px 0; border-bottom:1px solid ${BRAND.border}; font-family:${BRAND.font}; font-size:15px; color:${BRAND.text}; vertical-align:top;">${value}</td>
+                </tr>`;
+
+  const html = emailLayout({
+    preheader: `${data.name} — ${data.organization} : ${data.message.slice(0, 90)}`,
+    bodyHtml: `
+              <h1 style="margin:0 0 6px; font-family:${BRAND.font}; font-size:24px; line-height:1.25; font-weight:700; letter-spacing:-0.02em; color:${BRAND.text};">
+                Nouveau message de contact
+              </h1>
+              <p style="margin:0 0 24px; font-family:${BRAND.font}; font-size:14px; color:${BRAND.textMuted};">
+                Reçu le ${now}
+              </p>
+
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                ${row("Nom", escapeHtml(data.name))}
+                ${row("Organisation", escapeHtml(data.organization))}
+                ${row("Email", `<a href="mailto:${escapeHtml(data.email)}" style="color:${BRAND.indigo}; text-decoration:none;">${escapeHtml(data.email)}</a>`)}
+                ${row("Téléphone", escapeHtml(data.phone || "—"))}
+                ${row("Type d'organisation", escapeHtml(data.orgType || "—"))}
+                ${row("Besoin", escapeHtml(data.need || "—"))}
+                ${row("Reçu de", escapeHtml(data.source || "Formulaire de contact"))}
+              </table>
+
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:24px 0 28px;">
+                <tr>
+                  <td style="background-color:${BRAND.bg}; border-left:3px solid ${BRAND.amber}; border-radius:0 8px 8px 0; padding:18px 20px;">
+                    <p style="margin:0 0 8px; font-family:${BRAND.font}; font-size:12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:${BRAND.textMuted};">
+                      Message
+                    </p>
+                    <p style="margin:0; font-family:${BRAND.font}; font-size:15px; line-height:1.65; color:${BRAND.text}; white-space:pre-wrap;">${escapeHtml(data.message)}</p>
+                  </td>
+                </tr>
+              </table>
+
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td align="center" style="background-color:${BRAND.indigo}; border-radius:8px;">
+                    <a href="mailto:${escapeHtml(data.email)}?subject=${encodeURIComponent(`Re : votre demande — RapIA`)}"
+                       style="display:inline-block; padding:14px 28px; font-family:${BRAND.font}; font-size:15px; font-weight:600; color:#FFFFFF; text-decoration:none;">
+                      Répondre à ${escapeHtml(data.name.trim().split(/\s+/)[0])}
+                    </a>
+                  </td>
+                </tr>
+              </table>`,
+  });
 
   const text = [
     `Nouveau message de contact RapIA`,
@@ -192,40 +331,72 @@ export async function sendContactConfirmation(
 ): Promise<{ success: boolean; error?: string }> {
   const subject = "Merci pour votre message — RapIA";
 
-  const html = `
-<!DOCTYPE html>
-<html lang="fr">
-<head><meta charset="UTF-8"></head>
-<body style="font-family: system-ui, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px;">
-  <h2 style="color: #021E2D; margin-bottom: 16px;">Merci, ${escapeHtml(data.name)}.</h2>
-  <p style="line-height: 1.6; color: #334155;">
-    Nous avons bien reçu votre message et vous en remercions.
-  </p>
-  <p style="line-height: 1.6; color: #334155;">
-    L'équipe <strong>RapIA</strong> vous répondra dans un délai de <strong>24 heures ouvrées</strong>.
-  </p>
-  <p style="line-height: 1.6; color: #334155;">
-    En attendant, n'hésitez pas à consulter notre site pour découvrir nos services
-    et cas d'usage : <a href="https://ia.rapyogo.com/fr" style="color: #5E53A4;">ia.rapyogo.com</a>
-  </p>
-  <hr style="margin: 24px 0; border: none; border-top: 1px solid #e2e8f0;">
-  <p style="color: #64748b; font-size: 12px;">
-    RapIA — Conseil • Formation • Implémentation • Automatisation<br>
-    Goma, RDC • <a href="mailto:ia@rapyogo.com" style="color: #5E53A4;">ia@rapyogo.com</a>
-  </p>
-</body>
-</html>`.trim();
+  // Prénom seul si le visiteur a saisi nom + prénom : plus chaleureux qu'un nom complet.
+  const firstName = data.name.trim().split(/\s+/)[0];
+
+  const html = emailLayout({
+    preheader: "Votre message est bien arrivé. Réponse sous 24 heures ouvrées.",
+    bodyHtml: `
+              <h1 style="margin:0 0 20px; font-family:${BRAND.font}; font-size:26px; line-height:1.25; font-weight:700; letter-spacing:-0.02em; color:${BRAND.text};">
+                Merci, ${escapeHtml(firstName)}.
+              </h1>
+
+              <p style="margin:0 0 16px; font-family:${BRAND.font}; font-size:16px; line-height:1.65; color:${BRAND.textSecondary};">
+                Votre message nous est bien parvenu. Une personne de l'équipe le lit
+                et vous répond sous <strong style="color:${BRAND.text};">24 heures ouvrées</strong>.
+              </p>
+
+              <!-- Rappel de la demande : le visiteur voit ce que nous avons reçu -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:24px 0;">
+                <tr>
+                  <td style="background-color:${BRAND.bg}; border-left:3px solid ${BRAND.indigo}; border-radius:0 8px 8px 0; padding:18px 20px;">
+                    <p style="margin:0 0 8px; font-family:${BRAND.font}; font-size:12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:${BRAND.textMuted};">
+                      Votre message
+                    </p>
+                    <p style="margin:0; font-family:${BRAND.font}; font-size:15px; line-height:1.6; color:${BRAND.textSecondary}; white-space:pre-wrap;">${escapeHtml(data.message)}</p>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="margin:0 0 28px; font-family:${BRAND.font}; font-size:16px; line-height:1.65; color:${BRAND.textSecondary};">
+                En attendant notre réponse, vous pouvez découvrir comment nous aidons
+                les organisations de la région à mettre l'IA au travail.
+              </p>
+
+              <!-- Bouton robuste : table + padding sur le lien, seule construction fiable sous Outlook -->
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td align="center" style="background-color:${BRAND.indigo}; border-radius:8px;">
+                    <a href="${SITE_URL}/fr"
+                       style="display:inline-block; padding:14px 28px; font-family:${BRAND.font}; font-size:15px; font-weight:600; color:#FFFFFF; text-decoration:none;">
+                      Découvrir nos services
+                    </a>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="margin:28px 0 0; padding-top:20px; border-top:1px solid ${BRAND.border}; font-family:${BRAND.font}; font-size:14px; line-height:1.6; color:${BRAND.textMuted};">
+                Une précision à ajouter ? Répondez simplement à cet email.
+              </p>`,
+  });
 
   const text = [
-    `Merci, ${data.name}.`,
+    `Merci, ${firstName}.`,
     ``,
-    `Nous avons bien reçu votre message et vous en remercions.`,
-    `L'équipe RapIA vous répondra dans un délai de 24 heures ouvrées.`,
+    `Votre message nous est bien parvenu. Une personne de l'équipe le lit et vous`,
+    `répond sous 24 heures ouvrées.`,
     ``,
-    `En attendant : https://ia.rapyogo.com/fr`,
+    `--- Votre message ---`,
+    data.message,
+    `---------------------`,
+    ``,
+    `En attendant : ${SITE_URL}/fr`,
+    ``,
+    `Une précision à ajouter ? Répondez simplement à cet email.`,
     ``,
     `RapIA — Conseil • Formation • Implémentation • Automatisation`,
-    `Goma, RDC • ia@rapyogo.com`,
+    `Rapyogo SARL — Goma, République Démocratique du Congo`,
+    `ia@rapyogo.com • ia.rapyogo.com`,
   ].join("\n");
 
   return sendEmail(data.email, subject, html, text);
