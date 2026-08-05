@@ -1,14 +1,17 @@
 # RAPIA — Handoff de session
 
 > À lire en premier au début de chaque session (voir CLAUDE.md).
-> Dernière mise à jour : 2026-08-05 (fin de session)
+> Dernière mise à jour : 2026-08-06 (fin de session — module email Brevo)
 
 ## État actuel
 
 Site web de **RAPIA** (agence IA en RDC) — bilingue FR/EN, design Corporate Clair,
 déployé en production sur [`https://ia.rapyogo.com`](https://ia.rapyogo.com).
 
-**Ce qui tourne en production** (commit `9eaeb8c`) :
+**Le formulaire de contact est opérationnel** : il envoie réellement des emails
+via Brevo SMTP, testé de bout en bout en production (voir « Emails »).
+
+**Ce qui tourne en production** (commit `0d1f6f0`) :
 - **Bilinguisme complet** FR/EN via `next-intl` v4, 171 clés, parité stricte
 - **Design Corporate Clair** : Inter, fond clair `#F8F9FB`, zéro gradient/glow/blur,
   profondeur par bordures 1px et aplats
@@ -26,6 +29,15 @@ déployé en production sur [`https://ia.rapyogo.com`](https://ia.rapyogo.com).
 ## Commits récents (tout sur `master`, ordre chronologique)
 
 ```
+0d1f6f0 feat: pied de page legal complet dans les emails
+53753ac feat: identite visuelle RapIA dans les emails
+ae5c938 docs: handoff a jour — Brevo SMTP remplace Resend
+0551300 fix: valider avant le rate limiting sur le formulaire de contact
+3de350c fix: corrections de review sur le module email
+e5d0a08 feat: refonte complete email Brevo
+d899d5e feat: module email centralise — transporteur Brevo + stubs futurs
+b45f733 feat: ajout de nodemailer pour l'envoi d'emails via Brevo SMTP
+218db68 docs: plan d'implementation du module email Brevo + formulaire contact
 9eaeb8c chore: ajout .vercelignore pour eviter le scan de .gstack au deploy
 1ce4583 docs: spec design du module email Brevo + formulaire de contact
 5affd29 feat: ProblemLevels avec pin ScrollTrigger + SocialProof avec CountUp
@@ -246,6 +258,81 @@ Section Preuves & Crédibilité, entre ForWhom et Content.
 | `/[locale]/notre-vision` | Page immersive GSAP, 5 sections |
 | `/sitemap.xml`, `/robots.txt` | Générés dynamiquement, bilingues |
 
+## Emails (Brevo SMTP + Nodemailer)
+
+Mis en service le 2026-08-06. **Testé de bout en bout en production** : les deux
+emails arrivent, l'identité visuelle est en place.
+
+### Architecture — tout passe par `lib/email.ts`
+
+Aucune route ne parle SMTP directement. Le module expose :
+
+| Fonction | Rôle |
+|----------|------|
+| `sendEmail(to, subject, html, text)` | Socle bas niveau — signe les en-têtes, try/catch, retourne `{success, error}` sans jamais lever |
+| `sendContactNotification(data)` | Notification interne vers `ia@rapyogo.com` |
+| `sendContactConfirmation(data)` | Accusé de réception au visiteur |
+| `sendTrainingRegistration` / `sendQuoteRequest` / `sendNewsletter` | **Stubs** typés — signatures prêtes, corps à écrire |
+
+Le transporteur est un singleton (`pool: true`, `maxConnections: 1`) créé hors
+handler : Vercel recycle la connexion TCP entre requêtes chaudes.
+
+### Le gabarit visuel — `emailLayout()`
+
+Bandeau logo sur fond `deep` → filet ambre → carte blanche → pied de page légal.
+Les deux emails l'utilisent ; **toute nouvelle fonction email doit passer par lui.**
+
+Quatre contraintes à ne pas relâcher (elles ont chacune une raison) :
+
+- **Mise en page en `<table>` + styles en ligne.** Outlook ignore flexbox et grid,
+  Gmail dépouille les balises `<style>`. Ne pas « moderniser » sans tester ailleurs.
+- **Logo en PNG, jamais en WebP.** Outlook desktop rend via le moteur de Word,
+  qui ne connaît pas le WebP — le logo apparaîtrait cassé.
+- **Bandeau sombre + logo blanc** (`logo-horisontale-rapia-dark_mode.png`).
+  Gmail et Outlook forcent de plus en plus le mode sombre : un logo bleu nuit sur
+  fond blanc inversé disparaît. La bande sombre fixe rend identique partout.
+- **Couleurs recopiées dans la constante `BRAND`.** Un email ne peut pas lire les
+  variables CSS. **Si la palette change dans `app/globals.css`, la répercuter ici** —
+  c'est le seul endroit du module qui porte des couleurs.
+
+Les coordonnées de l'entreprise vivent dans la constante `COMPANY` (3 implantations,
+téléphone, RCCM / ID Nat / NIF) et le pied de page texte `FOOTER_TEXT` en **dérive** :
+une adresse se change à un seul endroit.
+
+### Sécurité du formulaire
+
+| Protection | Détail |
+|------------|--------|
+| Honeypot | Champ `_website` caché. Si rempli → `200 success` silencieux, **avant** tout envoi : le bot croit avoir réussi, le quota Brevo est préservé |
+| Rate limiting | 1 soumission / 60 s par IP, **appliqué après la validation** — sinon une faute de frappe bloquait le visiteur une minute pour rien |
+| Validation | Champs requis + longueurs max, échappement HTML de toute donnée injectée dans les emails |
+| Erreurs | Les détails SMTP restent dans les logs serveur ; le client ne reçoit qu'un message générique |
+
+**La route renvoie 500 si la notification interne échoue.** C'est délibéré : sans
+ça, un `success` s'affichait alors que le message n'était parvenu à personne.
+Corollaire utile : un `success: true` prouve que Brevo a accepté l'email.
+
+### Quota — la vraie borne
+
+Plan gratuit Brevo : **300 emails/jour**. Chaque soumission en consomme **2**
+(notification + confirmation), soit **~150 formulaires/jour** au plafond.
+Si ça sature : passer en notification seule, ou au plan payant Brevo
+(5 000/jour, ~10 €/mois). Ne jamais mettre d'envoi en boucle.
+
+### Variables d'environnement
+
+Les 6 sont posées sur **Production, Preview et Development** (via `vercel env add`) :
+`BREVO_SMTP_HOST`, `BREVO_SMTP_PORT`, `BREVO_SMTP_LOGIN`, `BREVO_SMTP_PASSWORD`,
+`IA_FROM_EMAIL`, `IA_FROM_NAME`. Détail dans le [README](../README.md).
+
+### Tests passés en production (2026-08-06)
+
+Champs manquants → 400 · email invalide → 400 · message manquant → 400 ·
+nom de 250 car. → 400 · honeypot → `success` sans email · **soumission valide →
+les 2 emails reçus** · 2ᵉ envoi immédiat → 429.
+
+Rejouables par `curl` sur `https://ia.rapyogo.com/api/contact`.
+
 ## Photographie (28 assets Higgsfield)
 
 Dans `public/images/photos/`. **1,52 Mo total.**
@@ -289,17 +376,26 @@ Le dossier `.gstack/` (daemon `/browse`) est verrouillé (`Permission denied`) e
 CLI Vercel le scanne même s'il est dans `.gitignore`, ce qui bloque le déploiement
 avec `EPERM: operation not permitted, scandir`.
 
-**Workaround éprouvé :** cloner dans `%TEMP%` et déployer depuis là :
-```powershell
-git clone C:\Users\RAPYOGO\rapia $env:TEMP\rapia-deploy
-Copy-Item -Recurse C:\Users\RAPYOGO\rapia\.vercel $env:TEMP\rapia-deploy\.vercel
-cd $env:TEMP\rapia-deploy
-npx vercel --prod --yes
-Remove-Item -Recurse -Force $env:TEMP\rapia-deploy
+**Workaround éprouvé** (utilisé 4 fois le 2026-08-06) — cloner hors du repo et
+déployer avec `--cwd`, sans `cd` :
+
+```bash
+TMP=/c/Users/RAPYOGO/AppData/Local/Temp/rapia-deploy
+rm -rf "$TMP"
+git clone -q --depth 1 "file:///c/Users/RAPYOGO/rapia" "$TMP"
+mkdir -p "$TMP/.vercel" && cp .vercel/project.json "$TMP/.vercel/project.json"
+npx vercel --cwd "$TMP" --prod --yes
+rm -rf "$TMP"
 ```
 
-Le `.vercelignore` est dans le repo mais ne suffit pas — le CLI scanne le
-filesystem avant d'appliquer les règles d'ignore pour .gstack.
+Deux détails qui comptent :
+- **`--cwd` plutôt que `cd`** — évite de déplacer le shell, et passe là où un `cd`
+  enchaîné se fait refuser.
+- **Le clone ne prend que ce qui est commité.** Vérifier que le travail est bien
+  commité avant de déployer, sinon on met en ligne la version précédente.
+
+Le `.vercelignore` est dans le repo mais ne suffit pas : le CLI scanne le
+filesystem avant d'appliquer les règles d'ignore.
 
 ## Points d'attention techniques
 
@@ -318,6 +414,25 @@ filesystem avant d'appliquer les règles d'ignore pour .gstack.
   `require("playwright")` résout).
 
 ## Prochaines pistes
+
+### Email — à traiter en priorité
+
+- **Authentifier le domaine dans Brevo (SPF, DKIM, DMARC).** Non vérifié à ce
+  jour. Sans ces enregistrements DNS chez Cloudflare, Gmail et Outlook peuvent
+  classer les emails en indésirables malgré un contenu correct. C'est le point
+  qui conditionne la délivrabilité réelle. → Brevo → Senders & Domains
+- **Tester le rendu sous Outlook desktop** — Gmail est permissif, Outlook non.
+  Le gabarit est construit pour lui, mais ça n'a pas été vérifié de visu.
+- **Supprimer `RESEND_API_KEY` et `CONTACT_EMAIL`** des variables Vercel
+  Production : plus aucun code ne les lit (suppression refusée par le classifieur
+  de sécurité pendant la session, à faire depuis le dashboard).
+- **Unifier l'adresse de contact.** Le site affiche `contact@rapyogo.com`
+  (`messages/fr.json` et `en.json`, clé `contact.email`) alors que les emails
+  partent de `ia@rapyogo.com`. Décider laquelle fait foi.
+- Implémenter les stubs quand le besoin arrive : inscriptions formations,
+  demandes de devis, newsletter.
+
+### Reste
 
 - Re-lancer `/impeccable critique` sur le design Corporate Clair
 - Audit Lighthouse sur `/fr` et `/en` (LCP, CLS, INP)
