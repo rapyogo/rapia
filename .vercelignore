@@ -1,0 +1,24 @@
+# Build
+/.next/
+/out/
+/build
+
+# Dependencies
+/node_modules
+
+# Skills et outils (verrouilles par des processus externes)
+.gstack/
+.impeccable/
+.claude/
+
+# Config locale
+.env*
+!.env.example
+
+# Git
+.git/
+.gitignore
+
+# Outils
+.vercel
+*.tsbuildinfo
