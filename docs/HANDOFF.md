@@ -1,7 +1,7 @@
 # RAPIA — Handoff de session
 
 > À lire en premier au début de chaque session (voir CLAUDE.md).
-> Dernière mise à jour : 2026-08-06 (fin de session — module email Brevo)
+> Dernière mise à jour : 2026-08-06 (fin de session — composants UI, preuves, footer)
 
 ## État actuel
 
@@ -11,8 +11,11 @@ déployé en production sur [`https://ia.rapyogo.com`](https://ia.rapyogo.com).
 **Le formulaire de contact est opérationnel** : il envoie réellement des emails
 via Brevo SMTP, testé de bout en bout en production (voir « Emails »).
 
-**Ce qui tourne en production** (commit `0d1f6f0`) :
-- **Bilinguisme complet** FR/EN via `next-intl` v4, 171 clés, parité stricte
+**Ce qui tourne en production** (commit `3921359`) :
+- **Bilinguisme complet** FR/EN via `next-intl` v4, 184 clés, parité stricte
+- **Bibliothèque de composants UI** — Badge, Empty, ChoiceChips, Card composé
+- **Footer complet** — coordonnées légales, contraste AA, source unique partagée
+  avec les emails (`lib/company.ts`)
 - **Design Corporate Clair** : Inter, fond clair `#F8F9FB`, zéro gradient/glow/blur,
   profondeur par bordures 1px et aplats
 - **Récit vidéo en 5 actes** au scroll (canvas + GSAP) avec 4 couches de parallaxe
@@ -29,6 +32,12 @@ via Brevo SMTP, testé de bout en bout en production (voir « Emails »).
 ## Commits récents (tout sur `master`, ordre chronologique)
 
 ```
+3921359 feat: footer complet — coordonnees legales, contraste AA, i18n reparee
+04f24dd feat: primitives UI premium, preuves honnetes et formulaire durci
+8a6228d docs: authentification du domaine verifiee — SPF et DKIM actifs
+ce4a035 chore: exclure du depot les fichiers graphify propres a la machine
+97367ba chore: graphe de connaissances initial (graphify)
+dda27f6 docs: handoff de fin de session — module email Brevo
 0d1f6f0 feat: pied de page legal complet dans les emails
 53753ac feat: identite visuelle RapIA dans les emails
 ae5c938 docs: handoff a jour — Brevo SMTP remplace Resend
@@ -68,8 +77,9 @@ Plan complet dans `~/.claude/plans/veuillez-fait-un-site-clever-lollipop.md`.
 | 5 | Lenis, ordre sections, SEO, déploiement | ✅ Fait |
 
 **Écarts restants :** pas de vidéo showpiece unique (les 5 séquences canvas tiennent
-la place), pas de CI/CD automatique, et les sections Preuves / Contenu affichent des
-placeholders en attendant du contenu réel vérifié.
+la place) et pas de CI/CD automatique. Les sections Preuves et Contenu n'affichent
+plus de placeholders : Preuves assume l'absence de références comme un argument,
+Contenu reste masquée tant qu'aucun article réel n'existe.
 
 ## Stack technique
 
@@ -93,12 +103,41 @@ placeholders en attendant du contenu réel vérifié.
   - Amber `#F59E0B` — conversion, sparingly
   - Emerald `#10B881` — succès, croissance
   - Fond `#F8F9FB`, Surfaces `#FFFFFF`, Bordures `#E2E8F0`
+- **Encres d'accent** — `--color-amber-ink` `#7C4A03` et `--color-emerald-ink`
+  `#05624A`. Amber et emerald pleins plafonnent à ~2,2:1 en **texte** sur fond
+  clair : parfaits en aplat de fond, illisibles en lettres. Toute mention
+  textuelle en amber ou emerald passe par ces encres.
 - **Tokens CSS :** `app/globals.css` (`:root` + `@theme inline`) — source unique de vérité
 - **Interdits** (cahier des charges, non négociables) :
   - Aucun gradient décoratif, aucun glow, aucun `backdrop-blur`
   - Aucun robot/cerveau/circuit imprimé/hologramme dans les visuels (sauf vidéo showpiece)
   - Aucun gradient bleu-violet SaaS
 - **Profondeur :** aplats tonals + bordures 1px, pas d'ombres lourdes
+
+## Bibliothèque de composants UI
+
+Dans `components/ui/`. **Aucune dépendance externe** — ni Radix, ni shadcn, ni
+Headless UI. Ce n'est pas un oubli : les organisations visées travaillent sur
+connexion limitée (PRODUCT.md), et chaque kilo-octet de JavaScript se paie au
+chargement. Les primitives sont écrites à la main, en HTML natif accessible.
+
+| Composant | Rôle | Points d'attention |
+|-----------|------|--------------------|
+| `Button` | 3 variantes (primary, secondary, ghost) | Rend un `<a>` si `href` est passé |
+| `Input` | Champ + label + aide + erreur + compteur | Sans état : `value` vient du parent. Le compteur n'apparaît qu'à 70 % de `maxLength` |
+| `Card` | Surface bordée | `CardHeader` / `CardBody` / `CardFooter` pour composer ; `padding="none"` alors. Accepte `ref` |
+| `Badge` | Chips et tags | Teintes 10 % ; amber et emerald utilisent les **encres**, jamais la couleur pleine |
+| `Empty` | État vide, en composition | `Empty` / `EmptyHeader` / `EmptyMedia` / `EmptyTitle` / `EmptyDescription` / `EmptyContent`. `EmptyTitle` prend `as="h3"` quand il porte un vrai niveau de titre |
+| `ChoiceChips` | Choix unique en chips | Boutons `aria-pressed`, **pas** un `radiogroup` : le champ est facultatif et doit pouvoir se désélectionner |
+
+L'API de composition d'`Empty` reprend celle de shadcn/ui — la structure, pas le
+style ni le code. Les composants « premium » trouvés en ligne (21st.dev et
+consorts) reposent presque tous sur gradients, glass et ombres portées, que le
+cahier des charges interdit : on en garde les idées de structure, jamais la
+surface.
+
+**Ne pas ajouter de composant sans usage réel.** Accordion, Tabs, Dialog et
+Skeleton ont été délibérément écartés : aucune page ne les appelle aujourd'hui.
 
 ## Ordre des sections (landing page)
 
@@ -198,16 +237,35 @@ progression ambre.
 - Durée du pin : `window.innerHeight * 2.2`
 - **Ne pas remplacer par du CSS sticky** — le rail a besoin du `onUpdate` GSAP
 
-## SocialProof — Compteurs & Placeholders
+## SocialProof — Preuves assumées
 
 Section Preuves & Crédibilité, entre ForWhom et Content.
 
-- **CountUp** : composant avec `IntersectionObserver` (se déclenche une fois, 1200ms)
-- **Stats nulles** : les valeurs dans `VALUES` (en haut du fichier) sont à `null` par
-  défaut → affichent un tiret `—` et le marqueur `[À CONFIRMER]` en ambre
-- **Cadres vides** : témoignages, clients, partenaires, certifications en dashed border
-- `emptyState` : message « Les chiffres seront publiés dès qu'ils seront vérifiés »
-- Pour publier un chiffre : remplacer `null` par la valeur réelle dans l'objet `VALUES`
+La section affichait « Ils nous font confiance » au-dessus de quatre cadres
+pointillés vides, alors que PRODUCT.md acte qu'**aucune référence client
+n'existe**. Le titre promettait ce que la section n'avait pas. Elle dit
+désormais où en est l'agence et ce qui déclenchera chaque publication —
+l'absence de preuve devient un argument, conformément au principe
+« crédibilité par la clarté ».
+
+- **Grille de statistiques masquée tant qu'aucun chiffre n'est confirmé.**
+  Quatre tuiles affichant un tiret ne prouvent rien et se lisent comme un
+  gabarit oublié en production. Elle réapparaît au premier chiffre publié.
+- **Pour publier un chiffre** : remplacer `null` par la valeur réelle dans
+  `VALUES`, en haut du fichier. **CountUp** l'anime alors une seule fois à
+  l'entrée dans le viewport (1200 ms, respecte `prefers-reduced-motion`).
+- **Quatre volets de preuve** (témoignages, clients, partenaires,
+  certifications) rendus avec `Empty` : chacun nomme ce qui manque **et la
+  règle que RAPIA s'impose avant de le publier**. Textes dans
+  `socialProof.proofs`, icônes mappées **par index** dans `PROOF_ICONS`.
+- `emptyState` ne s'affiche que si des chiffres sont publiés **et** qu'il en
+  reste à confirmer : il explique les tirets restants. Sans cette condition, il
+  répétait l'introduction.
+- **Callout de conversion en Deep Profond** en fin de section — seul emploi
+  autorisé de cette couleur en fond.
+
+**Aucun chiffre, logo ou témoignage ne s'invente.** C'est la règle produit la
+plus stricte du projet.
 
 ## Scroll fluide (Lenis)
 
@@ -233,7 +291,7 @@ Section Preuves & Crédibilité, entre ForWhom et Content.
 | `i18n/request.ts` | Charge `messages/{locale}.json` |
 | `i18n/navigation.ts` | `Link`, `useRouter`, `usePathname` conscients de la locale |
 | `proxy.ts` | Détection locale + redirection (ex-`middleware.ts`) |
-| `messages/fr.json`, `messages/en.json` | **171 clés**, parité stricte |
+| `messages/fr.json`, `messages/en.json` | **184 clés**, parité stricte |
 | `components/layout/LanguageSwitcher.tsx` | Bascule FR ⇄ EN |
 
 ### Règles
@@ -295,9 +353,16 @@ Quatre contraintes à ne pas relâcher (elles ont chacune une raison) :
   variables CSS. **Si la palette change dans `app/globals.css`, la répercuter ici** —
   c'est le seul endroit du module qui porte des couleurs.
 
-Les coordonnées de l'entreprise vivent dans la constante `COMPANY` (3 implantations,
-téléphone, RCCM / ID Nat / NIF) et le pied de page texte `FOOTER_TEXT` en **dérive** :
-une adresse se change à un seul endroit.
+Les coordonnées de l'entreprise vivent désormais dans **`lib/company.ts`**, pas
+dans `email.ts` : le footer du site publie exactement les mêmes données, et les
+recopier aurait créé deux endroits à corriger le jour d'un déménagement. Le pied
+de page texte `FOOTER_TEXT` et le pied de page HTML en **dérivent** tous les deux
+— **une adresse, un numéro ou une immatriculation se change à un seul endroit.**
+
+`lib/company.ts` ne porte que des **faits**. Tout ce qui se traduit (« siège »,
+« Téléphone », les intitulés) vit dans `messages/*.json`. Les emails, eux, sont
+en français uniquement : la mention « (siège) » y est reconstruite en dur par
+`officeLabel()`.
 
 ### Sécurité du formulaire
 
@@ -307,6 +372,19 @@ une adresse se change à un seul endroit.
 | Rate limiting | 1 soumission / 60 s par IP, **appliqué après la validation** — sinon une faute de frappe bloquait le visiteur une minute pour rien |
 | Validation | Champs requis + longueurs max, échappement HTML de toute donnée injectée dans les emails |
 | Erreurs | Les détails SMTP restent dans les logs serveur ; le client ne reçoit qu'un message générique |
+
+### Comportement du formulaire (côté page)
+
+- **429 et 400 ne disent pas la même chose.** Ils appelaient le même message
+  générique, ce qui poussait un visiteur rate-limité à réessayer aussitôt — et
+  à échouer encore. Chaque cas a désormais sa consigne : attendre, ou corriger.
+- **Le focus part sur le premier champ fautif** après un échec de validation
+  (sur mobile, il est souvent hors écran), et sur le bloc de confirmation après
+  un succès — sinon le focus retombe sur `<body>`.
+- Les `maxLength` du client **reflètent** `MAX_LENGTHS` de la route API. Le
+  serveur reste l'autorité ; ces bornes évitent seulement de rédiger un message
+  qui sera refusé après coup. **Les changer des deux côtés.**
+- Une frappe après un échec efface le bandeau rouge : le visiteur corrige.
 
 **La route renvoie 500 si la notification interne échoue.** C'est délibéré : sans
 ça, un `success` s'affichait alors que le message n'était parvenu à personne.
@@ -357,6 +435,32 @@ nom de 250 car. → 400 · honeypot → `success` sans email · **soumission val
 les 2 emails reçus** · 2ᵉ envoi immédiat → 429.
 
 Rejouables par `curl` sur `https://ia.rapyogo.com/api/contact`.
+
+## Footer & coordonnées
+
+`components/layout/Footer.tsx`, alimenté par `lib/company.ts`.
+
+Publie les 3 implantations, le téléphone, l'e-mail et les immatriculations
+(RCCM / ID Nat / NIF) — **les mêmes données que les emails**, décision prise
+sciemment : le site en disait moins que les messages qu'il envoie.
+
+**Contraste — ne pas baisser les opacités.** Sur le fond Deep Profond
+(`#001B2A`), le blanc à 30 % donne **2,6:1** et à 40 % **3,7:1**, sous le seuil
+AA de 4,5:1 exigé par PRODUCT.md. Les opacités partent de **55 %** (6,0:1).
+Mesure au rendu après correction : pire ratio **5,97:1**, zéro échec sur les
+28 textes, FR et EN. Baisser une opacité pour « adoucir » le pied de page fait
+disparaître le texte, pas le gris.
+
+Autres points :
+
+- **Rien en dur.** « Notre vision » et « Pourquoi RAPIA » étaient écrits en
+  français dans le JSX : le footer anglais affichait du français.
+- Les deux-points des immatriculations suivent la langue (`RCCM :` en français,
+  `RCCM:` en anglais).
+- `SERVICE_ANCHORS` mappe les ancres **par index** — les libellés sont traduits
+  et ne peuvent pas servir de clé.
+- Réserve basse `pb-28` : sans elle, la barre de navigation mobile (`h-16`,
+  fixée) recouvre les mentions légales.
 
 ## Photographie (28 assets Higgsfield)
 
@@ -437,6 +541,17 @@ filesystem avant d'appliquer les règles d'ignore.
 - **Le daemon `/browse` (gstack)** reste bloqué. QA Playwright : utiliser le Chrome
   système et écrire le script dans `~/.claude/skills/gstack/` (seul endroit où
   `require("playwright")` résout).
+- **Tailwind v4 rend les couleurs en `oklab()`**, pas en `rgb()`.
+  `getComputedStyle(el).color` renvoie `oklab(0.999994 … / 0.65)`. Un script qui
+  parse ces nombres comme du RGB produit des mesures de contraste fausses **et
+  plausibles** — c'est arrivé pendant l'audit du footer (1,19:1 annoncé au lieu
+  de 7,8:1). Pour mesurer un contraste, laisser le navigateur composer la
+  couleur sur son fond dans un `<canvas>` 1×1 et lire le pixel obtenu.
+- **`PRODUCT.md` a dérivé.** Il annonce encore Space Grotesk, le design system
+  « Kinshasa Modern », Resend et « pas d'autres coordonnées (téléphone,
+  adresse) ». Le code est sur Inter, Corporate Clair, Brevo, et publie les
+  coordonnées complètes. Le fichier est lu au démarrage par le skill de design :
+  tant qu'il n'est pas repris, il oriente mal chaque session.
 
 ## Prochaines pistes
 
@@ -451,15 +566,26 @@ filesystem avant d'appliquer les règles d'ignore.
 - **Supprimer `RESEND_API_KEY` et `CONTACT_EMAIL`** des variables Vercel
   Production : plus aucun code ne les lit (suppression refusée par le classifieur
   de sécurité pendant la session, à faire depuis le dashboard).
-- **Unifier l'adresse de contact.** Le site affiche `contact@rapyogo.com`
-  (`messages/fr.json` et `en.json`, clé `contact.email`) alors que les emails
-  partent de `ia@rapyogo.com`. Décider laquelle fait foi.
+- **Unifier l'adresse de contact — devenu plus visible.** Le formulaire affiche
+  `contact@rapyogo.com` (clé `contact.email`) alors que le footer, juste
+  en dessous, affiche `ia@rapyogo.com` (`lib/company.ts`) — d'où partent
+  réellement les emails. Les deux se voient maintenant sur le même écran.
+  **Décider laquelle fait foi**, puis supprimer l'autre : si `ia@` gagne, la clé
+  `contact.email` disparaît au profit de `COMPANY.email`.
 - Implémenter les stubs quand le besoin arrive : inscriptions formations,
   demandes de devis, newsletter.
 
 ### Reste
 
-- Re-lancer `/impeccable critique` sur le design Corporate Clair
+- **Reprendre `PRODUCT.md`** — voir « Points d'attention ». C'est le premier
+  fichier lu par le skill de design ; il décrit un site qui n'existe plus.
+- **Les eyebrows** (« PREUVES & CRÉDIBILITÉ ») sont proscrits par le référentiel
+  Impeccable, qui les considère comme un tic à supprimer sans exception. Le site
+  en a sur une douzaine de sections : les retirer une par une créerait une
+  incohérence pire que le défaut. **Chantier transverse, à décider en bloc.**
+- **Publier le premier article** : `components/sections/Content.tsx` rend une
+  grille complète mais retourne `null` tant que le tableau `ARTICLES` est vide.
+  Ajouter une entrée suffit — la mise en page n'est plus à décider.
 - Audit Lighthouse sur `/fr` et `/en` (LCP, CLS, INP)
 - CI/CD GitHub → Vercel automatique
 - Contenu réel pour les stats SocialProof, témoignages, articles (dès que vérifié)

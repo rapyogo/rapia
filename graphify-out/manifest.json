@@ -5,9 +5,9 @@
     "semantic_hash": "c009b5bc6d57a485dab09e01704916b9"
   },
   "C:\\Users\\RAPYOGO\\rapia\\app\\[locale]\\contact\\page.tsx": {
-    "mtime": 1785964685.7049391,
-    "ast_hash": "091f2598a8547e246a592eacd78fe33c",
-    "semantic_hash": "091f2598a8547e246a592eacd78fe33c"
+    "mtime": 1786014106.9220111,
+    "ast_hash": "b12b8f7ff93d969849715c02108dde9f",
+    "semantic_hash": "b12b8f7ff93d969849715c02108dde9f"
   },
   "C:\\Users\\RAPYOGO\\rapia\\app\\[locale]\\layout.tsx": {
     "mtime": 1785947658.615975,
@@ -60,9 +60,9 @@
     "semantic_hash": "43fb0b8782430e9f91133c6696adf028"
   },
   "C:\\Users\\RAPYOGO\\rapia\\components\\layout\\Footer.tsx": {
-    "mtime": 1785944673.4789817,
-    "ast_hash": "a7daf3e2554752915838140f72e7288a",
-    "semantic_hash": "a7daf3e2554752915838140f72e7288a"
+    "mtime": 1786017373.4510877,
+    "ast_hash": "abcac9d25c9537999545ecc11d984079",
+    "semantic_hash": "abcac9d25c9537999545ecc11d984079"
   },
   "C:\\Users\\RAPYOGO\\rapia\\components\\layout\\Header.tsx": {
     "mtime": 1785946345.6097703,
@@ -85,9 +85,9 @@
     "semantic_hash": "e15c60fe41187faa5da0e32e90674a76"
   },
   "C:\\Users\\RAPYOGO\\rapia\\components\\sections\\Content.tsx": {
-    "mtime": 1785944673.489986,
-    "ast_hash": "52a2a0393446e548114b0506f4b38d54",
-    "semantic_hash": "52a2a0393446e548114b0506f4b38d54"
+    "mtime": 1786014106.9260068,
+    "ast_hash": "2aa6e4329edc491fcb1ac44d4d9bd5b9",
+    "semantic_hash": "2aa6e4329edc491fcb1ac44d4d9bd5b9"
   },
   "C:\\Users\\RAPYOGO\\rapia\\components\\sections\\FinalCTA.tsx": {
     "mtime": 1785946345.6197703,
@@ -120,9 +120,9 @@
     "semantic_hash": "dd1c3905ee93736e491484dade57ae58"
   },
   "C:\\Users\\RAPYOGO\\rapia\\components\\sections\\SocialProof.tsx": {
-    "mtime": 1785954815.5318663,
-    "ast_hash": "3d260336491da2a30ac492297410cabf",
-    "semantic_hash": "3d260336491da2a30ac492297410cabf"
+    "mtime": 1786014106.9280093,
+    "ast_hash": "0fbcf80f9cf5ded78da73984f6626227",
+    "semantic_hash": "0fbcf80f9cf5ded78da73984f6626227"
   },
   "C:\\Users\\RAPYOGO\\rapia\\components\\sections\\StoryFlow.tsx": {
     "mtime": 1785946345.655768,
@@ -150,14 +150,14 @@
     "semantic_hash": "f0ff571c007de476ab0c4322c0889cae"
   },
   "C:\\Users\\RAPYOGO\\rapia\\components\\ui\\Card.tsx": {
-    "mtime": 1785946345.6597693,
-    "ast_hash": "f8934bf8681bec6cb24b0f13be13ac69",
-    "semantic_hash": "f8934bf8681bec6cb24b0f13be13ac69"
+    "mtime": 1786014106.9310088,
+    "ast_hash": "11ee386fe0f21f7869db4149a8bba33c",
+    "semantic_hash": "11ee386fe0f21f7869db4149a8bba33c"
   },
   "C:\\Users\\RAPYOGO\\rapia\\components\\ui\\Input.tsx": {
-    "mtime": 1785946345.6617684,
-    "ast_hash": "3ba9555f5c93a90980cec53e46b04d48",
-    "semantic_hash": "3ba9555f5c93a90980cec53e46b04d48"
+    "mtime": 1786014106.9400103,
+    "ast_hash": "c12e41a2380aaed62837541251054fc1",
+    "semantic_hash": "c12e41a2380aaed62837541251054fc1"
   },
   "C:\\Users\\RAPYOGO\\rapia\\components\\ui\\parallax-fond.tsx": {
     "mtime": 1785946345.6657763,
@@ -210,9 +210,9 @@
     "semantic_hash": "577067a2192590bb01e7a4971bd3bcff"
   },
   "C:\\Users\\RAPYOGO\\rapia\\lib\\email.ts": {
-    "mtime": 1785968463.546327,
-    "ast_hash": "7bf7ef69352e2f0afa337f2ce409f631",
-    "semantic_hash": "7bf7ef69352e2f0afa337f2ce409f631"
+    "mtime": 1786017373.4540832,
+    "ast_hash": "3fc619bcae116afc4494956ac80d39a2",
+    "semantic_hash": "3fc619bcae116afc4494956ac80d39a2"
   },
   "C:\\Users\\RAPYOGO\\rapia\\lib\\utils.ts": {
     "mtime": 1785681461.3885128,
@@ -220,14 +220,14 @@
     "semantic_hash": "2ef94df9d7f472b4a9158749ad95c707"
   },
   "C:\\Users\\RAPYOGO\\rapia\\messages\\en.json": {
-    "mtime": 1785964685.721939,
-    "ast_hash": "9e7c9f1ca0edf6e76bb74848b7858794",
-    "semantic_hash": "9e7c9f1ca0edf6e76bb74848b7858794"
+    "mtime": 1786017373.4580874,
+    "ast_hash": "0c7b3175bae22a3673519201dcde66e7",
+    "semantic_hash": "0c7b3175bae22a3673519201dcde66e7"
   },
   "C:\\Users\\RAPYOGO\\rapia\\messages\\fr.json": {
-    "mtime": 1785964685.7239363,
-    "ast_hash": "48f2c350120172e0652c0fb1f0f3e11d",
-    "semantic_hash": "48f2c350120172e0652c0fb1f0f3e11d"
+    "mtime": 1786017373.4600854,
+    "ast_hash": "4391800a46f04821d302f409c7fd479e",
+    "semantic_hash": "4391800a46f04821d302f409c7fd479e"
   },
   "C:\\Users\\RAPYOGO\\rapia\\next.config.ts": {
     "mtime": 1785944673.5709825,
@@ -280,9 +280,9 @@
     "semantic_hash": "e80876fcb2aaa436f32735f61477be12"
   },
   "C:\\Users\\RAPYOGO\\rapia\\docs\\HANDOFF.md": {
-    "mtime": 1785969260.8388302,
-    "ast_hash": "d8c36e8fd9b509d5c3e9d75cd0216d68",
-    "semantic_hash": "d8c36e8fd9b509d5c3e9d75cd0216d68"
+    "mtime": 1786018649.5605998,
+    "ast_hash": "ef2d49430dfb15cd9407e4799f8144ec",
+    "semantic_hash": "ef2d49430dfb15cd9407e4799f8144ec"
   },
   "C:\\Users\\RAPYOGO\\rapia\\docs\\superpowers\\plans\\2026-08-05-email-contact-form.md": {
     "mtime": 1785964685.713944,
@@ -293,5 +293,1485 @@
     "mtime": 1785964685.715937,
     "ast_hash": "473078c511dc996f55098675d5f0e3b9",
     "semantic_hash": "473078c511dc996f55098675d5f0e3b9"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\ui\\Badge.tsx": {
+    "mtime": 1786014106.9300091,
+    "ast_hash": "182c87f47a17a69ba3ef4fb055d21e92",
+    "semantic_hash": "182c87f47a17a69ba3ef4fb055d21e92"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\ui\\ChoiceChips.tsx": {
+    "mtime": 1786014106.9330077,
+    "ast_hash": "573aecfa6ff1fb026b0be1e01f99ab0e",
+    "semantic_hash": "573aecfa6ff1fb026b0be1e01f99ab0e"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\components\\ui\\Empty.tsx": {
+    "mtime": 1786014106.9380095,
+    "ast_hash": "5ca54ca5c1994fa1eb7b118ae5fb5b90",
+    "semantic_hash": "5ca54ca5c1994fa1eb7b118ae5fb5b90"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\lib\\company.ts": {
+    "mtime": 1786017373.4520855,
+    "ast_hash": "b7afc632292db1e1b3a60466b07c1614",
+    "semantic_hash": "b7afc632292db1e1b3a60466b07c1614"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\file.svg": {
+    "mtime": 1785679779.7613423,
+    "ast_hash": "d09f95206c3fa0bb9bd9fefabfd0ea71",
+    "semantic_hash": "d09f95206c3fa0bb9bd9fefabfd0ea71"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\globe.svg": {
+    "mtime": 1785679779.8128817,
+    "ast_hash": "2aaafa6a49b6563925fe440891e32717",
+    "semantic_hash": "2aaafa6a49b6563925fe440891e32717"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\icone-rapia_dark-mode.png": {
+    "mtime": 1785944673.581983,
+    "ast_hash": "2be8d95c5386684aff97b8970e4fea24",
+    "semantic_hash": "2be8d95c5386684aff97b8970e4fea24"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\icone-rapia_dark-mode.webp": {
+    "mtime": 1785944673.583982,
+    "ast_hash": "2bbd30e778779d38656549a73a882f3f",
+    "semantic_hash": "2bbd30e778779d38656549a73a882f3f"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\icone-rapia_ligth-mode.png": {
+    "mtime": 1785944673.587981,
+    "ast_hash": "4bcdfd9f12d3f71727289c847ea0c46e",
+    "semantic_hash": "4bcdfd9f12d3f71727289c847ea0c46e"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\icone-rapia_ligth-mode.webp": {
+    "mtime": 1785944673.5889826,
+    "ast_hash": "b67e679046089c663a07c93069ae2c3f",
+    "semantic_hash": "b67e679046089c663a07c93069ae2c3f"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-001.webp": {
+    "mtime": 1785931788.676054,
+    "ast_hash": "4cc4d21bb101dda862b6d3e6d7fe2e4c",
+    "semantic_hash": "4cc4d21bb101dda862b6d3e6d7fe2e4c"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-002.webp": {
+    "mtime": 1785931788.6800559,
+    "ast_hash": "7ae387e591450a72f32485232767f3a8",
+    "semantic_hash": "7ae387e591450a72f32485232767f3a8"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-003.webp": {
+    "mtime": 1785931788.6820588,
+    "ast_hash": "e0919fe11d287deb3d04344259d83877",
+    "semantic_hash": "e0919fe11d287deb3d04344259d83877"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-004.webp": {
+    "mtime": 1785931788.684053,
+    "ast_hash": "98f010b75b4d3a53340bbe9fd0d62939",
+    "semantic_hash": "98f010b75b4d3a53340bbe9fd0d62939"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-005.webp": {
+    "mtime": 1785931788.6860547,
+    "ast_hash": "1c2339dd0dd28f8056aa0875275ee17a",
+    "semantic_hash": "1c2339dd0dd28f8056aa0875275ee17a"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-006.webp": {
+    "mtime": 1785931788.6870556,
+    "ast_hash": "e655c3af381407a61714315ad11ebcb5",
+    "semantic_hash": "e655c3af381407a61714315ad11ebcb5"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-007.webp": {
+    "mtime": 1785931788.689058,
+    "ast_hash": "607a8a6781138b8b8d61ef82d6ed3a78",
+    "semantic_hash": "607a8a6781138b8b8d61ef82d6ed3a78"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-008.webp": {
+    "mtime": 1785931788.6900554,
+    "ast_hash": "2f1275a170377f96555b0558b6bf9c7f",
+    "semantic_hash": "2f1275a170377f96555b0558b6bf9c7f"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-009.webp": {
+    "mtime": 1785931788.692585,
+    "ast_hash": "b2c86d810944cdc42e665ff2ee7a1fcd",
+    "semantic_hash": "b2c86d810944cdc42e665ff2ee7a1fcd"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-010.webp": {
+    "mtime": 1785931788.828759,
+    "ast_hash": "f8ee875f393743df1128b9b54a3c6c7b",
+    "semantic_hash": "f8ee875f393743df1128b9b54a3c6c7b"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-011.webp": {
+    "mtime": 1785931788.8690515,
+    "ast_hash": "87adf4276e661e016d7a6472590ef9da",
+    "semantic_hash": "87adf4276e661e016d7a6472590ef9da"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-012.webp": {
+    "mtime": 1785931788.8710527,
+    "ast_hash": "e62c320856fc667de4dad50485a85ae7",
+    "semantic_hash": "e62c320856fc667de4dad50485a85ae7"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-013.webp": {
+    "mtime": 1785931788.8725898,
+    "ast_hash": "75eeccf95601e049479a2daa2626a0cf",
+    "semantic_hash": "75eeccf95601e049479a2daa2626a0cf"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-014.webp": {
+    "mtime": 1785931788.8735867,
+    "ast_hash": "dc02b550a0a6dd29693d553a75e595bb",
+    "semantic_hash": "dc02b550a0a6dd29693d553a75e595bb"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-015.webp": {
+    "mtime": 1785931788.8750997,
+    "ast_hash": "c8b6c346f1f3e4f304604fa9c3746d4b",
+    "semantic_hash": "c8b6c346f1f3e4f304604fa9c3746d4b"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-016.webp": {
+    "mtime": 1785931788.8761146,
+    "ast_hash": "bcb9b4dc905547899e315b668efca6bc",
+    "semantic_hash": "bcb9b4dc905547899e315b668efca6bc"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-017.webp": {
+    "mtime": 1785931788.8771164,
+    "ast_hash": "69d33506729028bb162ed5070dba021e",
+    "semantic_hash": "69d33506729028bb162ed5070dba021e"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-018.webp": {
+    "mtime": 1785931788.8796434,
+    "ast_hash": "c02faa220a712fff243b8b44c571fea9",
+    "semantic_hash": "c02faa220a712fff243b8b44c571fea9"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-019.webp": {
+    "mtime": 1785931788.8826475,
+    "ast_hash": "a6c948918ca667fa64faf0025fa1719e",
+    "semantic_hash": "a6c948918ca667fa64faf0025fa1719e"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-020.webp": {
+    "mtime": 1785931788.884218,
+    "ast_hash": "65fc774d0edec7642a08f6501c8ab76a",
+    "semantic_hash": "65fc774d0edec7642a08f6501c8ab76a"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-021.webp": {
+    "mtime": 1785931788.8851838,
+    "ast_hash": "57fe3c986ec330f22f699e5f3511cea3",
+    "semantic_hash": "57fe3c986ec330f22f699e5f3511cea3"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-022.webp": {
+    "mtime": 1785931788.8861854,
+    "ast_hash": "b889655dcca467638127d040283101a2",
+    "semantic_hash": "b889655dcca467638127d040283101a2"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-023.webp": {
+    "mtime": 1785931788.8877022,
+    "ast_hash": "33b9a3b74b148c43828a4c4c66d16c51",
+    "semantic_hash": "33b9a3b74b148c43828a4c4c66d16c51"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-024.webp": {
+    "mtime": 1785931788.8897212,
+    "ast_hash": "262892926610de244bafd7cd759d77dd",
+    "semantic_hash": "262892926610de244bafd7cd759d77dd"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-025.webp": {
+    "mtime": 1785931788.8913577,
+    "ast_hash": "0ced25107e3d08d1fb840f67d5c5a032",
+    "semantic_hash": "0ced25107e3d08d1fb840f67d5c5a032"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-026.webp": {
+    "mtime": 1785931788.8932555,
+    "ast_hash": "5ce6141a502148f0961f1fcc4a160452",
+    "semantic_hash": "5ce6141a502148f0961f1fcc4a160452"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-027.webp": {
+    "mtime": 1785931788.894898,
+    "ast_hash": "4c83bcbcdf1925dbbe0c5574d3c3a711",
+    "semantic_hash": "4c83bcbcdf1925dbbe0c5574d3c3a711"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-028.webp": {
+    "mtime": 1785931788.8967898,
+    "ast_hash": "d749151fc534241a3a3544a9152f6494",
+    "semantic_hash": "d749151fc534241a3a3544a9152f6494"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-029.webp": {
+    "mtime": 1785931788.8983638,
+    "ast_hash": "0931212c47eb940ff2ad273c072fb61c",
+    "semantic_hash": "0931212c47eb940ff2ad273c072fb61c"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-030.webp": {
+    "mtime": 1785931788.8993342,
+    "ast_hash": "cb096b2335b1538824b8c8f69248d4d5",
+    "semantic_hash": "cb096b2335b1538824b8c8f69248d4d5"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-031.webp": {
+    "mtime": 1785931788.9013386,
+    "ast_hash": "710113a49456131eb6e953d7f6a3761f",
+    "semantic_hash": "710113a49456131eb6e953d7f6a3761f"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-032.webp": {
+    "mtime": 1785931788.9028816,
+    "ast_hash": "0a9270b116b3f134a058f14e290f1b4f",
+    "semantic_hash": "0a9270b116b3f134a058f14e290f1b4f"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-033.webp": {
+    "mtime": 1785931788.962424,
+    "ast_hash": "c71c99c3431b1d638ef18af95c2f8eda",
+    "semantic_hash": "c71c99c3431b1d638ef18af95c2f8eda"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-034.webp": {
+    "mtime": 1785931789.0141695,
+    "ast_hash": "210d347227f34393c556a029a9cdf01f",
+    "semantic_hash": "210d347227f34393c556a029a9cdf01f"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-035.webp": {
+    "mtime": 1785931789.0721712,
+    "ast_hash": "4a9d4731c3f030fe7a483843970a4f82",
+    "semantic_hash": "4a9d4731c3f030fe7a483843970a4f82"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-036.webp": {
+    "mtime": 1785931789.115171,
+    "ast_hash": "cec263edc9ddc0b85a00971e76c24bc9",
+    "semantic_hash": "cec263edc9ddc0b85a00971e76c24bc9"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-037.webp": {
+    "mtime": 1785931789.1161692,
+    "ast_hash": "8bf72ba27fd263dbcb475f7e0963416f",
+    "semantic_hash": "8bf72ba27fd263dbcb475f7e0963416f"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-038.webp": {
+    "mtime": 1785931789.1181698,
+    "ast_hash": "10130b0423231517ad97e795112dba25",
+    "semantic_hash": "10130b0423231517ad97e795112dba25"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-039.webp": {
+    "mtime": 1785931789.1201713,
+    "ast_hash": "ca01b816d350e0d5d787dfe3bcf7039f",
+    "semantic_hash": "ca01b816d350e0d5d787dfe3bcf7039f"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-040.webp": {
+    "mtime": 1785931789.15917,
+    "ast_hash": "dc4f76942b2c0127d2a7c03524c743be",
+    "semantic_hash": "dc4f76942b2c0127d2a7c03524c743be"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-041.webp": {
+    "mtime": 1785931789.2171721,
+    "ast_hash": "12f9254dc11583922623717038c47488",
+    "semantic_hash": "12f9254dc11583922623717038c47488"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-042.webp": {
+    "mtime": 1785931789.2431722,
+    "ast_hash": "49bc3e0796a65a114b2591105e861c91",
+    "semantic_hash": "49bc3e0796a65a114b2591105e861c91"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-043.webp": {
+    "mtime": 1785931789.3211715,
+    "ast_hash": "f538285572e2d02a6102acd91f8be11d",
+    "semantic_hash": "f538285572e2d02a6102acd91f8be11d"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-044.webp": {
+    "mtime": 1785931789.3401692,
+    "ast_hash": "5e8d3ab9d8a88c38eda715605638dc88",
+    "semantic_hash": "5e8d3ab9d8a88c38eda715605638dc88"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-045.webp": {
+    "mtime": 1785931789.3651695,
+    "ast_hash": "e53766c06127c94b2ced56b962027ef2",
+    "semantic_hash": "e53766c06127c94b2ced56b962027ef2"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-046.webp": {
+    "mtime": 1785931789.4191704,
+    "ast_hash": "6726862d5161319a50743fc283ea8698",
+    "semantic_hash": "6726862d5161319a50743fc283ea8698"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-047.webp": {
+    "mtime": 1785931789.4611702,
+    "ast_hash": "c85b7cc2b0bab824a170bf1e723c87a0",
+    "semantic_hash": "c85b7cc2b0bab824a170bf1e723c87a0"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-048.webp": {
+    "mtime": 1785931789.4631705,
+    "ast_hash": "cc1f73bfe9113d1dfcd13f60ef5fb300",
+    "semantic_hash": "cc1f73bfe9113d1dfcd13f60ef5fb300"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-049.webp": {
+    "mtime": 1785931789.4641714,
+    "ast_hash": "8c60d4a04235ef42fe425126ca75dcad",
+    "semantic_hash": "8c60d4a04235ef42fe425126ca75dcad"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-2-surcharge\\frame-050.webp": {
+    "mtime": 1785931789.4661705,
+    "ast_hash": "8a5755e8fb3b433d9e283b02ea378c66",
+    "semantic_hash": "8a5755e8fb3b433d9e283b02ea378c66"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-001.webp": {
+    "mtime": 1785931789.551167,
+    "ast_hash": "d9dab319b55c055096a55e023a54a49b",
+    "semantic_hash": "d9dab319b55c055096a55e023a54a49b"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-002.webp": {
+    "mtime": 1785931789.571171,
+    "ast_hash": "612c502a938dab4c82b8da14d81caf37",
+    "semantic_hash": "612c502a938dab4c82b8da14d81caf37"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-003.webp": {
+    "mtime": 1785931789.573172,
+    "ast_hash": "3e7074bf4cd2f0e735d001a00b6efb12",
+    "semantic_hash": "3e7074bf4cd2f0e735d001a00b6efb12"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-004.webp": {
+    "mtime": 1785931789.5741694,
+    "ast_hash": "2aaddf0089c53900cffcf10d68d99499",
+    "semantic_hash": "2aaddf0089c53900cffcf10d68d99499"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-005.webp": {
+    "mtime": 1785931789.575169,
+    "ast_hash": "7818360b8c16e0cf71815b47f7e3e31f",
+    "semantic_hash": "7818360b8c16e0cf71815b47f7e3e31f"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-006.webp": {
+    "mtime": 1785931789.5771706,
+    "ast_hash": "29078da7b8d07555f0d0abd2ffa353c8",
+    "semantic_hash": "29078da7b8d07555f0d0abd2ffa353c8"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-007.webp": {
+    "mtime": 1785931789.5781727,
+    "ast_hash": "eda5f80fef3244996258bea78a62da7e",
+    "semantic_hash": "eda5f80fef3244996258bea78a62da7e"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-008.webp": {
+    "mtime": 1785931789.5791695,
+    "ast_hash": "3ae1c081f544cab490a5d49c1865c574",
+    "semantic_hash": "3ae1c081f544cab490a5d49c1865c574"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-009.webp": {
+    "mtime": 1785931789.5811713,
+    "ast_hash": "c66be53c45299d2f1d36292adff86845",
+    "semantic_hash": "c66be53c45299d2f1d36292adff86845"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-010.webp": {
+    "mtime": 1785931789.5821707,
+    "ast_hash": "72aeb31a75e3d576350629812f6ff3bc",
+    "semantic_hash": "72aeb31a75e3d576350629812f6ff3bc"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-011.webp": {
+    "mtime": 1785931789.584178,
+    "ast_hash": "f06342ab73ed49fd9da49ab6cc86a560",
+    "semantic_hash": "f06342ab73ed49fd9da49ab6cc86a560"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-012.webp": {
+    "mtime": 1785931789.5851715,
+    "ast_hash": "2f068c048d238883ad44d7ad3ec1a6c4",
+    "semantic_hash": "2f068c048d238883ad44d7ad3ec1a6c4"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-013.webp": {
+    "mtime": 1785931789.5871706,
+    "ast_hash": "6ea6feee59704e16a159ad4011f0663b",
+    "semantic_hash": "6ea6feee59704e16a159ad4011f0663b"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-014.webp": {
+    "mtime": 1785931789.5891697,
+    "ast_hash": "01241b4a5ef135821c3ac59c6d33fe9e",
+    "semantic_hash": "01241b4a5ef135821c3ac59c6d33fe9e"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-015.webp": {
+    "mtime": 1785931789.590171,
+    "ast_hash": "061b52a0ab0d76bbc3a863d9b0042594",
+    "semantic_hash": "061b52a0ab0d76bbc3a863d9b0042594"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-016.webp": {
+    "mtime": 1785931789.5911732,
+    "ast_hash": "37c6725401c7603d76506b60d12cb7a3",
+    "semantic_hash": "37c6725401c7603d76506b60d12cb7a3"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-017.webp": {
+    "mtime": 1785931789.6591682,
+    "ast_hash": "b4017c879cde5ec0c621e64ad621b411",
+    "semantic_hash": "b4017c879cde5ec0c621e64ad621b411"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-018.webp": {
+    "mtime": 1785931789.6811726,
+    "ast_hash": "376b0f401dd02b2455583592e7913a0d",
+    "semantic_hash": "376b0f401dd02b2455583592e7913a0d"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-019.webp": {
+    "mtime": 1785931789.683174,
+    "ast_hash": "960c03c25e7c794bfa737e5da82d1e90",
+    "semantic_hash": "960c03c25e7c794bfa737e5da82d1e90"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-020.webp": {
+    "mtime": 1785931789.685176,
+    "ast_hash": "59572f8c95f609957c7c459333fde68e",
+    "semantic_hash": "59572f8c95f609957c7c459333fde68e"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-021.webp": {
+    "mtime": 1785931789.6881728,
+    "ast_hash": "5131f875f5695ba6129c394d6bca5c0e",
+    "semantic_hash": "5131f875f5695ba6129c394d6bca5c0e"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-022.webp": {
+    "mtime": 1785931789.6891737,
+    "ast_hash": "58a0618fa822212862b49cb10a61d71f",
+    "semantic_hash": "58a0618fa822212862b49cb10a61d71f"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-023.webp": {
+    "mtime": 1785931789.6901715,
+    "ast_hash": "1cd2333627925e840ca8d203d4b495b3",
+    "semantic_hash": "1cd2333627925e840ca8d203d4b495b3"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-024.webp": {
+    "mtime": 1785931789.692171,
+    "ast_hash": "4f8b4c0d364db14b70da3d83062baaba",
+    "semantic_hash": "4f8b4c0d364db14b70da3d83062baaba"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-025.webp": {
+    "mtime": 1785931789.6941772,
+    "ast_hash": "e4f06220546c5d3fcf8db991bf3275eb",
+    "semantic_hash": "e4f06220546c5d3fcf8db991bf3275eb"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-026.webp": {
+    "mtime": 1785931789.6961699,
+    "ast_hash": "c635147c1fe5dd00afa73b31223354e8",
+    "semantic_hash": "c635147c1fe5dd00afa73b31223354e8"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-027.webp": {
+    "mtime": 1785931789.6971707,
+    "ast_hash": "7ef199d6bea40608e7b8d897cedb1a8d",
+    "semantic_hash": "7ef199d6bea40608e7b8d897cedb1a8d"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-028.webp": {
+    "mtime": 1785931789.6981704,
+    "ast_hash": "397b7b6f9986dd7e8a913b2db90fd6ee",
+    "semantic_hash": "397b7b6f9986dd7e8a913b2db90fd6ee"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-029.webp": {
+    "mtime": 1785931789.700172,
+    "ast_hash": "f8490cc2870590b7e9680b8ab45a1edc",
+    "semantic_hash": "f8490cc2870590b7e9680b8ab45a1edc"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-030.webp": {
+    "mtime": 1785931789.7011702,
+    "ast_hash": "33397e61944daeae7202b5d23d5db7d0",
+    "semantic_hash": "33397e61944daeae7202b5d23d5db7d0"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-031.webp": {
+    "mtime": 1785931789.7021687,
+    "ast_hash": "8d1763b77ba411838dbabbb39861919d",
+    "semantic_hash": "8d1763b77ba411838dbabbb39861919d"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-032.webp": {
+    "mtime": 1785931789.7041688,
+    "ast_hash": "f457933dae7949baf847dd036622ba42",
+    "semantic_hash": "f457933dae7949baf847dd036622ba42"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-033.webp": {
+    "mtime": 1785931789.7051744,
+    "ast_hash": "1f9645a19c0260a1d8f14a4bccbb36b6",
+    "semantic_hash": "1f9645a19c0260a1d8f14a4bccbb36b6"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-034.webp": {
+    "mtime": 1785931789.707172,
+    "ast_hash": "c15fd0af743872b754ff7638cc548d2f",
+    "semantic_hash": "c15fd0af743872b754ff7638cc548d2f"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-035.webp": {
+    "mtime": 1785931789.7081685,
+    "ast_hash": "f8e8ddc988d72a9cda75a8e11ed8bd30",
+    "semantic_hash": "f8e8ddc988d72a9cda75a8e11ed8bd30"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-036.webp": {
+    "mtime": 1785931789.710175,
+    "ast_hash": "c626786a5c528a33c6a85973fe89ef4b",
+    "semantic_hash": "c626786a5c528a33c6a85973fe89ef4b"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-037.webp": {
+    "mtime": 1785931789.7121701,
+    "ast_hash": "6f496553a4ab3458edf4c49803ab5b3a",
+    "semantic_hash": "6f496553a4ab3458edf4c49803ab5b3a"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-038.webp": {
+    "mtime": 1785931789.7141688,
+    "ast_hash": "e5c5a117f1046c8468806d34b0502eaa",
+    "semantic_hash": "e5c5a117f1046c8468806d34b0502eaa"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-039.webp": {
+    "mtime": 1785931789.746168,
+    "ast_hash": "c679dec4da0ff6caa5408b03ae92cd58",
+    "semantic_hash": "c679dec4da0ff6caa5408b03ae92cd58"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-040.webp": {
+    "mtime": 1785931789.7661676,
+    "ast_hash": "ef165ff533f30769886fb9204ef88b17",
+    "semantic_hash": "ef165ff533f30769886fb9204ef88b17"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-041.webp": {
+    "mtime": 1785931789.7691677,
+    "ast_hash": "749886118aeb1eb0c3eb90937225f41f",
+    "semantic_hash": "749886118aeb1eb0c3eb90937225f41f"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-042.webp": {
+    "mtime": 1785931789.779174,
+    "ast_hash": "71eca6360baf0c20c3aa842cf7ee3e88",
+    "semantic_hash": "71eca6360baf0c20c3aa842cf7ee3e88"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-043.webp": {
+    "mtime": 1785931789.7821703,
+    "ast_hash": "adcb82f34445f355fa0011d5f4f40e2d",
+    "semantic_hash": "adcb82f34445f355fa0011d5f4f40e2d"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-044.webp": {
+    "mtime": 1785931789.7961688,
+    "ast_hash": "d8f4cb3637d20e38550e877ccc2b74bd",
+    "semantic_hash": "d8f4cb3637d20e38550e877ccc2b74bd"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-045.webp": {
+    "mtime": 1785931789.798169,
+    "ast_hash": "3c7f7d2c4e0c26297c00db68c0ded09f",
+    "semantic_hash": "3c7f7d2c4e0c26297c00db68c0ded09f"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-046.webp": {
+    "mtime": 1785931789.7991705,
+    "ast_hash": "ec9f2703518a62b63938ff3dc7600467",
+    "semantic_hash": "ec9f2703518a62b63938ff3dc7600467"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-047.webp": {
+    "mtime": 1785931789.8011718,
+    "ast_hash": "68d33a033c645db7a95ca961f238b8d9",
+    "semantic_hash": "68d33a033c645db7a95ca961f238b8d9"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-048.webp": {
+    "mtime": 1785931789.8021722,
+    "ast_hash": "de65996a6e5799ede1d729c041427e0c",
+    "semantic_hash": "de65996a6e5799ede1d729c041427e0c"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-049.webp": {
+    "mtime": 1785931789.8041708,
+    "ast_hash": "759ef242b483edf9bc07db1da194f5f3",
+    "semantic_hash": "759ef242b483edf9bc07db1da194f5f3"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-3-rencontre\\frame-050.webp": {
+    "mtime": 1785931789.806177,
+    "ast_hash": "cd00ccef78beca55003e351eaf22b35a",
+    "semantic_hash": "cd00ccef78beca55003e351eaf22b35a"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-001.webp": {
+    "mtime": 1785931789.8091712,
+    "ast_hash": "bd09df7047a21fb4c21a56e38be8a57e",
+    "semantic_hash": "bd09df7047a21fb4c21a56e38be8a57e"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-002.webp": {
+    "mtime": 1785931789.8111694,
+    "ast_hash": "52bf04d49e04f43c68afec017586a637",
+    "semantic_hash": "52bf04d49e04f43c68afec017586a637"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-003.webp": {
+    "mtime": 1785931789.8121731,
+    "ast_hash": "89efae6b2fdb74edd89eed2cc9bc948c",
+    "semantic_hash": "89efae6b2fdb74edd89eed2cc9bc948c"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-004.webp": {
+    "mtime": 1785931789.8181696,
+    "ast_hash": "0a932063978d92a2621474f02f609d53",
+    "semantic_hash": "0a932063978d92a2621474f02f609d53"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-005.webp": {
+    "mtime": 1785931789.8401723,
+    "ast_hash": "302e7f9f2684efc63e848bd0869dc748",
+    "semantic_hash": "302e7f9f2684efc63e848bd0869dc748"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-006.webp": {
+    "mtime": 1785931789.8421693,
+    "ast_hash": "1019952bd83fdb830e9f31f9ff578e61",
+    "semantic_hash": "1019952bd83fdb830e9f31f9ff578e61"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-007.webp": {
+    "mtime": 1785931789.8491683,
+    "ast_hash": "d71afad7130f658f0fa9ee8a3ca21744",
+    "semantic_hash": "d71afad7130f658f0fa9ee8a3ca21744"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-008.webp": {
+    "mtime": 1785931789.8591678,
+    "ast_hash": "1d7c742291c70a00e8e083c5687798e5",
+    "semantic_hash": "1d7c742291c70a00e8e083c5687798e5"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-009.webp": {
+    "mtime": 1785931789.9001698,
+    "ast_hash": "83c69fe115d456727fc0ff298bdc7f17",
+    "semantic_hash": "83c69fe115d456727fc0ff298bdc7f17"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-010.webp": {
+    "mtime": 1785931789.9021702,
+    "ast_hash": "2639c2870f792fcff7f3dcb280b589ea",
+    "semantic_hash": "2639c2870f792fcff7f3dcb280b589ea"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-011.webp": {
+    "mtime": 1785931789.9031703,
+    "ast_hash": "69a9d1c6a43b69cbde3665856d1cac5b",
+    "semantic_hash": "69a9d1c6a43b69cbde3665856d1cac5b"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-012.webp": {
+    "mtime": 1785931789.9051714,
+    "ast_hash": "e79b5e857433212358c2aac210db8946",
+    "semantic_hash": "e79b5e857433212358c2aac210db8946"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-013.webp": {
+    "mtime": 1785931789.9061694,
+    "ast_hash": "1f61e549f326715b1f9065f6e4dc19b9",
+    "semantic_hash": "1f61e549f326715b1f9065f6e4dc19b9"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-014.webp": {
+    "mtime": 1785931789.9081717,
+    "ast_hash": "28ce2f8b35dc966371f58ded0020cf57",
+    "semantic_hash": "28ce2f8b35dc966371f58ded0020cf57"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-015.webp": {
+    "mtime": 1785931789.9091704,
+    "ast_hash": "e061a3ad9e23759a2bd91c678ce85a3b",
+    "semantic_hash": "e061a3ad9e23759a2bd91c678ce85a3b"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-016.webp": {
+    "mtime": 1785931789.9111702,
+    "ast_hash": "45d44a546fed6d355e690ba665c8791a",
+    "semantic_hash": "45d44a546fed6d355e690ba665c8791a"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-017.webp": {
+    "mtime": 1785931789.9121723,
+    "ast_hash": "1415a613c3fadbdc7e5ebfc4cac5c41b",
+    "semantic_hash": "1415a613c3fadbdc7e5ebfc4cac5c41b"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-018.webp": {
+    "mtime": 1785931789.9141755,
+    "ast_hash": "e0115e20230cdf00b48a6b67a809549b",
+    "semantic_hash": "e0115e20230cdf00b48a6b67a809549b"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-019.webp": {
+    "mtime": 1785931789.9701703,
+    "ast_hash": "04a7b4be2da7e4aa34285960005ae11b",
+    "semantic_hash": "04a7b4be2da7e4aa34285960005ae11b"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-020.webp": {
+    "mtime": 1785931789.9721704,
+    "ast_hash": "6647ba7273605879ebaa2db1e9858806",
+    "semantic_hash": "6647ba7273605879ebaa2db1e9858806"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-021.webp": {
+    "mtime": 1785931789.97417,
+    "ast_hash": "ad3e29a6d29ca30ada334ed0aab14f35",
+    "semantic_hash": "ad3e29a6d29ca30ada334ed0aab14f35"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-022.webp": {
+    "mtime": 1785931789.9751751,
+    "ast_hash": "ea8ee2771dd86cc0b9f888b299812a4a",
+    "semantic_hash": "ea8ee2771dd86cc0b9f888b299812a4a"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-023.webp": {
+    "mtime": 1785931789.97717,
+    "ast_hash": "286ba8bfe092ec69b1c7e92883de9664",
+    "semantic_hash": "286ba8bfe092ec69b1c7e92883de9664"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-024.webp": {
+    "mtime": 1785931789.9791708,
+    "ast_hash": "7ed1f284eb850dcc7ea07fc53d7762d2",
+    "semantic_hash": "7ed1f284eb850dcc7ea07fc53d7762d2"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-025.webp": {
+    "mtime": 1785931789.9801722,
+    "ast_hash": "e45d03b570bd284e3150d8325af39969",
+    "semantic_hash": "e45d03b570bd284e3150d8325af39969"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-026.webp": {
+    "mtime": 1785931789.982169,
+    "ast_hash": "e908e0042ef64a188bf19781f76372bd",
+    "semantic_hash": "e908e0042ef64a188bf19781f76372bd"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-027.webp": {
+    "mtime": 1785931789.98317,
+    "ast_hash": "3b7a90144b332745da10119015c424d2",
+    "semantic_hash": "3b7a90144b332745da10119015c424d2"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-028.webp": {
+    "mtime": 1785931789.984169,
+    "ast_hash": "e69f4bff0fed15cbf243ed35808d1c23",
+    "semantic_hash": "e69f4bff0fed15cbf243ed35808d1c23"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-029.webp": {
+    "mtime": 1785931789.9861698,
+    "ast_hash": "82b9af0412cff54cb8e9b5d037f3c5dd",
+    "semantic_hash": "82b9af0412cff54cb8e9b5d037f3c5dd"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-030.webp": {
+    "mtime": 1785931789.9881697,
+    "ast_hash": "8fac551abda1da5f19139764b1b85f6a",
+    "semantic_hash": "8fac551abda1da5f19139764b1b85f6a"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-031.webp": {
+    "mtime": 1785931789.989169,
+    "ast_hash": "e801420492c5683ff598c6bc82010b48",
+    "semantic_hash": "e801420492c5683ff598c6bc82010b48"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-032.webp": {
+    "mtime": 1785931789.9911726,
+    "ast_hash": "89e98780460d8789cc916e72ab4e54e4",
+    "semantic_hash": "89e98780460d8789cc916e72ab4e54e4"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-033.webp": {
+    "mtime": 1785931789.9931781,
+    "ast_hash": "e87b7d843aba1a10c8a900439415f966",
+    "semantic_hash": "e87b7d843aba1a10c8a900439415f966"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-034.webp": {
+    "mtime": 1785931789.994171,
+    "ast_hash": "957d58758143c79b35f69664ff5c36a3",
+    "semantic_hash": "957d58758143c79b35f69664ff5c36a3"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-035.webp": {
+    "mtime": 1785931789.9961736,
+    "ast_hash": "75ecf6f9c6ac89815237a77869f540bf",
+    "semantic_hash": "75ecf6f9c6ac89815237a77869f540bf"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-036.webp": {
+    "mtime": 1785931789.9981725,
+    "ast_hash": "2f7df962f80238be817e9932518db7ad",
+    "semantic_hash": "2f7df962f80238be817e9932518db7ad"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-037.webp": {
+    "mtime": 1785931789.999172,
+    "ast_hash": "6ff5d81d313c13e3db82b91b623daf73",
+    "semantic_hash": "6ff5d81d313c13e3db82b91b623daf73"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-038.webp": {
+    "mtime": 1785931790.0011697,
+    "ast_hash": "5054cd1f912a4f6593604c980922b202",
+    "semantic_hash": "5054cd1f912a4f6593604c980922b202"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-039.webp": {
+    "mtime": 1785931790.0021708,
+    "ast_hash": "c1fd26cc4269a437940dd78d414787b0",
+    "semantic_hash": "c1fd26cc4269a437940dd78d414787b0"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-040.webp": {
+    "mtime": 1785931790.0091715,
+    "ast_hash": "ae2379d249c7f40d93c88c4678f983b0",
+    "semantic_hash": "ae2379d249c7f40d93c88c4678f983b0"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-041.webp": {
+    "mtime": 1785931790.0191703,
+    "ast_hash": "0738866ae2836c377bd1b6e345463b08",
+    "semantic_hash": "0738866ae2836c377bd1b6e345463b08"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-042.webp": {
+    "mtime": 1785931790.0611713,
+    "ast_hash": "83a94c4ff67441f055e1b254f265c2a0",
+    "semantic_hash": "83a94c4ff67441f055e1b254f265c2a0"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-043.webp": {
+    "mtime": 1785931790.0621693,
+    "ast_hash": "bcbe5d49cb3fbe78e54ae5f1f164b1a7",
+    "semantic_hash": "bcbe5d49cb3fbe78e54ae5f1f164b1a7"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-044.webp": {
+    "mtime": 1785931790.0641692,
+    "ast_hash": "2f37d11c4c9f716abf2e65dbf7985cee",
+    "semantic_hash": "2f37d11c4c9f716abf2e65dbf7985cee"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-045.webp": {
+    "mtime": 1785931790.0661724,
+    "ast_hash": "c47113e7e9cf6a4034c8e931f4686974",
+    "semantic_hash": "c47113e7e9cf6a4034c8e931f4686974"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-046.webp": {
+    "mtime": 1785931790.0671735,
+    "ast_hash": "24269fac6c0e4a10a22512d34a32e08c",
+    "semantic_hash": "24269fac6c0e4a10a22512d34a32e08c"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-047.webp": {
+    "mtime": 1785931790.0701745,
+    "ast_hash": "96dcba0a7be94bb67de74721cb00de43",
+    "semantic_hash": "96dcba0a7be94bb67de74721cb00de43"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-048.webp": {
+    "mtime": 1785931790.0721736,
+    "ast_hash": "d3a6aceeac563dbe1bec6a7a312afa23",
+    "semantic_hash": "d3a6aceeac563dbe1bec6a7a312afa23"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-049.webp": {
+    "mtime": 1785931790.0731735,
+    "ast_hash": "f817438d18d3a0ff9132e045f71410bc",
+    "semantic_hash": "f817438d18d3a0ff9132e045f71410bc"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-4-delegation\\frame-050.webp": {
+    "mtime": 1785931790.0751693,
+    "ast_hash": "1445fe53b0d66cec7332759ef4092af3",
+    "semantic_hash": "1445fe53b0d66cec7332759ef4092af3"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-001.webp": {
+    "mtime": 1785931790.0771716,
+    "ast_hash": "a8ce0055a881995c7c009419e7a95623",
+    "semantic_hash": "a8ce0055a881995c7c009419e7a95623"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-002.webp": {
+    "mtime": 1785931790.0791702,
+    "ast_hash": "785c8b97640afb1f9c4fbf538bb2b5f1",
+    "semantic_hash": "785c8b97640afb1f9c4fbf538bb2b5f1"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-003.webp": {
+    "mtime": 1785931790.081172,
+    "ast_hash": "d81e1038781469932207ebd09a996433",
+    "semantic_hash": "d81e1038781469932207ebd09a996433"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-004.webp": {
+    "mtime": 1785931790.0821686,
+    "ast_hash": "5ca57cebf1b4fdad916914739ef60200",
+    "semantic_hash": "5ca57cebf1b4fdad916914739ef60200"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-005.webp": {
+    "mtime": 1785931790.0841703,
+    "ast_hash": "8cb4c230b40c413310428ee5e114bccf",
+    "semantic_hash": "8cb4c230b40c413310428ee5e114bccf"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-006.webp": {
+    "mtime": 1785931790.085181,
+    "ast_hash": "e3b2110a5a5f0122b63869dc4cf9d904",
+    "semantic_hash": "e3b2110a5a5f0122b63869dc4cf9d904"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-007.webp": {
+    "mtime": 1785931790.0871744,
+    "ast_hash": "6ba66086621e20f84edd940398301267",
+    "semantic_hash": "6ba66086621e20f84edd940398301267"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-008.webp": {
+    "mtime": 1785931790.0891693,
+    "ast_hash": "397c47fb6f53cf7765b798ba673d90a7",
+    "semantic_hash": "397c47fb6f53cf7765b798ba673d90a7"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-009.webp": {
+    "mtime": 1785931790.090176,
+    "ast_hash": "61299f1dfd7ce4b0413d3b8221007b2f",
+    "semantic_hash": "61299f1dfd7ce4b0413d3b8221007b2f"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-010.webp": {
+    "mtime": 1785931790.0921726,
+    "ast_hash": "70d5facd0cb5ce73cf841b42df61d3dc",
+    "semantic_hash": "70d5facd0cb5ce73cf841b42df61d3dc"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-011.webp": {
+    "mtime": 1785931790.0931704,
+    "ast_hash": "3410c8a8574fdf72a3627152a129ff13",
+    "semantic_hash": "3410c8a8574fdf72a3627152a129ff13"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-012.webp": {
+    "mtime": 1785931790.0951703,
+    "ast_hash": "4ecbc84e7aea9b97995dea6cf4d802da",
+    "semantic_hash": "4ecbc84e7aea9b97995dea6cf4d802da"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-013.webp": {
+    "mtime": 1785931790.1281674,
+    "ast_hash": "e61c067c00957b1783611f3275133a12",
+    "semantic_hash": "e61c067c00957b1783611f3275133a12"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-014.webp": {
+    "mtime": 1785931790.13017,
+    "ast_hash": "4cb45f455dd28ba32492215b1b58db11",
+    "semantic_hash": "4cb45f455dd28ba32492215b1b58db11"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-015.webp": {
+    "mtime": 1785931790.131173,
+    "ast_hash": "704f9946c832392495c2f8bee05804f3",
+    "semantic_hash": "704f9946c832392495c2f8bee05804f3"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-016.webp": {
+    "mtime": 1785931790.1331718,
+    "ast_hash": "6bf1a60db5d6b5dbfe4143cf99ca9cf6",
+    "semantic_hash": "6bf1a60db5d6b5dbfe4143cf99ca9cf6"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-017.webp": {
+    "mtime": 1785931790.1641753,
+    "ast_hash": "521b9f726609e7877a99c5e5ff7512cf",
+    "semantic_hash": "521b9f726609e7877a99c5e5ff7512cf"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-018.webp": {
+    "mtime": 1785931790.1701682,
+    "ast_hash": "6bfb8fda8ec4166886485ea53c44f984",
+    "semantic_hash": "6bfb8fda8ec4166886485ea53c44f984"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-019.webp": {
+    "mtime": 1785931790.1721685,
+    "ast_hash": "7c36f510ca527cddd4dcffcd5da509ef",
+    "semantic_hash": "7c36f510ca527cddd4dcffcd5da509ef"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-020.webp": {
+    "mtime": 1785931790.1731718,
+    "ast_hash": "15383005f6881a9c81bd3e7d1721ab69",
+    "semantic_hash": "15383005f6881a9c81bd3e7d1721ab69"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-021.webp": {
+    "mtime": 1785931790.1751707,
+    "ast_hash": "3fcf7dc9229ef86dc9682df110fae30b",
+    "semantic_hash": "3fcf7dc9229ef86dc9682df110fae30b"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-022.webp": {
+    "mtime": 1785931790.1761699,
+    "ast_hash": "871029447e253242715c20bac81f55f2",
+    "semantic_hash": "871029447e253242715c20bac81f55f2"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-023.webp": {
+    "mtime": 1785931790.202169,
+    "ast_hash": "574537eb33b18952e09ebfd231f96f73",
+    "semantic_hash": "574537eb33b18952e09ebfd231f96f73"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-024.webp": {
+    "mtime": 1785931790.2041707,
+    "ast_hash": "942ab3c89ca94f7199dfe38ed229a68c",
+    "semantic_hash": "942ab3c89ca94f7199dfe38ed229a68c"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-025.webp": {
+    "mtime": 1785931790.2061706,
+    "ast_hash": "1ff49821f1f1a0cb7eef7f621453bf82",
+    "semantic_hash": "1ff49821f1f1a0cb7eef7f621453bf82"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-026.webp": {
+    "mtime": 1785931790.2071724,
+    "ast_hash": "50e0f7af016ee30653419a65a095ab73",
+    "semantic_hash": "50e0f7af016ee30653419a65a095ab73"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-027.webp": {
+    "mtime": 1785931790.2091725,
+    "ast_hash": "4a9ca386e4e357ea73667d91f91de6f3",
+    "semantic_hash": "4a9ca386e4e357ea73667d91f91de6f3"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-028.webp": {
+    "mtime": 1785931790.2121744,
+    "ast_hash": "8ac8f61ff86a967ee0a597793f2ff065",
+    "semantic_hash": "8ac8f61ff86a967ee0a597793f2ff065"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-029.webp": {
+    "mtime": 1785931790.2191708,
+    "ast_hash": "6a94043d40cc1cd78743fb7c0421532d",
+    "semantic_hash": "6a94043d40cc1cd78743fb7c0421532d"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-030.webp": {
+    "mtime": 1785931790.2211714,
+    "ast_hash": "3b90868c7cfe14b3fb428374171b9cd9",
+    "semantic_hash": "3b90868c7cfe14b3fb428374171b9cd9"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-031.webp": {
+    "mtime": 1785931790.2221706,
+    "ast_hash": "d9a4d8070637b2161154ad0a50393e2b",
+    "semantic_hash": "d9a4d8070637b2161154ad0a50393e2b"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-032.webp": {
+    "mtime": 1785931790.2241743,
+    "ast_hash": "7b4b8c38f6669ef6cd4adff90ce5dab7",
+    "semantic_hash": "7b4b8c38f6669ef6cd4adff90ce5dab7"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-033.webp": {
+    "mtime": 1785931790.2271705,
+    "ast_hash": "77d26cc1ce3927442987760956f63a2d",
+    "semantic_hash": "77d26cc1ce3927442987760956f63a2d"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-034.webp": {
+    "mtime": 1785931790.2281742,
+    "ast_hash": "acd286eb818d4e5f87b34d77a4c8f9b3",
+    "semantic_hash": "acd286eb818d4e5f87b34d77a4c8f9b3"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-035.webp": {
+    "mtime": 1785931790.2301712,
+    "ast_hash": "af2bdd77a36b31782f80578e7ec081db",
+    "semantic_hash": "af2bdd77a36b31782f80578e7ec081db"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-036.webp": {
+    "mtime": 1785931790.2321725,
+    "ast_hash": "2c82999a0a5e6a5a6a08f70f4dcfe5ac",
+    "semantic_hash": "2c82999a0a5e6a5a6a08f70f4dcfe5ac"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-037.webp": {
+    "mtime": 1785931790.2331696,
+    "ast_hash": "369e2570257aa131b7cbf7be62950bf2",
+    "semantic_hash": "369e2570257aa131b7cbf7be62950bf2"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-038.webp": {
+    "mtime": 1785931790.235171,
+    "ast_hash": "5c3dfd68cbb3eb99d7312bfad59b97d1",
+    "semantic_hash": "5c3dfd68cbb3eb99d7312bfad59b97d1"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-039.webp": {
+    "mtime": 1785931790.240175,
+    "ast_hash": "7c338b076d70d8bef0fd8dedc550d813",
+    "semantic_hash": "7c338b076d70d8bef0fd8dedc550d813"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-040.webp": {
+    "mtime": 1785931790.2411718,
+    "ast_hash": "29425e09f40ec372503fe36688c9c721",
+    "semantic_hash": "29425e09f40ec372503fe36688c9c721"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-041.webp": {
+    "mtime": 1785931790.2431698,
+    "ast_hash": "256bc7aa8f9faa30a23bdb5744fd225a",
+    "semantic_hash": "256bc7aa8f9faa30a23bdb5744fd225a"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-042.webp": {
+    "mtime": 1785931790.2451715,
+    "ast_hash": "e911192bc4078732bec0f12114d89358",
+    "semantic_hash": "e911192bc4078732bec0f12114d89358"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-043.webp": {
+    "mtime": 1785931790.2471726,
+    "ast_hash": "f2a6a82ff6f2ec1616c9cfcecff4ef8c",
+    "semantic_hash": "f2a6a82ff6f2ec1616c9cfcecff4ef8c"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-044.webp": {
+    "mtime": 1785931790.2491739,
+    "ast_hash": "06566bdc654cc993e20ebd01c6068fc9",
+    "semantic_hash": "06566bdc654cc993e20ebd01c6068fc9"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-045.webp": {
+    "mtime": 1785931790.250174,
+    "ast_hash": "7a9fdaf0d584d18d313bedd88601bc0e",
+    "semantic_hash": "7a9fdaf0d584d18d313bedd88601bc0e"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-046.webp": {
+    "mtime": 1785931790.2521708,
+    "ast_hash": "57f872ca72d3d1c705dd200782206a96",
+    "semantic_hash": "57f872ca72d3d1c705dd200782206a96"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-047.webp": {
+    "mtime": 1785931790.2541711,
+    "ast_hash": "b3785907c4689645ecb0da40a4f228e3",
+    "semantic_hash": "b3785907c4689645ecb0da40a4f228e3"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-048.webp": {
+    "mtime": 1785931790.2551703,
+    "ast_hash": "eb30ed65b660bbd6a211ca25a2399a8e",
+    "semantic_hash": "eb30ed65b660bbd6a211ca25a2399a8e"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-049.webp": {
+    "mtime": 1785931790.2571788,
+    "ast_hash": "d13b5a20b45fbbeb09d2a895c5915537",
+    "semantic_hash": "d13b5a20b45fbbeb09d2a895c5915537"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\acte-5-liberte\\frame-050.webp": {
+    "mtime": 1785931790.2591813,
+    "ast_hash": "7f45fe2832458411bba15d7670c0ff50",
+    "semantic_hash": "7f45fe2832458411bba15d7670c0ff50"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-001.webp": {
+    "mtime": 1785929624.9572887,
+    "ast_hash": "7ad5816c5e3f1fd4f67bdb0550a19877",
+    "semantic_hash": "7ad5816c5e3f1fd4f67bdb0550a19877"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-002.webp": {
+    "mtime": 1785929624.9592934,
+    "ast_hash": "72a1f5101b4f0e3cc9fa963f90082afd",
+    "semantic_hash": "72a1f5101b4f0e3cc9fa963f90082afd"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-003.webp": {
+    "mtime": 1785929624.962297,
+    "ast_hash": "5d02d0bbf7b1850e2b4858625acf474f",
+    "semantic_hash": "5d02d0bbf7b1850e2b4858625acf474f"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-004.webp": {
+    "mtime": 1785929624.96429,
+    "ast_hash": "87c30170d209f3adddc8a1c65accc4ef",
+    "semantic_hash": "87c30170d209f3adddc8a1c65accc4ef"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-005.webp": {
+    "mtime": 1785929624.965293,
+    "ast_hash": "929843fa451e0857ad9494b8e8f9e6e0",
+    "semantic_hash": "929843fa451e0857ad9494b8e8f9e6e0"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-006.webp": {
+    "mtime": 1785929624.967289,
+    "ast_hash": "9f159bb9a1f023e946b50890d292c4d0",
+    "semantic_hash": "9f159bb9a1f023e946b50890d292c4d0"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-007.webp": {
+    "mtime": 1785929624.9682882,
+    "ast_hash": "1539439f8a24b228c4a9ac5706abccf4",
+    "semantic_hash": "1539439f8a24b228c4a9ac5706abccf4"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-008.webp": {
+    "mtime": 1785929624.9712944,
+    "ast_hash": "d3774a25a1c8e3fa08d6fabe3a6b3a48",
+    "semantic_hash": "d3774a25a1c8e3fa08d6fabe3a6b3a48"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-009.webp": {
+    "mtime": 1785929624.973289,
+    "ast_hash": "8cf13e4b75cd955cd8b60d00097bd548",
+    "semantic_hash": "8cf13e4b75cd955cd8b60d00097bd548"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-010.webp": {
+    "mtime": 1785929624.975294,
+    "ast_hash": "499d0df17eb409dc84035b8e4a32a738",
+    "semantic_hash": "499d0df17eb409dc84035b8e4a32a738"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-011.webp": {
+    "mtime": 1785929624.9772973,
+    "ast_hash": "1b9aa3a4d8477b9bdf11b413e8423078",
+    "semantic_hash": "1b9aa3a4d8477b9bdf11b413e8423078"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-012.webp": {
+    "mtime": 1785929624.97829,
+    "ast_hash": "c6bf96ca0a57b1429c7c7f4bfd5d4219",
+    "semantic_hash": "c6bf96ca0a57b1429c7c7f4bfd5d4219"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-013.webp": {
+    "mtime": 1785929624.9802914,
+    "ast_hash": "a39bc7f687731fbdc1875bfc8cc3a425",
+    "semantic_hash": "a39bc7f687731fbdc1875bfc8cc3a425"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-014.webp": {
+    "mtime": 1785929624.987292,
+    "ast_hash": "8a68c63bda09158b09598c8eb4163c30",
+    "semantic_hash": "8a68c63bda09158b09598c8eb4163c30"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-015.webp": {
+    "mtime": 1785929624.9972925,
+    "ast_hash": "fb76cee0dc9865ca01b97120c1e23f7d",
+    "semantic_hash": "fb76cee0dc9865ca01b97120c1e23f7d"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-016.webp": {
+    "mtime": 1785929624.9992929,
+    "ast_hash": "f374c32b4047fb453c9af47235db382e",
+    "semantic_hash": "f374c32b4047fb453c9af47235db382e"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-017.webp": {
+    "mtime": 1785929625.0002913,
+    "ast_hash": "e39d6f45ff41f33f2917ec467e8aef83",
+    "semantic_hash": "e39d6f45ff41f33f2917ec467e8aef83"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-018.webp": {
+    "mtime": 1785929625.003304,
+    "ast_hash": "f2d63551211548ebcd0356d193e364aa",
+    "semantic_hash": "f2d63551211548ebcd0356d193e364aa"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-019.webp": {
+    "mtime": 1785929625.0052931,
+    "ast_hash": "7552736af947f2acc32b3de5df3b80df",
+    "semantic_hash": "7552736af947f2acc32b3de5df3b80df"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-020.webp": {
+    "mtime": 1785929625.0072927,
+    "ast_hash": "4c7a75872312a7eda12416da86a63af3",
+    "semantic_hash": "4c7a75872312a7eda12416da86a63af3"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-021.webp": {
+    "mtime": 1785929625.0082955,
+    "ast_hash": "9d55a3bb0687f73ed3263b91e4336bcb",
+    "semantic_hash": "9d55a3bb0687f73ed3263b91e4336bcb"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-022.webp": {
+    "mtime": 1785929625.0102923,
+    "ast_hash": "9cdb460f1fff3890983147921651a428",
+    "semantic_hash": "9cdb460f1fff3890983147921651a428"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-023.webp": {
+    "mtime": 1785929625.0122986,
+    "ast_hash": "9002d0f28d65c2045418e0d288d6187f",
+    "semantic_hash": "9002d0f28d65c2045418e0d288d6187f"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-024.webp": {
+    "mtime": 1785929625.0132906,
+    "ast_hash": "b69cdd62260e44a0527d89ae12bb5280",
+    "semantic_hash": "b69cdd62260e44a0527d89ae12bb5280"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-025.webp": {
+    "mtime": 1785929625.0192933,
+    "ast_hash": "dfe5c205288e9deb241edfc91eec4360",
+    "semantic_hash": "dfe5c205288e9deb241edfc91eec4360"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-026.webp": {
+    "mtime": 1785929625.0222998,
+    "ast_hash": "b1d9db57fd55b1163222f81b5324521b",
+    "semantic_hash": "b1d9db57fd55b1163222f81b5324521b"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-027.webp": {
+    "mtime": 1785929625.0242908,
+    "ast_hash": "b6144f5dd7cd95e0e806be1ac389fcb8",
+    "semantic_hash": "b6144f5dd7cd95e0e806be1ac389fcb8"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-028.webp": {
+    "mtime": 1785929625.0592942,
+    "ast_hash": "e30c5a68a8a50aee21a387bf6567a9fd",
+    "semantic_hash": "e30c5a68a8a50aee21a387bf6567a9fd"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-029.webp": {
+    "mtime": 1785929625.063292,
+    "ast_hash": "a3b2910bfc51fd27a2ae084042fc5508",
+    "semantic_hash": "a3b2910bfc51fd27a2ae084042fc5508"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-030.webp": {
+    "mtime": 1785929625.1132898,
+    "ast_hash": "071efc82abc6de85b239d9ed486464c6",
+    "semantic_hash": "071efc82abc6de85b239d9ed486464c6"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-031.webp": {
+    "mtime": 1785929625.1172938,
+    "ast_hash": "affc696feada2c025d46d1e0bd9c0c97",
+    "semantic_hash": "affc696feada2c025d46d1e0bd9c0c97"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-032.webp": {
+    "mtime": 1785929625.1182933,
+    "ast_hash": "f48ad17ae24ed4577cc0b7c56858f755",
+    "semantic_hash": "f48ad17ae24ed4577cc0b7c56858f755"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-033.webp": {
+    "mtime": 1785929625.1202905,
+    "ast_hash": "e85c1b9c0b4062f84e8298f7e5a2e866",
+    "semantic_hash": "e85c1b9c0b4062f84e8298f7e5a2e866"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-034.webp": {
+    "mtime": 1785929625.1222892,
+    "ast_hash": "cf8e7ea05c5ba816ae9da8297265230c",
+    "semantic_hash": "cf8e7ea05c5ba816ae9da8297265230c"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-035.webp": {
+    "mtime": 1785929625.1232955,
+    "ast_hash": "bdad77c7ea962a095180ceaeac03f8f6",
+    "semantic_hash": "bdad77c7ea962a095180ceaeac03f8f6"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-036.webp": {
+    "mtime": 1785929625.1262896,
+    "ast_hash": "ca8343a01d4b4e30a53a305a1155397e",
+    "semantic_hash": "ca8343a01d4b4e30a53a305a1155397e"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-037.webp": {
+    "mtime": 1785929625.1282957,
+    "ast_hash": "744553ab5e45591aad91cbf5c82f6009",
+    "semantic_hash": "744553ab5e45591aad91cbf5c82f6009"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-038.webp": {
+    "mtime": 1785929625.1332963,
+    "ast_hash": "739c321f8b57ab8aff86ac7cbd59b676",
+    "semantic_hash": "739c321f8b57ab8aff86ac7cbd59b676"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-039.webp": {
+    "mtime": 1785929625.1362922,
+    "ast_hash": "06c6ecdd7b1e3c1ea766b8e18b324328",
+    "semantic_hash": "06c6ecdd7b1e3c1ea766b8e18b324328"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-040.webp": {
+    "mtime": 1785929625.1382947,
+    "ast_hash": "15fcca850975a44a8add1359f1dcfffa",
+    "semantic_hash": "15fcca850975a44a8add1359f1dcfffa"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-041.webp": {
+    "mtime": 1785929625.1402998,
+    "ast_hash": "62349542a23801531565b4244887a9d7",
+    "semantic_hash": "62349542a23801531565b4244887a9d7"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-042.webp": {
+    "mtime": 1785929625.1412933,
+    "ast_hash": "2066931163abd275419aa5ed6bba502d",
+    "semantic_hash": "2066931163abd275419aa5ed6bba502d"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-043.webp": {
+    "mtime": 1785929625.1452923,
+    "ast_hash": "8f40d5d4ae236bb430efd56d4abbf37e",
+    "semantic_hash": "8f40d5d4ae236bb430efd56d4abbf37e"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-044.webp": {
+    "mtime": 1785929625.1502936,
+    "ast_hash": "2ee77a2590fdf042e89b21d03b5f5ca3",
+    "semantic_hash": "2ee77a2590fdf042e89b21d03b5f5ca3"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-045.webp": {
+    "mtime": 1785929625.152297,
+    "ast_hash": "3f4ec796e9d273bbe381b634f6f48fc3",
+    "semantic_hash": "3f4ec796e9d273bbe381b634f6f48fc3"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-046.webp": {
+    "mtime": 1785929625.1542945,
+    "ast_hash": "60cdf4aac77077490da8b7494c5615a3",
+    "semantic_hash": "60cdf4aac77077490da8b7494c5615a3"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-047.webp": {
+    "mtime": 1785929625.1552894,
+    "ast_hash": "c9769aa8967992b7feae1ce1fa6fd693",
+    "semantic_hash": "c9769aa8967992b7feae1ce1fa6fd693"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-048.webp": {
+    "mtime": 1785929625.1572933,
+    "ast_hash": "2cc51a18fe7f376a329f498b06c0fdc5",
+    "semantic_hash": "2cc51a18fe7f376a329f498b06c0fdc5"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-049.webp": {
+    "mtime": 1785929625.160292,
+    "ast_hash": "dd3f96bed197e8c7f276c7ca61665793",
+    "semantic_hash": "dd3f96bed197e8c7f276c7ca61665793"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\hero-sequence\\frame-050.webp": {
+    "mtime": 1785929625.1712918,
+    "ast_hash": "26e032ba010cb8eb3d4df988abfdaea7",
+    "semantic_hash": "26e032ba010cb8eb3d4df988abfdaea7"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\academy.webp": {
+    "mtime": 1785950501.468922,
+    "ast_hash": "b98e0dceff22dbf4cc21f24cfb697965",
+    "semantic_hash": "b98e0dceff22dbf4cc21f24cfb697965"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\banniere-ressources.webp": {
+    "mtime": 1785950501.4749277,
+    "ast_hash": "cc48335c2fb7f969fdd1f2076833b3ca",
+    "semantic_hash": "cc48335c2fb7f969fdd1f2076833b3ca"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\cas-commercial.webp": {
+    "mtime": 1785950501.4819243,
+    "ast_hash": "a5c700bd12bf5864c37812eef282659c",
+    "semantic_hash": "a5c700bd12bf5864c37812eef282659c"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\cas-direction.webp": {
+    "mtime": 1785950501.4849205,
+    "ast_hash": "6607e69d9ec947b0f11c2c7d6e2ccbd6",
+    "semantic_hash": "6607e69d9ec947b0f11c2c7d6e2ccbd6"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\cas-finance.webp": {
+    "mtime": 1785950501.4889245,
+    "ast_hash": "2053a4228de1b47dc93704929e31277a",
+    "semantic_hash": "2053a4228de1b47dc93704929e31277a"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\cas-ong.webp": {
+    "mtime": 1785950501.4919221,
+    "ast_hash": "ea34fbc01545c3b2064f9ff0517d9aa3",
+    "semantic_hash": "ea34fbc01545c3b2064f9ff0517d9aa3"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\cas-rh.webp": {
+    "mtime": 1785950501.6139312,
+    "ast_hash": "77932084449c2743c84af9b4ec189e97",
+    "semantic_hash": "77932084449c2743c84af9b4ec189e97"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\cas-service-client.webp": {
+    "mtime": 1785950501.6199155,
+    "ast_hash": "c351d9ef7f731f95289838b7017ac9d6",
+    "semantic_hash": "c351d9ef7f731f95289838b7017ac9d6"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\contexte-africain.webp": {
+    "mtime": 1785950501.6229157,
+    "ast_hash": "4cf89be489e33341efd04a9a0937295c",
+    "semantic_hash": "4cf89be489e33341efd04a9a0937295c"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\dashboard-mockup.webp": {
+    "mtime": 1785950501.6259205,
+    "ast_hash": "84949c04ea8f4a307dac2746f5b58661",
+    "semantic_hash": "84949c04ea8f4a307dac2746f5b58661"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\detail-clavier.webp": {
+    "mtime": 1785950501.6299274,
+    "ast_hash": "00aa0a66567fc733f0d6dfa4a545ad9c",
+    "semantic_hash": "00aa0a66567fc733f0d6dfa4a545ad9c"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\detail-plante.webp": {
+    "mtime": 1785950501.6359346,
+    "ast_hash": "891f2bd44171110c9418900fe6f65336",
+    "semantic_hash": "891f2bd44171110c9418900fe6f65336"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\detail-whiteboard.webp": {
+    "mtime": 1785950501.6379158,
+    "ast_hash": "390ebab4df7886b124b31e629ec7768e",
+    "semantic_hash": "390ebab4df7886b124b31e629ec7768e"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\equipe.webp": {
+    "mtime": 1785950501.6409173,
+    "ast_hash": "2634534f7ca20d001c92fc7be693a4b0",
+    "semantic_hash": "2634534f7ca20d001c92fc7be693a4b0"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\graphique-systemes.webp": {
+    "mtime": 1785950501.642915,
+    "ast_hash": "83f3b3f1b8cf1786cab835b564e29c21",
+    "semantic_hash": "83f3b3f1b8cf1786cab835b564e29c21"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\master.webp": {
+    "mtime": 1785950501.647925,
+    "ast_hash": "de331f9ff8b360c720042e28fd204fec",
+    "semantic_hash": "de331f9ff8b360c720042e28fd204fec"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\methode-1-comprendre.webp": {
+    "mtime": 1785950501.6509204,
+    "ast_hash": "6836bef19fd81277eb831b03e5d01a6e",
+    "semantic_hash": "6836bef19fd81277eb831b03e5d01a6e"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\methode-2-identifier.webp": {
+    "mtime": 1785950501.6539235,
+    "ast_hash": "85995bf262c652082723b8907de2f4b1",
+    "semantic_hash": "85995bf262c652082723b8907de2f4b1"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\methode-3-construire.webp": {
+    "mtime": 1785950501.6569257,
+    "ast_hash": "5712b7a32e351e212f8e83dc37251f29",
+    "semantic_hash": "5712b7a32e351e212f8e83dc37251f29"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\methode-4-former.webp": {
+    "mtime": 1785950501.8449144,
+    "ast_hash": "e1f7f83e5928b84059fc3b89a5f581ed",
+    "semantic_hash": "e1f7f83e5928b84059fc3b89a5f581ed"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\public-entreprises.webp": {
+    "mtime": 1785950501.8479176,
+    "ast_hash": "fe8eb28f82b70772e008d3e9bc3e86af",
+    "semantic_hash": "fe8eb28f82b70772e008d3e9bc3e86af"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\public-institutions.webp": {
+    "mtime": 1785950501.850914,
+    "ast_hash": "f9b33f6a2241c56e199bead79aca08a3",
+    "semantic_hash": "f9b33f6a2241c56e199bead79aca08a3"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\public-ong.webp": {
+    "mtime": 1785950501.852913,
+    "ast_hash": "665f338a4c7b6292cfe4a241acb12c0a",
+    "semantic_hash": "665f338a4c7b6292cfe4a241acb12c0a"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\public-professionnels.webp": {
+    "mtime": 1785950501.8559144,
+    "ast_hash": "4e741d18384ecc069903061a160882f7",
+    "semantic_hash": "4e741d18384ecc069903061a160882f7"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\service-automatisation.webp": {
+    "mtime": 1785950501.858913,
+    "ast_hash": "509f90ae7a26afe1edf1b15569fb4917",
+    "semantic_hash": "509f90ae7a26afe1edf1b15569fb4917"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\service-conseil.webp": {
+    "mtime": 1785950501.8619146,
+    "ast_hash": "0d7269bcf4f72cff25d8085d7cfe9a68",
+    "semantic_hash": "0d7269bcf4f72cff25d8085d7cfe9a68"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\service-formation.webp": {
+    "mtime": 1785950501.8669188,
+    "ast_hash": "8270ba5f452c24176d4ed66c9512ba0a",
+    "semantic_hash": "8270ba5f452c24176d4ed66c9512ba0a"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\images\\photos\\service-implementation.webp": {
+    "mtime": 1785950501.8729274,
+    "ast_hash": "cd936ae91f00c68f9289399daf8d69ac",
+    "semantic_hash": "cd936ae91f00c68f9289399daf8d69ac"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\logo-horisontale-rapia-dark_mode.png": {
+    "mtime": 1785944673.5919867,
+    "ast_hash": "658bc31370958488557fd86df5c67086",
+    "semantic_hash": "658bc31370958488557fd86df5c67086"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\logo-horisontale-rapia-dark_mode.webp": {
+    "mtime": 1785944673.5939825,
+    "ast_hash": "4921ec486ae0574fc09710d0fbfd942e",
+    "semantic_hash": "4921ec486ae0574fc09710d0fbfd942e"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\logo-horisontale-rapia-ligth_mode.png": {
+    "mtime": 1785944673.596982,
+    "ast_hash": "c91c7477096b38827955610e3f9cf349",
+    "semantic_hash": "c91c7477096b38827955610e3f9cf349"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\logo-horisontale-rapia-ligth_mode.webp": {
+    "mtime": 1785944673.599977,
+    "ast_hash": "e17fcb6b191b376b0ca1d174fb69e44a",
+    "semantic_hash": "e17fcb6b191b376b0ca1d174fb69e44a"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\next.svg": {
+    "mtime": 1785679779.8848748,
+    "ast_hash": "8e061864f388b47f33a1c3780831193e",
+    "semantic_hash": "8e061864f388b47f33a1c3780831193e"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\rapia-mark.svg": {
+    "mtime": 1785688028.4923837,
+    "ast_hash": "c29e66fb2bbaec5b899bd7bafea81229",
+    "semantic_hash": "c29e66fb2bbaec5b899bd7bafea81229"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\vercel.svg": {
+    "mtime": 1785679779.9299018,
+    "ast_hash": "c0af2f507b369b085b35ef4bbe3bcf1e",
+    "semantic_hash": "c0af2f507b369b085b35ef4bbe3bcf1e"
+  },
+  "C:\\Users\\RAPYOGO\\rapia\\public\\window.svg": {
+    "mtime": 1785679779.9878945,
+    "ast_hash": "a2760511c65806022ad20adf74370ff3",
+    "semantic_hash": "a2760511c65806022ad20adf74370ff3"
   }
 }
