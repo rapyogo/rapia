@@ -5,6 +5,7 @@
 
 import nodemailer from "nodemailer";
 import type { Transporter } from "nodemailer";
+import { COMPANY, legalLine } from "./company";
 
 // ---------------------------------------------------------------------------
 // Transporteur Nodemailer — singleton (créé une fois, recyclé par Vercel)
@@ -111,34 +112,33 @@ const BRAND = {
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ia.rapyogo.com";
 
 /**
- * Coordonnées légales de l'entreprise.
+ * Coordonnées légales de l'entreprise — importées de `lib/company.ts`.
  *
  * Elles ne sont pas décoratives : les filtres anti-spam accordent de la
  * confiance aux expéditeurs qui s'identifient physiquement, avec une adresse
  * et des identifiants vérifiables. Elles figurent donc dans chaque email.
+ *
+ * Le footer du site publie exactement les mêmes données. Elles ont été sorties
+ * d'ici pour cette raison : une adresse se corrige à un seul endroit.
  */
-const COMPANY = {
-  phone: "+243 856 474 500",
-  /** Format sans espaces ni ponctuation, requis par les liens `tel:`. */
-  phoneLink: "+243856474500",
-  email: "ia@rapyogo.com",
-  offices: [
-    { city: "Goma (siège)", address: "Av. Rwamichacha n° 30, Keshero" },
-    { city: "Kinshasa", address: "01, Av. OUA, Concession Procoki, Q. Basoko" },
-    { city: "Lubumbashi", address: "170, Av. Maniema, Q. Makutano" },
-  ],
-  legal: "RCCM : CD/GOM/RCCM/23-B-00261 · ID Nat : 19-H5300-N42287N · NIF : A2215930Q",
-} as const;
+
+/**
+ * Les emails sont en français uniquement — la mention « siège » y est donc
+ * écrite en dur, alors que le site la tire de ses fichiers de traduction.
+ */
+function officeLabel(office: (typeof COMPANY.offices)[number]): string {
+  return office.headquarters ? `${office.city} (siège)` : office.city;
+}
 
 /** Pied de page des versions texte — pendant du pied de page HTML. */
 const FOOTER_TEXT = [
-  `RapIA — un service de Rapyogo SARL`,
+  `${COMPANY.brand} — un service de ${COMPANY.legalName}`,
   `Conseil • Formation • Implémentation • Automatisation`,
   ``,
-  ...COMPANY.offices.map((o) => `${o.city} : ${o.address}`),
+  ...COMPANY.offices.map((o) => `${officeLabel(o)} : ${o.address}`),
   ``,
-  `Tél : ${COMPANY.phone} • E-mail : ${COMPANY.email} • Web : ia.rapyogo.com`,
-  `Rapyogo SARL — ${COMPANY.legal.replace(/ · /g, " | ")}`,
+  `Tél : ${COMPANY.phone} • E-mail : ${COMPANY.email} • Web : ${COMPANY.website}`,
+  `${COMPANY.legalName} — ${legalLine(" | ")}`,
 ].join("\n");
 
 /**
@@ -216,7 +216,7 @@ function emailLayout({
                   .map(
                     (o) => `
                 <tr>
-                  <td style="padding:0 12px 6px 0; font-family:${BRAND.font}; font-size:12px; font-weight:600; color:#CBD5E1; vertical-align:top; white-space:nowrap;">${escapeHtml(o.city)}</td>
+                  <td style="padding:0 12px 6px 0; font-family:${BRAND.font}; font-size:12px; font-weight:600; color:#CBD5E1; vertical-align:top; white-space:nowrap;">${escapeHtml(officeLabel(o))}</td>
                   <td style="padding:0 0 6px; font-family:${BRAND.font}; font-size:12px; line-height:1.5; color:#94A3B8; vertical-align:top;">${escapeHtml(o.address)}</td>
                 </tr>`
                   )
@@ -233,7 +233,7 @@ function emailLayout({
               </p>
 
               <p style="margin:0; padding-top:16px; border-top:1px solid #123044; font-family:${BRAND.font}; font-size:11px; line-height:1.6; color:#64748B;">
-                Rapyogo SARL &mdash; ${COMPANY.legal}<br>
+                ${COMPANY.legalName} &mdash; ${legalLine()}<br>
                 Vous recevez ce message parce que vous avez utilisé un formulaire sur ia.rapyogo.com.
               </p>
 

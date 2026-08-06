@@ -3,7 +3,6 @@
     "name": "RAPIA",
     "tagline": "Consulting. Training. Implementation. Automation.",
     "description": "RAPIA helps companies, organizations, and professionals integrate artificial intelligence into their operations.",
-    "location": "Democratic Republic of the Congo",
     "positioning": "Artificial intelligence that works for your organization."
   },
   "nav": {
@@ -230,6 +229,13 @@
     "servicesTitle": "Services",
     "aboutTitle": "Learn more",
     "contactTitle": "Contact",
+    "officesTitle": "Offices",
+    "serviceOf": "A service of",
+    "whyRapia": "Why RAPIA",
+    "visionLink": "Our vision",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone",
+    "headquarters": "head office",
     "copyright": "All rights reserved."
   },
   "vision": {
