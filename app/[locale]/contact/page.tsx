@@ -1,16 +1,20 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { ChoiceChips } from "@/components/ui/ChoiceChips";
 import { Card } from "@/components/ui/Card";
 import { Mail, CheckCircle, AlertCircle, ArrowLeft } from "lucide-react";
 
 type FormState = "idle" | "loading" | "success" | "error";
+
+/** Ce que le serveur a refusé — chaque cas appelle une consigne différente. */
+type ErrorKind = "generic" | "rateLimit" | "validation";
 
 type FormData = {
   name: string;
@@ -34,6 +38,22 @@ const initialFormData: FormData = {
   _website: "",
 };
 
+/**
+ * Miroir de `MAX_LENGTHS` dans app/api/contact/route.ts. Le serveur reste
+ * l'autorité — ces bornes évitent seulement au visiteur de rédiger un message
+ * qui sera refusé après coup.
+ */
+const MAX = {
+  name: 200,
+  organization: 200,
+  email: 320,
+  phone: 50,
+  message: 5000,
+} as const;
+
+/** Ordre de lecture du formulaire : détermine quel champ reçoit le focus. */
+const FIELD_ORDER = ["name", "organization", "email", "message"] as const;
+
 export default function ContactPage() {
   const t = useTranslations("contact");
   const locale = useLocale();
@@ -43,7 +63,19 @@ export default function ContactPage() {
 
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [formState, setFormState] = useState<FormState>("idle");
+  const [errorKind, setErrorKind] = useState<ErrorKind>("generic");
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
+
+  const fieldRefs = useRef<
+    Partial<Record<string, HTMLInputElement | HTMLTextAreaElement | null>>
+  >({});
+  const successRef = useRef<HTMLDivElement>(null);
+
+  // Le formulaire disparaît au succès : sans ce déplacement, le focus retombe
+  // sur <body> et un utilisateur au clavier perd sa position dans la page.
+  useEffect(() => {
+    if (formState === "success") successRef.current?.focus();
+  }, [formState]);
 
   const validate = (): boolean => {
     const newErrors: Partial<Record<keyof FormData, string>> = {};
@@ -64,6 +96,14 @@ export default function ContactPage() {
     }
 
     setErrors(newErrors);
+
+    // Signaler l'erreur ne suffit pas : sur mobile, le premier champ fautif est
+    // souvent hors écran. On y emmène le visiteur.
+    const firstInvalid = FIELD_ORDER.find((field) => newErrors[field]);
+    if (firstInvalid) {
+      fieldRefs.current[firstInvalid]?.focus();
+    }
+
     return Object.keys(newErrors).length === 0;
   };
 
@@ -81,11 +121,25 @@ export default function ContactPage() {
         body: JSON.stringify(formData),
       });
 
-      if (!res.ok) throw new Error("Erreur serveur");
+      if (!res.ok) {
+        // 429 et 400 appellent des gestes opposés : attendre, ou corriger.
+        // Les confondre sous « une erreur est survenue » pousse le visiteur à
+        // réessayer aussitôt, ce qui échoue à nouveau.
+        setErrorKind(
+          res.status === 429
+            ? "rateLimit"
+            : res.status === 400
+              ? "validation"
+              : "generic",
+        );
+        setFormState("error");
+        return;
+      }
 
       setFormState("success");
       setFormData(initialFormData);
     } catch {
+      setErrorKind("generic");
       setFormState("error");
     }
   };
@@ -99,7 +153,17 @@ export default function ContactPage() {
         return next;
       });
     }
+    // Une frappe après un échec signifie que le visiteur corrige : le bandeau
+    // rouge n'a plus lieu d'être affiché pendant qu'il retravaille sa saisie.
+    if (formState === "error") setFormState("idle");
   };
+
+  const errorMessage =
+    errorKind === "rateLimit"
+      ? t("errorRateLimit")
+      : errorKind === "validation"
+        ? t("errorValidation")
+        : t("errorBody");
 
   return (
     <>
@@ -128,9 +192,19 @@ export default function ContactPage() {
 
             {/* Success state */}
             {formState === "success" && (
-              <Card padding="lg" className="border-[var(--color-emerald)]/50 bg-[var(--color-emerald)]/5">
+              <Card
+                ref={successRef}
+                tabIndex={-1}
+                role="status"
+                padding="lg"
+                className="border-[var(--color-emerald)]/50 bg-[var(--color-emerald)]/5"
+              >
                 <div className="flex items-center gap-3 mb-3">
-                  <CheckCircle size={24} className="text-[var(--color-emerald)]" />
+                  <CheckCircle
+                    size={24}
+                    className="text-[var(--color-emerald-ink)]"
+                    aria-hidden="true"
+                  />
                   <h2 className="text-lg font-semibold text-[var(--color-text)]">
                     {t("successTitle")}
                   </h2>
@@ -158,17 +232,21 @@ export default function ContactPage() {
 
             {/* Error state */}
             {formState === "error" && (
-              <div className="mb-6 p-4 rounded-[var(--radius-md)] bg-[var(--color-error-bg)] text-[var(--color-error)] flex items-center gap-3">
-                <AlertCircle size={20} />
-                <p className="text-sm">
-                  {t("errorBody")}{" "}
-                  <a
-                    href={`mailto:${email}`}
-                    className="font-semibold underline"
-                  >
-                    {email}
-                  </a>
-                  .
+              <div
+                role="alert"
+                className="mb-6 flex items-start gap-3 rounded-[var(--radius-md)] bg-[var(--color-error-bg)] p-4 text-[var(--color-error)]"
+              >
+                <AlertCircle size={20} className="mt-0.5 shrink-0" aria-hidden="true" />
+                <p className="text-sm leading-6">
+                  {errorMessage}{" "}
+                  {errorKind !== "rateLimit" && (
+                    <>
+                      <a href={`mailto:${email}`} className="font-semibold underline">
+                        {email}
+                      </a>
+                      .
+                    </>
+                  )}
                 </p>
               </div>
             )}
@@ -201,6 +279,11 @@ export default function ContactPage() {
                     value={formData.name}
                     onChange={(e) => updateField("name", e.target.value)}
                     error={errors.name}
+                    maxLength={MAX.name}
+                    autoComplete="name"
+                    fieldRef={(el) => {
+                      fieldRefs.current.name = el;
+                    }}
                     required
                   />
                   <Input
@@ -210,6 +293,11 @@ export default function ContactPage() {
                     value={formData.organization}
                     onChange={(e) => updateField("organization", e.target.value)}
                     error={errors.organization}
+                    maxLength={MAX.organization}
+                    autoComplete="organization"
+                    fieldRef={(el) => {
+                      fieldRefs.current.organization = el;
+                    }}
                     required
                   />
                   <Input
@@ -220,6 +308,12 @@ export default function ContactPage() {
                     value={formData.email}
                     onChange={(e) => updateField("email", e.target.value)}
                     error={errors.email}
+                    maxLength={MAX.email}
+                    autoComplete="email"
+                    inputMode="email"
+                    fieldRef={(el) => {
+                      fieldRefs.current.email = el;
+                    }}
                     required
                   />
                   <Input
@@ -229,54 +323,28 @@ export default function ContactPage() {
                     placeholder={t("placeholders.phone")}
                     value={formData.phone}
                     onChange={(e) => updateField("phone", e.target.value)}
+                    maxLength={MAX.phone}
+                    autoComplete="tel"
+                    inputMode="tel"
+                    optionalLabel={t("optional")}
                   />
                 </div>
 
-                {/* Organization type */}
-                <fieldset>
-                  <legend className="text-sm font-medium text-[var(--color-text)] mb-3">
-                    {t("formLabels.orgType")}
-                  </legend>
-                  <div className="flex flex-wrap gap-2">
-                    {orgTypes.map((type) => (
-                      <button
-                        key={type}
-                        type="button"
-                        onClick={() => updateField("orgType", type)}
-                        className={`px-4 py-2 text-sm rounded-[var(--radius-md)] border transition-all duration-200 ${
-                          formData.orgType === type
-                            ? "border-[var(--color-indigo)] bg-[var(--color-indigo)]/10 text-[var(--color-indigo)] font-medium"
-                            : "border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-indigo)]/50"
-                        }`}
-                      >
-                        {type}
-                      </button>
-                    ))}
-                  </div>
-                </fieldset>
+                <ChoiceChips
+                  legend={t("formLabels.orgType")}
+                  options={orgTypes}
+                  value={formData.orgType}
+                  onChange={(value) => updateField("orgType", value)}
+                  optionalLabel={t("optional")}
+                />
 
-                {/* Need */}
-                <fieldset>
-                  <legend className="text-sm font-medium text-[var(--color-text)] mb-3">
-                    {t("question")}
-                  </legend>
-                  <div className="flex flex-wrap gap-2">
-                    {needs.map((need) => (
-                      <button
-                        key={need}
-                        type="button"
-                        onClick={() => updateField("need", need)}
-                        className={`px-4 py-2 text-sm rounded-[var(--radius-md)] border transition-all duration-200 ${
-                          formData.need === need
-                            ? "border-[var(--color-indigo)] bg-[var(--color-indigo)]/10 text-[var(--color-indigo)] font-medium"
-                            : "border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-indigo)]/50"
-                        }`}
-                      >
-                        {need}
-                      </button>
-                    ))}
-                  </div>
-                </fieldset>
+                <ChoiceChips
+                  legend={t("question")}
+                  options={needs}
+                  value={formData.need}
+                  onChange={(value) => updateField("need", value)}
+                  optionalLabel={t("optional")}
+                />
 
                 <Input
                   id="message"
@@ -286,6 +354,10 @@ export default function ContactPage() {
                   value={formData.message}
                   onChange={(e) => updateField("message", e.target.value)}
                   error={errors.message}
+                  maxLength={MAX.message}
+                  fieldRef={(el) => {
+                    fieldRefs.current.message = el;
+                  }}
                   required
                   rows={5}
                 />

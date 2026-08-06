@@ -147,9 +147,10 @@
   },
   "socialProof": {
     "eyebrow": "Preuves & crédibilité",
-    "heading": "Ils nous font confiance",
-    "subtitle": "Des organisations qui ont choisi d'intégrer l'IA avec RAPIA.",
+    "heading": "Ce que nous pouvons prouver, et ce qui reste à prouver.",
+    "intro": "RAPIA est une agence jeune. Plutôt que de remplir cette page de chiffres invérifiables, nous montrons exactement où nous en sommes — et ce que nous publierons dès que ce sera vrai.",
     "toConfirm": "[À CONFIRMER]",
+    "pending": "À venir",
     "emptyState": "Les chiffres seront publiés dès qu'ils seront vérifiés. Aucune donnée n'est inventée sur ce site.",
     "stats": [
       {"key": "projets", "label": "Projets livrés", "suffix": ""},
@@ -157,15 +158,22 @@
       {"key": "processus", "label": "Processus automatisés", "suffix": ""},
       {"key": "organisations", "label": "Organisations accompagnées", "suffix": ""}
     ],
-    "testimonialsLabel": "Témoignages",
-    "clientsLabel": "Clients",
-    "partnersLabel": "Partenaires",
-    "certificationsLabel": "Certifications"
+    "proofs": [
+      {"key": "testimonials", "label": "Témoignages", "body": "Le premier témoignage sera publié après notre première mission livrée, avec l'accord écrit du client."},
+      {"key": "clients", "label": "Clients", "body": "Aucun logo n'apparaîtra ici sans l'autorisation signée de l'organisation concernée."},
+      {"key": "partners", "label": "Partenaires", "body": "Les partenariats en cours de formalisation seront annoncés une fois les accords signés."},
+      {"key": "certifications", "label": "Certifications", "body": "Les certifications de l'équipe seront listées avec leur organisme émetteur et leur date d'obtention."}
+    ],
+    "ctaTitle": "Vous cherchez une agence qui ne surjoue pas ?",
+    "ctaBody": "Nous commençons par un diagnostic honnête de vos processus. S'il n'y a pas d'opportunité IA sérieuse chez vous, nous vous le disons.",
+    "ctaLabel": "Demander un diagnostic"
   },
   "content": {
     "heading": "Comprendre l'IA avant de l'adopter.",
     "subtitle": "Articles, analyses et ressources pour démystifier l'intelligence artificielle.",
     "categories": ["Intelligence artificielle", "Automatisation", "Agents IA", "Productivité", "Transformation numérique", "IA en Afrique", "Formation"],
+    "readMore": "Lire l'article",
+    "readingTime": "{minutes} min de lecture",
     "placeholder": true
   },
   "finalCta": {
@@ -211,6 +219,9 @@
     "successBody": "Merci pour votre message. Nous vous répondrons dans les 24h à l'adresse",
     "successConfirmation": "Vous allez recevoir un email de confirmation dans quelques instants.",
     "sendAnother": "Envoyer un autre message",
+    "optional": "(facultatif)",
+    "errorRateLimit": "Vous venez d'envoyer un message. Patientez une minute avant d'en envoyer un autre.",
+    "errorValidation": "Certaines informations n'ont pas été acceptées. Vérifiez vos réponses, puis renvoyez le formulaire — ou écrivez-nous à",
     "errorBody": "Une erreur est survenue lors de l'envoi. Veuillez réessayer ou nous contacter directement à",
     "sending": "Envoi en cours...",
     "directEmail": "Ou écrivez-nous directement à"

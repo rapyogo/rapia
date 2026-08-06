@@ -21,6 +21,13 @@
   --color-emerald: #10B881;
   --color-emerald-light: #1ED896;
 
+  /* Encres d'accent — versions assombries d'amber et emerald, reservees au TEXTE.
+     Amber (#F59E0B) et emerald (#10B881) plafonnent a ~2,2:1 sur fond clair :
+     lisibles en aplat de fond, illisibles en texte. Ces deux encres passent
+     4,5:1 sur les tuiles teintees a 10%, sans changer la couleur percue. */
+  --color-amber-ink: #7C4A03;
+  --color-emerald-ink: #05624A;
+
   /* Surfaces */
   --color-bg: #F8F9FB;
   --color-bg-alt: #F1F3F6;

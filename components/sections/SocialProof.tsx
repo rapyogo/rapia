@@ -2,18 +2,33 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import { Quote, Building2, Handshake, BadgeCheck } from "lucide-react";
+import {
+  Empty,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+  EmptyDescription,
+} from "@/components/ui/Empty";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
 
 /**
  * PREUVES & CRÉDIBILITÉ.
  *
  * **Aucun chiffre n'est inventé ici.** Chaque statistique est un emplacement
- * dont la valeur reste `null` tant qu'un chiffre vérifié n'a pas été fourni :
- * elle affiche alors un tiret et le marqueur « à confirmer », et n'anime rien.
- * Témoignages, clients, partenaires et certifications montrent un cadre vide
- * plutôt que des logos de remplissage.
+ * dont la valeur reste `null` tant qu'un chiffre vérifié n'a pas été fourni.
  *
- * Pour publier un chiffre : renseigner sa valeur dans `VALUES` ci-dessous.
+ * Pour publier un chiffre : renseigner sa valeur dans `VALUES` ci-dessous. La
+ * grille de statistiques n'apparaît qu'à partir du premier chiffre confirmé —
+ * quatre tuiles affichant un tiret ne prouvent rien et se lisent comme un
+ * gabarit oublié en production.
+ *
+ * Les quatre volets de preuve, eux, sont toujours rendus : ils nomment ce qui
+ * manque et la règle que RAPIA s'impose avant de le publier. Une absence
+ * expliquée soutient le positionnement « crédibilité par la clarté » ; un cadre
+ * vide le contredit.
  */
 const VALUES: Record<string, number | null> = {
   projets: null,
@@ -27,6 +42,15 @@ interface Stat {
   label: string;
   suffix: string;
 }
+
+interface Proof {
+  key: string;
+  label: string;
+  body: string;
+}
+
+/** Icônes mappées par index — jamais par libellé, celui-ci étant traduit. */
+const PROOF_ICONS = [Quote, Building2, Handshake, BadgeCheck];
 
 /** Compte une seule fois, à l'entrée dans le viewport. */
 function CountUp({ value, suffix }: { value: number; suffix: string }) {
@@ -74,8 +98,11 @@ function CountUp({ value, suffix }: { value: number; suffix: string }) {
 
 export function SocialProof() {
   const t = useTranslations("socialProof");
+  const locale = useLocale();
   const stats = t.raw("stats") as Stat[];
+  const proofs = t.raw("proofs") as Proof[];
   const hasAnyStat = stats.some((s) => VALUES[s.key] !== null);
+  const hasPendingStat = stats.some((s) => VALUES[s.key] === null);
 
   return (
     <section className="section section-alt" aria-label="Preuves et crédibilité">
@@ -90,67 +117,107 @@ export function SocialProof() {
           >
             {t("heading")}
           </h2>
+          <p className="mt-5 text-lg leading-8 text-[var(--color-text-secondary)]">
+            {t("intro")}
+          </p>
         </div>
 
-        <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {stats.map((stat, i) => {
-            const value = VALUES[stat.key] ?? null;
+        {hasAnyStat && (
+          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {stats.map((stat, i) => {
+              const value = VALUES[stat.key] ?? null;
+              return (
+                <motion.div
+                  key={stat.key}
+                  className="border-t border-[var(--color-border)] pt-5"
+                  initial={{ opacity: 0, y: 22 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.55, delay: i * 0.06 }}
+                >
+                  <div
+                    className="text-[var(--color-text)] tabular-nums font-bold"
+                    style={{ fontSize: "clamp(28px, 3vw, 40px)" }}
+                  >
+                    {value !== null ? (
+                      <CountUp value={value} suffix={stat.suffix} />
+                    ) : (
+                      <span className="text-[var(--color-text-muted)]">—</span>
+                    )}
+                  </div>
+                  <div className="mt-2 text-sm text-[var(--color-text-secondary)]">
+                    {stat.label}
+                  </div>
+                  {value === null && (
+                    <div className="mt-1 text-[0.6875rem] font-semibold tracking-[0.1em] text-[var(--color-amber-ink)]">
+                      {t("toConfirm")}
+                    </div>
+                  )}
+                </motion.div>
+              );
+            })}
+          </div>
+        )}
+
+        <div className="mt-12 grid gap-6 sm:grid-cols-2">
+          {proofs.map((proof, i) => {
+            const Icon = PROOF_ICONS[i] ?? Quote;
             return (
               <motion.div
-                key={stat.key}
-                className="border-t border-[var(--color-border)] pt-5"
-                initial={{ opacity: 0, y: 22 }}
+                key={proof.key}
+                initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.55, delay: i * 0.06 }}
+                transition={{ duration: 0.5, delay: i * 0.05 }}
               >
-                <div
-                  className="text-[var(--color-text)] tabular-nums font-bold"
-                  style={{ fontSize: "clamp(28px, 3vw, 40px)" }}
-                >
-                  {value !== null ? (
-                    <CountUp value={value} suffix={stat.suffix} />
-                  ) : (
-                    <span className="text-[var(--color-text-muted)]">—</span>
-                  )}
-                </div>
-                <div className="mt-2 text-sm text-[var(--color-text-secondary)]">
-                  {stat.label}
-                </div>
-                {value === null && (
-                  <div className="mt-1 text-[0.6875rem] font-semibold tracking-[0.1em] text-[var(--color-amber)]">
-                    {t("toConfirm")}
-                  </div>
-                )}
+                <Empty className="h-full">
+                  <EmptyHeader>
+                    <div className="flex items-center gap-3">
+                      <EmptyMedia variant="icon">
+                        <Icon size={18} strokeWidth={1.75} />
+                      </EmptyMedia>
+                      <EmptyTitle as="h3">{proof.label}</EmptyTitle>
+                      <Badge tone="amber" dot className="ml-auto">
+                        {t("pending")}
+                      </Badge>
+                    </div>
+                    <EmptyDescription>{proof.body}</EmptyDescription>
+                  </EmptyHeader>
+                </Empty>
               </motion.div>
             );
           })}
         </div>
 
-        <div className="mt-14 grid gap-6 border-t border-[var(--color-border)] pt-10 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            t("testimonialsLabel"),
-            t("clientsLabel"),
-            t("partnersLabel"),
-            t("certificationsLabel"),
-          ].map((label) => (
-            <div key={label}>
-              <h3 className="text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
-                {label}
-              </h3>
-              <div
-                className="mt-3 h-20 rounded-[var(--radius-md)] border border-dashed border-[var(--color-border)]"
-                aria-hidden="true"
-              />
-            </div>
-          ))}
-        </div>
-
-        {!hasAnyStat && (
+        {/* Cette mise au point n'a de sens qu'à côté de chiffres partiellement
+            publiés : elle explique les tirets restants. Tant qu'aucune
+            statistique n'existe, l'introduction le dit déjà — la répéter ici
+            ferait dire deux fois la même chose à deux endroits de la section. */}
+        {hasAnyStat && hasPendingStat && (
           <p className="mt-6 max-w-prose text-sm text-[var(--color-text-secondary)]">
             {t("emptyState")}
           </p>
         )}
+
+        {/* Callout de conversion — seul emploi autorisé du Deep Profond. */}
+        <div className="mt-12 rounded-[var(--radius-lg)] bg-[var(--color-deep)] px-6 py-8 md:px-10 md:py-10">
+          <div className="max-w-2xl">
+            <h3 className="text-xl font-bold leading-tight text-white md:text-2xl">
+              {t("ctaTitle")}
+            </h3>
+            <p className="mt-3 text-base leading-7 text-white/75">
+              {t("ctaBody")}
+            </p>
+            <Button
+              href={`/${locale}/contact`}
+              variant="secondary"
+              size="md"
+              className="mt-6"
+            >
+              {t("ctaLabel")}
+            </Button>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -147,9 +147,10 @@
   },
   "socialProof": {
     "eyebrow": "Proof & credibility",
-    "heading": "They trust us",
-    "subtitle": "Organizations that have chosen to integrate AI with RAPIA.",
+    "heading": "What we can prove, and what we can't prove yet.",
+    "intro": "RAPIA is a young agency. Rather than filling this page with figures nobody can check, we show exactly where we stand — and what we will publish the moment it becomes true.",
     "toConfirm": "[TO CONFIRM]",
+    "pending": "Pending",
     "emptyState": "Figures will be published once verified. No data on this site is invented.",
     "stats": [
       {"key": "projets", "label": "Projects delivered", "suffix": ""},
@@ -157,15 +158,22 @@
       {"key": "processus", "label": "Processes automated", "suffix": ""},
       {"key": "organisations", "label": "Organizations supported", "suffix": ""}
     ],
-    "testimonialsLabel": "Testimonials",
-    "clientsLabel": "Clients",
-    "partnersLabel": "Partners",
-    "certificationsLabel": "Certifications"
+    "proofs": [
+      {"key": "testimonials", "label": "Testimonials", "body": "The first testimonial will be published after our first delivered engagement, with the client's written consent."},
+      {"key": "clients", "label": "Clients", "body": "No logo will appear here without signed authorisation from the organization concerned."},
+      {"key": "partners", "label": "Partners", "body": "Partnerships currently being formalised will be announced once the agreements are signed."},
+      {"key": "certifications", "label": "Certifications", "body": "Team certifications will be listed with their issuing body and the date awarded."}
+    ],
+    "ctaTitle": "Looking for an agency that doesn't oversell?",
+    "ctaBody": "We start with an honest diagnostic of your processes. If there is no serious AI opportunity in your organization, we tell you so.",
+    "ctaLabel": "Request a diagnostic"
   },
   "content": {
     "heading": "Understand AI before adopting it.",
     "subtitle": "Articles, analysis, and resources to demystify artificial intelligence.",
     "categories": ["Artificial Intelligence", "Automation", "AI Agents", "Productivity", "Digital Transformation", "AI in Africa", "Training"],
+    "readMore": "Read the article",
+    "readingTime": "{minutes} min read",
     "placeholder": true
   },
   "finalCta": {
@@ -211,6 +219,9 @@
     "successBody": "Thank you for your message. We'll respond within 24 hours at",
     "successConfirmation": "You will receive a confirmation email shortly.",
     "sendAnother": "Send another message",
+    "optional": "(optional)",
+    "errorRateLimit": "You've just sent a message. Please wait a minute before sending another.",
+    "errorValidation": "Some of your answers weren't accepted. Check them, then submit the form again — or write to us at",
     "errorBody": "An error occurred while sending. Please try again or contact us directly at",
     "sending": "Sending...",
     "directEmail": "Or write to us directly at"
