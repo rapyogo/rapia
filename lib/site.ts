@@ -96,35 +96,55 @@ export const SIBLING_SERVICES = [
 ] as const;
 
 /**
+ * Identifiants de plateformes sociales. Sert de clé de correspondance avec les
+ * pictogrammes de `components/ui/social-icons.tsx` — **le nom affiché ne peut
+ * pas jouer ce rôle** : il change (« Twitter » → « X ») et rien ne garantit
+ * qu'il reste identique des deux côtés.
+ */
+export type SocialKey =
+  | "linkedin"
+  | "youtube"
+  | "tiktok"
+  | "facebook"
+  | "instagram"
+  | "x"
+  | "github";
+
+export type SocialPlatform = {
+  key: SocialKey;
+  /** Nom affiché — sert aussi de `aria-label` sur le lien en pictogramme. */
+  name: string;
+  url: string | null;
+};
+
+/**
  * Profils sociaux — la place est faite pour toutes les plateformes prévues,
  * même celles qui n'ont pas encore d'adresse.
  *
- * `url: null` = plateforme prévue, non publiée. Renseigner l'URL suffit : le
- * lien apparaît dans le pied de page **et** dans le `sameAs` du JSON-LD, sans
- * autre modification.
+ * `url: null` = plateforme prévue, non publiée. **Renseigner l'URL est le seul
+ * geste nécessaire** : le pictogramme apparaît dans le pied de page et l'URL
+ * part dans le `sameAs` du JSON-LD, sans toucher à un composant.
  *
- * **N'inscrire qu'une URL ouverte et vérifiée.** Un `sameAs` qui pointe vers un
- * profil inexistant affaiblit l'entité au lieu de la confirmer — c'est
- * pourquoi TikTok reste vide malgré la mention d'un compte « RapYOGO » dans
- * l'audit : TikTok répond 200 sur n'importe quel `@handle`, existant ou non,
- * et le compte n'a donc pas pu être confirmé.
+ * **N'inscrire qu'une URL ouverte et vérifiée.** Une icône qui ne mène nulle
+ * part est pire qu'une icône absente : elle promet une présence, et un `sameAs`
+ * mort affaiblit l'entité au lieu de la confirmer. C'est pourquoi TikTok reste
+ * vide malgré la mention d'un compte « RapYOGO » dans l'audit — TikTok répond
+ * 200 sur n'importe quel `@handle`, existant ou non, et le compte n'a donc pas
+ * pu être confirmé.
  */
-export const SOCIAL_PLATFORMS: readonly {
-  name: string;
-  url: string | null;
-}[] = [
-  { name: "LinkedIn", url: null },
-  { name: "YouTube", url: null },
-  { name: "TikTok", url: null },
-  { name: "Facebook", url: null },
-  { name: "Instagram", url: null },
-  { name: "X", url: null },
-  { name: "GitHub", url: "https://github.com/rapyogo" },
+export const SOCIAL_PLATFORMS: readonly SocialPlatform[] = [
+  { key: "linkedin", name: "LinkedIn", url: null },
+  { key: "youtube", name: "YouTube", url: null },
+  { key: "tiktok", name: "TikTok", url: null },
+  { key: "facebook", name: "Facebook", url: null },
+  { key: "instagram", name: "Instagram", url: null },
+  { key: "x", name: "X", url: null },
+  { key: "github", name: "GitHub", url: "https://github.com/rapyogo" },
 ];
 
 /** Les profils réellement publiables — ceux qui ont une URL. */
 export const SOCIALS = SOCIAL_PLATFORMS.filter(
-  (platform): platform is { name: string; url: string } =>
+  (platform): platform is SocialPlatform & { url: string } =>
     platform.url !== null,
 );
 
@@ -197,11 +217,8 @@ export const FOUNDER = {
   /** Ville d'origine. */
   birthPlace: "Bukavu",
   /**
-   * Organismes certificateurs.
-   *
-   * ⚠️ Ceux-ci viennent de l'**audit GEO**, pas de l'intéressé : sa biographie
-   * ne les mentionne pas. **À confirmer ou à retirer** — une certification
-   * annoncée et non détenue coûte plus cher que l'absence de la mention.
+   * Organismes certificateurs. Repérés par l'audit GEO, **confirmés par
+   * l'intéressé le 2026-08-07** : ils sont publiables tels quels.
    */
   certifications: ["Microsoft", "Anthropic"],
   /**

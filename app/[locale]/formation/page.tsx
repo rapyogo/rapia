@@ -6,6 +6,7 @@ import {
   BlockTitle,
   PageBody,
   PageCta,
+  PageFigure,
   PageHeader,
   PageShell,
 } from "@/components/layout/PageShell";
@@ -129,6 +130,16 @@ export default async function TrainingPage({
             ))}
           </div>
 
+          {/* Une salle de formation réelle, en ouverture : la page vend un
+              apprentissage en présence, elle doit le montrer avant de le
+              décrire. `priority` parce que l'image est au-dessus de la ligne
+              de flottaison sur les écrans de bureau. */}
+          <PageFigure
+            src="/images/photos/academy.webp"
+            priority
+            className="aspect-[3/2]"
+          />
+
           <div>
             <BlockTitle>{t("formatsTitle")}</BlockTitle>
             <ul className="mt-8 space-y-4">
@@ -174,6 +185,14 @@ export default async function TrainingPage({
               ))}
             </ul>
           </div>
+
+          {/* Les modalités parlent de terrain — connexion, déplacement,
+              locaux du client. Le visuel du contexte africain les précède
+              plutôt que de les illustrer après coup. */}
+          <PageFigure
+            src="/images/photos/contexte-africain.webp"
+            className="aspect-[3/2]"
+          />
 
           <div>
             <BlockTitle>{t("deliveryTitle")}</BlockTitle>

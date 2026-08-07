@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -64,6 +65,60 @@ export function PageBody({ children }: { children: React.ReactNode }) {
         {children}
       </div>
     </section>
+  );
+}
+
+/**
+ * Illustration en pleine largeur de la colonne de lecture.
+ *
+ * **`alt` est vide, et c'est délibéré.** Ces photographies n'apportent aucune
+ * information que le texte voisin ne donne déjà : le titre du service est juste
+ * au-dessus. Leur décrire le contenu ferait entendre à un lecteur d'écran une
+ * légende qui n'existe pour personne d'autre, et il faudrait la traduire, la
+ * maintenir, la resynchroniser à chaque remplacement de visuel. Une image
+ * décorative se déclare décorative. Si un jour une photo **porte** une
+ * information — un schéma, une capture — elle prendra un vrai `alt` et cessera
+ * de passer par ce composant.
+ *
+ * `sizes` est calé sur la colonne (`max-w-3xl`, 768 px) : sans lui, Next sert
+ * une image de pleine fenêtre à des gens dont la bande passante est la
+ * contrainte première (PRODUCT.md).
+ */
+export function PageFigure({
+  src,
+  priority = false,
+  className = "",
+}: {
+  src: string;
+  priority?: boolean;
+  className?: string;
+}) {
+  return (
+    <Image
+      src={src}
+      alt=""
+      aria-hidden="true"
+      width={768}
+      height={512}
+      sizes="(max-width: 768px) 100vw, 768px"
+      priority={priority}
+      className={`w-full rounded-[var(--radius-lg)] border border-[var(--color-border)] object-cover ${className}`}
+    />
+  );
+}
+
+/** Vignette carrée — repère visuel dans une liste, jamais un contenu. */
+export function PageThumb({ src }: { src: string }) {
+  return (
+    <Image
+      src={src}
+      alt=""
+      aria-hidden="true"
+      width={160}
+      height={160}
+      sizes="80px"
+      className="h-16 w-16 shrink-0 rounded-[var(--radius-md)] border border-[var(--color-border)] object-cover md:h-20 md:w-20"
+    />
   );
 }
 

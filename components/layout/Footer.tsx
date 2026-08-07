@@ -1,15 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { ExternalLink } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { COMPANY } from "@/lib/company";
-import { RECOGNITIONS, SOCIALS } from "@/lib/site";
+import { RECOGNITIONS } from "@/lib/site";
+import { SocialLinks } from "@/components/ui/social-icons";
 
 /**
  * Pied de page du site.
  *
- * Deux principes le gouvernent :
+ * Trois principes le gouvernent :
  *
  * - **Les coordonnées viennent de `lib/company.ts`**, le même module que les
  *   emails. Le site et les messages qu'il envoie disent donc exactement la même
@@ -17,6 +17,13 @@ import { RECOGNITIONS, SOCIALS } from "@/lib/site";
  * - **Rien n'est écrit en dur.** Un libellé codé en français apparaissait tel
  *   quel sur la version anglaise du site ; tout passe désormais par
  *   `messages/*.json`.
+ * - **Trois rangées, pas sept blocs.** Le pied de page empilait marque,
+ *   services, liens, contact, réseaux, implantations, distinctions et mentions
+ *   légales — huit sections superposées, chacune avec son titre en capitales,
+ *   qui donnaient à la fin du site le poids d'une page entière. Le contenu n'a
+ *   pas bougé, sa hiérarchie si : **navigation**, puis **où nous sommes et où
+ *   nous suivre**, puis **le légal**. Ce qui se lit rarement descend et
+ *   maigrit ; rien n'a été supprimé.
  *
  * Contraste : sur le fond Deep Profond (#001B2A), le blanc à 30 % plafonne à
  * 2,6:1 et à 40 % à 3,7:1 — sous le seuil AA de 4,5:1 exigé par PRODUCT.md.
@@ -43,21 +50,21 @@ export function Footer() {
   const recognitions = tAbout.raw("recognitions") as { title: string }[];
 
   const linkClass =
-    "text-sm text-white/65 hover:text-white transition-colors duration-200";
+    "text-sm text-white/65 transition-colors duration-200 hover:text-white";
   const columnTitleClass =
-    "text-xs font-semibold uppercase tracking-[0.1em] text-white/60 mb-5";
+    "mb-4 text-xs font-semibold uppercase tracking-[0.1em] text-white/60";
 
   return (
     <footer className="border-t border-white/10 bg-[var(--color-deep)] text-white">
       {/* La barre de navigation mobile est fixée en bas de l'écran : sans cette
           réserve, elle recouvre les mentions légales. */}
       <div className="container-site pt-16 pb-28 md:pt-20 md:pb-12">
-        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Marque */}
-          <div>
+        {/* Rangée 1 — marque et navigation */}
+        <div className="flex flex-col gap-12 md:flex-row md:justify-between md:gap-16">
+          <div className="max-w-xs">
             <a
               href={prefix}
-              className="mb-4 inline-flex items-center gap-2 text-xl font-bold text-white"
+              className="inline-flex items-center gap-2 text-xl font-bold text-white"
             >
               <Image
                 src="/icone-rapia_dark-mode.webp"
@@ -69,7 +76,7 @@ export function Footer() {
               />
               {tSite("name")}
             </a>
-            <p className="text-sm leading-relaxed text-white/65">
+            <p className="mt-4 text-sm leading-relaxed text-white/65">
               {tSite("tagline")}
             </p>
             <p className="mt-4 text-xs text-white/55">
@@ -77,182 +84,117 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Services */}
-          <div>
-            <h3 className={columnTitleClass}>{t("servicesTitle")}</h3>
-            <ul className="space-y-2.5">
-              {items.map((item) => (
-                <li key={item.title}>
-                  <a href={`${prefix}/services#${item.id}`} className={linkClass}>
-                    {item.title}
+          <nav
+            aria-label={t("servicesTitle")}
+            className="grid flex-1 grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 md:max-w-2xl"
+          >
+            <div>
+              <h3 className={columnTitleClass}>{t("servicesTitle")}</h3>
+              <ul className="space-y-2.5">
+                {items.map((item) => (
+                  <li key={item.id}>
+                    <a
+                      href={`${prefix}/services#${item.id}`}
+                      className={linkClass}
+                    >
+                      {item.title}
+                    </a>
+                  </li>
+                ))}
+                <li>
+                  <a href={`${prefix}/formation`} className={linkClass}>
+                    {t("trainingLink")}
                   </a>
                 </li>
-              ))}
-              <li>
-                <a href={`${prefix}/services`} className={linkClass}>
-                  {t("servicesPageLink")}
-                </a>
-              </li>
-              <li>
-                <a href={`${prefix}/formation`} className={linkClass}>
-                  {t("trainingLink")}
-                </a>
-              </li>
-            </ul>
-          </div>
+              </ul>
+            </div>
 
-          {/* En savoir plus */}
-          <div>
-            <h3 className={columnTitleClass}>{t("aboutTitle")}</h3>
-            <ul className="space-y-2.5">
-              <li>
-                <a href={`${prefix}/a-propos`} className={linkClass}>
-                  {t("aboutLink")}
-                </a>
-              </li>
-              <li>
-                <a href={`${prefix}/faq`} className={linkClass}>
-                  {t("faqLink")}
-                </a>
-              </li>
-              <li>
-                <a href={`${prefix}/#why-rapia`} className={linkClass}>
-                  {t("whyRapia")}
-                </a>
-              </li>
-              <li>
-                <a href={`${prefix}/notre-vision`} className={linkClass}>
-                  {t("visionLink")}
-                </a>
-              </li>
-              <li>
-                <a href={`${prefix}/#academy`} className={linkClass}>
-                  RAPIA Academy
-                </a>
-              </li>
-              <li>
-                <a href={`${prefix}/contact`} className={linkClass}>
-                  {tNav("contact")}
-                </a>
-              </li>
-            </ul>
-          </div>
+            <div>
+              <h3 className={columnTitleClass}>{t("aboutTitle")}</h3>
+              <ul className="space-y-2.5">
+                <li>
+                  <a href={`${prefix}/a-propos`} className={linkClass}>
+                    {t("aboutLink")}
+                  </a>
+                </li>
+                <li>
+                  <a href={`${prefix}/notre-vision`} className={linkClass}>
+                    {t("visionLink")}
+                  </a>
+                </li>
+                <li>
+                  <a href={`${prefix}/#why-rapia`} className={linkClass}>
+                    {t("whyRapia")}
+                  </a>
+                </li>
+                <li>
+                  <a href={`${prefix}/faq`} className={linkClass}>
+                    {t("faqLink")}
+                  </a>
+                </li>
+              </ul>
+            </div>
 
-          {/* Contact direct */}
-          <div>
-            <h3 className={columnTitleClass}>{t("contactTitle")}</h3>
-            <ul className="space-y-3">
-              <li>
-                <span className="block text-xs text-white/55">
-                  {t("emailLabel")}
-                </span>
-                <a
-                  href={`mailto:${COMPANY.email}`}
-                  className="text-sm text-white hover:text-[var(--color-amber)] transition-colors duration-200"
-                >
-                  {COMPANY.email}
-                </a>
-              </li>
-              <li>
-                <span className="block text-xs text-white/55">
-                  {t("phoneLabel")}
-                </span>
-                <a
-                  href={`tel:${COMPANY.phoneLink}`}
-                  className="text-sm text-white hover:text-[var(--color-amber)] transition-colors duration-200"
-                >
-                  {COMPANY.phone}
-                </a>
-              </li>
-            </ul>
-
-            {/* Liens sortants — l'audit GEO relevait zéro lien externe sur tout
-                le site. Les mentions existaient (GitHub, distinction GoGettaz)
-                mais rien ne les reliait à la marque : ni un lecteur ni un
-                moteur ne pouvait faire le rapprochement. */}
-            {SOCIALS.length > 0 && (
-              <>
-                <h3 className={`${columnTitleClass} mt-8`}>
-                  {t("followTitle")}
-                </h3>
-                <ul className="space-y-2.5">
-                  {SOCIALS.map((social) => (
-                    <li key={social.name}>
-                      <a
-                        href={social.url}
-                        target="_blank"
-                        rel="noopener noreferrer me"
-                        className={`${linkClass} inline-flex items-center gap-1.5`}
-                      >
-                        {social.name}
-                        <ExternalLink size={13} aria-hidden="true" />
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </>
-            )}
-          </div>
+            <div>
+              <h3 className={columnTitleClass}>{t("contactTitle")}</h3>
+              <ul className="space-y-2.5">
+                <li>
+                  <a href={`mailto:${COMPANY.email}`} className={linkClass}>
+                    {COMPANY.email}
+                  </a>
+                </li>
+                <li>
+                  <a href={`tel:${COMPANY.phoneLink}`} className={linkClass}>
+                    {COMPANY.phone}
+                  </a>
+                </li>
+                <li>
+                  <a href={`${prefix}/contact`} className={linkClass}>
+                    {tNav("contact")}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </nav>
         </div>
 
-        {/* Implantations */}
-        <div className="mt-14 border-t border-white/10 pt-10">
-          <h3 className={columnTitleClass}>{t("officesTitle")}</h3>
-          <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Rangée 2 — où nous sommes, où nous suivre.
+            Les implantations tenaient une section à elles seules, titre
+            compris, pour trois lignes d'adresse. Elles partagent désormais la
+            rangée des réseaux : deux informations de même nature — comment
+            nous atteindre — sur la même ligne. */}
+        <div className="mt-14 flex flex-col gap-6 border-t border-white/10 pt-8 md:flex-row md:items-center md:justify-between">
+          <ul className="flex flex-col gap-x-8 gap-y-2 text-xs leading-relaxed text-white/55 sm:flex-row sm:flex-wrap">
             {COMPANY.offices.map((office) => (
               <li key={office.city}>
-                <p className="text-sm font-semibold text-white">
+                <span className="font-semibold text-white/80">
                   {office.city}
-                  {office.headquarters && (
-                    <span className="ml-2 text-xs font-medium text-[var(--color-amber)]">
-                      {t("headquarters")}
-                    </span>
-                  )}
-                </p>
-                <p className="mt-1 text-sm leading-relaxed text-white/65">
-                  {office.address}
-                </p>
+                </span>
+                {/* Parenthèses reconstruites ici : la clé ne porte que le mot
+                    (« siège » / « head office »), comme `officeLabel()` côté
+                    emails. La ponctuation n'est pas de la traduction. */}
+                {office.headquarters && (
+                  <span className="ml-1.5 text-[var(--color-amber)]">
+                    ({t("headquarters")})
+                  </span>
+                )}
+                <span className="ml-1.5">{office.address}</span>
               </li>
             ))}
           </ul>
+
+          {/* Les icônes ne s'affichent que pour les plateformes dont l'URL est
+              renseignée dans SOCIAL_PLATFORMS (lib/site.ts). Rien à modifier
+              ici le jour où un profil ouvre. */}
+          <SocialLinks className="-ml-3 shrink-0 md:ml-0 md:-mr-3" />
         </div>
 
-        {/* Distinctions — la seule preuve de crédibilité vérifiable par un
-            tiers que RAPIA possède aujourd'hui, et qui n'était nulle part sur
-            le site. Chaque entrée renvoie à sa source : elle se vérifie sans
-            nous croire sur parole. */}
-        {recognitions.length > 0 && (
-          <div className="mt-12 border-t border-white/10 pt-10">
-            <h3 className={columnTitleClass}>{t("recognitionLabel")}</h3>
-            <ul className="flex flex-wrap gap-3">
-              {recognitions.map((recognition, i) => {
-                // Mappé par index : le titre est traduit, il ne peut pas
-                // servir de clé de correspondance avec `RECOGNITIONS`.
-                const source = RECOGNITIONS[i];
-                if (!source) return null;
-                return (
-                  <li key={recognition.title}>
-                    <a
-                      href={source.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-[var(--radius-md)] border border-white/20 px-4 py-2.5 text-sm text-white/80 transition-colors duration-200 hover:border-[var(--color-amber)] hover:text-white"
-                    >
-                      <span className="font-medium">{recognition.title}</span>
-                      {source.year && (
-                        <span className="text-white/55">{source.year}</span>
-                      )}
-                      <ExternalLink size={13} aria-hidden="true" />
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        )}
-
-        {/* Mentions légales */}
-        <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-8 md:flex-row md:items-center md:justify-between">
+        {/* Rangée 3 — le légal, et les distinctions ramenées à des liens.
+            Elles étaient présentées en cartouches bordés, du poids d'un bouton
+            d'action : trois fausses cibles principales en bas de page. Elles
+            restent vérifiables — chacune renvoie au site de l'organisme — mais
+            à leur juste rang typographique. */}
+        <div className="mt-8 flex flex-col gap-5 border-t border-white/10 pt-8 md:flex-row md:items-start md:justify-between">
           <p className="text-xs leading-relaxed text-white/55">
             {COMPANY.legalName}
             {COMPANY.registrations.map((reg) => (
@@ -266,10 +208,33 @@ export function Footer() {
                 {reg.value}
               </span>
             ))}
-          </p>
-          <p className="shrink-0 text-xs text-white/55">
+            {" · "}
             &copy; {new Date().getFullYear()} {tSite("name")}. {t("copyright")}
           </p>
+
+          {recognitions.length > 0 && (
+            <ul className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-white/55 md:shrink-0 md:justify-end">
+              {recognitions.map((recognition, i) => {
+                // Mappé par index : le titre est traduit, il ne peut pas
+                // servir de clé de correspondance avec `RECOGNITIONS`.
+                const source = RECOGNITIONS[i];
+                if (!source) return null;
+                return (
+                  <li key={recognition.title}>
+                    <a
+                      href={source.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="transition-colors duration-200 hover:text-white"
+                    >
+                      {recognition.title}
+                      {source.year && <span> {source.year}</span>}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </div>
       </div>
     </footer>

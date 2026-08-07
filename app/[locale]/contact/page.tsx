@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/Input";
 import { ChoiceChips } from "@/components/ui/ChoiceChips";
 import { Card } from "@/components/ui/Card";
 import { Mail, CheckCircle, AlertCircle, ArrowLeft } from "lucide-react";
+import { COMPANY } from "@/lib/company";
 
 type FormState = "idle" | "loading" | "success" | "error";
 
@@ -57,7 +58,15 @@ const FIELD_ORDER = ["name", "organization", "email", "message"] as const;
 export default function ContactPage() {
   const t = useTranslations("contact");
   const locale = useLocale();
-  const email = t("email");
+  /**
+   * L'adresse affichée est celle d'où partent réellement les emails
+   * (`lib/company.ts`), pas une clé de traduction. La page en affichait une
+   * autre — `contact@rapyogo.com` — pendant que le pied de page, juste en
+   * dessous, publiait `ia@rapyogo.com` : deux adresses sur le même écran, dont
+   * une seule relevait ses messages. Une adresse e-mail n'est pas de la copy :
+   * elle ne se traduit pas et ne se duplique pas.
+   */
+  const email = COMPANY.email;
   const orgTypes = t.raw("orgTypes") as string[];
   const needs = t.raw("needs") as string[];
 

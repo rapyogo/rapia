@@ -6,8 +6,10 @@ import {
   BlockTitle,
   PageBody,
   PageCta,
+  PageFigure,
   PageHeader,
   PageShell,
+  PageThumb,
 } from "@/components/layout/PageShell";
 import { breadcrumb, graph, webPage } from "@/lib/schema";
 import { ogImage, siteUrl } from "@/lib/site";
@@ -63,6 +65,22 @@ type Detail = {
   forWhom: string;
 };
 type Step = { title: string; description: string };
+
+/**
+ * Les visuels des étapes de méthode, dans l'ordre du parcours.
+ *
+ * Mappés **par index** : les titres d'étapes sont traduits et ne peuvent pas
+ * servir de clé. Le tableau peut être plus court que la liste d'étapes — une
+ * étape sans visuel s'affiche alors sans vignette, plutôt que de faire tomber
+ * la page. Les visuels des services, eux, se déduisent de l'`id` (non traduit)
+ * et n'ont besoin d'aucune table de correspondance.
+ */
+const METHOD_PHOTOS = [
+  "/images/photos/methode-1-comprendre.webp",
+  "/images/photos/methode-2-identifier.webp",
+  "/images/photos/methode-3-construire.webp",
+  "/images/photos/methode-4-former.webp",
+];
 
 export default async function ServicesPage({
   params,
@@ -125,6 +143,16 @@ export default async function ServicesPage({
             if (!service) return null;
             return (
               <article key={detail.id} id={detail.id}>
+                {/* Le nom du fichier suit l'`id` du service, qui n'est pas
+                    traduit : ajouter un service revient à déposer une photo au
+                    même nom, sans toucher à ce composant. La première est
+                    chargée en priorité — c'est elle que voit un visiteur qui
+                    arrive en haut de page. */}
+                <PageFigure
+                  src={`/images/photos/service-${detail.id}.webp`}
+                  priority={detail.id === details[0]?.id}
+                  className="mb-8 aspect-[3/2]"
+                />
                 <BlockTitle>{service.title}</BlockTitle>
                 <p className="mt-4 leading-relaxed text-[var(--color-text-secondary)]">
                   {service.description}
@@ -177,16 +205,19 @@ export default async function ServicesPage({
               {steps.map((step, index) => (
                 <li
                   key={step.title}
-                  className="flex gap-5 bg-[var(--color-surface)] p-6"
+                  className="flex items-start gap-5 bg-[var(--color-surface)] p-6"
                 >
-                  <span
-                    aria-hidden="true"
-                    className="shrink-0 text-sm font-bold tabular-nums text-[var(--color-indigo)]"
-                  >
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
+                  {METHOD_PHOTOS[index] && (
+                    <PageThumb src={METHOD_PHOTOS[index]} />
+                  )}
                   <div>
-                    <p className="font-bold text-[var(--color-text)]">
+                    <p className="flex items-baseline gap-2.5 font-bold text-[var(--color-text)]">
+                      <span
+                        aria-hidden="true"
+                        className="text-sm tabular-nums text-[var(--color-indigo)]"
+                      >
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
                       {step.title}
                     </p>
                     <p className="mt-1.5 leading-relaxed text-[var(--color-text-secondary)]">

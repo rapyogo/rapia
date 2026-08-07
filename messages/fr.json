@@ -346,7 +346,6 @@
   "contact": {
     "heading": "Parlons de votre projet",
     "subtitle": "Dites-nous ce que vous souhaitez améliorer grâce à l'IA. Nous vous répondons sous 24h.",
-    "email": "contact@rapyogo.com",
     "question": "Que souhaitez-vous améliorer grâce à l'IA ?",
     "submitCta": "Envoyer ma demande",
     "formLabels": {
@@ -406,19 +405,13 @@
     "servicesTitle": "Services",
     "aboutTitle": "En savoir plus",
     "contactTitle": "Contact",
-    "officesTitle": "Implantations",
     "serviceOf": "Un service de",
     "whyRapia": "Pourquoi RAPIA",
     "visionLink": "Notre vision",
-    "emailLabel": "E-mail",
-    "phoneLabel": "Téléphone",
     "headquarters": "siège",
     "copyright": "Tous droits réservés.",
     "aboutLink": "À propos",
     "faqLink": "FAQ",
-    "followTitle": "Nous suivre",
-    "recognitionLabel": "Distinction",
-    "servicesPageLink": "Tous nos services",
     "trainingLink": "RAPIA Academy"
   },
   "vision": {
