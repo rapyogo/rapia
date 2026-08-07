@@ -37,8 +37,8 @@ export function ForWhom() {
       <div className="container-site">
         <motion.div
           className="text-center max-w-2xl mx-auto mb-16"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
         >
@@ -61,10 +61,10 @@ export function ForWhom() {
               <motion.div
                 key={audience.title}
                 className={`bg-[var(--color-surface)] border border-[var(--color-border)] rounded-[var(--radius-lg)] overflow-hidden flex flex-col group transition-all duration-300 ${audienceAccents[i]} hover:shadow-[var(--shadow-md)] hover:-translate-y-1`}
-                initial={{ opacity: 0, y: 32 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+                transition={{ duration: 0.5 }}
               >
                 <div className="relative aspect-[4/5] w-full overflow-hidden bg-[var(--color-bg-alt)]">
                   <Image

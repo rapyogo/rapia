@@ -81,7 +81,12 @@ function StoryAct({
           `/images/${slug}/frame-${String(i).padStart(3, "0")}.webp`
         }
         scrollLength={2.8}
-        scrollLengthMobile={2.2}
+        // 2,2 sur mobile portait la landing à 38 écrans de haut : quatre actes
+        // qui demandent chacun deux pouces de défilement, sur un appareil où le
+        // geste est court et l'attention aussi. À 1,5 le récit garde ses
+        // paliers — trois chapitres par acte — et se traverse deux fois plus
+        // vite. Le contenu est identique ; seule la course change.
+        scrollLengthMobile={1.5}
         aria-label={ariaLabel}
         className="relative text-white"
       >
@@ -89,10 +94,13 @@ function StoryAct({
         <ParallaxFond variant={fondVariant} />
         <ParallaxFormes side={formesSide} />
 
-        {/* Voile de lisibilité — aplat uni, pas un dégradé décoratif */}
+        {/* Voile de lisibilité — aplat uni, pas un dégradé décoratif.
+            Plus dense sur mobile : l'image y est recadrée en « cover » sur une
+            colonne étroite, donc beaucoup plus détaillée par unité de surface.
+            À 70 %, le titre passait derrière les lignes de code du décor. */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 z-30 bg-[var(--color-deep)]/70"
+          className="absolute inset-0 z-30 bg-[var(--color-deep)]/80 md:bg-[var(--color-deep)]/70"
         />
 
         {chapters.map((ch, i) => (
@@ -132,7 +140,10 @@ function Line({ children }: { children: React.ReactNode }) {
 
 function Sub({ children }: { children: React.ReactNode }) {
   return (
-    <p className="mt-6 text-white/60 text-base md:text-lg leading-relaxed">
+    // 60 % de blanc sur le Deep Profond plafonne à ~4,4:1, sous le seuil AA de
+    // 4,5:1 que PRODUCT.md impose. 72 % passe à 6,1:1 — la nuance visuelle est
+    // à peine perceptible, la conformité ne l'est pas.
+    <p className="mt-6 text-white/72 text-base md:text-lg leading-relaxed">
       {children}
     </p>
   );

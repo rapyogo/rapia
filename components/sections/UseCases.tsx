@@ -39,8 +39,8 @@ export function UseCases() {
       <div className="container-site">
         <motion.div
           className="max-w-2xl mb-16"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
         >
@@ -61,10 +61,10 @@ export function UseCases() {
             <motion.div
               key={c.sector}
               className={`bg-[var(--color-surface)] rounded-[var(--radius-lg)] border border-[var(--color-border)] ${sectorAccents[i]} border-l-[3px] overflow-hidden group hover:shadow-[var(--shadow-md)] transition-all duration-300`}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
+              transition={{ duration: 0.4 }}
             >
               <div className="relative aspect-square w-full overflow-hidden bg-[var(--color-bg-alt)]">
                 <Image

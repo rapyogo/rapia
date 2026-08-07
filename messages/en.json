@@ -17,7 +17,8 @@
     "languageEn": "English",
     "switchTo": "Passer en français",
     "skipToContent": "Skip to main content",
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "secondaryMenu": "Secondary menu"
   },
   "hero": {
     "eyebrow": "ARTIFICIAL INTELLIGENCE AGENCY | DRC",
@@ -416,7 +417,9 @@
     "aboutLink": "About",
     "faqLink": "FAQ",
     "followTitle": "Follow us",
-    "recognitionLabel": "Recognition"
+    "recognitionLabel": "Recognition",
+    "servicesPageLink": "All our services",
+    "trainingLink": "RAPIA Academy"
   },
   "vision": {
     "back": "Back",
@@ -646,5 +649,113 @@
     "ctaTitle": "Your question isn't here?",
     "ctaBody": "Ask it directly. We answer precise questions with a precise answer, not with a brochure.",
     "ctaButton": "Ask your question"
+  },
+  "servicesPage": {
+    "metaTitle": "Services — AI consulting, training, implementation, automation",
+    "metaDescription": "RAPIA's four services in detail: what each one solves, what it actually delivers, who it is for and how it runs. Goma, Kinshasa, Lubumbashi.",
+    "eyebrow": "Services",
+    "heading": "Four ways into the subject",
+    "subtitle": "Most organisations don't need all four. They need the one that unblocks their situation — and to know which one that is.",
+    "back": "Back to home",
+    "intro": [
+      "An AI engagement is easy to sell and hard to deliver. The difference rarely comes down to technology: it comes down to what was understood about the real work before starting.",
+      "So here, for each service, is what it solves, what you get at the end, and who it is for. If your situation fits none of these boxes, tell us: that is useful information, not a problem."
+    ],
+    "labelProblem": "The problem it solves",
+    "labelDelivers": "What you get",
+    "labelForWhom": "Who it is for",
+    "items": [
+      {
+        "id": "conseil",
+        "problem": "Everyone in the organisation is talking about AI and nobody knows where to start. Initiatives head off in four directions, none lands, and management ends up concluding that \"it doesn't work here\".",
+        "delivers": [
+          "A map of your processes, with the time each one actually consumes",
+          "The list of tasks where AI changes something — and those where it adds nothing",
+          "A roadmap costed in effort, ordered by expected gain",
+          "The risks identified: sensitive data, dependencies, points of failure"
+        ],
+        "forWhom": "Executive management, operations directors, programme coordination. Any organisation that has to weigh a budget before spending it."
+      },
+      {
+        "id": "formation",
+        "problem": "The tools are there, the accounts are open, and teams use them like a search engine. The gap between what AI can do and what it is asked to do stays exactly where it was.",
+        "delivers": [
+          "Sessions built on your own files, not on generic examples",
+          "Written working methods, reusable after the trainer leaves",
+          "A separate level for executives and for operational teams",
+          "A remote check-in after the training"
+        ],
+        "forWhom": "Administrative, finance, HR, communications and coordination teams. Executives who must decide without being technicians."
+      },
+      {
+        "id": "implementation",
+        "problem": "A public assistant knows neither your procedures, nor your contracts, nor your history. Every answer has to be reworked by hand, and the time saved is lost again in checking.",
+        "delivers": [
+          "An assistant connected to your documents and data, with its sources cited",
+          "A documented architecture: which data goes where, and why",
+          "Recovery after a dropped connection, designed in from the start",
+          "Handover to your team, or maintenance if you prefer"
+        ],
+        "forWhom": "Organisations with real document volume: NGOs, professional firms, institutions, companies with written procedures."
+      },
+      {
+        "id": "automatisation",
+        "problem": "Tasks nobody claims eat entire days: re-entry, sorting, chasing, formatting, consolidating reports. They appear in no job description and cost the most.",
+        "delivers": [
+          "Agents that carry out a complete process, under human supervision",
+          "The checkpoints where a human approves before anything goes out",
+          "A log of what was done, auditable after the fact",
+          "Staged deployment, starting with the most expensive process"
+        ],
+        "forWhom": "Organisations that have already connected their data and want to move from assistance to execution."
+      }
+    ],
+    "methodTitle": "How an engagement runs",
+    "methodBody": "Four stages, in this order, whichever service you pick. The first is never billed blind: until we have understood your situation, we don't know what we are selling.",
+    "ctaTitle": "Not sure which one applies to you?",
+    "ctaBody": "That is the most common case, and it is exactly what the first conversation settles. An hour is enough.",
+    "ctaButton": "Talk about your situation"
+  },
+  "trainingPage": {
+    "metaTitle": "RAPIA Academy — AI training for executives and teams",
+    "metaDescription": "Artificial intelligence training in the DRC: fundamentals, generative AI, automation, AI agents, AI for executives and for NGOs. Sessions built on your own files.",
+    "eyebrow": "RAPIA Academy",
+    "heading": "Training the people who will work with AI",
+    "subtitle": "An organisation does not become more effective because it bought licences. It becomes effective when its teams know what to do with them.",
+    "back": "Back to home",
+    "intro": [
+      "Most AI training runs on invented examples: drafting a fictional letter, summarising an article nobody cares about. Participants leave impressed and change nothing about their Monday.",
+      "Our sessions start from your real files. What gets produced during the training is work you will not have to do afterwards — the only indicator that strikes us as serious."
+    ],
+    "formatsTitle": "Three formats, three audiences",
+    "formats": [
+      {
+        "title": "Executives",
+        "description": "Knowing how to decide: where to invest, which risks to accept, how to measure a result, and how to recognise a provider selling hot air.",
+        "audience": "Executive management, boards, programme leads"
+      },
+      {
+        "title": "Operational teams",
+        "description": "Knowing how to do it, on your own files. Every participant leaves with written methods that apply to their post — not with notes.",
+        "audience": "Administration, finance, HR, communications, monitoring and evaluation"
+      },
+      {
+        "title": "Bespoke",
+        "description": "A programme built from a specific need — a trade, a tool, a process. The content is decided after a conversation, not before.",
+        "audience": "Organisations with a particular constraint or profession"
+      }
+    ],
+    "catalogTitle": "What we teach",
+    "catalogIntro": "Modules combine according to the group's level. A typical path runs from two to five half-days.",
+    "deliveryTitle": "How it runs",
+    "deliveryItems": [
+      "On site in Goma, Kinshasa or Lubumbashi, or remotely — the hands-on stages benefit from being in the same room.",
+      "In French or English, the group's choice.",
+      "Small groups: beyond a dozen participants, nobody practises any more.",
+      "A remote check-in a few weeks later, to see what held and what gave way."
+    ],
+    "ctaTitle": "Train your team",
+    "ctaBody": "Tell us who needs training and on what. We come back with a programme, a duration and a price — not with a brochure.",
+    "ctaButton": "Request a programme"
   }
 }

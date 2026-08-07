@@ -20,8 +20,8 @@ export function WhyRapia() {
       <div className="container-site">
         <motion.div
           className="max-w-2xl mb-16"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
         >
@@ -49,10 +49,10 @@ export function WhyRapia() {
               <motion.div
                 key={arg.title}
                 className="group bg-[var(--color-surface)] border border-[var(--color-border)] rounded-[var(--radius-lg)] p-6 hover:border-[var(--color-indigo)]/30 hover:shadow-[var(--shadow-md)] transition-all duration-300"
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, delay: i * 0.07 }}
+                transition={{ duration: 0.4 }}
               >
                 <div className="w-10 h-10 rounded-[var(--radius-md)] bg-[var(--color-deep)]/5 text-[var(--color-deep)] flex items-center justify-center mb-4">
                   <Icon size={18} />

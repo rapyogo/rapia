@@ -17,7 +17,8 @@
     "languageEn": "English",
     "switchTo": "Switch to English",
     "skipToContent": "Aller au contenu principal",
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "secondaryMenu": "Menu secondaire"
   },
   "hero": {
     "eyebrow": "AGENCE D'INTELLIGENCE ARTIFICIELLE | RDC",
@@ -416,7 +417,9 @@
     "aboutLink": "À propos",
     "faqLink": "FAQ",
     "followTitle": "Nous suivre",
-    "recognitionLabel": "Distinction"
+    "recognitionLabel": "Distinction",
+    "servicesPageLink": "Tous nos services",
+    "trainingLink": "RAPIA Academy"
   },
   "vision": {
     "back": "Retour",
@@ -646,5 +649,113 @@
     "ctaTitle": "Votre question n'y est pas ?",
     "ctaBody": "Posez-la directement. Nous répondons aux questions précises par une réponse précise, pas par une plaquette.",
     "ctaButton": "Poser votre question"
+  },
+  "servicesPage": {
+    "metaTitle": "Services — conseil, formation, implémentation, automatisation IA",
+    "metaDescription": "Les quatre prestations de RAPIA en détail : ce que chacune résout, ce qu’elle livre concrètement, à qui elle s’adresse et comment elle se déroule. Goma, Kinshasa, Lubumbashi.",
+    "eyebrow": "Services",
+    "heading": "Quatre façons d’entrer dans le sujet",
+    "subtitle": "La plupart des organisations n’ont pas besoin des quatre. Elles ont besoin de celle qui débloque leur situation — et de savoir laquelle.",
+    "back": "Retour à l’accueil",
+    "intro": [
+      "Une prestation d’IA se vend facilement et se livre difficilement. La différence tient rarement à la technologie : elle tient à ce qu’on a compris du travail réel avant de commencer.",
+      "Voici donc, pour chaque service, ce qu’il résout, ce que vous recevez à la fin, et à qui il s’adresse. Si votre situation n’entre dans aucune de ces cases, dites-le nous : c’est une information utile, pas un problème."
+    ],
+    "labelProblem": "Le problème qu’il résout",
+    "labelDelivers": "Ce que vous recevez",
+    "labelForWhom": "Pour qui",
+    "items": [
+      {
+        "id": "conseil",
+        "problem": "Tout le monde parle d’IA dans l’organisation, personne ne sait par où commencer. Les initiatives partent dans quatre directions, aucune n’aboutit, et la direction finit par conclure que « ça ne marche pas chez nous ».",
+        "delivers": [
+          "Une cartographie de vos processus, avec le temps réellement consommé par chacun",
+          "La liste des tâches où l’IA change quelque chose — et celles où elle n’apporte rien",
+          "Une feuille de route chiffrée en effort, ordonnée par gain attendu",
+          "Les risques identifiés : données sensibles, dépendances, points de rupture"
+        ],
+        "forWhom": "Direction générale, direction des opérations, coordination de programme. Toute organisation qui doit arbitrer un budget avant de le dépenser."
+      },
+      {
+        "id": "formation",
+        "problem": "Les outils sont là, les comptes sont ouverts, et les équipes s’en servent comme d’un moteur de recherche. L’écart entre ce que l’IA peut faire et ce qu’on lui demande reste entier.",
+        "delivers": [
+          "Des sessions bâties sur vos propres dossiers, pas sur des exemples génériques",
+          "Des méthodes de travail écrites, réutilisables après le départ du formateur",
+          "Un niveau distinct pour les dirigeants et pour les équipes opérationnelles",
+          "Un point de contrôle à distance après la formation"
+        ],
+        "forWhom": "Équipes administratives, financières, RH, communication, coordination. Dirigeants qui doivent décider sans être techniciens."
+      },
+      {
+        "id": "implementation",
+        "problem": "L’assistant public ne connaît ni vos procédures, ni vos contrats, ni votre historique. Chaque réponse doit être reprise à la main, et le temps gagné se perd en vérification.",
+        "delivers": [
+          "Un assistant connecté à vos documents et à vos données, avec ses sources citées",
+          "Une architecture documentée : quelle donnée transite où, et pourquoi",
+          "La reprise après coupure de connexion, prévue dès la conception",
+          "La passation à votre équipe, ou une maintenance si vous préférez"
+        ],
+        "forWhom": "Organisations avec un volume documentaire réel : ONG, cabinets, institutions, entreprises à procédures écrites."
+      },
+      {
+        "id": "automatisation",
+        "problem": "Des tâches que personne ne revendique consomment des journées entières : ressaisie, tri, relance, mise en forme, consolidation de rapports. Elles ne figurent dans aucune fiche de poste et coûtent pourtant le plus cher.",
+        "delivers": [
+          "Des agents qui exécutent un processus complet, sous supervision humaine",
+          "Les points de contrôle où un humain valide avant que ça parte",
+          "Un journal de ce qui a été fait, vérifiable après coup",
+          "Un déploiement par étapes, en commençant par le processus le plus coûteux"
+        ],
+        "forWhom": "Organisations qui ont déjà connecté leurs données et veulent passer de l’assistance à l’exécution."
+      }
+    ],
+    "methodTitle": "Comment se déroule une mission",
+    "methodBody": "Quatre étapes, dans cet ordre, quel que soit le service. La première n’est jamais facturée à l’aveugle : tant que nous n’avons pas compris votre situation, nous ne savons pas ce que nous vendons.",
+    "ctaTitle": "Vous ne savez pas laquelle vous concerne ?",
+    "ctaBody": "C’est le cas le plus fréquent, et c’est exactement ce que sert à trancher le premier échange. Une heure suffit.",
+    "ctaButton": "Parler de votre situation"
+  },
+  "trainingPage": {
+    "metaTitle": "RAPIA Academy — formations IA pour dirigeants et équipes",
+    "metaDescription": "Formations à l’intelligence artificielle en RDC : fondamentaux, IA générative, automatisation, agents IA, IA pour dirigeants et pour ONG. Sessions bâties sur vos propres dossiers.",
+    "eyebrow": "RAPIA Academy",
+    "heading": "Former les humains qui travailleront avec l’IA",
+    "subtitle": "Une organisation ne devient pas plus efficace parce qu’elle a acheté des licences. Elle le devient quand ses équipes savent quoi en faire.",
+    "back": "Retour à l’accueil",
+    "intro": [
+      "La plupart des formations à l’IA se donnent sur des exemples inventés : rédiger un courrier fictif, résumer un article qui n’intéresse personne. Les participants repartent impressionnés et ne changent rien à leur travail du lundi.",
+      "Nos sessions partent de vos dossiers réels. Ce qui se produit pendant la formation est du travail que vous n’aurez plus à faire ensuite — c’est le seul indicateur qui nous paraisse sérieux."
+    ],
+    "formatsTitle": "Trois formats, trois publics",
+    "formats": [
+      {
+        "title": "Dirigeants",
+        "description": "Savoir décider : où investir, quels risques accepter, comment mesurer un résultat, et comment reconnaître un prestataire qui vend du vent.",
+        "audience": "Direction générale, conseil d’administration, chefs de programme"
+      },
+      {
+        "title": "Équipes opérationnelles",
+        "description": "Savoir faire, sur ses propres dossiers. Chaque participant repart avec des méthodes écrites applicables à son poste, pas avec des notes.",
+        "audience": "Administration, finance, RH, communication, suivi-évaluation"
+      },
+      {
+        "title": "Sur mesure",
+        "description": "Un programme construit à partir d’un besoin précis — un métier, un outil, un processus. Le contenu se décide après un échange, pas avant.",
+        "audience": "Organisations avec une contrainte ou un métier particulier"
+      }
+    ],
+    "catalogTitle": "Ce que nous enseignons",
+    "catalogIntro": "Les modules se combinent selon le niveau du groupe. Un parcours type dure de deux à cinq demi-journées.",
+    "deliveryTitle": "Comment ça se passe",
+    "deliveryItems": [
+      "Sur place à Goma, Kinshasa ou Lubumbashi, ou à distance — les phases pratiques gagnent à se faire ensemble dans la même pièce.",
+      "En français ou en anglais, au choix du groupe.",
+      "Petits groupes : au-delà d’une douzaine de participants, plus personne ne pratique.",
+      "Un point de contrôle à distance quelques semaines après, pour voir ce qui a tenu et ce qui a lâché."
+    ],
+    "ctaTitle": "Former votre équipe",
+    "ctaBody": "Dites-nous qui doit être formé et sur quoi. Nous revenons avec un programme, une durée et un prix — pas avec une plaquette.",
+    "ctaButton": "Demander un programme"
   }
 }

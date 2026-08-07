@@ -20,8 +20,8 @@ export function Technologies() {
       <div className="container-site">
         <motion.div
           className="max-w-2xl mb-16"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
         >
@@ -44,10 +44,10 @@ export function Technologies() {
               <motion.div
                 key={cat.title}
                 className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-[var(--radius-lg)] p-6 text-center group hover:border-[var(--color-indigo)]/30 hover:shadow-[var(--shadow-sm)] transition-all duration-300"
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
+                transition={{ duration: 0.4 }}
               >
                 <div className="w-14 h-14 mx-auto rounded-2xl bg-[var(--color-indigo)]/5 text-[var(--color-indigo)] flex items-center justify-center mb-4">
                   <Icon size={24} />

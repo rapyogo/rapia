@@ -75,8 +75,8 @@ export function Process() {
         {/* En-tête */}
         <motion.div
           className="max-w-2xl mb-16"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
         >
@@ -133,10 +133,10 @@ export function Process() {
                 <motion.div
                   key={number}
                   className="relative flex flex-col items-center text-center"
-                  initial={{ opacity: 0, y: 32 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
                   viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.5, delay: i * 0.12 }}
+                  transition={{ duration: 0.5 }}
                 >
                   <div
                     className={`relative z-10 w-20 h-20 rounded-[var(--radius-lg)] flex items-center justify-center mb-6 border ${stepColors[i]}`}
@@ -165,10 +165,10 @@ export function Process() {
               <motion.div
                 key={number}
                 className="flex items-start gap-5"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
+                transition={{ duration: 0.4 }}
               >
                 <div
                   className={`flex-shrink-0 w-14 h-14 rounded-xl flex items-center justify-center border ${stepColors[i]}`}

@@ -264,3 +264,36 @@ body {
   visibility: hidden;
   transform: translateY(40px);
 }
+
+/* ---------------------------------------------------------------------------
+   Barre de défilement masquée
+
+   Le site est conçu comme un récit au scroll : la barre native, qui saute à
+   chaque section épinglée par ScrollTrigger, trahissait le procédé plus
+   qu'elle n'aidait à se repérer.
+
+   Le défilement lui-même reste entier — molette, clavier, geste tactile,
+   Page Down. Seul l'indicateur visuel disparaît. C'est un compromis assumé :
+   on perd un repère de position, on gagne la continuité de l'image.
+   --------------------------------------------------------------------------- */
+
+html {
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* anciens Edge */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;                  /* Chrome, Safari */
+}
+
+/* Les conteneurs qui défilent en interne — tiroir mobile, blocs larges —
+   suivent la même règle, sinon une barre réapparaît au milieu de la page. */
+.scroll-hidden {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scroll-hidden::-webkit-scrollbar {
+  display: none;
+}

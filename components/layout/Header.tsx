@@ -9,22 +9,38 @@ import { cn } from "@/lib/utils";
 
 export function Header() {
   const t = useTranslations("nav");
+  const tFooter = useTranslations("footer");
   const locale = useLocale();
   const prefix = `/${locale}`;
   // « À propos » pointait vers l'ancre `#why-rapia` de l'accueil : un argument
   // de vente, pas une page d'identité. Elle mène désormais à la vraie page —
   // c'est celle qu'un visiteur cherche quand il veut savoir à qui il parle, et
   // celle qu'un moteur cherche pour rattacher l'entité à une personne.
+  //
+  // La FAQ n'est pas ici : une barre à six entrées ne hiérarchise plus rien, et
+  // la FAQ se consulte quand on a déjà une question, pas en entrant sur le site.
   const navLinks = [
     { label: t("home"), href: prefix },
-    { label: t("services"), href: `${prefix}/#services` },
-    { label: t("training"), href: `${prefix}/#academy` },
+    { label: t("services"), href: `${prefix}/services` },
+    { label: t("training"), href: `${prefix}/formation` },
     { label: t("about"), href: `${prefix}/a-propos` },
     { label: t("contact"), href: `${prefix}/contact` },
   ];
-  // La FAQ n'est pas dans la navigation principale : elle vit dans le pied de
-  // page. Une barre à six entrées ne hiérarchise plus rien, et la FAQ se
-  // consulte quand on a déjà une question — pas en entrant sur le site.
+
+  /**
+   * Ce que le tiroir mobile contient — et surtout ce qu'il ne contient pas.
+   *
+   * Il reprenait `navLinks` à l'identique, c'est-à-dire exactement les quatre
+   * onglets déjà affichés en permanence par la barre du bas. Ouvrir le menu ne
+   * montrait donc rien de nouveau. Il porte désormais les liens **secondaires**
+   * : ceux qui n'ont pas leur place dans une barre à quatre onglets mais qu'on
+   * doit pouvoir atteindre.
+   */
+  const secondaryLinks = [
+    { label: t("about"), href: `${prefix}/a-propos` },
+    { label: t("faq"), href: `${prefix}/faq` },
+    { label: tFooter("visionLink"), href: `${prefix}/notre-vision` },
+  ];
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -129,10 +145,18 @@ export function Header() {
           role="dialog"
           aria-modal="true"
           aria-label="Menu de navigation"
-          className="md:hidden fixed inset-0 top-16 z-40 bg-[var(--color-deep)]"
+          // `inset-x-0 bottom-0` plutôt que `inset-0` : avec `top-16`, un
+          // `inset-0` laisse `right: 0` *et* `left: 0` se battre avec la barre
+          // de défilement et fait déborder le tiroir de quelques pixels.
+          // `pb-20` réserve la hauteur de la barre d'onglets, qui reste au
+          // premier plan pour que la navigation principale reste atteignable.
+          className="scroll-hidden md:hidden fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto bg-[var(--color-deep)] pb-20"
         >
-          <nav className="flex flex-col p-6 gap-1" aria-label="Navigation mobile">
-            {navLinks.map((link) => (
+          <nav
+            className="flex flex-col p-6 gap-1"
+            aria-label={t("secondaryMenu")}
+          >
+            {secondaryLinks.map((link) => (
               <a key={link.href} href={link.href} className="py-3 px-4 text-base font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-[var(--radius-md)] transition-colors" onClick={closeMenu}>
                 {link.label}
               </a>

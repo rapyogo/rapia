@@ -15,8 +15,8 @@ export function MobileNav() {
 
   const links = [
     { label: t("home"), href: prefix },
-    { label: t("services"), href: `${prefix}/#services` },
-    { label: t("training"), href: `${prefix}/#academy` },
+    { label: t("services"), href: `${prefix}/services` },
+    { label: t("training"), href: `${prefix}/formation` },
     { label: t("contact"), href: `${prefix}/contact` },
   ];
 

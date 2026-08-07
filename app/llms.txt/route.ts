@@ -41,6 +41,14 @@ const DESCRIPTIONS: Record<
     fr: "Accueil — positionnement, les 3 niveaux de maturité IA (Discuter, Connecter, Déléguer), services, méthode, cas d'usage, technologies.",
     en: "Home — positioning, the 3 levels of AI maturity (Chat, Connect, Delegate), services, method, use cases, technologies.",
   },
+  "/services": {
+    fr: "Services — conseil, formation, implémentation et automatisation IA détaillés : le problème résolu, les livrables et le public de chacun, puis la méthode en quatre étapes.",
+    en: "Services — AI consulting, training, implementation and automation in detail: the problem solved, deliverables and audience for each, then the four-stage method.",
+  },
+  "/formation": {
+    fr: "RAPIA Academy — formations IA en RDC : trois formats (dirigeants, équipes opérationnelles, sur mesure), catalogue de 9 modules, modalités et langues.",
+    en: "RAPIA Academy — AI training in the DRC: three formats (executives, operational teams, bespoke), a nine-module catalogue, delivery terms and languages.",
+  },
   "/a-propos": {
     fr: "À propos — l'agence, le parcours du fondateur, les certifications, les distinctions et les engagements de transparence.",
     en: "About — the agency, the founder's background, certifications, recognitions and transparency commitments.",

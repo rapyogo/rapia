@@ -24,14 +24,6 @@ import { RECOGNITIONS, SOCIALS } from "@/lib/site";
  * « adoucir » le pied de page : c'est le texte qui disparaît, pas le gris.
  */
 
-/**
- * Ancre de chaque service, mappée par index — les libellés sont traduits et ne
- * peuvent pas servir de clé. L'ordre suit `services.items` dans
- * `messages/*.json` : Conseil, Formation, Implémentation, Automatisation.
- * Seule la formation a sa propre section.
- */
-const SERVICE_ANCHORS = ["#services", "#academy", "#services", "#services"];
-
 export function Footer() {
   const t = useTranslations("footer");
   const tServices = useTranslations("services");
@@ -41,7 +33,10 @@ export function Footer() {
   const locale = useLocale();
   const prefix = `/${locale}`;
 
-  const items = tServices.raw("items") as { title: string }[];
+  // Chaque service a son ancre sur /services. L'`id` vit dans le namespace
+  // partagé et n'est pas traduit : il ne peut donc pas casser le lien quand la
+  // copie change, contrairement au mapping par index qu'il remplace.
+  const items = tServices.raw("items") as { id: string; title: string }[];
   // Les distinctions sont décrites une seule fois, dans le namespace `about` :
   // le pied de page et la page « À propos » citent le même libellé, et une
   // correction ne se fait qu'à un endroit.
@@ -86,16 +81,23 @@ export function Footer() {
           <div>
             <h3 className={columnTitleClass}>{t("servicesTitle")}</h3>
             <ul className="space-y-2.5">
-              {items.map((item, i) => (
+              {items.map((item) => (
                 <li key={item.title}>
-                  <a
-                    href={`${prefix}/${SERVICE_ANCHORS[i] ?? "#services"}`}
-                    className={linkClass}
-                  >
+                  <a href={`${prefix}/services#${item.id}`} className={linkClass}>
                     {item.title}
                   </a>
                 </li>
               ))}
+              <li>
+                <a href={`${prefix}/services`} className={linkClass}>
+                  {t("servicesPageLink")}
+                </a>
+              </li>
+              <li>
+                <a href={`${prefix}/formation`} className={linkClass}>
+                  {t("trainingLink")}
+                </a>
+              </li>
             </ul>
           </div>
 

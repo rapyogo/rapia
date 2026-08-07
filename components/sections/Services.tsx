@@ -61,8 +61,8 @@ export function Services() {
         {/* En-tête */}
         <motion.div
           className="flex flex-col lg:flex-row lg:items-end gap-8 mb-16"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
         >
@@ -92,10 +92,10 @@ export function Services() {
             return (
               <motion.div
                 key={service.id}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+                transition={{ duration: 0.5 }}
               >
                 <div
                   className={`bg-[var(--color-surface)] rounded-[var(--radius-lg)] border border-[var(--color-border)] ${borderColors[i]} border-l-[3px] h-full flex flex-col group overflow-hidden transition-all duration-300 hover:shadow-[var(--shadow-md)] hover:-translate-y-1`}

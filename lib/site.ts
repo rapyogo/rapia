@@ -30,6 +30,8 @@ export const SITE_URL =
 /** Chemins publics, hors préfixe de locale. `""` = accueil. */
 export const SITE_PATHS = [
   "",
+  "/services",
+  "/formation",
   "/a-propos",
   "/faq",
   "/notre-vision",

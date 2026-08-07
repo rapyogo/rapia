@@ -130,10 +130,10 @@ export function SocialProof() {
                 <motion.div
                   key={stat.key}
                   className="border-t border-[var(--color-border)] pt-5"
-                  initial={{ opacity: 0, y: 22 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
                   viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.55, delay: i * 0.06 }}
+                  transition={{ duration: 0.55 }}
                 >
                   <div
                     className="text-[var(--color-text)] tabular-nums font-bold"
@@ -165,10 +165,10 @@ export function SocialProof() {
             return (
               <motion.div
                 key={proof.key}
-                initial={{ opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5, delay: i * 0.05 }}
+                transition={{ duration: 0.5 }}
               >
                 <Empty className="h-full">
                   <EmptyHeader>
