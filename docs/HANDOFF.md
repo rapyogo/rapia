@@ -962,6 +962,13 @@ Mise en service le 2026-08-07. **Testée de bout en bout en local** : demande de
 lien, création du compte, consommation du jeton, ouverture de session, accès à
 la page protégée, déconnexion, et refus du rejeu.
 
+**Et vérifiée en production** sur `ia.rapyogo.com` : adresse invalide → 400,
+demande réelle → 200, jeton inconnu → 303 vers `?erreur=expire`, `/fr/espace`
+sans session → 307 vers `/fr/connexion?suite=%2Ffr%2Fespace`. Le 200 vaut
+double preuve : la base répond **et** Brevo a accepté l'e-mail — la route
+renvoie 500 si l'envoi échoue, précisément pour qu'un succès ne puisse pas
+mentir.
+
 | Fichier | Rôle |
 |---------|------|
 | `lib/auth.ts` | Tout : jetons, sessions, cookie, garde de redirection |
