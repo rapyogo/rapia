@@ -312,6 +312,8 @@ plus stricte du projet.
 | Route | Contenu |
 |-------|---------|
 | `/[locale]` | Landing page complète (13 sections dans l'ordre ci-dessus) |
+| `/[locale]/services` | Les 4 services développés : problème, livrables, public, méthode |
+| `/[locale]/formation` | RAPIA Academy : 3 formats, catalogue, modalités |
 | `/[locale]/a-propos` | Agence, fondateur, certifications, distinctions, engagements |
 | `/[locale]/faq` | 10 questions/réponses + JSON-LD `FAQPage` |
 | `/[locale]/contact` | Formulaire contact → `/api/contact` (Brevo SMTP, honeypot, rate limiting) |
@@ -606,6 +608,54 @@ Deux détails qui comptent :
 
 Le `.vercelignore` est dans le repo mais ne suffit pas : le CLI scanne le
 filesystem avant d'appliquer les règles d'ignore.
+
+## Base de données (Neon) — posée le 2026-08-07, pas encore utilisée
+
+Postgres serverless chez Neon. **Le schéma existe et est vérifié ; aucune page
+ne s'y connecte encore.** C'est le socle de l'espace client prévu pour la
+session suivante : compte, audit de workflow en libre-service, ressources,
+formations, avancement de projet.
+
+| Élément | Où |
+|---------|-----|
+| Connexion | `DATABASE_URL` — Vercel (Production, Preview, Development) et `.env.local` |
+| Client | `lib/db.ts` — pilote HTTP `@neondatabase/serverless` |
+| Schéma | `db/migrations/001_initial.sql` |
+| Exécution | `npm run db:migrate` |
+
+**13 tables** : `users`, `auth_tokens`, `sessions`, `workflow_audits`,
+`training_sessions`, `training_registrations`, `resources`,
+`resource_downloads`, `projects`, `project_milestones`, `posts`,
+`newsletter_subscribers`, `schema_migrations`.
+
+### Ce qu'il faut savoir avant d'y toucher
+
+- **Le pilote HTTP refuse plusieurs instructions par requête.** D'où le
+  découpage dans `scripts/migrate.mjs` : il suit l'état du lexer (chaînes,
+  commentaires, dollar-quotes `$$`) parce qu'un `split(";")` couperait au
+  milieu des corps de fonction. Sans transaction englobante, **chaque migration
+  doit être idempotente** — `IF NOT EXISTS` partout.
+- **`sql` est un tagged template.** ``sql`... ${email} ...` `` lie les
+  paramètres ; `sql(\`... ${email} ...\`)` les concatène. Les deux formes se
+  ressemblent, une seule est sûre.
+- **`citext` pour les e-mails**, vérifié : `Test@Rapia.CD` et `test@rapia.cd`
+  sont le même compte. Sans ce type, l'unicité se contourne par une majuscule.
+- **`ON DELETE CASCADE` depuis `users`**, vérifié : supprimer un compte efface
+  ses audits, inscriptions et projets en une requête.
+- **Aucun mot de passe n'est stocké.** `users.password_hash` est nullable et le
+  restera si l'authentification passe par **lien magique** — la piste par
+  défaut, puisque Brevo est déjà en service. `auth_tokens` stocke un *hash* du
+  jeton, jamais le jeton.
+- **`newsletter_subscribers` est séparée de `users`** : on s'abonne sans
+  compte. `unsubscribed_at` conserve la ligne au lieu de la supprimer, ce qui
+  permet de prouver qu'un désabonnement a été honoré.
+
+### ⚠️ Le mot de passe de la base a circulé en clair
+
+La chaîne de connexion a été transmise dans une conversation. **Faire tourner
+le mot de passe depuis Neon** avant la mise en service de l'espace client, puis
+remplacer la valeur avec `vercel env rm` / `vercel env add` sur les trois
+environnements et dans `.env.local`.
 
 ## Points d'attention techniques
 
