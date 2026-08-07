@@ -848,6 +848,39 @@ réglé** : `ALTER ROLE neondb_owner WITH PASSWORD` exécuté en SQL — Neon
 l'accepte depuis n'importe quel client, le dashboard n'est pas nécessaire — et
 `.env.local` mis à jour, nouvelle connexion vérifiée par `npm run db:migrate`.
 
+### ⚠️ La base ne doit jamais être requise au moment du build
+
+Le premier déploiement après la mise en place de l'espace client **a échoué en
+entier**, sur un message qui n'aidait pas :
+
+```
+Error: Database connection string provided to `neon()` is not a valid URL.
+       Connection string: [REDACTED]
+Error: Failed to collect page data for /api/auth/logout
+```
+
+Deux causes superposées :
+
+1. **`lib/db.ts` appelait `neon()` au chargement du module.** La phase
+   « Collecting page data » de `next build` évalue les modules : elle
+   exécutait donc la connexion, et une valeur fautive faisait tomber la
+   construction du site complet — y compris les pages qui ne touchent pas la
+   base. Corrigé : le client s'initialise **à la première requête**, derrière
+   un Proxy qui préserve l'écriture ``sql`…` ``. Vérifié en rejouant le build
+   avec `DATABASE_URL="ceci-nest-pas-une-url"` : il passe.
+2. **Les variables « Sensitive » de Vercel ne sont pas exposées au build.**
+   `vercel env add` classe automatiquement ainsi une chaîne de connexion ; au
+   build, le code reçoit un substitut, d'où le `[REDACTED]` que `neon()` a
+   tenté de parser. Au *runtime* la vraie valeur est bien là.
+
+**À retenir : construire le site ne demande pas de savoir joindre la base.**
+Tout module ajouté qui ouvre une connexion, lit un secret ou appelle un service
+externe doit le faire paresseusement. Sinon une panne de Neon pendant un
+déploiement empêche de publier une correction de faute d'orthographe.
+
+`lib/db.ts` retire aussi un éventuel **BOM** en tête de la variable — voir le
+piège PowerShell dans « Points d'attention ».
+
 **Vercel est synchronisé** : `DATABASE_URL` et `DATABASE_URL_UNPOOLED` ont été
 reposées sur Production, Preview et Development le 2026-08-07. La variante
 `_UNPOOLED` est le **même endpoint sans `-pooler` dans le nom d'hôte** —
