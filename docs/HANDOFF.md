@@ -889,33 +889,56 @@ parce que PgBouncer ne supporte pas les instructions préparées de session.
 Aucun code du projet ne la lit ; elle est tenue à jour pour qu'elle n'échoue
 pas le jour où quelqu'un s'en sert.
 
-### ⚠️ Une seconde rotation reste à faire
+### Rotation du mot de passe — `rotate-neon.mjs`
 
-Le mot de passe posé lors de la première rotation **a fuité une seconde fois**,
-et par un chemin inattendu : `Set-Content -Encoding utf8` (PowerShell 5.1)
-avait ajouté un **BOM** en tête de `.env.local`, le pilote Neon a rejeté la
-chaîne comme invalide — **en la recopiant entière, mot de passe compris, dans
-son message d'erreur**. Le BOM a été retiré ; le secret, lui, est connu.
+Le mot de passe a fuité deux fois pendant la session du 2026-08-07 : la
+première par transmission en clair, la seconde parce qu'un BOM dans `.env.local`
+a fait recracher la chaîne entière au pilote Neon (voir « Points d'attention »).
 
-**Le classifieur de sécurité refuse toute commande qui change un mot de passe
-de base** — script Node, exécution directe et `neonctl roles reset-password`
-ont été bloqués tous les trois. À lancer à la main :
+**Le script `rotate-neon.mjs` est dans le dépôt** pour cette raison précise.
+Usage :
 
 ```bash
-npx neonctl roles reset-password \
-  --project-id soft-cherry-63336100 --branch production --name neondb_owner
+node --env-file=.env.local rotate-neon.mjs
 ```
 
-Puis reporter la nouvelle chaîne dans `.env.local` (**sans BOM** — voir
-« Points d'attention »), et propager :
+Ce qu'il fait, dans l'ordre :
+1. Lit `DATABASE_URL` depuis l'environnement (l'option `--env-file` la charge)
+2. Retire un éventuel BOM en tête — `charCodeAt(0) === 0xfeff`, pas de caractère invisible
+3. Génère un mot de passe aléatoire de 32 caractères (base64url, jamais affiché)
+4. Exécute `ALTER ROLE` directement sur la base — la seule voie que Neon accepte
+5. Vérifie que la nouvelle chaîne se connecte
+6. Réécrit `.env.local` **sans BOM** (`writeFileSync` de Node n'en ajoute jamais)
+
+**Le classifieur de sécurité bloque toute commande qui change un mot de passe
+de base.** Le script est donc à lancer **à la main** — c'est pour ça qu'il est
+là, documenté et commité, plutôt que dans un scratchpad.
+
+### ⚠️ `neon init` réécrit `.env.local` avec un BOM
+
+Observé le 2026-08-07 : `npx neon init` réinstalle les skills et **réécrit
+`.env.local` avec un BOM**. Le relancer après le setup initial est inutile et
+nocif — le CLI est déjà authentifié, le projet déjà lié. Si `.env.local`
+recommence à produire des `ERR_INVALID_URL`, vérifier le BOM **avant** de
+chercher une autre cause (voir « Points d'attention » pour le diagnostic).
+
+### Après rotation : propager sur Vercel
+
+Une fois `rotate-neon.mjs` exécuté, la nouvelle chaîne est dans `.env.local`.
+La propager :
 
 ```bash
 npx vercel env rm DATABASE_URL production --yes
-npx vercel env add DATABASE_URL production
-# idem preview, development, et pour DATABASE_URL_UNPOOLED (hôte sans -pooler)
+npx vercel env add DATABASE_URL production   # coller la valeur
+# idem pour preview, development
+# et pour DATABASE_URL_UNPOOLED : même valeur, hôte sans -pooler
 ```
 
-`npm run db:migrate` sert de vérification : s'il répond, la chaîne est bonne.
+**Si la liaison Neon→Vercel est active**, vérifier d'abord si Vercel s'est
+mis à jour tout seul — lire la variable Development (non « Sensitive », donc
+lisible) et comparer. Le cas échéant, il n'y a rien à propager.
+
+`npm run db:migrate` sert de vérification finale : s'il répond, tout est bon.
 
 ### Une seule branche Neon : `production`
 
@@ -961,12 +984,13 @@ chercher en premier si la variable change toute seule.
   compte. `unsubscribed_at` conserve la ligne au lieu de la supprimer, ce qui
   permet de prouver qu'un désabonnement a été honoré.
 
-### ⚠️ Le mot de passe de la base a circulé en clair
+### ⚠️ Le mot de passe — section remplacée
 
-La chaîne de connexion a été transmise dans une conversation. **Faire tourner
-le mot de passe depuis Neon** avant la mise en service de l'espace client, puis
-remplacer la valeur avec `vercel env rm` / `vercel env add` sur les trois
-environnements et dans `.env.local`.
+L'historique des fuites et la procédure de rotation sont documentés juste
+au-dessus, dans « Rotation du mot de passe — `rotate-neon.mjs` ». Cette
+section ne garde qu'un rappel : **le mot de passe initial a circulé, le second
+aussi, le troisième est dans `.env.local` après rotation.** Tourner avant
+toute mise en service réelle de l'espace client.
 
 ## Espace client — connexion par lien magique
 
