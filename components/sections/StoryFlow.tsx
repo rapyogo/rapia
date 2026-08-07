@@ -45,6 +45,10 @@ function StoryAct({
       const els = gsap.utils.toArray<HTMLElement>("[data-chapter]");
       if (els.length === 0) return;
 
+      // L'état initial réel est posé en CSS (`app/globals.css`, sélecteur
+      // `[data-chapter]:not([data-chapter="0"])`) : ce `gsap.set` ne s'exécute
+      // qu'après l'hydratation, trop tard pour éviter que les chapitres
+      // superposés s'affichent tous ensemble. Valeurs à garder synchronisées.
       gsap.set(els.slice(1), { autoAlpha: 0, y: 40 });
 
       const tl = gsap.timeline({

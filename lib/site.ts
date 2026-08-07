@@ -59,49 +59,121 @@ export function ogImage(locale: string) {
 }
 
 /**
- * Profils externes de la marque.
+ * La maison mère.
  *
- * Deux usages qui n'en font qu'un : les liens sortants du pied de page et le
- * `sameAs` du JSON-LD. L'audit relevait **zéro lien externe** sur tout le site
- * — les mentions tierces existaient (GoGettaz, GitHub, TikTok) mais rien ne
- * les reliait à la marque, ni pour un lecteur ni pour un moteur.
+ * `rapyogo.com` porte le groupe ; **chaque service a son sous-domaine**.
+ * L'audit lisait cette structure comme une « dilution de l'autorité de
+ * marque » et recommandait de tout consolider sur un domaine — le conseil
+ * tombe à côté : c'est un portefeuille de produits, pas un site éparpillé par
+ * accident. Ce qu'il faut, ce n'est pas fusionner les domaines, c'est **les
+ * relier** pour qu'un moteur voie un groupe et non quatre inconnus.
  *
- * **N'ajouter ici qu'une URL vérifiée.** Un `sameAs` qui pointe vers un profil
- * inexistant affaiblit l'entité au lieu de la confirmer.
+ * `rapyogo.com` est aujourd'hui un domaine parqué chez Hostinger — le nœud
+ * central du groupe n'a pas de page. C'est le chaînon manquant le plus
+ * rentable qui reste (voir docs/HANDOFF.md).
  */
-export const SOCIALS = [
-  { name: "GitHub", url: "https://github.com/rapyogo" },
-] as const;
-
-/*
- * TikTok volontairement absent. L'audit mentionne un compte « RapYOGO », mais
- * TikTok répond 200 sur n'importe quel `@handle`, y compris inexistant : le
- * profil n'a donc pas pu être vérifié depuis ici. Ajouter la ligne
- * `{ name: "TikTok", url: "https://www.tiktok.com/@<handle exact>" }` dès que
- * le handle est confirmé — même chose pour LinkedIn et YouTube quand les pages
- * existeront.
- */
+export const PARENT = {
+  legalName: "Rapyogo SARL",
+  url: "https://rapyogo.com",
+} as const;
 
 /**
- * Distinctions et mentions par des tiers — les seules preuves de crédibilité
- * que RAPIA possède aujourd'hui, et qui n'étaient nulle part sur le site.
+ * Les autres services du groupe.
  *
- * Règle produit : **rien ne s'invente ici.** Une distinction se cite avec
- * l'URL qui permet de la vérifier, sinon elle ne se cite pas.
+ * Ils valent mieux qu'un organigramme : ils prouvent que RAPIA n'est pas une
+ * plaque de conseil, mais l'atelier IA d'un groupe qui exploite ses propres
+ * produits en production. Pour une agence dont le métier est la crédibilité,
+ * c'est l'argument le plus solide disponible — et il est vrai.
+ *
+ * `url: null` tant que le service n'a pas d'adresse publique vérifiée : le
+ * bloc s'affiche alors sans lien plutôt que de renvoyer dans le vide.
+ */
+export const SIBLING_SERVICES = [
+  { key: "viteat", name: "Viteat", url: null },
+  { key: "rapycar", name: "RAPYCAR", url: "https://car.rapyogo.com" },
+] as const;
+
+/**
+ * Profils sociaux — la place est faite pour toutes les plateformes prévues,
+ * même celles qui n'ont pas encore d'adresse.
+ *
+ * `url: null` = plateforme prévue, non publiée. Renseigner l'URL suffit : le
+ * lien apparaît dans le pied de page **et** dans le `sameAs` du JSON-LD, sans
+ * autre modification.
+ *
+ * **N'inscrire qu'une URL ouverte et vérifiée.** Un `sameAs` qui pointe vers un
+ * profil inexistant affaiblit l'entité au lieu de la confirmer — c'est
+ * pourquoi TikTok reste vide malgré la mention d'un compte « RapYOGO » dans
+ * l'audit : TikTok répond 200 sur n'importe quel `@handle`, existant ou non,
+ * et le compte n'a donc pas pu être confirmé.
+ */
+export const SOCIAL_PLATFORMS: readonly {
+  name: string;
+  url: string | null;
+}[] = [
+  { name: "LinkedIn", url: null },
+  { name: "YouTube", url: null },
+  { name: "TikTok", url: null },
+  { name: "Facebook", url: null },
+  { name: "Instagram", url: null },
+  { name: "X", url: null },
+  { name: "GitHub", url: "https://github.com/rapyogo" },
+];
+
+/** Les profils réellement publiables — ceux qui ont une URL. */
+export const SOCIALS = SOCIAL_PLATFORMS.filter(
+  (platform): platform is { name: string; url: string } =>
+    platform.url !== null,
+);
+
+/**
+ * Distinctions décernées par des tiers.
+ *
+ * Elles récompensent **le fondateur et le groupe Rapyogo**, pas RAPIA en tant
+ * qu'agence IA : la page « À propos » le dit ainsi. Une distinction
+ * agroalimentaire présentée comme un prix d'IA se retourne contre celui qui
+ * l'affiche.
+ *
+ * `url` renvoie au **site officiel de l'organisme**, pas à une page nommant
+ * l'intéressé. Le libellé du lien doit le refléter (« le programme », pas
+ * « la preuve ») : un lien qui promet une vérification qu'il ne permet pas
+ * fait plus de mal que pas de lien.
+ *
+ * `year` est omis quand l'année n'est pas établie. **Ne pas la deviner.**
  */
 export const RECOGNITIONS = [
   {
     id: "gogettaz-2024",
-    issuer: "GoGettaz Africa",
+    issuer: "GoGettaz Agripreneur Prize",
     url: "https://gogettaz.africa/",
     year: "2024",
   },
+  {
+    id: "startupper-totalenergies",
+    issuer: "TotalEnergies Startupper de l'Année",
+    url: "https://startupper.totalenergies.com/",
+    year: null,
+  },
+  {
+    id: "poesam",
+    issuer: "Prix Orange de l'Entrepreneur Social (POESAM)",
+    url: "https://www.orange.com/fr/prix-orange-entrepreneur-social-afrique-moyen-orient",
+    year: null,
+  },
 ] as const;
 
-/** Tout ce qui atteste l'entité, pour `sameAs`. */
+/**
+ * Ce qui atteste l'entité, pour `sameAs`.
+ *
+ * **Les distinctions n'y figurent pas.** `sameAs` désigne d'autres adresses
+ * *de la même entité* — un profil, une fiche, une page qui parle d'elle. Le
+ * site d'un organisme qui a décerné un prix n'est pas RAPIA : l'y mettre
+ * brouille l'identité au lieu de la confirmer. Les distinctions passent par
+ * `award` sur le fondateur et par des liens sortants visibles.
+ */
 export const SAME_AS: string[] = [
+  PARENT.url,
   ...SOCIALS.map((s) => s.url),
-  ...RECOGNITIONS.map((r) => r.url),
 ];
 
 /**
@@ -109,23 +181,33 @@ export const SAME_AS: string[] = [
  * « À propos ».
  *
  * L'audit GEO est formel : pour un consultant IA, **la crédibilité est le
- * produit**. Le site n'affichait aucune biographie, aucun diplôme, aucune
- * certification — le levier le plus rentable était aussi le seul inutilisé.
+ * produit**. Le site n'affichait aucune biographie, aucune distinction — le
+ * levier le plus rentable était aussi le seul inutilisé.
  *
  * Ce module ne porte que des **noms propres** (personne, établissements,
  * organismes) : ils ne se traduisent pas. Les intitulés et la prose vivent
  * dans `messages/*.json`, comme partout ailleurs.
  *
- * Source de ces faits : l'audit GEO du 05/08/2026. **À faire confirmer par
- * l'intéressé avant toute nouvelle publication** — une certification annoncée
- * et non détenue coûte plus cher que l'absence de page « À propos ».
+ * Faits transmis par l'intéressé le 2026-08-07, sauf mention contraire.
  */
 export const FOUNDER = {
   name: "Michel Bengana",
-  /** Organismes certificateurs, dans l'ordre d'affichage. */
+  /** Ville d'origine. */
+  birthPlace: "Bukavu",
+  /**
+   * Organismes certificateurs.
+   *
+   * ⚠️ Ceux-ci viennent de l'**audit GEO**, pas de l'intéressé : sa biographie
+   * ne les mentionne pas. **À confirmer ou à retirer** — une certification
+   * annoncée et non détenue coûte plus cher que l'absence de la mention.
+   */
   certifications: ["Microsoft", "Anthropic"],
-  /** Établissement du diplôme le plus élevé. */
-  almaMater: "Université Libre des Pays des Grands Lacs (ULPGL)",
+  /**
+   * Domaine du diplôme. L'établissement n'est **pas** publié : l'audit citait
+   * l'ULPGL, l'intéressé dit seulement « diplômé en psychologie ». En cas de
+   * doute, on publie le fait établi, pas le fait plausible.
+   */
+  degreeField: "Psychologie",
   /** Programmes et réseaux dont il est issu. */
-  affiliations: ["Orange Corners"],
+  affiliations: ["Orange Corners RDC"],
 } as const;

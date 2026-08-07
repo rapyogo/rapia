@@ -20,9 +20,11 @@ export function Header() {
     { label: t("services"), href: `${prefix}/#services` },
     { label: t("training"), href: `${prefix}/#academy` },
     { label: t("about"), href: `${prefix}/a-propos` },
-    { label: t("faq"), href: `${prefix}/faq` },
     { label: t("contact"), href: `${prefix}/contact` },
   ];
+  // La FAQ n'est pas dans la navigation principale : elle vit dans le pied de
+  // page. Une barre à six entrées ne hiérarchise plus rien, et la FAQ se
+  // consulte quand on a déjà une question — pas en entrant sur le site.
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);

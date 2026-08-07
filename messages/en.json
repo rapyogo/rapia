@@ -507,10 +507,10 @@
   },
   "about": {
     "metaTitle": "About — the agency and its founder",
-    "metaDescription": "RAPIA is the artificial intelligence division of Rapyogo SARL, a Congolese company based in Goma. Founder's background, certifications, recognitions, and what we do not claim.",
+    "metaDescription": "RAPIA is the artificial intelligence division of Rapyogo SARL, a Congolese group based in Goma. Michel Bengana's background, verifiable recognitions, and what we refuse to publish.",
     "eyebrow": "About",
     "heading": "Who is behind RAPIA",
-    "subtitle": "A Congolese agency, led by a practitioner, that would rather say what it cannot do than let you assume otherwise.",
+    "subtitle": "A Congolese agency backed by a group that runs its own products — and would rather say what it cannot do than let you assume otherwise.",
     "back": "Back to home",
     "agencyTitle": "The agency",
     "agencyBody": [
@@ -518,14 +518,38 @@
       "The work fits in one sentence: moving an organisation from the stage where someone asks an assistant questions, to the stage where systems actually carry out work. In between there are processes to map, data to connect and teams to train. That is where we come in.",
       "We resell no licences and are tied to no vendor. The model we choose depends on the problem to solve, not on a commercial agreement."
     ],
-    "founderTitle": "The founder",
-    "founderRole": "Founder and director",
-    "founderBody": [
-      "RAPIA is led by {name}, founder of Rapyogo SARL. His background is not an engineer's: he comes from psychology, and that training shapes how the agency works.",
-      "Most AI projects do not fail on the technology. They fail because nobody looked at how a team actually works before handing it a tool. Understanding a job before automating it is the starting point of every engagement."
+    "groupTitle": "A group that uses what it sells",
+    "groupBody": "Most AI agencies have never had to run an AI system under real constraints: traffic, dropped connections, thin margins, users with no time to learn. Rapyogo has. Each service in the group has its own domain, and the artificial intelligence they run is the one we build.",
+    "groupParentLabel": "Parent company",
+    "groupServices": [
+      {
+        "key": "viteat",
+        "name": "Viteat",
+        "description": "Food delivery in the DRC, launched in 2023 as Rapyogo Food. Dark kitchens, a dedicated fleet, electric motorbikes, eco-friendly packaging — and AI in production for dispatch and delivery times."
+      },
+      {
+        "key": "rapycar",
+        "name": "RAPYCAR",
+        "description": "Peer-to-peer vehicle rental in the DRC.",
+        "linkLabel": "Visit the service"
+      }
     ],
-    "credentialsTitle": "Education and certifications",
+    "founderTitle": "The founder",
+    "founderRole": "Founder and CEO of Rapyogo SARL",
+    "founderBody": [
+      "{name} was born and raised in Bukavu. A psychology graduate, he turned to entrepreneurship for a simple reason: that is where he could take on the problems he saw every day.",
+      "His first venture, a fast-food outlet, showed him what was wrong with food delivery in the DRC: waste, delays, and a service out of reach for people with reduced mobility. In 2023 he launched Rapyogo Food — now Viteat — to answer it: dark kitchens, a dedicated fleet, electric motorbikes, and AI running dispatch.",
+      "As a person with albinism in a society where that still invites prejudice, he made inclusion a design criterion rather than a talking point: the group's products are built first for the people standard services leave out.",
+      "RAPIA grew out of that path. A psychology background is no detour for an AI agency: most projects fail not on the technology, but because nobody looked at how a team actually works before handing it a tool."
+    ],
+    "credentialsTitle": "Education and skills",
+    "degreeLevel": "University degree",
+    "degreeFieldLabel": "Psychology",
     "credentials": [
+      {
+        "title": "Psychology graduate",
+        "detail": "The training that shapes the method: understand a job before automating it."
+      },
       {
         "title": "Microsoft certification",
         "detail": "Validated skills on Microsoft artificial intelligence technologies and services."
@@ -535,21 +559,27 @@
         "detail": "Validated skills on designing with and professionally applying Claude models."
       },
       {
-        "title": "Master's degree in psychology",
-        "detail": "Université Libre des Pays des Grands Lacs (ULPGL), Goma."
-      },
-      {
-        "title": "Orange Corners alumnus",
+        "title": "Orange Corners DRC — 2024 cohort",
         "detail": "Entrepreneurship support programme run by the Dutch Ministry of Foreign Affairs."
       }
     ],
     "recognitionsTitle": "Recognitions",
+    "recognitionsIntro": "These recognitions went to the founder and to the Rapyogo group — not to RAPIA as an AI agency. We cite them because they say something about how we work, not to pass them off as artificial intelligence awards.",
     "recognitions": [
       {
-        "title": "GoGettaz Africa — Top 60 Agripreneurs",
-        "year": "2024",
-        "detail": "Rapyogo SARL was selected among the 60 continental finalists of the pan-African GoGettaz competition for agrifood entrepreneurship.",
-        "linkLabel": "Verify on gogettaz.africa"
+        "title": "GoGettaz Agripreneur Prize — African Top 60",
+        "detail": "Michel Bengana was selected among the 60 best African agripreneurs of the pan-African GoGettaz prize.",
+        "linkLabel": "The GoGettaz prize"
+      },
+      {
+        "title": "TotalEnergies Startupper of the Year, DRC — Top 100",
+        "detail": "Among the 100 national finalists of the TotalEnergies challenge, which rewards projects with strong community impact.",
+        "linkLabel": "The Startupper challenge"
+      },
+      {
+        "title": "Orange Social Entrepreneur Prize (POESAM) — DRC winner",
+        "detail": "DRC winner of the Orange prize rewarding socially driven technology initiatives across Africa and the Middle East.",
+        "linkLabel": "The POESAM prize"
       }
     ],
     "honestyTitle": "What we do not publish",
@@ -557,7 +587,7 @@
     "honestyItems": [
       "No performance figure appears on this site unless it comes from a measured engagement and has been approved by the client concerned.",
       "No testimonial or client logo is published without written consent from the organisation named.",
-      "The recognitions above link back to their original source: they can be verified without taking our word for it.",
+      "The recognitions above link to the body that awarded them, and state plainly what they reward — the group, not the agency.",
       "An absence on this page is a real absence, not an outdated update."
     ],
     "ctaTitle": "A question about how we work?",

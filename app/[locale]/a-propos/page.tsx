@@ -4,6 +4,7 @@ import {
   ArrowLeft,
   Award,
   BadgeCheck,
+  Boxes,
   ExternalLink,
   GraduationCap,
   ShieldCheck,
@@ -16,7 +17,14 @@ import { Button } from "@/components/ui/Button";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumb, graph, webPage } from "@/lib/schema";
 import { COMPANY } from "@/lib/company";
-import { FOUNDER, RECOGNITIONS, ogImage, siteUrl } from "@/lib/site";
+import {
+  FOUNDER,
+  PARENT,
+  RECOGNITIONS,
+  SIBLING_SERVICES,
+  ogImage,
+  siteUrl,
+} from "@/lib/site";
 
 /**
  * Page « À propos » — la réponse au point le plus lourd de l'audit GEO.
@@ -77,11 +85,15 @@ export async function generateMetadata({
 }
 
 type Credential = { title: string; detail: string };
-type Recognition = {
-  title: string;
-  year: string;
-  detail: string;
-  linkLabel: string;
+/** `year` n'est plus ici : il vit dans `RECOGNITIONS` et vaut `null` quand
+ *  l'année n'est pas établie. Une distinction sans date reste citable ; une
+ *  distinction datée au hasard ne l'est plus. */
+type Recognition = { title: string; detail: string; linkLabel: string };
+type GroupService = {
+  key: string;
+  name: string;
+  description: string;
+  linkLabel?: string;
 };
 
 export default async function AboutPage({
@@ -101,6 +113,7 @@ export default async function AboutPage({
     paragraph.replace("{name}", FOUNDER.name),
   );
   const credentials = t.raw("credentials") as Credential[];
+  const groupServices = t.raw("groupServices") as GroupService[];
   const recognitions = t.raw("recognitions") as Recognition[];
   const honestyItems = t.raw("honestyItems") as string[];
 
@@ -182,6 +195,69 @@ export default async function AboutPage({
               </dl>
             </div>
 
+            {/* L'écosystème du groupe — la meilleure preuve E-E-A-T
+                disponible, et elle est vraie : l'agence qui conseille sur l'IA
+                en exploite en production dans les produits de son groupe.
+                L'audit lisait les quatre domaines comme une dilution ; ce sont
+                des services distincts, et les relier vaut mieux que les
+                fusionner. */}
+            <div>
+              <h2 className={sectionTitle}>{t("groupTitle")}</h2>
+              <p className="mt-6 leading-relaxed text-[var(--color-text-secondary)]">
+                {t("groupBody")}
+              </p>
+
+              <a
+                href={PARENT.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-[var(--color-indigo)] hover:underline"
+              >
+                {t("groupParentLabel")} — {PARENT.legalName}
+                <ExternalLink size={14} aria-hidden="true" />
+              </a>
+
+              <ul className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                {groupServices.map((service) => {
+                  // Mappé par clé, pas par index : les services du groupe
+                  // n'ont pas d'ordre imposé et peuvent être réordonnés dans
+                  // la traduction sans casser les liens.
+                  const source = SIBLING_SERVICES.find(
+                    (s) => s.key === service.key,
+                  );
+                  return (
+                    <li
+                      key={service.key}
+                      className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-5"
+                    >
+                      <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-indigo)]/8 text-[var(--color-indigo)]">
+                        <Boxes size={17} />
+                      </div>
+                      <p className="font-bold text-[var(--color-text)]">
+                        {service.name}
+                      </p>
+                      <p className="mt-1.5 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+                        {service.description}
+                      </p>
+                      {/* Sans URL publique, le service est cité sans lien
+                          plutôt que renvoyé dans le vide. */}
+                      {source?.url && service.linkLabel && (
+                        <a
+                          href={source.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-[var(--color-indigo)] hover:underline"
+                        >
+                          {service.linkLabel}
+                          <ExternalLink size={13} aria-hidden="true" />
+                        </a>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+
             {/* Le fondateur */}
             <div>
               <h2 className={sectionTitle}>{t("founderTitle")}</h2>
@@ -231,6 +307,12 @@ export default async function AboutPage({
             {/* Distinctions */}
             <div>
               <h2 className={sectionTitle}>{t("recognitionsTitle")}</h2>
+              {/* Dire ce que la distinction récompense vraiment. Un prix
+                  agroalimentaire présenté comme un prix d'IA se retourne
+                  contre celui qui l'affiche — et un lecteur le voit. */}
+              <p className="mt-4 leading-relaxed text-[var(--color-text-secondary)]">
+                {t("recognitionsIntro")}
+              </p>
             <ul className="mt-6 space-y-4">
               {recognitions.map((recognition, index) => {
                 // Les distinctions sont mappées par index sur `RECOGNITIONS` :
@@ -248,9 +330,11 @@ export default async function AboutPage({
                       <div>
                         <p className="font-bold text-[var(--color-text)]">
                           {recognition.title}
-                          <span className="ml-2 text-sm font-medium text-[var(--color-text-secondary)]">
-                            {recognition.year}
-                          </span>
+                          {source?.year && (
+                            <span className="ml-2 text-sm font-medium text-[var(--color-text-secondary)]">
+                              {source.year}
+                            </span>
+                          )}
                         </p>
                         <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
                           {recognition.detail}

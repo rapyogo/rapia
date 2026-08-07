@@ -240,3 +240,27 @@ body {
     will-change: auto !important;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Chapitres narratifs superposés — hero et StoryFlow
+
+   L'état de départ est posé ici, en CSS, et non par le `gsap.set()` des
+   composants. Celui-ci ne s'exécute qu'après l'hydratation : jusque-là, les
+   trois chapitres — positionnés en absolu les uns sur les autres — s'affichaient
+   tous en même temps, texte par-dessus texte. Mesuré à ~600 ms en local ; sur
+   une connexion lente, ce chevauchement dure plusieurs secondes, et c'est la
+   première chose que voit le visiteur.
+
+   `visibility` accompagne `opacity` parce que GSAP pilote `autoAlpha`, qui est
+   la combinaison des deux. Un état initial qui n'en couvrirait qu'une seule
+   produirait un saut au premier frame de l'animation.
+
+   Chaque acte renumérote ses chapitres à partir de 0 : le sélecteur vaut donc
+   pour la hero comme pour les quatre actes de StoryFlow.
+   --------------------------------------------------------------------------- */
+
+[data-chapter]:not([data-chapter="0"]) {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(40px);
+}

@@ -113,6 +113,12 @@ export default async function LocaleLayout({
     >
       <head>
         <JsonLd data={graph(nodes)} />
+        {/* Sans JavaScript, GSAP ne révèle jamais les chapitres 2 et 3 des
+            séquences narratives : leur texte resterait invisible. On les remet
+            alors dans le flux, empilés les uns sous les autres. */}
+        <noscript>
+          <style>{`[data-chapter]{position:relative!important;opacity:1!important;visibility:visible!important;transform:none!important}`}</style>
+        </noscript>
       </head>
       <body className="min-h-full flex flex-col font-sans">
         <NextIntlClientProvider>

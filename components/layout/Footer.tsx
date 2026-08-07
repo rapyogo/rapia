@@ -45,10 +45,7 @@ export function Footer() {
   // Les distinctions sont décrites une seule fois, dans le namespace `about` :
   // le pied de page et la page « À propos » citent le même libellé, et une
   // correction ne se fait qu'à un endroit.
-  const recognitions = tAbout.raw("recognitions") as {
-    title: string;
-    year: string;
-  }[];
+  const recognitions = tAbout.raw("recognitions") as { title: string }[];
 
   const linkClass =
     "text-sm text-white/65 hover:text-white transition-colors duration-200";
@@ -240,7 +237,9 @@ export function Footer() {
                       className="inline-flex items-center gap-2 rounded-[var(--radius-md)] border border-white/20 px-4 py-2.5 text-sm text-white/80 transition-colors duration-200 hover:border-[var(--color-amber)] hover:text-white"
                     >
                       <span className="font-medium">{recognition.title}</span>
-                      <span className="text-white/55">{recognition.year}</span>
+                      {source.year && (
+                        <span className="text-white/55">{source.year}</span>
+                      )}
                       <ExternalLink size={13} aria-hidden="true" />
                     </a>
                   </li>

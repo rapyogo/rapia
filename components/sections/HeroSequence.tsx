@@ -73,6 +73,12 @@ export function HeroSequence() {
       if (chapters.length === 0) return;
 
       // Les chapitres 2+ démarrent masqués — autoAlpha coupe aussi les clics.
+      //
+      // **L'état initial réel est posé en CSS** (`app/globals.css`, sélecteur
+      // `[data-chapter]:not([data-chapter="0"])`). Ce `gsap.set` ne fait que
+      // le confirmer côté GSAP : tant qu'il était seul, les trois chapitres
+      // restaient superposés et lisibles en même temps jusqu'à l'hydratation.
+      // Si les valeurs changent ici, les changer là-bas aussi.
       gsap.set(chapters.slice(1), { autoAlpha: 0, y: 40 });
 
       const tl = gsap.timeline({

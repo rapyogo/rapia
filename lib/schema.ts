@@ -1,6 +1,13 @@
 import { getTranslations } from "next-intl/server";
 import { COMPANY } from "@/lib/company";
-import { FOUNDER, RECOGNITIONS, SAME_AS, SITE_URL, siteUrl } from "@/lib/site";
+import {
+  FOUNDER,
+  PARENT,
+  RECOGNITIONS,
+  SAME_AS,
+  SITE_URL,
+  siteUrl,
+} from "@/lib/site";
 
 /**
  * Données structurées JSON-LD — un seul endroit pour tout le site.
@@ -121,6 +128,14 @@ export async function baseGraph(locale: string) {
       ],
       knowsLanguage: ["fr", "en"],
       founder: { "@id": FOUNDER_ID },
+      // `rapyogo.com` porte le groupe, chaque service son sous-domaine. Sans
+      // ce rattachement, un moteur voit quatre marques sans lien ; avec lui,
+      // il voit un groupe — et l'autorité de l'un profite aux autres.
+      parentOrganization: {
+        "@type": "Organization",
+        name: PARENT.legalName,
+        url: PARENT.url,
+      },
       // Les immatriculations RDC valent identification officielle : elles
       // distinguent Rapyogo SARL de toute autre entité portant le même nom.
       identifier: COMPANY.registrations.map((reg) => ({
@@ -168,21 +183,31 @@ export async function baseGraph(locale: string) {
       name: FOUNDER.name,
       jobTitle: tAbout("founderRole"),
       worksFor: { "@id": ORGANIZATION_ID },
-      alumniOf: {
-        "@type": "CollegeOrUniversity",
-        name: FOUNDER.almaMater,
-      },
+      birthPlace: { "@type": "Place", name: FOUNDER.birthPlace },
       affiliation: FOUNDER.affiliations.map((name) => ({
         "@type": "Organization",
         name,
       })),
       knowsAbout: services.map((service) => service.title),
-      hasCredential: FOUNDER.certifications.map((issuer) => ({
-        "@type": "EducationalOccupationalCredential",
-        credentialCategory: "certification",
-        recognizedBy: { "@type": "Organization", name: issuer },
-      })),
-      award: RECOGNITIONS.map((r) => `${r.issuer} ${r.year}`),
+      hasCredential: [
+        {
+          "@type": "EducationalOccupationalCredential",
+          credentialCategory: "degree",
+          educationalLevel: tAbout("degreeLevel"),
+          about: { "@type": "Thing", name: tAbout("degreeFieldLabel") },
+        },
+        ...FOUNDER.certifications.map((issuer) => ({
+          "@type": "EducationalOccupationalCredential",
+          credentialCategory: "certification",
+          recognizedBy: { "@type": "Organization", name: issuer },
+        })),
+      ],
+      // Le nom de l'organisme suffit ; l'année n'est ajoutée que lorsqu'elle
+      // est établie. « Prix X 2024 » écrit au hasard est une affirmation, pas
+      // une approximation.
+      award: RECOGNITIONS.map((r) =>
+        r.year ? `${r.issuer} ${r.year}` : r.issuer,
+      ),
     },
     ...offices(locale),
   ];

@@ -507,61 +507,91 @@
   },
   "about": {
     "metaTitle": "À propos — l’agence et son fondateur",
-    "metaDescription": "RAPIA est la division intelligence artificielle de Rapyogo SARL, société congolaise basée à Goma. Parcours du fondateur, certifications, distinctions, et ce que nous ne prétendons pas.",
+    "metaDescription": "RAPIA est la division intelligence artificielle de Rapyogo SARL, groupe congolais basé à Goma. Parcours de Michel Bengana, distinctions vérifiables, et ce que nous refusons de publier.",
     "eyebrow": "À propos",
     "heading": "Qui est derrière RAPIA",
-    "subtitle": "Une agence congolaise, dirigée par un praticien, qui préfère dire ce qu'elle ne sait pas faire plutôt que de le laisser croire.",
-    "back": "Retour à l'accueil",
-    "agencyTitle": "L'agence",
+    "subtitle": "Une agence congolaise adossée à un groupe qui exploite ses propres produits — et qui préfère dire ce qu’elle ne sait pas faire plutôt que de le laisser croire.",
+    "back": "Retour à l’accueil",
+    "agencyTitle": "L’agence",
     "agencyBody": [
       "RAPIA est la division intelligence artificielle de Rapyogo SARL, société de droit congolais immatriculée à Goma. Elle travaille depuis trois implantations — Goma, Kinshasa, Lubumbashi — avec des entreprises, des ONG, des institutions et des professionnels indépendants.",
-      "Le métier tient en une phrase : faire passer une organisation du stade où quelqu'un pose des questions à un assistant, au stade où des systèmes exécutent réellement du travail. Entre les deux il y a des processus à cartographier, des données à connecter et des équipes à former. C'est là que nous intervenons.",
-      "Nous ne revendons aucune licence et ne sommes liés à aucun éditeur. Le modèle retenu dépend du problème à résoudre, pas d'un accord commercial."
+      "Le métier tient en une phrase : faire passer une organisation du stade où quelqu’un pose des questions à un assistant, au stade où des systèmes exécutent réellement du travail. Entre les deux il y a des processus à cartographier, des données à connecter et des équipes à former. C’est là que nous intervenons.",
+      "Nous ne revendons aucune licence et ne sommes liés à aucun éditeur. Le modèle retenu dépend du problème à résoudre, pas d’un accord commercial."
+    ],
+    "groupTitle": "Un groupe qui utilise ce qu’il vend",
+    "groupBody": "La plupart des agences d’IA n’ont jamais eu à faire tourner un système d’IA sous contrainte réelle : trafic, coupures de connexion, marges serrées, utilisateurs qui n’ont pas le temps d’apprendre. Rapyogo, si. Chaque service du groupe a son domaine, et l’intelligence artificielle qu’ils utilisent, c’est nous qui la construisons.",
+    "groupParentLabel": "Maison mère",
+    "groupServices": [
+      {
+        "key": "viteat",
+        "name": "Viteat",
+        "description": "Livraison de repas à domicile en RDC, lancée en 2023 sous le nom Rapyogo Food. Dark kitchens, flotte dédiée, motos électriques, emballages écologiques — et de l’IA en production sur l’affectation des courses et les délais."
+      },
+      {
+        "key": "rapycar",
+        "name": "RAPYCAR",
+        "description": "Location de véhicules entre particuliers en RDC.",
+        "linkLabel": "Voir le service"
+      }
     ],
     "founderTitle": "Le fondateur",
-    "founderRole": "Fondateur et directeur",
+    "founderRole": "Fondateur et CEO de Rapyogo SARL",
     "founderBody": [
-      "RAPIA est dirigée par {name}, fondateur de Rapyogo SARL. Son parcours n'est pas celui d'un ingénieur : il vient de la psychologie, et cette formation décide de la manière dont l'agence travaille.",
-      "La plupart des projets d'IA n'échouent pas sur la technique. Ils échouent parce que personne n'a regardé comment une équipe travaille vraiment avant de lui livrer un outil. Comprendre un métier avant de l'automatiser, c'est le point de départ de chaque mission."
+      "{name} est né et a grandi à Bukavu. Diplômé en psychologie, il s’est tourné vers l’entrepreneuriat pour une raison simple : c’est là qu’il pouvait s’attaquer à des problèmes qu’il voyait tous les jours.",
+      "Sa première affaire, un fast-food, lui a montré ce qui n’allait pas dans la livraison alimentaire en RDC : du gaspillage, des retards, et un service inaccessible aux personnes à mobilité réduite. En 2023 il lance Rapyogo Food — devenu Viteat — pour y répondre : dark kitchens, flotte dédiée, motos électriques, et de l’IA sur l’affectation des courses.",
+      "Personne albinos dans une société où cela expose encore aux préjugés, il a fait de l’inclusion un critère de conception plutôt qu’un argument : les produits du groupe sont pensés d’abord pour ceux que les services standards laissent de côté.",
+      "RAPIA est né de ce parcours. Une formation en psychologie n’est pas un détour pour une agence d’IA : la plupart des projets n’échouent pas sur la technique, mais parce que personne n’a regardé comment une équipe travaille vraiment avant de lui livrer un outil."
     ],
-    "credentialsTitle": "Formation et certifications",
+    "credentialsTitle": "Formation et compétences",
+    "degreeLevel": "Diplôme universitaire",
+    "degreeFieldLabel": "Psychologie",
     "credentials": [
       {
+        "title": "Diplômé en psychologie",
+        "detail": "La formation qui décide de la méthode : comprendre un métier avant de l’automatiser."
+      },
+      {
         "title": "Certification Microsoft",
-        "detail": "Compétences validées sur les technologies et services d'intelligence artificielle Microsoft."
+        "detail": "Compétences validées sur les technologies et services d’intelligence artificielle Microsoft."
       },
       {
         "title": "Certification Anthropic",
-        "detail": "Compétences validées sur la conception et l'usage professionnel des modèles Claude."
+        "detail": "Compétences validées sur la conception et l’usage professionnel des modèles Claude."
       },
       {
-        "title": "Bac+5 en psychologie",
-        "detail": "Université Libre des Pays des Grands Lacs (ULPGL), Goma."
-      },
-      {
-        "title": "Alumni Orange Corners",
-        "detail": "Programme d'accompagnement entrepreneurial porté par le ministère néerlandais des Affaires étrangères."
+        "title": "Orange Corners RDC — cohorte 2024",
+        "detail": "Programme d’accompagnement entrepreneurial porté par le ministère néerlandais des Affaires étrangères."
       }
     ],
     "recognitionsTitle": "Distinctions",
+    "recognitionsIntro": "Ces distinctions récompensent le fondateur et le groupe Rapyogo — pas RAPIA en tant qu’agence d’IA. Nous les citons parce qu’elles disent quelque chose de la façon dont nous travaillons, pas pour les faire passer pour des prix d’intelligence artificielle.",
     "recognitions": [
       {
-        "title": "GoGettaz Africa — Top 60 Agripreneurs",
-        "year": "2024",
-        "detail": "Rapyogo SARL a été retenue parmi les 60 finalistes continentaux du concours panafricain GoGettaz, dédié à l'entrepreneuriat agroalimentaire.",
-        "linkLabel": "Vérifier sur gogettaz.africa"
+        "title": "GoGettaz Agripreneur Prize — Top 60 africains",
+        "detail": "Michel Bengana a été retenu parmi les 60 meilleurs agripreneurs africains du prix panafricain GoGettaz.",
+        "linkLabel": "Le prix GoGettaz"
+      },
+      {
+        "title": "Challenge Startupper de l’Année, TotalEnergies RDC — Top 100",
+        "detail": "Parmi les 100 finalistes nationaux du concours TotalEnergies, qui distingue les projets à fort impact communautaire.",
+        "linkLabel": "Le concours Startupper"
+      },
+      {
+        "title": "Prix Orange de l’Entrepreneur Social (POESAM) — lauréat RDC",
+        "detail": "Lauréat en RDC du prix Orange qui récompense les initiatives technologiques à vocation sociale en Afrique et au Moyen-Orient.",
+        "linkLabel": "Le prix POESAM"
       }
     ],
     "honestyTitle": "Ce que nous ne publions pas",
-    "honestyBody": "Une agence de conseil se juge sur ses preuves. Voici l'état réel des nôtres — et la règle que nous nous imposons avant de publier quoi que ce soit.",
+    "honestyBody": "Une agence de conseil se juge sur ses preuves. Voici l’état réel des nôtres — et la règle que nous nous imposons avant de publier quoi que ce soit.",
     "honestyItems": [
-      "Aucun chiffre de performance n'est affiché sur ce site tant qu'il ne provient pas d'une mission mesurée et validée par le client concerné.",
-      "Aucun témoignage ni logo client n'est publié sans accord écrit de l'organisation citée.",
-      "Les distinctions mentionnées ci-dessus renvoient à leur source d'origine : elles se vérifient sans nous croire sur parole.",
+      "Aucun chiffre de performance n’est affiché sur ce site tant qu’il ne provient pas d’une mission mesurée et validée par le client concerné.",
+      "Aucun témoignage ni logo client n’est publié sans accord écrit de l’organisation citée.",
+      "Les distinctions ci-dessus renvoient à l’organisme qui les décerne, et disent clairement ce qu’elles récompensent — le groupe, pas l’agence.",
       "Une absence sur cette page est une absence réelle, pas un oubli de mise à jour."
     ],
     "ctaTitle": "Une question sur notre façon de travailler ?",
-    "ctaBody": "Le premier échange sert à comprendre votre situation. Il n'engage à rien et ne nécessite aucune préparation.",
+    "ctaBody": "Le premier échange sert à comprendre votre situation. Il n’engage à rien et ne nécessite aucune préparation.",
     "ctaButton": "Nous écrire"
   },
   "faq": {
