@@ -1,8 +1,8 @@
 # RAPIA — Handoff de session
 
 > À lire en premier au début de chaque session (voir CLAUDE.md).
-> Dernière mise à jour : 2026-08-07, seconde session (espace client : schéma
-> Academy/communauté, connexion par lien magique, footer minimaliste)
+> Dernière mise à jour : 2026-08-07, fin de session — espace client en production,
+> 35 tables, 292 clés i18n, 8 commits sur master
 
 ## État actuel
 
@@ -12,17 +12,23 @@ déployé en production sur [`https://ia.rapyogo.com`](https://ia.rapyogo.com).
 **Le formulaire de contact est opérationnel** : il envoie réellement des emails
 via Brevo SMTP, testé de bout en bout en production (voir « Emails »).
 
-**L'espace client existe** : connexion par lien magique, testée de bout en bout
-en local (voir « Espace client »). Le schéma porte désormais l'Academy, les
-communautés, le forum et les paiements Mobile Money — **35 tables**.
+**L'espace client est en production** : connexion par lien magique, testée de
+bout en bout sur `ia.rapyogo.com`. Le schéma Neon porte 35 tables — comptes,
+organisations, communautés, forum, Academy (cours, leçons, quiz, progression),
+paiements Mobile Money.
 
-**Ce qui tourne en production** (commit `7d03a10`) :
-- **Bilinguisme complet** FR/EN via `next-intl` v4, **266 clés**, parité stricte
-- **Sept pages** : accueil, Services, Formation, À propos, FAQ, Notre vision, Contact
+**Ce qui tourne en production** (commit `e0e77d8`) :
+- **Bilinguisme complet** FR/EN via `next-intl` v4, **292 clés**, parité stricte
+- **Dix pages** : accueil, Services, Formation, À propos, FAQ, Notre vision,
+  Contact, Connexion, Vérification, Espace client
+- **Trois nouvelles routes API** : `/api/auth/request`, `/api/auth/verify`,
+  `/api/auth/logout`
 - **Signalisation IA saine** : `llms.txt`, sitemap, canonicals et `@graph` JSON-LD
   sur `ia.rapyogo.com` (voir « Visibilité IA »)
 - **Bibliothèque de composants UI** — Badge, Empty, ChoiceChips, Card composé,
-  `PageShell` pour les pages de contenu
+  `PageShell`, `PageFigure`, `PageThumb`, `SocialIcon`, `SocialLinks`
+- **Footer refondu** — trois rangées au lieu de huit blocs, pictogrammes sociaux
+- **Photos sur Services et Formation** — `PageFigure` et `PageThumb`
 - **Footer complet** — coordonnées légales, liens sortants, distinctions,
   contraste AA, source unique partagée avec les emails (`lib/company.ts`)
 - **Design Corporate Clair** : Inter, fond clair `#F8F9FB`, zéro gradient/glow/blur,
@@ -41,6 +47,15 @@ communautés, le forum et les paiements Mobile Money — **35 tables**.
 ## Commits récents (tout sur `master`, ordre chronologique)
 
 ```
+e0e77d8 docs: rotation Neon documentee, script rotate-neon.mjs dans le depot
+0be95da chore: une seule branche Neon — vercel-dev supprimee
+d5f2e00 docs: lien magique verifie en production sur ia.rapyogo.com
+6688ff1 fix: la base ne doit pas etre requise pour construire le site
+1ccde62 docs: variables Vercel synchronisees, et le BOM PowerShell
+22bb126 docs: handoff a jour — espace client, schema 002, footer, disque sature
+850ce8b feat: espace client — schema Academy/communaute et connexion lien magique
+52408f6 feat: footer minimaliste, icones sociales, photos Services/Formation
+0b60283 docs: handoff a jour — navigation, fondus, FOUC des chapitres
 7d03a10 chore: lockfile apres ajout du pilote Neon
 1b0bc9c feat: base Neon — schema de l espace client, migrations et client SQL
 673a4fd feat: pages Services et Formation, burger repense, fondus, scrollbar masquee
@@ -1117,40 +1132,47 @@ npx vercel env pull .env.local --environment=production
 
 ## Prochaines pistes
 
+### La rotation du mot de passe Neon — priorité absolue
+
+Le mot de passe a fuié deux fois. **`rotate-neon.mjs` est dans le dépôt**,
+documenté en détail dans la section « Base de données ». Une commande :
+
+```bash
+node --env-file=.env.local rotate-neon.mjs
+```
+
+Ensuite vérifier si Vercel s'est synchronisé automatiquement (liaison Neon), et
+propager sinon. La procédure complète est dans « Rotation du mot de passe ».
+
 ### Le chantier de la session suivante — remplir l'espace client
 
-La porte est ouverte (connexion, session, page protégée) et **le schéma attend
-en entier**. Ce qui manque est l'écran de chaque fonction. Ordre proposé, du
-plus rentable au moins pressé :
+La porte est ouverte (connexion, session, page protégée) et le schéma attend
+en entier. **Toutes les tables sont en place sur `production`** — ce qui manque
+est l'écran de chaque fonction. Ordre proposé :
 
-1. **Profil et organisation.** Le compte n'a aujourd'hui qu'une adresse
-   e-mail : `full_name`, `handle`, `avatar_url` sont vides. C'est le préalable
-   au forum — on ne signe pas un message avec son adresse. Enchaîner sur la
-   création d'organisation et l'invitation d'agents (`organization_invites`,
-   même mécanique de jeton haché que la connexion, e-mail à écrire).
-2. **Blog** — `posts` existe, `Content.tsx` rend déjà la grille et retourne
-   `null` faute de source. C'est le contenu qui manque le plus au site, et le
-   plus simple à brancher. Puis `post_comments` (modération par défaut) et
-   `likes`.
-3. **Academy** — `courses` → `course_modules` → `lessons`, puis `enrollments`
-   et `lesson_progress`. Les quiz après : ils n'ont d'intérêt qu'une fois des
-   leçons à sanctionner.
-4. **Audit de workflow en libre-service** — `workflow_audits`. Le diagnostic
-   rend un `maturity_level` de 1 à 3, qui reprend les trois niveaux du site
-   (Discuter / Connecter / Déléguer) — et `courses.level` utilise **la même
-   échelle**, ce qui permet à un audit de recommander les bons cours.
-5. **Paiements FlexPay** — un skill dédié existe (`flexpay-mobile-money`).
-   `orders` / `payments` sont prêtes, `provider_reference` est `UNIQUE` : c'est
-   la garde contre le double encaissement sur un rappel de callback répété.
-6. **Forum et communautés** — le plus lourd en interface, et celui qui exige
-   une politique de modération avant d'ouvrir.
-7. **Newsletter** — `newsletter_subscribers`, double opt-in.
+1. **Profil utilisateur.** Le compte n'a qu'une adresse : `full_name`, `handle`,
+   `avatar_url` sont vides. Premier écran à construire — on ne signe pas un
+   message avec son adresse e-mail.
+2. **Blog.** `posts` existe, `Content.tsx` rend déjà la grille et retourne
+   `null` faute de source. Brancher `posts` sur `Content.tsx`, puis `post_comments`
+   (modération par défaut) et `likes`.
+3. **Organisations.** Création, invitation d'agents — même mécanique de jeton
+   haché que la connexion. Email d'invitation à écrire dans `lib/email.ts`.
+4. **Academy.** `courses` → `course_modules` → `lessons`, puis `enrollments` et
+   `lesson_progress`. Les quiz après.
+5. **Audit de workflow.** `workflow_audits` — le diagnostic rend un
+   `maturity_level` de 1 à 3, et `courses.level` utilise la **même échelle**.
+6. **Paiements FlexPay.** Un skill dédié existe (`flexpay-mobile-money`).
+   `orders`/`payments` sont prêtes, `provider_reference` est `UNIQUE` : c'est la
+   garde contre le double encaissement.
+7. **Forum et communautés.** Le plus lourd en interface.
+8. **Administration.** Aucun écran n'existe, et l'utilisateur a demandé que
+   « l'admin gère la plateforme entière ». Tout se fait en SQL direct pour
+   l'instant — c'est le premier vrai manque.
 
-**Deux décisions restent à prendre** : ce qu'un compte non vérifié peut voir
-(aujourd'hui `email_verified_at` est posé dès le premier lien cliqué, donc la
-question ne se pose pas encore), et **qui administre** — un back-office à
-construire, ou du SQL direct au début. Aucun écran d'administration n'existe,
-alors que l'utilisateur a demandé que « l'admin gère la plateforme entière ».
+À décider avant de coder : ce qu'un compte non vérifié peut voir (pour l'instant
+`email_verified_at` est posé au premier clic, donc la question ne se pose pas),
+et si on construit un back-office ou si on continue en SQL direct.
 
 ### À confirmer par l'utilisateur
 
