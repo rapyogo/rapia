@@ -1,7 +1,8 @@
 # RAPIA — Handoff de session
 
 > À lire en premier au début de chaque session (voir CLAUDE.md).
-> Dernière mise à jour : 2026-08-07 (audit GEO, pages Services/Formation, refonte navigation mobile, base Neon)
+> Dernière mise à jour : 2026-08-07, seconde session (espace client : schéma
+> Academy/communauté, connexion par lien magique, footer minimaliste)
 
 ## État actuel
 
@@ -10,6 +11,10 @@ déployé en production sur [`https://ia.rapyogo.com`](https://ia.rapyogo.com).
 
 **Le formulaire de contact est opérationnel** : il envoie réellement des emails
 via Brevo SMTP, testé de bout en bout en production (voir « Emails »).
+
+**L'espace client existe** : connexion par lien magique, testée de bout en bout
+en local (voir « Espace client »). Le schéma porte désormais l'Academy, les
+communautés, le forum et les paiements Mobile Money — **35 tables**.
 
 **Ce qui tourne en production** (commit `7d03a10`) :
 - **Bilinguisme complet** FR/EN via `next-intl` v4, **266 clés**, parité stricte
@@ -344,7 +349,7 @@ plus stricte du projet.
 | `i18n/request.ts` | Charge `messages/{locale}.json` |
 | `i18n/navigation.ts` | `Link`, `useRouter`, `usePathname` conscients de la locale |
 | `proxy.ts` | Détection locale + redirection (ex-`middleware.ts`) |
-| `messages/fr.json`, `messages/en.json` | **184 clés**, parité stricte |
+| `messages/fr.json`, `messages/en.json` | **292 clés**, parité stricte |
 | `components/layout/LanguageSwitcher.tsx` | Bascule FR ⇄ EN |
 
 ### Règles
@@ -371,6 +376,9 @@ plus stricte du projet.
 | `/[locale]/faq` | 10 questions/réponses + JSON-LD `FAQPage` |
 | `/[locale]/contact` | Formulaire contact → `/api/contact` (Brevo SMTP, honeypot, rate limiting) |
 | `/[locale]/notre-vision` | Page immersive GSAP, 5 sections |
+| `/[locale]/connexion` | Demande de lien magique. `noindex` |
+| `/[locale]/connexion/verifier` | Confirmation du lien (bouton → POST). `noindex` |
+| `/[locale]/espace` | Espace client, protégé par session. `noindex` |
 | `/sitemap.xml`, `/robots.txt`, `/llms.txt` | Générés dynamiquement, bilingues |
 | `/[locale]/opengraph-image` | Image de partage 1200×630 générée par `next/og` |
 
@@ -629,13 +637,53 @@ les 2 emails reçus** · 2ᵉ envoi immédiat → 429.
 
 Rejouables par `curl` sur `https://ia.rapyogo.com/api/contact`.
 
-## Footer & coordonnées
+## Footer & coordonnées — refondu le 2026-08-07
 
 `components/layout/Footer.tsx`, alimenté par `lib/company.ts`.
 
 Publie les 3 implantations, le téléphone, l'e-mail et les immatriculations
 (RCCM / ID Nat / NIF) — **les mêmes données que les emails**, décision prise
 sciemment : le site en disait moins que les messages qu'il envoie.
+
+### Trois rangées, plus huit blocs
+
+Le pied de page empilait marque, services, liens, contact, réseaux,
+implantations, distinctions et mentions légales : **huit sections, chacune avec
+son titre en capitales**, qui donnaient à la fin du site le poids d'une page
+entière. Le contenu n'a pas bougé, sa hiérarchie si :
+
+| Rangée | Contenu |
+|--------|---------|
+| 1 | Marque à gauche, trois colonnes de liens à droite (Services, En savoir plus, Contact) |
+| 2 | Les trois implantations, et les **pictogrammes sociaux** |
+| 3 | Mentions légales et copyright, distinctions en liens texte |
+
+- **Les distinctions ne sont plus des cartouches bordés.** Elles avaient le
+  poids visuel d'un bouton d'action : trois fausses cibles principales en bas
+  de page. Elles restent vérifiables — chacune renvoie au site de l'organisme.
+- **Les réseaux sont des icônes** (`components/ui/social-icons.tsx`), SVG
+  écrits à la main : Lucide a retiré les logos de marques de son catalogue.
+  Cible tactile de 44 px pour un dessin de 18, compensée par un `-ml-3` sinon
+  la rangée paraît rentrée. **Une plateforme ne s'affiche que si son URL est
+  renseignée** — une icône qui ne mène nulle part promet une présence qui
+  n'existe pas.
+- **Six clés de traduction ont été supprimées** des deux fichiers de messages
+  (`officesTitle`, `emailLabel`, `phoneLabel`, `followTitle`,
+  `recognitionLabel`, `servicesPageLink`) : plus aucun composant ne les lisait.
+
+### Photos sur les pages de contenu
+
+`PageFigure` et `PageThumb` (`components/layout/PageShell.tsx`). Services et
+Formation étaient entièrement textuelles alors que 28 photos existent.
+
+- Chaque service porte la sienne, **déduite de son `id`**
+  (`service-${id}.webp`) : ajouter un service revient à déposer une photo au
+  même nom, sans toucher au composant.
+- Les quatre étapes de méthode prennent une vignette, mappées **par index**
+  (`METHOD_PHOTOS`) — les titres sont traduits, ils ne peuvent pas servir de clé.
+- **`alt` est vide partout.** Ces photos n'apportent rien que le texte voisin
+  ne dise déjà. Leur inventer une description créerait une légende à traduire
+  et à resynchroniser à chaque remplacement de visuel.
 
 **Contraste — ne pas baisser les opacités.** Sur le fond Deep Profond
 (`#001B2A`), le blanc à 30 % donne **2,6:1** et à 40 % **3,7:1**, sous le seuil
@@ -719,24 +767,98 @@ Deux détails qui comptent :
 Le `.vercelignore` est dans le repo mais ne suffit pas : le CLI scanne le
 filesystem avant d'appliquer les règles d'ignore.
 
-## Base de données (Neon) — posée le 2026-08-07, pas encore utilisée
+## Base de données (Neon) — 35 tables
 
-Postgres serverless chez Neon. **Le schéma existe et est vérifié ; aucune page
-ne s'y connecte encore.** C'est le socle de l'espace client prévu pour la
-session suivante : compte, audit de workflow en libre-service, ressources,
-formations, avancement de projet.
+Postgres serverless chez Neon. Projet `Rapia` (`soft-cherry-63336100`),
+organisation `org-winter-water-42162281`, région `aws-us-east-2`.
 
 | Élément | Où |
 |---------|-----|
-| Connexion | `DATABASE_URL` — Vercel (Production, Preview, Development) et `.env.local` |
+| Connexion | `DATABASE_URL` — `.env.local` et Vercel |
 | Client | `lib/db.ts` — pilote HTTP `@neondatabase/serverless` |
-| Schéma | `db/migrations/001_initial.sql` |
+| Schéma | `db/migrations/001_initial.sql`, `002_academy_community.sql` |
 | Exécution | `npm run db:migrate` |
+| Inventaire | `npm run db:check` — **ce que la base contient vraiment**, à opposer à ce que les fichiers SQL disent |
 
-**13 tables** : `users`, `auth_tokens`, `sessions`, `workflow_audits`,
-`training_sessions`, `training_registrations`, `resources`,
-`resource_downloads`, `projects`, `project_milestones`, `posts`,
-`newsletter_subscribers`, `schema_migrations`.
+**Migration 001 (13 tables)** — comptes, audits de workflow, formations
+animées, ressources, projets, blog, newsletter.
+
+**Migration 002 (22 tables)** — appliquée le 2026-08-07 :
+
+| Domaine | Tables |
+|---------|--------|
+| Organisations | `organizations`, `organization_members`, `organization_invites` |
+| Communautés | `communities`, `community_members` |
+| Forum | `forum_topics`, `forum_replies` |
+| Blog social | `post_comments`, `likes` |
+| Academy | `courses`, `course_modules`, `lessons`, `enrollments`, `lesson_progress` |
+| Quiz | `quizzes`, `quiz_questions`, `quiz_options`, `quiz_attempts`, `quiz_answers` |
+| Paiements | `orders`, `order_items`, `payments` |
+
+### Trois décisions prises avec l'utilisateur le 2026-08-07
+
+- **Authentification maison par lien magique**, contre Neon Auth. Celui-ci
+  aurait tenu une table de comptes parallèle à `users`, à synchroniser, et fait
+  partir les e-mails hors de Brevo. `users.id` reste la clé unique de tout le
+  schéma. *(`neon init` a tout de même été lancé : il a installé le CLI, le MCP
+  VS Code et des skills — outillage local, ignoré par git.)*
+- **Mobile Money uniquement** — M-Pesa, Airtel, Orange, AfriMoney via
+  FlexPay.cd. Pas de carte bancaire au schéma. `provider = 'manual'` n'est pas
+  une offre publique : c'est l'écriture d'un admin qui régularise un versement
+  hors ligne (facture ONG, espèces).
+- **Communautés validées avant publication.** Une communauté existe en base dès
+  sa demande et reste invisible jusqu'à `approved_at`. La modération est
+  préventive, pas réactive.
+
+### Ce qu'il faut savoir avant d'y toucher
+
+- **Le pilote HTTP refuse plusieurs instructions par requête.** D'où le
+  découpage dans `scripts/migrate.mjs` : il suit l'état du lexer (chaînes,
+  commentaires, dollar-quotes `$$`) parce qu'un `split(";")` couperait au
+  milieu des corps de fonction. Sans transaction englobante, **chaque migration
+  doit être idempotente** — `IF NOT EXISTS` partout.
+- **`sql` est un tagged template.** ``sql`... ${email} ...` `` lie les
+  paramètres ; `sql(\`...\`)` **lève une erreur** — le pilote refuse l'appel de
+  fonction et renvoie vers `sql.query(...)`, la seule forme admise pour du DDL
+  sans paramètre. Rencontré en écrivant la rotation du mot de passe.
+- **`citext` pour les e-mails**, vérifié : `Test@Rapia.CD` et `test@rapia.cd`
+  sont le même compte. `users.handle` l'est aussi — l'identifiant public ne
+  doit pas dépendre d'une majuscule.
+- **`ON DELETE CASCADE` depuis `users`**, vérifié. Deux exceptions
+  délibérées : `organizations.owner_id` et `communities.owner_id` sont en
+  `SET NULL`, parce que supprimer le compte d'un directeur ne doit pas emporter
+  son organisation et ses agents.
+- **Les « j'aime » ne sont pas polymorphes.** `likes` porte une vraie clé
+  étrangère par cible (`post_id`, `topic_id`, `reply_id`, `comment_id`) avec
+  `num_nonnulls(...) = 1`, plutôt qu'un couple `(type, id)` sans contrainte.
+  L'unicité passe par **quatre index partiels** : un `UNIQUE` ordinaire sur les
+  quatre colonnes laisserait passer autant de doublons qu'on veut, deux NULL
+  n'étant jamais égaux en SQL. Même piège pour `forum_topics.slug`, d'où le
+  `COALESCE(community_id, '000…'::uuid)` dans son index.
+- **`forum_topics.reply_count` et `last_reply_at` sont tenus par trigger.**
+  Ne jamais les écrire depuis le code applicatif.
+- **Les montants sont en centimes**, jamais en flottant, et **recopiés** sur
+  `order_items` : une facture doit dire ce qui a été vendu ce jour-là, même si
+  le prix a changé au catalogue depuis.
+
+### Le mot de passe a été tourné le 2026-08-07
+
+La chaîne de connexion avait circulé en clair dans une conversation. **C'est
+réglé** : `ALTER ROLE neondb_owner WITH PASSWORD` exécuté en SQL — Neon
+l'accepte depuis n'importe quel client, le dashboard n'est pas nécessaire — et
+`.env.local` mis à jour, nouvelle connexion vérifiée par `npm run db:migrate`.
+
+⚠️ **`DATABASE_URL` sur Vercel porte encore l'ancien mot de passe.** Le
+classifieur de sécurité refuse `vercel env rm` / `vercel env add` en session.
+Sans conséquence tant qu'aucune page déployée ne lit la base — **mais à faire
+avant la première mise en ligne de l'espace client** :
+
+```bash
+# la bonne valeur est dans .env.local
+npx vercel env rm DATABASE_URL production --yes
+npx vercel env add DATABASE_URL production   # coller la valeur
+# idem pour preview et development
+```
 
 ### Ce qu'il faut savoir avant d'y toucher
 
@@ -767,8 +889,84 @@ le mot de passe depuis Neon** avant la mise en service de l'espace client, puis
 remplacer la valeur avec `vercel env rm` / `vercel env add` sur les trois
 environnements et dans `.env.local`.
 
+## Espace client — connexion par lien magique
+
+Mise en service le 2026-08-07. **Testée de bout en bout en local** : demande de
+lien, création du compte, consommation du jeton, ouverture de session, accès à
+la page protégée, déconnexion, et refus du rejeu.
+
+| Fichier | Rôle |
+|---------|------|
+| `lib/auth.ts` | Tout : jetons, sessions, cookie, garde de redirection |
+| `lib/email.ts` → `sendMagicLink()` | L'e-mail, via le gabarit `emailLayout()` |
+| `app/api/auth/request/route.ts` | Demande de lien |
+| `app/api/auth/verify/route.ts` | Consomme le jeton, ouvre la session |
+| `app/api/auth/logout/route.ts` | Ferme la session |
+| `app/[locale]/connexion/` | Formulaire + page de confirmation |
+| `app/[locale]/espace/` | La page protégée |
+
+### Sept choix qui ont chacun une raison
+
+- **La vérification passe par un bouton, pas par le clic sur le lien.**
+  Microsoft 365 Safe Links — donc les ONG et institutions visées — **visite les
+  URL entrantes avant leur destinataire**. Un jeton à usage unique consommé par
+  ce passage laisse la personne devant « lien déjà utilisé » sur un lien
+  qu'elle n'a jamais ouvert. Un scanner suit un lien ; il ne soumet pas un
+  formulaire. **Ne pas « simplifier » en consommant le jeton au `GET`.**
+- **La route répond toujours la même chose**, que le compte existe ou non,
+  qu'il soit limité ou non. Sinon le formulaire devient un oracle : on saisit
+  une adresse, on lit la réponse, on sait qui est client de RapIA. Les seuls
+  autres codes sont 400 (adresse invalide) et 500 (envoi échoué) — les cas où
+  rien n'a été tenté.
+- **La consommation du jeton est un `UPDATE ... RETURNING`, pas un `SELECT`
+  puis un `UPDATE`.** Entre les deux, deux clics simultanés ouvriraient deux
+  sessions.
+- **Session de 30 jours glissants**, prolongée à mi-vie. Un espace de formation
+  se consulte par à-coups ; une session courte renverrait sans cesse vers la
+  boîte mail et consommerait le quota Brevo (300/jour).
+- **La protection est dans le composant serveur, pas dans `proxy.ts`.** Le
+  middleware tourne en Edge : ni `node:crypto` ni le pilote de base n'y sont
+  disponibles, il ne pourrait que constater la présence d'un cookie sans
+  vérifier qu'il correspond à une session vivante. **Toute page ajoutée sous
+  `/espace` doit refaire l'appel à `getSessionUser()`** — ou passer par un
+  `layout.tsx` commun quand elles seront plusieurs.
+- **Jamais le jeton en base, toujours son empreinte SHA-256.** Vaut pour
+  `auth_tokens`, `sessions` et `organization_invites`.
+- **`lib/auth.ts` n'est pas gardé par `server-only`** — le paquet n'est pas
+  installé, le projet tient à zéro dépendance externe. La garde est humaine :
+  **ne l'importer que depuis un composant serveur ou une route API.**
+
+### Ce qui manque pour l'essayer en local
+
+`.env.local` **ne contient pas les identifiants Brevo** — seulement
+`DATABASE_URL` (plus `RESEND_API_KEY` et `CONTACT_EMAIL`, morts). La demande de
+lien répond donc 500 en local, ce qui est le comportement voulu : mieux vaut
+une erreur qu'un « lien envoyé » devant une boîte vide. Pour tester
+réellement :
+
+```bash
+npx vercel env pull .env.local --environment=production
+```
+
 ## Points d'attention techniques
 
+- **⚠️ Le disque C: a saturé pendant la session du 2026-08-07** — 0 octet libre
+  sur 237 Go, en pleine écriture de fichier. Symptôme trompeur : PowerShell se
+  met à répondre **faux** sans erreur (`Test-Path` renvoie vide sur des
+  dossiers qui existent, `Get-Volume` ne trouve plus C:). Si des commandes
+  deviennent incohérentes, vérifier l'espace **avant** de chercher un bug :
+  ```powershell
+  $d = New-Object System.IO.DriveInfo("C"); "{0:N2} Go" -f ($d.AvailableFreeSpace/1GB)
+  ```
+  9,5 Go ont été récupérés en supprimant `.next`, `npm-cache`, `pnpm-cache`,
+  `next-swc` et le contenu de `%LOCALAPPDATA%\Temp` — tous régénérables. Passer
+  par `cmd /c rmdir /s /q` quand PowerShell devient peu fiable.
+- **`.next` partagé entre `next build` et `next dev` casse le routage.** Après
+  un build de production, `npm run dev` a servi **404 sur toutes les routes
+  API nouvellement ajoutées** — tout en affichant `○ Compiling /api/auth/request`
+  dans ses logs, ce qui envoie chercher le bug dans le code. `/api/contact`,
+  déjà présent dans le build, répondait normalement. **Supprimer `.next` avant
+  de passer du build au dev.**
 - **pnpm-lock.yaml** à la racine `C:\Users\RAPYOGO\` → Turbopack émet un warning
   "workspace root inferred" à chaque build. Non bloquant, silençable avec
   `turbopack.root` dans `next.config.ts`.
@@ -796,45 +994,53 @@ environnements et dans `.env.local`.
 
 ## Prochaines pistes
 
-### Le chantier de la session suivante — l'espace client
+### Le chantier de la session suivante — remplir l'espace client
 
-Décidé avec l'utilisateur le 2026-08-07. Le schéma Neon l'attend en entier
-(voir « Base de données ») ; **aucune ligne de code applicatif n'existe encore.**
+La porte est ouverte (connexion, session, page protégée) et **le schéma attend
+en entier**. Ce qui manque est l'écran de chaque fonction. Ordre proposé, du
+plus rentable au moins pressé :
 
-1. **Authentification par lien magique.** `users`, `auth_tokens`, `sessions`
-   sont prêtes. Brevo est déjà en service, donc pas de secret à stocker :
-   `sendEmail()` existe, le stub à écrire est l'envoi du lien. `password_hash`
-   reste nullable tant que ce choix tient.
-2. **Audit de workflow en libre-service** — `workflow_audits`. Réponses en
-   `jsonb` + `questionnaire_version` : sans ce numéro, les réponses d'avant un
-   changement de questionnaire deviennent illisibles. Le diagnostic rend un
-   `maturity_level` de 1 à 3, qui reprend les trois niveaux du site
-   (Discuter / Connecter / Déléguer).
-3. **Ressources** — `resources`, `resource_downloads`. `access` vaut
-   `public`, `account` ou `client`.
-4. **Formations** — `training_sessions`, `training_registrations`. Le catalogue
-   éditorial reste dans `messages/*.json` ; la table ne porte que ce qu'une
-   inscription exige.
-5. **Avancement de projet** — `projects`, `project_milestones`. Des étapes, pas
-   un pourcentage : un client veut savoir *ce qui* est fait.
-6. **Blog** — `posts`. `Content.tsx` rend déjà la grille et retourne `null`
-   faute de source ; c'est cette table qui la lui donne.
+1. **Profil et organisation.** Le compte n'a aujourd'hui qu'une adresse
+   e-mail : `full_name`, `handle`, `avatar_url` sont vides. C'est le préalable
+   au forum — on ne signe pas un message avec son adresse. Enchaîner sur la
+   création d'organisation et l'invitation d'agents (`organization_invites`,
+   même mécanique de jeton haché que la connexion, e-mail à écrire).
+2. **Blog** — `posts` existe, `Content.tsx` rend déjà la grille et retourne
+   `null` faute de source. C'est le contenu qui manque le plus au site, et le
+   plus simple à brancher. Puis `post_comments` (modération par défaut) et
+   `likes`.
+3. **Academy** — `courses` → `course_modules` → `lessons`, puis `enrollments`
+   et `lesson_progress`. Les quiz après : ils n'ont d'intérêt qu'une fois des
+   leçons à sanctionner.
+4. **Audit de workflow en libre-service** — `workflow_audits`. Le diagnostic
+   rend un `maturity_level` de 1 à 3, qui reprend les trois niveaux du site
+   (Discuter / Connecter / Déléguer) — et `courses.level` utilise **la même
+   échelle**, ce qui permet à un audit de recommander les bons cours.
+5. **Paiements FlexPay** — un skill dédié existe (`flexpay-mobile-money`).
+   `orders` / `payments` sont prêtes, `provider_reference` est `UNIQUE` : c'est
+   la garde contre le double encaissement sur un rappel de callback répété.
+6. **Forum et communautés** — le plus lourd en interface, et celui qui exige
+   une politique de modération avant d'ouvrir.
 7. **Newsletter** — `newsletter_subscribers`, double opt-in.
 
-**Trois décisions à prendre avant de coder** : la durée de session, ce qu'un
-compte non vérifié peut voir, et qui administre le contenu (un back-office ou
-du SQL direct au début).
+**Deux décisions restent à prendre** : ce qu'un compte non vérifié peut voir
+(aujourd'hui `email_verified_at` est posé dès le premier lien cliqué, donc la
+question ne se pose pas encore), et **qui administre** — un back-office à
+construire, ou du SQL direct au début. Aucun écran d'administration n'existe,
+alors que l'utilisateur a demandé que « l'admin gère la plateforme entière ».
 
 ### À confirmer par l'utilisateur
 
-- **Certifications Microsoft et Anthropic** : publiées sur `/a-propos`, mais
-  elles viennent de l'audit GEO et **pas de la biographie transmise par
-  l'intéressé**. Confirmer ou retirer de `FOUNDER.certifications`
-  (`lib/site.ts`) et de `about.credentials` (`messages/*.json`).
+- ✅ **Certifications Microsoft et Anthropic — confirmées par l'intéressé le
+  2026-08-07.** Elles peuvent rester publiées.
 - **Liens sociaux** : `SOCIAL_PLATFORMS` réserve la place de LinkedIn, YouTube,
-  TikTok, Facebook, Instagram et X, toutes à `url: null`. Renseigner une URL
-  suffit à la publier dans le pied de page **et** dans le `sameAs`. Seul GitHub
-  est vérifié à ce jour.
+  TikTok, Facebook, Instagram et X, toutes à `url: null`. Le pied de page rend
+  désormais des **pictogrammes** (`components/ui/social-icons.tsx`) : renseigner
+  une URL suffit à faire apparaître l'icône **et** à alimenter le `sameAs`,
+  sans toucher à un composant. Seul GitHub est vérifié à ce jour.
+- **URL LinkedIn et photo du fondateur** : demandées le 2026-08-07, pas encore
+  transmises. Le profil n'est pas trouvable par recherche publique — il faut
+  l'URL exacte. La photo remplacerait l'absence de portrait sur `/a-propos`.
 - **Domaine de Viteat** : aucun ne résout (`viteat.com`, `.cd`, `.app`,
   `.africa`, `viteat.rapyogo.com`). Le service est cité sans lien sur
   `/a-propos` ; `SIBLING_SERVICES` l'attend en `url: null`.
@@ -852,12 +1058,10 @@ du SQL direct au début).
 - **Supprimer `RESEND_API_KEY` et `CONTACT_EMAIL`** des variables Vercel
   Production : plus aucun code ne les lit (suppression refusée par le classifieur
   de sécurité pendant la session, à faire depuis le dashboard).
-- **Unifier l'adresse de contact — devenu plus visible.** Le formulaire affiche
-  `contact@rapyogo.com` (clé `contact.email`) alors que le footer, juste
-  en dessous, affiche `ia@rapyogo.com` (`lib/company.ts`) — d'où partent
-  réellement les emails. Les deux se voient maintenant sur le même écran.
-  **Décider laquelle fait foi**, puis supprimer l'autre : si `ia@` gagne, la clé
-  `contact.email` disparaît au profit de `COMPANY.email`.
+- ✅ **Adresse de contact unifiée le 2026-08-07.** `ia@rapyogo.com`
+  (`COMPANY.email`) fait foi partout ; la clé `contact.email` a été supprimée
+  des deux fichiers de messages. Une adresse e-mail n'est pas de la copy : elle
+  ne se traduit pas et ne se duplique pas.
 - Implémenter les stubs quand le besoin arrive : inscriptions formations,
   demandes de devis, newsletter.
 
