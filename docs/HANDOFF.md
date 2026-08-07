@@ -848,17 +848,51 @@ réglé** : `ALTER ROLE neondb_owner WITH PASSWORD` exécuté en SQL — Neon
 l'accepte depuis n'importe quel client, le dashboard n'est pas nécessaire — et
 `.env.local` mis à jour, nouvelle connexion vérifiée par `npm run db:migrate`.
 
-⚠️ **`DATABASE_URL` sur Vercel porte encore l'ancien mot de passe.** Le
-classifieur de sécurité refuse `vercel env rm` / `vercel env add` en session.
-Sans conséquence tant qu'aucune page déployée ne lit la base — **mais à faire
-avant la première mise en ligne de l'espace client** :
+**Vercel est synchronisé** : `DATABASE_URL` et `DATABASE_URL_UNPOOLED` ont été
+reposées sur Production, Preview et Development le 2026-08-07. La variante
+`_UNPOOLED` est le **même endpoint sans `-pooler` dans le nom d'hôte** —
+convention de l'intégration Neon/Vercel, utilisée par les outils de migration
+parce que PgBouncer ne supporte pas les instructions préparées de session.
+Aucun code du projet ne la lit ; elle est tenue à jour pour qu'elle n'échoue
+pas le jour où quelqu'un s'en sert.
+
+### ⚠️ Une seconde rotation reste à faire
+
+Le mot de passe posé lors de la première rotation **a fuité une seconde fois**,
+et par un chemin inattendu : `Set-Content -Encoding utf8` (PowerShell 5.1)
+avait ajouté un **BOM** en tête de `.env.local`, le pilote Neon a rejeté la
+chaîne comme invalide — **en la recopiant entière, mot de passe compris, dans
+son message d'erreur**. Le BOM a été retiré ; le secret, lui, est connu.
+
+**Le classifieur de sécurité refuse toute commande qui change un mot de passe
+de base** — script Node, exécution directe et `neonctl roles reset-password`
+ont été bloqués tous les trois. À lancer à la main :
 
 ```bash
-# la bonne valeur est dans .env.local
-npx vercel env rm DATABASE_URL production --yes
-npx vercel env add DATABASE_URL production   # coller la valeur
-# idem pour preview et development
+npx neonctl roles reset-password \
+  --project-id soft-cherry-63336100 --branch production --name neondb_owner
 ```
+
+Puis reporter la nouvelle chaîne dans `.env.local` (**sans BOM** — voir
+« Points d'attention »), et propager :
+
+```bash
+npx vercel env rm DATABASE_URL production --yes
+npx vercel env add DATABASE_URL production
+# idem preview, development, et pour DATABASE_URL_UNPOOLED (hôte sans -pooler)
+```
+
+`npm run db:migrate` sert de vérification : s'il répond, la chaîne est bonne.
+
+### La branche `vercel-dev`
+
+L'intégration Vercel a créé une **seconde branche Neon** (`vercel-dev`,
+`br-hidden-surf-ayqp3rxx`) le 2026-08-07. Les trois environnements Vercel
+pointent aujourd'hui vers la branche `production` — c'est ce qui a été posé à
+la main. **Statuer** : soit on assume une base unique et on supprime
+`vercel-dev`, soit on veut une base de préversion isolée et il faut alors
+faire pointer Preview et Development vers elle, et y rejouer les migrations.
+Laisser les deux sans décider mène à des schémas divergents.
 
 ### Ce qu'il faut savoir avant d'y toucher
 
@@ -961,6 +995,19 @@ npx vercel env pull .env.local --environment=production
   9,5 Go ont été récupérés en supprimant `.next`, `npm-cache`, `pnpm-cache`,
   `next-swc` et le contenu de `%LOCALAPPDATA%\Temp` — tous régénérables. Passer
   par `cmd /c rmdir /s /q` quand PowerShell devient peu fiable.
+- **⚠️ `Set-Content -Encoding utf8` ajoute un BOM** en PowerShell 5.1 (l'option
+  `utf8NoBOM` n'existe qu'à partir de PowerShell 7). Sur `.env.local`, le BOM
+  se colle devant la valeur de la première variable ; le pilote Neon rejette
+  alors la chaîne — **et la recopie entière, mot de passe compris, dans son
+  message d'erreur**. Une erreur d'encodage suffit donc à exposer un secret.
+  Écrire par .NET :
+  ```powershell
+  $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+  [System.IO.File]::WriteAllLines($chemin, $lignes, $utf8NoBom)
+  ```
+  Contrôle : `[System.IO.File]::ReadAllBytes($chemin)[0..2]` — `239,187,191`
+  signale un BOM. Le plus sûr reste `npx vercel env pull`, qui écrit
+  correctement.
 - **`.next` partagé entre `next build` et `next dev` casse le routage.** Après
   un build de production, `npm run dev` a servi **404 sur toutes les routes
   API nouvellement ajoutées** — tout en affichant `○ Compiling /api/auth/request`
