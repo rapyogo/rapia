@@ -459,6 +459,111 @@ export async function sendContactConfirmation(
 }
 
 // ---------------------------------------------------------------------------
+// Espace client — lien de connexion
+// ---------------------------------------------------------------------------
+
+/**
+ * Envoie le lien de connexion à l'espace client.
+ *
+ * C'est **le seul chemin d'entrée** dans l'espace membre : si cet e-mail
+ * n'arrive pas, personne ne se connecte. Trois précautions en découlent.
+ *
+ * - **L'objet dit ce que c'est, sans promesse marketing.** Un objet accrocheur
+ *   sur un e-mail transactionnel augmente le risque de classement en
+ *   promotions, où il ne sera pas cherché.
+ * - **Le lien est aussi écrit en clair sous le bouton.** Les clients de
+ *   messagerie en mode texte, et ceux qui bloquent les liens cliquables des
+ *   expéditeurs récents, ne laisseraient sinon aucun moyen d'entrer.
+ * - **La durée de validité est annoncée.** Un lien qui échoue sans expliquer
+ *   pourquoi se lit comme une panne du site.
+ *
+ * Ne prend pas de `locale` : les e-mails du projet sont en français, comme
+ * ceux du formulaire de contact.
+ */
+export async function sendMagicLink(
+  to: string,
+  url: string,
+  options: { isNew?: boolean; expiresInMinutes?: number } = {}
+): Promise<{ success: boolean; error?: string }> {
+  const { isNew = false, expiresInMinutes = 15 } = options;
+
+  const subject = isNew
+    ? "Activez votre espace RapIA"
+    : "Votre lien de connexion RapIA";
+
+  const heading = isNew ? "Bienvenue chez RapIA" : "Votre lien de connexion";
+  const intro = isNew
+    ? "Votre espace est prêt. Un seul clic pour l'ouvrir — il n'y a pas de mot de passe à choisir, ni à retenir."
+    : "Cliquez sur le bouton ci-dessous pour ouvrir votre espace. Il n'y a pas de mot de passe à saisir.";
+
+  const html = emailLayout({
+    preheader: `Votre lien de connexion, valable ${expiresInMinutes} minutes.`,
+    bodyHtml: `
+              <h1 style="margin:0 0 20px; font-family:${BRAND.font}; font-size:26px; line-height:1.25; font-weight:700; letter-spacing:-0.02em; color:${BRAND.text};">
+                ${heading}
+              </h1>
+
+              <p style="margin:0 0 28px; font-family:${BRAND.font}; font-size:16px; line-height:1.65; color:${BRAND.textSecondary};">
+                ${intro}
+              </p>
+
+              <!-- Bouton robuste : table + padding sur le lien, seule construction fiable sous Outlook -->
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td align="center" style="background-color:${BRAND.indigo}; border-radius:8px;">
+                    <a href="${escapeHtml(url)}"
+                       style="display:inline-block; padding:14px 28px; font-family:${BRAND.font}; font-size:15px; font-weight:600; color:#FFFFFF; text-decoration:none;">
+                      Ouvrir mon espace
+                    </a>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="margin:24px 0 0; font-family:${BRAND.font}; font-size:14px; line-height:1.6; color:${BRAND.textMuted};">
+                Ce lien est valable <strong style="color:${BRAND.text};">${expiresInMinutes} minutes</strong>
+                et ne fonctionne qu'une fois.
+              </p>
+
+              <!-- Le lien en clair : certains clients de messagerie n'affichent
+                   pas les boutons, et d'autres neutralisent les liens des
+                   expéditeurs récents. -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0 0;">
+                <tr>
+                  <td style="background-color:${BRAND.bg}; border-left:3px solid ${BRAND.border}; border-radius:0 8px 8px 0; padding:14px 16px;">
+                    <p style="margin:0 0 6px; font-family:${BRAND.font}; font-size:12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:${BRAND.textMuted};">
+                      Le bouton ne fonctionne pas ?
+                    </p>
+                    <p style="margin:0; font-family:${BRAND.font}; font-size:13px; line-height:1.5; word-break:break-all; color:${BRAND.textSecondary};">${escapeHtml(url)}</p>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="margin:28px 0 0; padding-top:20px; border-top:1px solid ${BRAND.border}; font-family:${BRAND.font}; font-size:14px; line-height:1.6; color:${BRAND.textMuted};">
+                Vous n'avez rien demandé ? Ignorez cet e-mail : sans ce clic, aucun
+                compte ne s'ouvre et aucune donnée n'est conservée.
+              </p>`,
+  });
+
+  const text = [
+    heading,
+    ``,
+    intro,
+    ``,
+    url,
+    ``,
+    `Ce lien est valable ${expiresInMinutes} minutes et ne fonctionne qu'une fois.`,
+    ``,
+    `Vous n'avez rien demandé ? Ignorez cet e-mail : sans ce clic, aucun compte`,
+    `ne s'ouvre et aucune donnée n'est conservée.`,
+    ``,
+    `--`,
+    FOOTER_TEXT,
+  ].join("\n");
+
+  return sendEmail(to, subject, html, text);
+}
+
+// ---------------------------------------------------------------------------
 // Stubs — futures fonctions email (à implémenter quand le besoin sera confirmé)
 // ---------------------------------------------------------------------------
 

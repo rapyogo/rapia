@@ -48,3 +48,10 @@ next-env.d.ts
 graphify-out/.graphify_python
 graphify-out/.graphify_root
 graphify-out/cache/
+
+# outillage local installe par `neon init` — skills d'agent, etat du CLI.
+# C'est de l'equipement de poste de travail, pas du produit : chaque machine
+# le reinstalle avec `npx neon@latest init`.
+.agents/
+.neon
+skills-lock.json

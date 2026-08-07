@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "db:migrate": "node --env-file=.env.local scripts/migrate.mjs"
+    "db:migrate": "node --env-file=.env.local scripts/migrate.mjs",
+    "db:check": "node --env-file=.env.local scripts/db-check.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
