@@ -917,15 +917,27 @@ npx vercel env add DATABASE_URL production
 
 `npm run db:migrate` sert de vérification : s'il répond, la chaîne est bonne.
 
-### La branche `vercel-dev`
+### Une seule branche Neon : `production`
 
-L'intégration Vercel a créé une **seconde branche Neon** (`vercel-dev`,
-`br-hidden-surf-ayqp3rxx`) le 2026-08-07. Les trois environnements Vercel
-pointent aujourd'hui vers la branche `production` — c'est ce qui a été posé à
-la main. **Statuer** : soit on assume une base unique et on supprime
-`vercel-dev`, soit on veut une base de préversion isolée et il faut alors
-faire pointer Preview et Development vers elle, et y rejouer les migrations.
-Laisser les deux sans décider mène à des schémas divergents.
+`neon init` avait créé une seconde branche, `vercel-dev`, le 2026-08-07 à
+14h36 — donc **avant** la migration 002 : elle portait déjà l'ancien schéma à
+13 tables pendant que la vraie base en avait 35. Rien ne pointait vers elle,
+les trois environnements Vercel visant `production`. **Supprimée**, décision
+prise avec l'utilisateur : deux bases dont une oubliée finissent toujours par
+coûter une soirée.
+
+**Le jour où il faudra une base de préversion** — c'est-à-dire dès qu'il y aura
+de vrais comptes clients, pour qu'un test n'écrive plus dans leurs données — la
+recréer, y rejouer `npm run db:migrate`, **et** faire pointer `DATABASE_URL` de
+Preview et Development vers elle. Les trois gestes, sinon les schémas divergent
+en silence.
+
+**Il n'y a pas de ressource Marketplace Neon côté Vercel** (`vercel integration
+ls` ne renvoie rien) : la liaison a été faite depuis Neon. Conséquence à
+connaître — si cette intégration reprend la main, elle **réécrira**
+`DATABASE_URL` sur Vercel, par-dessus les valeurs posées à la main ici. Sans
+gravité tant que les deux visent la même branche, mais c'est l'explication à
+chercher en premier si la variable change toute seule.
 
 ### Ce qu'il faut savoir avant d'y toucher
 
