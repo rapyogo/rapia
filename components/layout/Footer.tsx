@@ -1,8 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import { ExternalLink } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { COMPANY } from "@/lib/company";
+import { RECOGNITIONS, SOCIALS } from "@/lib/site";
 
 /**
  * Pied de page du site.
@@ -35,10 +37,18 @@ export function Footer() {
   const tServices = useTranslations("services");
   const tSite = useTranslations("site");
   const tNav = useTranslations("nav");
+  const tAbout = useTranslations("about");
   const locale = useLocale();
   const prefix = `/${locale}`;
 
   const items = tServices.raw("items") as { title: string }[];
+  // Les distinctions sont décrites une seule fois, dans le namespace `about` :
+  // le pied de page et la page « À propos » citent le même libellé, et une
+  // correction ne se fait qu'à un endroit.
+  const recognitions = tAbout.raw("recognitions") as {
+    title: string;
+    year: string;
+  }[];
 
   const linkClass =
     "text-sm text-white/65 hover:text-white transition-colors duration-200";
@@ -97,6 +107,16 @@ export function Footer() {
             <h3 className={columnTitleClass}>{t("aboutTitle")}</h3>
             <ul className="space-y-2.5">
               <li>
+                <a href={`${prefix}/a-propos`} className={linkClass}>
+                  {t("aboutLink")}
+                </a>
+              </li>
+              <li>
+                <a href={`${prefix}/faq`} className={linkClass}>
+                  {t("faqLink")}
+                </a>
+              </li>
+              <li>
                 <a href={`${prefix}/#why-rapia`} className={linkClass}>
                   {t("whyRapia")}
                 </a>
@@ -146,6 +166,33 @@ export function Footer() {
                 </a>
               </li>
             </ul>
+
+            {/* Liens sortants — l'audit GEO relevait zéro lien externe sur tout
+                le site. Les mentions existaient (GitHub, distinction GoGettaz)
+                mais rien ne les reliait à la marque : ni un lecteur ni un
+                moteur ne pouvait faire le rapprochement. */}
+            {SOCIALS.length > 0 && (
+              <>
+                <h3 className={`${columnTitleClass} mt-8`}>
+                  {t("followTitle")}
+                </h3>
+                <ul className="space-y-2.5">
+                  {SOCIALS.map((social) => (
+                    <li key={social.name}>
+                      <a
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer me"
+                        className={`${linkClass} inline-flex items-center gap-1.5`}
+                      >
+                        {social.name}
+                        <ExternalLink size={13} aria-hidden="true" />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
           </div>
         </div>
 
@@ -170,6 +217,38 @@ export function Footer() {
             ))}
           </ul>
         </div>
+
+        {/* Distinctions — la seule preuve de crédibilité vérifiable par un
+            tiers que RAPIA possède aujourd'hui, et qui n'était nulle part sur
+            le site. Chaque entrée renvoie à sa source : elle se vérifie sans
+            nous croire sur parole. */}
+        {recognitions.length > 0 && (
+          <div className="mt-12 border-t border-white/10 pt-10">
+            <h3 className={columnTitleClass}>{t("recognitionLabel")}</h3>
+            <ul className="flex flex-wrap gap-3">
+              {recognitions.map((recognition, i) => {
+                // Mappé par index : le titre est traduit, il ne peut pas
+                // servir de clé de correspondance avec `RECOGNITIONS`.
+                const source = RECOGNITIONS[i];
+                if (!source) return null;
+                return (
+                  <li key={recognition.title}>
+                    <a
+                      href={source.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-[var(--radius-md)] border border-white/20 px-4 py-2.5 text-sm text-white/80 transition-colors duration-200 hover:border-[var(--color-amber)] hover:text-white"
+                    >
+                      <span className="font-medium">{recognition.title}</span>
+                      <span className="text-white/55">{recognition.year}</span>
+                      <ExternalLink size={13} aria-hidden="true" />
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
 
         {/* Mentions légales */}
         <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-8 md:flex-row md:items-center md:justify-between">

@@ -1,3 +1,6 @@
+import { getTranslations } from "next-intl/server";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { graph, webPage } from "@/lib/schema";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MobileNav } from "@/components/layout/MobileNav";
@@ -25,9 +28,27 @@ import { FinalCTA } from "@/components/sections/FinalCTA";
  * showpiece la remplace (phase 4). Le constat vient donc avant le recit, et
  * non l'inverse : on nomme le probleme, puis on montre la sortie.
  */
-export default function Home() {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "site" });
+
+  // L'accueil ne declarait aucun noeud de page : le layout de locale posait
+  // l'organisation et le site, mais rien ne disait ce qu'etait cette URL-la.
+  // Les autres pages le font maintenant ; l'accueil ne peut pas rester la
+  // seule sans identite propre dans le graphe.
+  const node = webPage(locale, {
+    path: "",
+    name: t("positioning"),
+    description: t("description"),
+  });
+
   return (
     <>
+      <JsonLd data={graph([node])} />
       <Header />
       <main id="main-content">
         <HeroSequence />

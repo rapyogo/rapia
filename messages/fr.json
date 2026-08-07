@@ -16,7 +16,8 @@
     "languageFr": "Français",
     "languageEn": "English",
     "switchTo": "Switch to English",
-    "skipToContent": "Aller au contenu principal"
+    "skipToContent": "Aller au contenu principal",
+    "faq": "FAQ"
   },
   "hero": {
     "eyebrow": "AGENCE D'INTELLIGENCE ARTIFICIELLE | RDC",
@@ -50,28 +51,52 @@
         "id": "conseil",
         "title": "Conseil IA",
         "description": "Identifier les tâches, processus et fonctions dans lesquels l'IA peut créer le plus de valeur.",
-        "features": ["Audit IA", "Stratégie d'adoption", "Cartographie des processus", "Identification des opportunités", "Feuille de route IA"],
+        "features": [
+          "Audit IA",
+          "Stratégie d'adoption",
+          "Cartographie des processus",
+          "Identification des opportunités",
+          "Feuille de route IA"
+        ],
         "cta": "Découvrir le conseil"
       },
       {
         "id": "formation",
         "title": "Formation IA",
         "description": "Former les équipes à une utilisation professionnelle, sécurisée et productive de l'intelligence artificielle.",
-        "features": ["Formation entreprise", "Ateliers pratiques", "Formation dirigeants", "Ingénierie des prompts", "Utilisation professionnelle des assistants IA"],
+        "features": [
+          "Formation entreprise",
+          "Ateliers pratiques",
+          "Formation dirigeants",
+          "Ingénierie des prompts",
+          "Utilisation professionnelle des assistants IA"
+        ],
         "cta": "Voir les formations"
       },
       {
         "id": "implementation",
         "title": "Implémentation IA",
         "description": "Construire et intégrer des systèmes IA adaptés aux besoins réels de l'organisation.",
-        "features": ["Assistants IA", "Systèmes RAG", "Bases de connaissances", "Intégration de modèles IA", "Systèmes documentaires intelligents"],
+        "features": [
+          "Assistants IA",
+          "Systèmes RAG",
+          "Bases de connaissances",
+          "Intégration de modèles IA",
+          "Systèmes documentaires intelligents"
+        ],
         "cta": "Parler d'un projet"
       },
       {
         "id": "automatisation",
         "title": "Automatisation & Agents IA",
         "description": "Automatiser les tâches répétitives et construire des agents capables d'exécuter des workflows.",
-        "features": ["Automatisation des processus", "Agents IA", "Qualification de prospects", "Traitement documentaire", "Support client et reporting"],
+        "features": [
+          "Automatisation des processus",
+          "Agents IA",
+          "Qualification de prospects",
+          "Traitement documentaire",
+          "Support client et reporting"
+        ],
         "cta": "Automatiser un processus"
       }
     ]
@@ -81,10 +106,22 @@
     "heading": "Comment nous travaillons",
     "subtitle": "Une méthodologie éprouvée pour passer du problème à la solution, avec les équipes au centre.",
     "steps": [
-      {"title": "Comprendre", "description": "Nous analysons vos objectifs, vos processus et vos difficultés."},
-      {"title": "Identifier", "description": "Nous identifions les tâches et processus présentant le meilleur potentiel d'utilisation de l'IA."},
-      {"title": "Construire", "description": "Nous concevons et implémentons la solution adaptée."},
-      {"title": "Former", "description": "Nous accompagnons les équipes afin que la technologie soit réellement adoptée."}
+      {
+        "title": "Comprendre",
+        "description": "Nous analysons vos objectifs, vos processus et vos difficultés."
+      },
+      {
+        "title": "Identifier",
+        "description": "Nous identifions les tâches et processus présentant le meilleur potentiel d'utilisation de l'IA."
+      },
+      {
+        "title": "Construire",
+        "description": "Nous concevons et implémentons la solution adaptée."
+      },
+      {
+        "title": "Former",
+        "description": "Nous accompagnons les équipes afin que la technologie soit réellement adoptée."
+      }
     ]
   },
   "useCases": {
@@ -95,18 +132,58 @@
     "interventionLabel": "Intervention IA",
     "resultLabel": "Résultat",
     "cases": [
-      {"sector": "Ressources Humaines", "before": "Tri manuel de CV et documents RH chronophage.", "intervention": "Automatisation du tri, synthèse de documents et aide à la préparation des fiches.", "result": "Traitement accéléré, équipe RH recentrée sur l'humain."},
-      {"sector": "Commercial", "before": "Prospects non qualifiés, temps perdu en recherche d'informations.", "intervention": "Qualification automatique des prospects et préparation des informations nécessaires.", "result": "Commerciaux mieux préparés, cycle de vente raccourci."},
-      {"sector": "Service Client", "before": "Questions fréquentes qui saturent les équipes support.", "intervention": "Assistant IA capable de répondre aux questions fréquentes et d'escalader les cas complexes.", "result": "Temps de réponse réduit, satisfaction client améliorée."},
-      {"sector": "ONG", "before": "Collecte et analyse manuelles des données de projets.", "intervention": "Accélération de la collecte, de l'analyse et de la synthèse des informations.", "result": "Reporting plus rapide, meilleure allocation des ressources."},
-      {"sector": "Finance & Administration", "before": "Tâches documentaires et rapports manuels répétitifs.", "intervention": "Automatisation des tâches documentaires, rapports et workflows internes.", "result": "Réduction des erreurs, gain de temps significatif."},
-      {"sector": "Direction", "before": "Décisions basées sur des informations fragmentées.", "intervention": "Systèmes de synthèse et d'analyse pour une vue d'ensemble rapide.", "result": "Décisions plus rapides, mieux informées."}
+      {
+        "sector": "Ressources Humaines",
+        "before": "Tri manuel de CV et documents RH chronophage.",
+        "intervention": "Automatisation du tri, synthèse de documents et aide à la préparation des fiches.",
+        "result": "Traitement accéléré, équipe RH recentrée sur l'humain."
+      },
+      {
+        "sector": "Commercial",
+        "before": "Prospects non qualifiés, temps perdu en recherche d'informations.",
+        "intervention": "Qualification automatique des prospects et préparation des informations nécessaires.",
+        "result": "Commerciaux mieux préparés, cycle de vente raccourci."
+      },
+      {
+        "sector": "Service Client",
+        "before": "Questions fréquentes qui saturent les équipes support.",
+        "intervention": "Assistant IA capable de répondre aux questions fréquentes et d'escalader les cas complexes.",
+        "result": "Temps de réponse réduit, satisfaction client améliorée."
+      },
+      {
+        "sector": "ONG",
+        "before": "Collecte et analyse manuelles des données de projets.",
+        "intervention": "Accélération de la collecte, de l'analyse et de la synthèse des informations.",
+        "result": "Reporting plus rapide, meilleure allocation des ressources."
+      },
+      {
+        "sector": "Finance & Administration",
+        "before": "Tâches documentaires et rapports manuels répétitifs.",
+        "intervention": "Automatisation des tâches documentaires, rapports et workflows internes.",
+        "result": "Réduction des erreurs, gain de temps significatif."
+      },
+      {
+        "sector": "Direction",
+        "before": "Décisions basées sur des informations fragmentées.",
+        "intervention": "Systèmes de synthèse et d'analyse pour une vue d'ensemble rapide.",
+        "result": "Décisions plus rapides, mieux informées."
+      }
     ]
   },
   "academy": {
     "heading": "Former les humains qui travailleront avec l'IA.",
     "subtitle": "RAPIA Academy : des formations conçues pour tous les niveaux, du dirigeant à l'équipe opérationnelle.",
-    "formations": ["Fondamentaux de l'IA", "IA générative", "ChatGPT, Claude, Gemini et autres LLM", "Automatisation", "Agents IA", "IA pour dirigeants", "IA pour équipes administratives", "IA pour ONG", "IA pour entrepreneurs"],
+    "formations": [
+      "Fondamentaux de l'IA",
+      "IA générative",
+      "ChatGPT, Claude, Gemini et autres LLM",
+      "Automatisation",
+      "Agents IA",
+      "IA pour dirigeants",
+      "IA pour équipes administratives",
+      "IA pour ONG",
+      "IA pour entrepreneurs"
+    ],
     "cta": "Voir les formations"
   },
   "whyRapia": {
@@ -114,11 +191,26 @@
     "heading": "Pourquoi RAPIA ?",
     "subtitle": "Dans un marché saturé de promesses, voici ce qui fait la différence.",
     "arguments": [
-      {"title": "Compréhension du terrain africain", "description": "Nos solutions sont pensées en fonction des réalités opérationnelles des organisations en RDC et en Afrique."},
-      {"title": "Approche orientée résultats", "description": "Nous ne commençons pas par l'outil. Nous commençons par le problème."},
-      {"title": "Formation + Implémentation", "description": "Nous ne nous contentons pas de construire une solution. Nous aidons également les équipes à l'adopter."},
-      {"title": "Technologies multiples", "description": "RAPIA est agnostique vis-à-vis des outils. Le meilleur modèle dépend du problème à résoudre."},
-      {"title": "Accompagnement humain", "description": "L'objectif n'est pas de remplacer les équipes. L'objectif est de leur permettre de travailler mieux, plus rapidement et avec davantage de capacité."}
+      {
+        "title": "Compréhension du terrain africain",
+        "description": "Nos solutions sont pensées en fonction des réalités opérationnelles des organisations en RDC et en Afrique."
+      },
+      {
+        "title": "Approche orientée résultats",
+        "description": "Nous ne commençons pas par l'outil. Nous commençons par le problème."
+      },
+      {
+        "title": "Formation + Implémentation",
+        "description": "Nous ne nous contentons pas de construire une solution. Nous aidons également les équipes à l'adopter."
+      },
+      {
+        "title": "Technologies multiples",
+        "description": "RAPIA est agnostique vis-à-vis des outils. Le meilleur modèle dépend du problème à résoudre."
+      },
+      {
+        "title": "Accompagnement humain",
+        "description": "L'objectif n'est pas de remplacer les équipes. L'objectif est de leur permettre de travailler mieux, plus rapidement et avec davantage de capacité."
+      }
     ]
   },
   "technologies": {
@@ -127,10 +219,22 @@
     "subtitle": "Nous choisissons la technologie en fonction du problème, pas l'inverse.",
     "techLine": "Nous choisissons la technologie en fonction du problème, pas l'inverse.",
     "categories": [
-      {"title": "LLM", "description": "ChatGPT, Claude, Gemini, Mistral, DeepSeek et autres modèles pertinents."},
-      {"title": "Automatisation", "description": "Workflows, API, intégrations et automatisations sur mesure."},
-      {"title": "Données", "description": "Bases de données, documents, knowledge bases et systèmes RAG."},
-      {"title": "Agents", "description": "Agents IA capables d'exécuter des tâches et des workflows de manière autonome."}
+      {
+        "title": "LLM",
+        "description": "ChatGPT, Claude, Gemini, Mistral, DeepSeek et autres modèles pertinents."
+      },
+      {
+        "title": "Automatisation",
+        "description": "Workflows, API, intégrations et automatisations sur mesure."
+      },
+      {
+        "title": "Données",
+        "description": "Bases de données, documents, knowledge bases et systèmes RAG."
+      },
+      {
+        "title": "Agents",
+        "description": "Agents IA capables d'exécuter des tâches et des workflows de manière autonome."
+      }
     ]
   },
   "forWhom": {
@@ -138,10 +242,26 @@
     "heading": "Pour qui ?",
     "subtitle": "Quelle que soit votre organisation, nous avons une approche adaptée.",
     "audiences": [
-      {"title": "Entreprises", "description": "Améliorez votre productivité et automatisez vos opérations.", "cta": "Parler à un expert"},
-      {"title": "ONG", "description": "Optimisez vos processus, la documentation, le reporting et la gestion des connaissances.", "cta": "Découvrir comment"},
-      {"title": "Institutions", "description": "Formez vos équipes et structurez une stratégie d'adoption de l'IA.", "cta": "Former mes équipes"},
-      {"title": "Professionnels", "description": "Développez des compétences directement applicables dans votre travail.", "cta": "Voir les formations"}
+      {
+        "title": "Entreprises",
+        "description": "Améliorez votre productivité et automatisez vos opérations.",
+        "cta": "Parler à un expert"
+      },
+      {
+        "title": "ONG",
+        "description": "Optimisez vos processus, la documentation, le reporting et la gestion des connaissances.",
+        "cta": "Découvrir comment"
+      },
+      {
+        "title": "Institutions",
+        "description": "Formez vos équipes et structurez une stratégie d'adoption de l'IA.",
+        "cta": "Former mes équipes"
+      },
+      {
+        "title": "Professionnels",
+        "description": "Développez des compétences directement applicables dans votre travail.",
+        "cta": "Voir les formations"
+      }
     ]
   },
   "socialProof": {
@@ -152,16 +272,48 @@
     "pending": "À venir",
     "emptyState": "Les chiffres seront publiés dès qu'ils seront vérifiés. Aucune donnée n'est inventée sur ce site.",
     "stats": [
-      {"key": "projets", "label": "Projets livrés", "suffix": ""},
-      {"key": "equipes", "label": "Personnes formées", "suffix": ""},
-      {"key": "processus", "label": "Processus automatisés", "suffix": ""},
-      {"key": "organisations", "label": "Organisations accompagnées", "suffix": ""}
+      {
+        "key": "projets",
+        "label": "Projets livrés",
+        "suffix": ""
+      },
+      {
+        "key": "equipes",
+        "label": "Personnes formées",
+        "suffix": ""
+      },
+      {
+        "key": "processus",
+        "label": "Processus automatisés",
+        "suffix": ""
+      },
+      {
+        "key": "organisations",
+        "label": "Organisations accompagnées",
+        "suffix": ""
+      }
     ],
     "proofs": [
-      {"key": "testimonials", "label": "Témoignages", "body": "Le premier témoignage sera publié après notre première mission livrée, avec l'accord écrit du client."},
-      {"key": "clients", "label": "Clients", "body": "Aucun logo n'apparaîtra ici sans l'autorisation signée de l'organisation concernée."},
-      {"key": "partners", "label": "Partenaires", "body": "Les partenariats en cours de formalisation seront annoncés une fois les accords signés."},
-      {"key": "certifications", "label": "Certifications", "body": "Les certifications de l'équipe seront listées avec leur organisme émetteur et leur date d'obtention."}
+      {
+        "key": "testimonials",
+        "label": "Témoignages",
+        "body": "Le premier témoignage sera publié après notre première mission livrée, avec l'accord écrit du client."
+      },
+      {
+        "key": "clients",
+        "label": "Clients",
+        "body": "Aucun logo n'apparaîtra ici sans l'autorisation signée de l'organisation concernée."
+      },
+      {
+        "key": "partners",
+        "label": "Partenaires",
+        "body": "Les partenariats en cours de formalisation seront annoncés une fois les accords signés."
+      },
+      {
+        "key": "certifications",
+        "label": "Certifications",
+        "body": "Les certifications de l'équipe seront listées avec leur organisme émetteur et leur date d'obtention."
+      }
     ],
     "ctaTitle": "Vous cherchez une agence qui ne surjoue pas ?",
     "ctaBody": "Nous commençons par un diagnostic honnête de vos processus. S'il n'y a pas d'opportunité IA sérieuse chez vous, nous vous le disons.",
@@ -170,7 +322,15 @@
   "content": {
     "heading": "Comprendre l'IA avant de l'adopter.",
     "subtitle": "Articles, analyses et ressources pour démystifier l'intelligence artificielle.",
-    "categories": ["Intelligence artificielle", "Automatisation", "Agents IA", "Productivité", "Transformation numérique", "IA en Afrique", "Formation"],
+    "categories": [
+      "Intelligence artificielle",
+      "Automatisation",
+      "Agents IA",
+      "Productivité",
+      "Transformation numérique",
+      "IA en Afrique",
+      "Formation"
+    ],
     "readMore": "Lire l'article",
     "readingTime": "{minutes} min de lecture",
     "placeholder": true
@@ -197,8 +357,22 @@
       "need": "Besoin principal",
       "message": "Message"
     },
-    "orgTypes": ["Entreprise", "ONG", "Institution publique", "Startup", "Professionnel indépendant", "Autre"],
-    "needs": ["Former mon équipe", "Automatiser un processus", "Mettre en place un système IA", "Développer un agent IA", "Élaborer une stratégie IA", "Autre"],
+    "orgTypes": [
+      "Entreprise",
+      "ONG",
+      "Institution publique",
+      "Startup",
+      "Professionnel indépendant",
+      "Autre"
+    ],
+    "needs": [
+      "Former mon équipe",
+      "Automatiser un processus",
+      "Mettre en place un système IA",
+      "Développer un agent IA",
+      "Élaborer une stratégie IA",
+      "Autre"
+    ],
     "backHome": "Retour à l'accueil",
     "placeholders": {
       "name": "Votre nom complet",
@@ -223,7 +397,9 @@
     "errorValidation": "Certaines informations n'ont pas été acceptées. Vérifiez vos réponses, puis renvoyez le formulaire — ou écrivez-nous à",
     "errorBody": "Une erreur est survenue lors de l'envoi. Veuillez réessayer ou nous contacter directement à",
     "sending": "Envoi en cours...",
-    "directEmail": "Ou écrivez-nous directement à"
+    "directEmail": "Ou écrivez-nous directement à",
+    "metaTitle": "Contact — parler à un expert IA en RDC",
+    "metaDescription": "Contactez RAPIA : conseil, formation, implémentation et automatisation IA. Bureaux à Goma, Kinshasa et Lubumbashi. Réponse sous 24 h ouvrées."
   },
   "footer": {
     "servicesTitle": "Services",
@@ -236,7 +412,11 @@
     "emailLabel": "E-mail",
     "phoneLabel": "Téléphone",
     "headquarters": "siège",
-    "copyright": "Tous droits réservés."
+    "copyright": "Tous droits réservés.",
+    "aboutLink": "À propos",
+    "faqLink": "FAQ",
+    "followTitle": "Nous suivre",
+    "recognitionLabel": "Distinction"
   },
   "vision": {
     "back": "Retour",
@@ -258,7 +438,9 @@
     "s4TitleC": "l'outil",
     "s5Eyebrow": "05 — Passer à l'action",
     "s5TitleA": "Prêt à",
-    "s5TitleB": "commencer ?"
+    "s5TitleB": "commencer ?",
+    "metaTitle": "Notre vision — une IA qui travaille, pas qui répond",
+    "metaDescription": "La vision de RAPIA : faire passer les organisations congolaises et africaines du stade de la conversation avec une IA à celui de la délégation réelle de travail."
   },
   "storyFlow": {
     "act2": {
@@ -301,11 +483,138 @@
   },
   "transformation": {
     "scenes": [
-      {"label": "LA SURCHARGE", "line": "La surcharge devient la norme."},
-      {"label": "L'ARRIVÉE", "line": "Un système peut prendre le relais."},
-      {"label": "LE RELAIS", "line": "La transition est fluide, pas un remplacement."},
-      {"label": "L'EXÉCUTION", "line": "Les tâches s'exécutent, en continu."},
-      {"label": "LE RÉSULTAT", "line": "Le temps retrouvé change tout."}
+      {
+        "label": "LA SURCHARGE",
+        "line": "La surcharge devient la norme."
+      },
+      {
+        "label": "L'ARRIVÉE",
+        "line": "Un système peut prendre le relais."
+      },
+      {
+        "label": "LE RELAIS",
+        "line": "La transition est fluide, pas un remplacement."
+      },
+      {
+        "label": "L'EXÉCUTION",
+        "line": "Les tâches s'exécutent, en continu."
+      },
+      {
+        "label": "LE RÉSULTAT",
+        "line": "Le temps retrouvé change tout."
+      }
     ]
+  },
+  "about": {
+    "metaTitle": "À propos — l’agence et son fondateur",
+    "metaDescription": "RAPIA est la division intelligence artificielle de Rapyogo SARL, société congolaise basée à Goma. Parcours du fondateur, certifications, distinctions, et ce que nous ne prétendons pas.",
+    "eyebrow": "À propos",
+    "heading": "Qui est derrière RAPIA",
+    "subtitle": "Une agence congolaise, dirigée par un praticien, qui préfère dire ce qu'elle ne sait pas faire plutôt que de le laisser croire.",
+    "back": "Retour à l'accueil",
+    "agencyTitle": "L'agence",
+    "agencyBody": [
+      "RAPIA est la division intelligence artificielle de Rapyogo SARL, société de droit congolais immatriculée à Goma. Elle travaille depuis trois implantations — Goma, Kinshasa, Lubumbashi — avec des entreprises, des ONG, des institutions et des professionnels indépendants.",
+      "Le métier tient en une phrase : faire passer une organisation du stade où quelqu'un pose des questions à un assistant, au stade où des systèmes exécutent réellement du travail. Entre les deux il y a des processus à cartographier, des données à connecter et des équipes à former. C'est là que nous intervenons.",
+      "Nous ne revendons aucune licence et ne sommes liés à aucun éditeur. Le modèle retenu dépend du problème à résoudre, pas d'un accord commercial."
+    ],
+    "founderTitle": "Le fondateur",
+    "founderRole": "Fondateur et directeur",
+    "founderBody": [
+      "RAPIA est dirigée par {name}, fondateur de Rapyogo SARL. Son parcours n'est pas celui d'un ingénieur : il vient de la psychologie, et cette formation décide de la manière dont l'agence travaille.",
+      "La plupart des projets d'IA n'échouent pas sur la technique. Ils échouent parce que personne n'a regardé comment une équipe travaille vraiment avant de lui livrer un outil. Comprendre un métier avant de l'automatiser, c'est le point de départ de chaque mission."
+    ],
+    "credentialsTitle": "Formation et certifications",
+    "credentials": [
+      {
+        "title": "Certification Microsoft",
+        "detail": "Compétences validées sur les technologies et services d'intelligence artificielle Microsoft."
+      },
+      {
+        "title": "Certification Anthropic",
+        "detail": "Compétences validées sur la conception et l'usage professionnel des modèles Claude."
+      },
+      {
+        "title": "Bac+5 en psychologie",
+        "detail": "Université Libre des Pays des Grands Lacs (ULPGL), Goma."
+      },
+      {
+        "title": "Alumni Orange Corners",
+        "detail": "Programme d'accompagnement entrepreneurial porté par le ministère néerlandais des Affaires étrangères."
+      }
+    ],
+    "recognitionsTitle": "Distinctions",
+    "recognitions": [
+      {
+        "title": "GoGettaz Africa — Top 60 Agripreneurs",
+        "year": "2024",
+        "detail": "Rapyogo SARL a été retenue parmi les 60 finalistes continentaux du concours panafricain GoGettaz, dédié à l'entrepreneuriat agroalimentaire.",
+        "linkLabel": "Vérifier sur gogettaz.africa"
+      }
+    ],
+    "honestyTitle": "Ce que nous ne publions pas",
+    "honestyBody": "Une agence de conseil se juge sur ses preuves. Voici l'état réel des nôtres — et la règle que nous nous imposons avant de publier quoi que ce soit.",
+    "honestyItems": [
+      "Aucun chiffre de performance n'est affiché sur ce site tant qu'il ne provient pas d'une mission mesurée et validée par le client concerné.",
+      "Aucun témoignage ni logo client n'est publié sans accord écrit de l'organisation citée.",
+      "Les distinctions mentionnées ci-dessus renvoient à leur source d'origine : elles se vérifient sans nous croire sur parole.",
+      "Une absence sur cette page est une absence réelle, pas un oubli de mise à jour."
+    ],
+    "ctaTitle": "Une question sur notre façon de travailler ?",
+    "ctaBody": "Le premier échange sert à comprendre votre situation. Il n'engage à rien et ne nécessite aucune préparation.",
+    "ctaButton": "Nous écrire"
+  },
+  "faq": {
+    "metaTitle": "Questions fréquentes sur l'intégration de l'IA",
+    "metaDescription": "Coûts, délais, sécurité des données, connexion limitée, formation des équipes : réponses directes aux questions que posent les organisations congolaises avant un projet d'intelligence artificielle.",
+    "eyebrow": "Questions fréquentes",
+    "heading": "Ce qu'on nous demande avant de commencer",
+    "subtitle": "Les questions posées en premier rendez-vous, avec les réponses que nous y apportons réellement.",
+    "back": "Retour à l'accueil",
+    "items": [
+      {
+        "question": "Faut-il déjà être « prêt » pour l'IA ?",
+        "answer": "Non. Une organisation prête est une organisation qui a déjà fait le travail — cartographier ses processus, ranger ses données, identifier ses goulots. C'est précisément ce travail que nous faisons en premier. Ce qu'il faut au départ, ce n'est pas de la maturité technique : c'est une tâche précise qui coûte du temps à quelqu'un, chaque semaine."
+      },
+      {
+        "question": "Combien coûte un projet d'intelligence artificielle ?",
+        "answer": "Nous ne publions pas de grille tarifaire, parce qu'un audit de processus, une formation d'équipe et l'implémentation d'un agent connecté n'ont ni la même durée ni le même livrable. Le coût dépend de trois choses : le nombre de processus concernés, l'état des données à connecter, et le niveau d'autonomie visé. Un cadrage d'une heure suffit à situer un ordre de grandeur avant tout engagement."
+      },
+      {
+        "question": "Combien de temps avant de voir un résultat ?",
+        "answer": "Une formation d'équipe produit un effet dès la semaine suivante : les collaborateurs cessent d'utiliser l'IA comme un moteur de recherche. Un assistant connecté aux documents de l'organisation demande généralement quelques semaines, l'essentiel du délai venant de l'accès aux données, pas du développement. Une automatisation de bout en bout se déploie par étapes, en commençant par le processus le plus coûteux."
+      },
+      {
+        "question": "Nos données vont-elles sortir de l'organisation ?",
+        "answer": "C'est une décision d'architecture, pas une fatalité. Selon la sensibilité des données, une solution peut fonctionner avec des modèles hébergés, avec des modèles opérés en environnement fermé, ou en cloisonnant ce qui sort de ce qui reste. Nous documentons ce choix avant de construire : vous devez savoir quelle donnée transite où, et pouvoir le justifier à votre conseil d'administration ou à votre bailleur."
+      },
+      {
+        "question": "L'IA va-t-elle remplacer notre équipe ?",
+        "answer": "Notre travail consiste à retirer des tâches, pas des personnes. Les processus que nous automatisons sont ceux que personne ne revendique : ressaisie, tri, relance, mise en forme, consolidation de rapports. Une organisation qui déploie l'IA pour réduire ses effectifs se prive des seules personnes capables de superviser les systèmes qu'elle vient d'installer."
+      },
+      {
+        "question": "Quelle différence entre utiliser ChatGPT et ce que vous installez ?",
+        "answer": "Un assistant public répond à partir de ce qu'il sait en général. Il ne connaît ni vos procédures, ni vos contrats, ni votre historique client, et il ne peut rien exécuter dans vos outils. Nous distinguons trois niveaux : discuter, connecter — l'IA accède à vos données et à vos systèmes — et déléguer, où des agents exécutent des tâches complètes sous supervision humaine. La valeur apparaît à partir du deuxième niveau."
+      },
+      {
+        "question": "Cela fonctionne-t-il avec une connexion internet limitée ?",
+        "answer": "Oui, à condition d'y penser dès la conception. Les solutions que nous construisons sont dimensionnées pour des débits irréguliers : traitements groupés plutôt que continus, interfaces légères, tolérance aux coupures, et reprise sans perte quand la connexion revient. C'est une contrainte structurante en RDC, pas un cas particulier."
+      },
+      {
+        "question": "Quels outils et quels modèles utilisez-vous ?",
+        "answer": "Nous sommes agnostiques. Selon le problème, une solution peut reposer sur des modèles d'OpenAI, d'Anthropic, de Google, sur des modèles ouverts hébergés, ou sur une combinaison des trois. Le choix se justifie par le besoin — confidentialité, coût par requête, langue, latence — et se documente. Un prestataire qui propose le même outil à tous ses clients vend son partenariat, pas votre résultat."
+      },
+      {
+        "question": "Formez-vous aussi les équipes, ou seulement les dirigeants ?",
+        "answer": "Les deux, et séparément. Un dirigeant a besoin de savoir décider : où investir, quels risques accepter, comment mesurer. Une équipe opérationnelle a besoin de savoir faire, sur ses propres dossiers. Les mêmes contenus servis aux deux publics ne produisent d'effet sur aucun. RAPIA Academy couvre les deux formats."
+      },
+      {
+        "question": "Intervenez-vous en dehors de Goma ?",
+        "answer": "Oui. Nous sommes implantés à Goma, Kinshasa et Lubumbashi, et nous travaillons à distance avec des organisations ailleurs en RDC et sur le continent. Les phases de cadrage et de formation gagnent à se faire sur place ; le reste se conduit à distance sans perte de qualité."
+      }
+    ],
+    "ctaTitle": "Votre question n'y est pas ?",
+    "ctaBody": "Posez-la directement. Nous répondons aux questions précises par une réponse précise, pas par une plaquette.",
+    "ctaButton": "Poser votre question"
   }
 }

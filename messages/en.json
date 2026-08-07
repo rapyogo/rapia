@@ -16,7 +16,8 @@
     "languageFr": "Français",
     "languageEn": "English",
     "switchTo": "Passer en français",
-    "skipToContent": "Skip to main content"
+    "skipToContent": "Skip to main content",
+    "faq": "FAQ"
   },
   "hero": {
     "eyebrow": "ARTIFICIAL INTELLIGENCE AGENCY | DRC",
@@ -50,28 +51,52 @@
         "id": "conseil",
         "title": "AI Consulting",
         "description": "Identify the tasks, processes, and functions where AI can create the most value.",
-        "features": ["AI Audit", "Adoption Strategy", "Process Mapping", "Opportunity Identification", "AI Roadmap"],
+        "features": [
+          "AI Audit",
+          "Adoption Strategy",
+          "Process Mapping",
+          "Opportunity Identification",
+          "AI Roadmap"
+        ],
         "cta": "Explore consulting"
       },
       {
         "id": "formation",
         "title": "AI Training",
         "description": "Train teams in professional, secure, and productive use of artificial intelligence.",
-        "features": ["Enterprise Training", "Practical Workshops", "Executive Training", "Prompt Engineering", "Professional AI Assistant Use"],
+        "features": [
+          "Enterprise Training",
+          "Practical Workshops",
+          "Executive Training",
+          "Prompt Engineering",
+          "Professional AI Assistant Use"
+        ],
         "cta": "View trainings"
       },
       {
         "id": "implementation",
         "title": "AI Implementation",
         "description": "Build and integrate AI systems tailored to the organization's real needs.",
-        "features": ["AI Assistants", "RAG Systems", "Knowledge Bases", "AI Model Integration", "Intelligent Document Systems"],
+        "features": [
+          "AI Assistants",
+          "RAG Systems",
+          "Knowledge Bases",
+          "AI Model Integration",
+          "Intelligent Document Systems"
+        ],
         "cta": "Discuss a project"
       },
       {
         "id": "automatisation",
         "title": "Automation & AI Agents",
         "description": "Automate repetitive tasks and build agents capable of executing workflows.",
-        "features": ["Process Automation", "AI Agents", "Lead Qualification", "Document Processing", "Customer Support & Reporting"],
+        "features": [
+          "Process Automation",
+          "AI Agents",
+          "Lead Qualification",
+          "Document Processing",
+          "Customer Support & Reporting"
+        ],
         "cta": "Automate a process"
       }
     ]
@@ -81,10 +106,22 @@
     "heading": "How we work",
     "subtitle": "A proven methodology to go from problem to solution, with teams at the center.",
     "steps": [
-      {"title": "Understand", "description": "We analyze your goals, processes, and challenges."},
-      {"title": "Identify", "description": "We identify the tasks and processes with the highest potential for AI use."},
-      {"title": "Build", "description": "We design and implement the right solution."},
-      {"title": "Train", "description": "We support teams so the technology is genuinely adopted."}
+      {
+        "title": "Understand",
+        "description": "We analyze your goals, processes, and challenges."
+      },
+      {
+        "title": "Identify",
+        "description": "We identify the tasks and processes with the highest potential for AI use."
+      },
+      {
+        "title": "Build",
+        "description": "We design and implement the right solution."
+      },
+      {
+        "title": "Train",
+        "description": "We support teams so the technology is genuinely adopted."
+      }
     ]
   },
   "useCases": {
@@ -95,18 +132,58 @@
     "interventionLabel": "AI Intervention",
     "resultLabel": "Result",
     "cases": [
-      {"sector": "Human Resources", "before": "Time-consuming manual CV and HR document sorting.", "intervention": "Automated sorting, document synthesis, and card preparation assistance.", "result": "Faster processing, HR team refocused on people."},
-      {"sector": "Sales", "before": "Unqualified leads, time wasted searching for information.", "intervention": "Automatic lead qualification and information preparation.", "result": "Better-prepared salespeople, shorter sales cycle."},
-      {"sector": "Customer Service", "before": "Frequent questions overwhelming support teams.", "intervention": "AI assistant that answers common questions and escalates complex cases.", "result": "Reduced response time, improved customer satisfaction."},
-      {"sector": "NGOs", "before": "Manual project data collection and analysis.", "intervention": "Accelerated collection, analysis, and synthesis of information.", "result": "Faster reporting, better resource allocation."},
-      {"sector": "Finance & Admin", "before": "Repetitive manual document tasks and reports.", "intervention": "Automation of document tasks, reports, and internal workflows.", "result": "Reduced errors, significant time savings."},
-      {"sector": "Leadership", "before": "Decisions based on fragmented information.", "intervention": "Synthesis and analysis systems for quick overview.", "result": "Faster, better-informed decisions."}
+      {
+        "sector": "Human Resources",
+        "before": "Time-consuming manual CV and HR document sorting.",
+        "intervention": "Automated sorting, document synthesis, and card preparation assistance.",
+        "result": "Faster processing, HR team refocused on people."
+      },
+      {
+        "sector": "Sales",
+        "before": "Unqualified leads, time wasted searching for information.",
+        "intervention": "Automatic lead qualification and information preparation.",
+        "result": "Better-prepared salespeople, shorter sales cycle."
+      },
+      {
+        "sector": "Customer Service",
+        "before": "Frequent questions overwhelming support teams.",
+        "intervention": "AI assistant that answers common questions and escalates complex cases.",
+        "result": "Reduced response time, improved customer satisfaction."
+      },
+      {
+        "sector": "NGOs",
+        "before": "Manual project data collection and analysis.",
+        "intervention": "Accelerated collection, analysis, and synthesis of information.",
+        "result": "Faster reporting, better resource allocation."
+      },
+      {
+        "sector": "Finance & Admin",
+        "before": "Repetitive manual document tasks and reports.",
+        "intervention": "Automation of document tasks, reports, and internal workflows.",
+        "result": "Reduced errors, significant time savings."
+      },
+      {
+        "sector": "Leadership",
+        "before": "Decisions based on fragmented information.",
+        "intervention": "Synthesis and analysis systems for quick overview.",
+        "result": "Faster, better-informed decisions."
+      }
     ]
   },
   "academy": {
     "heading": "Training the people who will work with AI.",
     "subtitle": "RAPIA Academy: training designed for every level, from executives to operational teams.",
-    "formations": ["AI Fundamentals", "Generative AI", "ChatGPT, Claude, Gemini, and other LLMs", "Automation", "AI Agents", "AI for Executives", "AI for Admin Teams", "AI for NGOs", "AI for Entrepreneurs"],
+    "formations": [
+      "AI Fundamentals",
+      "Generative AI",
+      "ChatGPT, Claude, Gemini, and other LLMs",
+      "Automation",
+      "AI Agents",
+      "AI for Executives",
+      "AI for Admin Teams",
+      "AI for NGOs",
+      "AI for Entrepreneurs"
+    ],
     "cta": "View trainings"
   },
   "whyRapia": {
@@ -114,11 +191,26 @@
     "heading": "Why RAPIA?",
     "subtitle": "In a market saturated with promises, here's what makes the difference.",
     "arguments": [
-      {"title": "African-context expertise", "description": "Our solutions are designed around the operational realities of organizations in the DRC and across Africa."},
-      {"title": "Results-first approach", "description": "We don't start with the tool. We start with the problem."},
-      {"title": "Training + Implementation", "description": "We don't just build a solution. We help teams adopt it."},
-      {"title": "Technology-agnostic", "description": "RAPIA is tool-agnostic. The best model depends on the problem to solve."},
-      {"title": "Human-centered", "description": "The goal isn't to replace teams. It's to let them work better, faster, and with greater capacity."}
+      {
+        "title": "African-context expertise",
+        "description": "Our solutions are designed around the operational realities of organizations in the DRC and across Africa."
+      },
+      {
+        "title": "Results-first approach",
+        "description": "We don't start with the tool. We start with the problem."
+      },
+      {
+        "title": "Training + Implementation",
+        "description": "We don't just build a solution. We help teams adopt it."
+      },
+      {
+        "title": "Technology-agnostic",
+        "description": "RAPIA is tool-agnostic. The best model depends on the problem to solve."
+      },
+      {
+        "title": "Human-centered",
+        "description": "The goal isn't to replace teams. It's to let them work better, faster, and with greater capacity."
+      }
     ]
   },
   "technologies": {
@@ -127,10 +219,22 @@
     "subtitle": "We choose the technology based on the problem, not the other way around.",
     "techLine": "We choose the technology based on the problem, not the other way around.",
     "categories": [
-      {"title": "LLMs", "description": "ChatGPT, Claude, Gemini, Mistral, DeepSeek, and other relevant models."},
-      {"title": "Automation", "description": "Custom workflows, APIs, integrations, and automation."},
-      {"title": "Data", "description": "Databases, documents, knowledge bases, and RAG systems."},
-      {"title": "Agents", "description": "AI agents capable of executing tasks and workflows autonomously."}
+      {
+        "title": "LLMs",
+        "description": "ChatGPT, Claude, Gemini, Mistral, DeepSeek, and other relevant models."
+      },
+      {
+        "title": "Automation",
+        "description": "Custom workflows, APIs, integrations, and automation."
+      },
+      {
+        "title": "Data",
+        "description": "Databases, documents, knowledge bases, and RAG systems."
+      },
+      {
+        "title": "Agents",
+        "description": "AI agents capable of executing tasks and workflows autonomously."
+      }
     ]
   },
   "forWhom": {
@@ -138,10 +242,26 @@
     "heading": "Who is it for?",
     "subtitle": "Whatever your organization, we have a tailored approach.",
     "audiences": [
-      {"title": "Businesses", "description": "Improve productivity and automate your operations.", "cta": "Talk to an expert"},
-      {"title": "NGOs", "description": "Optimize your processes, documentation, reporting, and knowledge management.", "cta": "Discover how"},
-      {"title": "Institutions", "description": "Train your teams and build an AI adoption strategy.", "cta": "Train my teams"},
-      {"title": "Professionals", "description": "Develop skills directly applicable to your work.", "cta": "View trainings"}
+      {
+        "title": "Businesses",
+        "description": "Improve productivity and automate your operations.",
+        "cta": "Talk to an expert"
+      },
+      {
+        "title": "NGOs",
+        "description": "Optimize your processes, documentation, reporting, and knowledge management.",
+        "cta": "Discover how"
+      },
+      {
+        "title": "Institutions",
+        "description": "Train your teams and build an AI adoption strategy.",
+        "cta": "Train my teams"
+      },
+      {
+        "title": "Professionals",
+        "description": "Develop skills directly applicable to your work.",
+        "cta": "View trainings"
+      }
     ]
   },
   "socialProof": {
@@ -152,16 +272,48 @@
     "pending": "Pending",
     "emptyState": "Figures will be published once verified. No data on this site is invented.",
     "stats": [
-      {"key": "projets", "label": "Projects delivered", "suffix": ""},
-      {"key": "equipes", "label": "People trained", "suffix": ""},
-      {"key": "processus", "label": "Processes automated", "suffix": ""},
-      {"key": "organisations", "label": "Organizations supported", "suffix": ""}
+      {
+        "key": "projets",
+        "label": "Projects delivered",
+        "suffix": ""
+      },
+      {
+        "key": "equipes",
+        "label": "People trained",
+        "suffix": ""
+      },
+      {
+        "key": "processus",
+        "label": "Processes automated",
+        "suffix": ""
+      },
+      {
+        "key": "organisations",
+        "label": "Organizations supported",
+        "suffix": ""
+      }
     ],
     "proofs": [
-      {"key": "testimonials", "label": "Testimonials", "body": "The first testimonial will be published after our first delivered engagement, with the client's written consent."},
-      {"key": "clients", "label": "Clients", "body": "No logo will appear here without signed authorisation from the organization concerned."},
-      {"key": "partners", "label": "Partners", "body": "Partnerships currently being formalised will be announced once the agreements are signed."},
-      {"key": "certifications", "label": "Certifications", "body": "Team certifications will be listed with their issuing body and the date awarded."}
+      {
+        "key": "testimonials",
+        "label": "Testimonials",
+        "body": "The first testimonial will be published after our first delivered engagement, with the client's written consent."
+      },
+      {
+        "key": "clients",
+        "label": "Clients",
+        "body": "No logo will appear here without signed authorisation from the organization concerned."
+      },
+      {
+        "key": "partners",
+        "label": "Partners",
+        "body": "Partnerships currently being formalised will be announced once the agreements are signed."
+      },
+      {
+        "key": "certifications",
+        "label": "Certifications",
+        "body": "Team certifications will be listed with their issuing body and the date awarded."
+      }
     ],
     "ctaTitle": "Looking for an agency that doesn't oversell?",
     "ctaBody": "We start with an honest diagnostic of your processes. If there is no serious AI opportunity in your organization, we tell you so.",
@@ -170,7 +322,15 @@
   "content": {
     "heading": "Understand AI before adopting it.",
     "subtitle": "Articles, analysis, and resources to demystify artificial intelligence.",
-    "categories": ["Artificial Intelligence", "Automation", "AI Agents", "Productivity", "Digital Transformation", "AI in Africa", "Training"],
+    "categories": [
+      "Artificial Intelligence",
+      "Automation",
+      "AI Agents",
+      "Productivity",
+      "Digital Transformation",
+      "AI in Africa",
+      "Training"
+    ],
     "readMore": "Read the article",
     "readingTime": "{minutes} min read",
     "placeholder": true
@@ -197,8 +357,22 @@
       "need": "Primary need",
       "message": "Message"
     },
-    "orgTypes": ["Company", "NGO", "Public Institution", "Startup", "Independent Professional", "Other"],
-    "needs": ["Train my team", "Automate a process", "Set up an AI system", "Develop an AI agent", "Develop an AI strategy", "Other"],
+    "orgTypes": [
+      "Company",
+      "NGO",
+      "Public Institution",
+      "Startup",
+      "Independent Professional",
+      "Other"
+    ],
+    "needs": [
+      "Train my team",
+      "Automate a process",
+      "Set up an AI system",
+      "Develop an AI agent",
+      "Develop an AI strategy",
+      "Other"
+    ],
     "backHome": "Back to home",
     "placeholders": {
       "name": "Your full name",
@@ -223,7 +397,9 @@
     "errorValidation": "Some of your answers weren't accepted. Check them, then submit the form again — or write to us at",
     "errorBody": "An error occurred while sending. Please try again or contact us directly at",
     "sending": "Sending...",
-    "directEmail": "Or write to us directly at"
+    "directEmail": "Or write to us directly at",
+    "metaTitle": "Contact — talk to an AI expert in the DRC",
+    "metaDescription": "Get in touch with RAPIA: AI consulting, training, implementation and automation. Offices in Goma, Kinshasa and Lubumbashi. Reply within one business day."
   },
   "footer": {
     "servicesTitle": "Services",
@@ -236,7 +412,11 @@
     "emailLabel": "Email",
     "phoneLabel": "Phone",
     "headquarters": "head office",
-    "copyright": "All rights reserved."
+    "copyright": "All rights reserved.",
+    "aboutLink": "About",
+    "faqLink": "FAQ",
+    "followTitle": "Follow us",
+    "recognitionLabel": "Recognition"
   },
   "vision": {
     "back": "Back",
@@ -258,7 +438,9 @@
     "s4TitleC": "the tool",
     "s5Eyebrow": "05 — Taking action",
     "s5TitleA": "Ready to",
-    "s5TitleB": "get started?"
+    "s5TitleB": "get started?",
+    "metaTitle": "Our vision — AI that works, not AI that answers",
+    "metaDescription": "RAPIA's vision: moving Congolese and African organisations from chatting with an AI to genuinely delegating work to it."
   },
   "storyFlow": {
     "act2": {
@@ -301,11 +483,138 @@
   },
   "transformation": {
     "scenes": [
-      {"label": "THE OVERLOAD", "line": "Overload becomes the norm."},
-      {"label": "THE ARRIVAL", "line": "A system can take over."},
-      {"label": "THE HANDOFF", "line": "The transition is smooth, not a replacement."},
-      {"label": "THE EXECUTION", "line": "Tasks get done, continuously."},
-      {"label": "THE RESULT", "line": "Time reclaimed changes everything."}
+      {
+        "label": "THE OVERLOAD",
+        "line": "Overload becomes the norm."
+      },
+      {
+        "label": "THE ARRIVAL",
+        "line": "A system can take over."
+      },
+      {
+        "label": "THE HANDOFF",
+        "line": "The transition is smooth, not a replacement."
+      },
+      {
+        "label": "THE EXECUTION",
+        "line": "Tasks get done, continuously."
+      },
+      {
+        "label": "THE RESULT",
+        "line": "Time reclaimed changes everything."
+      }
     ]
+  },
+  "about": {
+    "metaTitle": "About — the agency and its founder",
+    "metaDescription": "RAPIA is the artificial intelligence division of Rapyogo SARL, a Congolese company based in Goma. Founder's background, certifications, recognitions, and what we do not claim.",
+    "eyebrow": "About",
+    "heading": "Who is behind RAPIA",
+    "subtitle": "A Congolese agency, led by a practitioner, that would rather say what it cannot do than let you assume otherwise.",
+    "back": "Back to home",
+    "agencyTitle": "The agency",
+    "agencyBody": [
+      "RAPIA is the artificial intelligence division of Rapyogo SARL, a company incorporated under Congolese law and registered in Goma. It operates from three locations — Goma, Kinshasa, Lubumbashi — with companies, NGOs, institutions and independent professionals.",
+      "The work fits in one sentence: moving an organisation from the stage where someone asks an assistant questions, to the stage where systems actually carry out work. In between there are processes to map, data to connect and teams to train. That is where we come in.",
+      "We resell no licences and are tied to no vendor. The model we choose depends on the problem to solve, not on a commercial agreement."
+    ],
+    "founderTitle": "The founder",
+    "founderRole": "Founder and director",
+    "founderBody": [
+      "RAPIA is led by {name}, founder of Rapyogo SARL. His background is not an engineer's: he comes from psychology, and that training shapes how the agency works.",
+      "Most AI projects do not fail on the technology. They fail because nobody looked at how a team actually works before handing it a tool. Understanding a job before automating it is the starting point of every engagement."
+    ],
+    "credentialsTitle": "Education and certifications",
+    "credentials": [
+      {
+        "title": "Microsoft certification",
+        "detail": "Validated skills on Microsoft artificial intelligence technologies and services."
+      },
+      {
+        "title": "Anthropic certification",
+        "detail": "Validated skills on designing with and professionally applying Claude models."
+      },
+      {
+        "title": "Master's degree in psychology",
+        "detail": "Université Libre des Pays des Grands Lacs (ULPGL), Goma."
+      },
+      {
+        "title": "Orange Corners alumnus",
+        "detail": "Entrepreneurship support programme run by the Dutch Ministry of Foreign Affairs."
+      }
+    ],
+    "recognitionsTitle": "Recognitions",
+    "recognitions": [
+      {
+        "title": "GoGettaz Africa — Top 60 Agripreneurs",
+        "year": "2024",
+        "detail": "Rapyogo SARL was selected among the 60 continental finalists of the pan-African GoGettaz competition for agrifood entrepreneurship.",
+        "linkLabel": "Verify on gogettaz.africa"
+      }
+    ],
+    "honestyTitle": "What we do not publish",
+    "honestyBody": "A consultancy is judged on its evidence. Here is the real state of ours — and the rule we hold ourselves to before publishing anything.",
+    "honestyItems": [
+      "No performance figure appears on this site unless it comes from a measured engagement and has been approved by the client concerned.",
+      "No testimonial or client logo is published without written consent from the organisation named.",
+      "The recognitions above link back to their original source: they can be verified without taking our word for it.",
+      "An absence on this page is a real absence, not an outdated update."
+    ],
+    "ctaTitle": "A question about how we work?",
+    "ctaBody": "The first conversation is about understanding your situation. It commits you to nothing and requires no preparation.",
+    "ctaButton": "Get in touch"
+  },
+  "faq": {
+    "metaTitle": "Frequently asked questions about AI adoption",
+    "metaDescription": "Cost, timelines, data security, limited connectivity, team training: direct answers to the questions Congolese organisations ask before an artificial intelligence project.",
+    "eyebrow": "Frequently asked questions",
+    "heading": "What people ask us before we start",
+    "subtitle": "The questions raised in a first meeting, with the answers we actually give.",
+    "back": "Back to home",
+    "items": [
+      {
+        "question": "Do we need to be \"ready\" for AI first?",
+        "answer": "No. A ready organisation is one that has already done the work — mapped its processes, tidied its data, identified its bottlenecks. That work is exactly what we do first. What you need at the start is not technical maturity: it is one specific task that costs someone time, every week."
+      },
+      {
+        "question": "How much does an artificial intelligence project cost?",
+        "answer": "We publish no price list, because a process audit, a team training session and the implementation of a connected agent share neither duration nor deliverable. Cost depends on three things: how many processes are involved, the state of the data to connect, and the level of autonomy you are aiming for. A one-hour scoping call is enough to establish an order of magnitude before any commitment."
+      },
+      {
+        "question": "How long before we see a result?",
+        "answer": "Team training has an effect within the following week: people stop using AI as a search engine. An assistant connected to the organisation's documents usually takes a few weeks, most of the delay coming from data access rather than development. End-to-end automation is deployed in stages, starting with the most expensive process."
+      },
+      {
+        "question": "Will our data leave the organisation?",
+        "answer": "That is an architecture decision, not a given. Depending on how sensitive the data is, a solution can run on hosted models, on models operated in a closed environment, or by separating what leaves from what stays. We document that choice before building: you must know which data goes where, and be able to justify it to your board or your donor."
+      },
+      {
+        "question": "Will AI replace our team?",
+        "answer": "Our work is to remove tasks, not people. The processes we automate are the ones nobody claims: re-entry, sorting, chasing, formatting, consolidating reports. An organisation that deploys AI to cut headcount loses the only people able to supervise the systems it has just installed."
+      },
+      {
+        "question": "What is the difference between using ChatGPT and what you install?",
+        "answer": "A public assistant answers from what it knows in general. It knows neither your procedures, nor your contracts, nor your customer history, and it cannot execute anything in your tools. We distinguish three levels: chatting, connecting — the AI reaches your data and your systems — and delegating, where agents carry out complete tasks under human supervision. Value appears from the second level onwards."
+      },
+      {
+        "question": "Does this work with limited internet connectivity?",
+        "answer": "Yes, provided it is designed for from the start. The solutions we build are sized for irregular bandwidth: batched rather than continuous processing, lightweight interfaces, tolerance to outages, and lossless resumption when the connection returns. In the DRC this is a structural constraint, not an edge case."
+      },
+      {
+        "question": "Which tools and models do you use?",
+        "answer": "We are agnostic. Depending on the problem, a solution may rely on models from OpenAI, Anthropic, Google, on hosted open models, or on a combination of all three. The choice is justified by the need — confidentiality, cost per request, language, latency — and documented. A provider who proposes the same tool to every client is selling their partnership, not your outcome."
+      },
+      {
+        "question": "Do you train teams too, or only executives?",
+        "answer": "Both, and separately. An executive needs to know how to decide: where to invest, which risks to accept, how to measure. An operational team needs to know how to do it, on their own files. The same material served to both audiences works for neither. RAPIA Academy covers both formats."
+      },
+      {
+        "question": "Do you work outside Goma?",
+        "answer": "Yes. We are based in Goma, Kinshasa and Lubumbashi, and we work remotely with organisations elsewhere in the DRC and across the continent. Scoping and training phases benefit from being held on site; the rest is delivered remotely with no loss of quality."
+      }
+    ],
+    "ctaTitle": "Your question isn't here?",
+    "ctaBody": "Ask it directly. We answer precise questions with a precise answer, not with a brochure.",
+    "ctaButton": "Ask your question"
   }
 }

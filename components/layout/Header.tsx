@@ -11,11 +11,16 @@ export function Header() {
   const t = useTranslations("nav");
   const locale = useLocale();
   const prefix = `/${locale}`;
+  // « À propos » pointait vers l'ancre `#why-rapia` de l'accueil : un argument
+  // de vente, pas une page d'identité. Elle mène désormais à la vraie page —
+  // c'est celle qu'un visiteur cherche quand il veut savoir à qui il parle, et
+  // celle qu'un moteur cherche pour rattacher l'entité à une personne.
   const navLinks = [
     { label: t("home"), href: prefix },
     { label: t("services"), href: `${prefix}/#services` },
     { label: t("training"), href: `${prefix}/#academy` },
-    { label: t("about"), href: `${prefix}/#why-rapia` },
+    { label: t("about"), href: `${prefix}/a-propos` },
+    { label: t("faq"), href: `${prefix}/faq` },
     { label: t("contact"), href: `${prefix}/contact` },
   ];
 

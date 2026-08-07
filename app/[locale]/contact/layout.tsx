@@ -5,18 +5,19 @@ import { breadcrumb, graph, webPage } from "@/lib/schema";
 import { ogImage, siteUrl } from "@/lib/site";
 
 /**
- * La page « Notre vision » est un composant client (GSAP, ScrollTrigger) : elle
- * ne peut pas exporter de `generateMetadata`. Ce layout le fait pour elle.
+ * La page contact est un composant client (état du formulaire) : elle n'a
+ * jamais pu exporter de métadonnées, et personne n'avait ajouté ce layout.
  *
- * Ce qu'il corrige : le `metadata` statique précédent était écrit en français
- * en dur — la version anglaise servait donc un titre et une description
- * français — et il ne déclarait aucun `canonical`. Faute de canonical propre,
- * la page héritait de celui de la racine et se déclarait donc comme étant la
- * page d'accueil. Deux URLs qui prétendent être la même page, c'est du contenu
- * dupliqué du point de vue d'un crawler.
+ * Résultat relevé par l'audit : elle servait le titre, la description, le
+ * canonical et les balises OG de la page d'accueil. Un moteur ne pouvait ni
+ * distinguer les deux pages, ni comprendre que celle-ci porte les coordonnées.
+ *
+ * Le schema `ContactPage` fait ce dernier travail explicitement — les
+ * coordonnées elles-mêmes sont déjà déclarées une fois pour toutes dans le
+ * `ContactPoint` de l'organisation, servi par le layout de locale.
  */
 
-const PATH = "/notre-vision";
+const PATH = "/contact";
 
 export async function generateMetadata({
   params,
@@ -24,7 +25,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "vision" });
+  const t = await getTranslations({ locale, namespace: "contact" });
   const url = siteUrl(locale, PATH);
 
   return {
@@ -39,7 +40,7 @@ export async function generateMetadata({
       },
     },
     openGraph: {
-      type: "article",
+      type: "website",
       title: t("metaTitle"),
       description: t("metaDescription"),
       url,
@@ -48,7 +49,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function NotreVisionLayout({
+export default async function ContactLayout({
   children,
   params,
 }: {
@@ -56,15 +57,16 @@ export default async function NotreVisionLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "vision" });
+  const t = await getTranslations({ locale, namespace: "contact" });
 
   const nodes = [
     webPage(locale, {
+      type: "ContactPage",
       path: PATH,
       name: t("metaTitle"),
       description: t("metaDescription"),
     }),
-    breadcrumb(locale, [{ name: t("metaTitle"), path: PATH }]),
+    breadcrumb(locale, [{ name: t("heading"), path: PATH }]),
   ];
 
   return (

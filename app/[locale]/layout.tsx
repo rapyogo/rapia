@@ -4,6 +4,9 @@ import { NextIntlClientProvider } from "next-intl";
 import { Inter } from "next/font/google";
 import { MotionConfig } from "framer-motion";
 import { SmoothScroll } from "@/components/ui/smooth-scroll";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { baseGraph, graph } from "@/lib/schema";
+import { SITE_URL, siteUrl } from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,14 +29,12 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "site" });
 
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://rapia.cd";
   // localePrefix: "always" — chaque locale a son propre préfixe, y compris
   // la locale par défaut. Le canonical doit donc toujours le porter.
-  const pathPrefix = `/${locale}`;
+  const canonical = siteUrl(locale);
 
   return {
-    metadataBase: new URL(baseUrl),
+    metadataBase: new URL(SITE_URL),
     title: {
       default: `RAPIA — ${locale === "fr" ? "Agence d'Intelligence Artificielle | RDC" : "Artificial Intelligence Agency | DRC"}`,
       template: `%s | RAPIA`,
@@ -48,10 +49,13 @@ export async function generateMetadata({
       apple: "/icone-rapia_dark-mode.webp",
     },
     alternates: {
-      canonical: `${baseUrl}${pathPrefix}`,
+      canonical,
       languages: {
-        fr: `${baseUrl}/fr`,
-        en: `${baseUrl}/en`,
+        fr: siteUrl("fr"),
+        en: siteUrl("en"),
+        // Sans `x-default`, un moteur choisit lui-même la langue servie aux
+        // visiteurs dont la locale ne correspond à aucune des deux.
+        "x-default": siteUrl("fr"),
       },
     },
     openGraph: {
@@ -63,15 +67,14 @@ export async function generateMetadata({
       description: locale === "fr"
         ? "Conseil. Formation. Implémentation. Automatisation. L'IA qui travaille pour votre organisation."
         : "Consulting. Training. Implementation. Automation. AI that works for your organization.",
-      url: `${baseUrl}${pathPrefix}`,
-      images: [
-        {
-          url: "/logo-horisontale-rapia-dark_mode.webp",
-          width: 500,
-          height: 500,
-          alt: "RAPIA",
-        },
-      ],
+      url: canonical,
+      locale: locale === "fr" ? "fr_CD" : "en_US",
+      alternateLocale: locale === "fr" ? "en_US" : "fr_CD",
+      // Pas d'`images` ici : `app/[locale]/opengraph-image.tsx` fournit le
+      // visuel 1200×630 et Next l'injecte, en absolu, dans og:image comme dans
+      // twitter:image. Le déclarer en double laisserait deux sources à
+      // corriger — l'ancienne pointait encore vers un logo carré 500×500 sur
+      // un domaine mort.
     },
     twitter: {
       card: "summary_large_image",
@@ -79,7 +82,6 @@ export async function generateMetadata({
       description: locale === "fr"
         ? "Conseil. Formation. Implémentation. Automatisation. L'IA qui travaille pour votre organisation."
         : "Consulting. Training. Implementation. Automation. AI that works for your organization.",
-      images: ["/logo-horisontale-rapia-dark_mode.webp"],
     },
     robots: {
       index: true,
@@ -97,20 +99,12 @@ export default async function LocaleLayout({
 }>) {
   const { locale } = await params;
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "RAPIA",
-    description: locale === "fr"
-      ? "Agence d'intelligence artificielle — Conseil, Formation, Implémentation, Automatisation en RDC."
-      : "Artificial intelligence agency — Consulting, Training, Implementation, Automation in DRC.",
-    url: "https://rapia.cd",
-    email: "contact@rapyogo.com",
-    address: {
-      "@type": "PostalAddress",
-      addressCountry: "CD",
-    },
-  };
+  // Le socle d'entités — organisation, site, fondateur, établissements — est
+  // servi sur chaque page. Les pages y ajoutent leur propre nœud (`WebPage`,
+  // `FAQPage`, fil d'Ariane) via leur propre `<JsonLd>`, et les `@id` les
+  // recollent : c'est ce qui permet à un moteur de comprendre que la FAQ et la
+  // page contact décrivent la même entreprise.
+  const nodes = await baseGraph(locale);
 
   return (
     <html
@@ -118,10 +112,7 @@ export default async function LocaleLayout({
       className={`${inter.variable} h-full antialiased`}
     >
       <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <JsonLd data={graph(nodes)} />
       </head>
       <body className="min-h-full flex flex-col font-sans">
         <NextIntlClientProvider>

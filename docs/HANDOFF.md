@@ -1,7 +1,7 @@
 # RAPIA — Handoff de session
 
 > À lire en premier au début de chaque session (voir CLAUDE.md).
-> Dernière mise à jour : 2026-08-06 (fin de session — composants UI, preuves, footer)
+> Dernière mise à jour : 2026-08-07 (corrections de l'audit GEO — domaine, schema, llms.txt, pages E-E-A-T)
 
 ## État actuel
 
@@ -312,9 +312,90 @@ plus stricte du projet.
 | Route | Contenu |
 |-------|---------|
 | `/[locale]` | Landing page complète (13 sections dans l'ordre ci-dessus) |
+| `/[locale]/a-propos` | Agence, fondateur, certifications, distinctions, engagements |
+| `/[locale]/faq` | 10 questions/réponses + JSON-LD `FAQPage` |
 | `/[locale]/contact` | Formulaire contact → `/api/contact` (Brevo SMTP, honeypot, rate limiting) |
 | `/[locale]/notre-vision` | Page immersive GSAP, 5 sections |
-| `/sitemap.xml`, `/robots.txt` | Générés dynamiquement, bilingues |
+| `/sitemap.xml`, `/robots.txt`, `/llms.txt` | Générés dynamiquement, bilingues |
+| `/[locale]/opengraph-image` | Image de partage 1200×630 générée par `next/og` |
+
+## Visibilité IA (GEO) — audit du 05/08/2026
+
+Audit externe : `C:\Users\RAPYOGO\geo-audit-rapia\GEO-REPORT-RapIA-v3.pdf`,
+score global **43/100**. Corrections appliquées le 2026-08-07.
+
+### La panne de fond : `rapia.cd`
+
+Le site se déclarait tout entier sur `rapia.cd` — **un domaine qui ne résout
+pas** (NXDOMAIN, vérifié : `curl` renvoie 000). Canonical, `og:url`, `og:image`
+et sitemap pointaient vers le vide. Le domaine était recopié dans quatre
+fichiers, et `NEXT_PUBLIC_SITE_URL` n'était posée sur aucun environnement
+Vercel : c'est donc bien le fallback mort qui était servi en production.
+
+**`lib/site.ts` est désormais la source unique** de l'URL, des profils
+externes, des distinctions et des faits sur le fondateur. Le sitemap, le
+robots.txt, le llms.txt, les canonicals et le JSON-LD en dérivent tous — ils ne
+peuvent plus diverger. Le domaine se change **à un seul endroit**.
+
+### Ce qui a été ajouté
+
+| Fichier | Rôle |
+|---------|------|
+| `lib/site.ts` | URL, chemins, profils, distinctions, fondateur |
+| `lib/schema.ts` | Tout le JSON-LD, en `@graph` avec des `@id` stables |
+| `components/seo/JsonLd.tsx` | Injection, avec échappement de `<` |
+| `app/llms.txt/route.ts` | Carte du site pour les crawlers IA (llmstxt.org) |
+| `app/[locale]/opengraph-image.tsx` | Image de partage 1200×630 |
+| `app/[locale]/a-propos/`, `app/[locale]/faq/` | Les deux pages E-E-A-T |
+| `app/[locale]/contact/layout.tsx` | Métadonnées : la page est un composant client |
+
+### Pièges rencontrés — à ne pas réintroduire
+
+- **`openGraph` d'une page enfant remplace celui du parent, il ne le complète
+  pas.** Dès qu'une page déclare son propre bloc `openGraph`, l'image générée
+  par la convention `opengraph-image.tsx` disparaît **silencieusement**. Toute
+  page qui personnalise son OG doit rappeler `ogImage(locale)`.
+- **Un seul nœud par URL dans le graphe.** Émettre `WebPage(type: FAQPage)`
+  *et* un `FAQPage` séparé créait deux entités concurrentes pour la même page.
+  `faqPage()` produit maintenant un nœud unique qui porte les deux rôles.
+- **`logo-horisontale-rapia-dark_mode.png` est un carré 500×500** où la marque
+  n'occupe qu'une bande centrale. Posé à hauteur voulue dans l'image OG, il
+  rendait un logotype minuscule. C'est `icone-rapia_dark-mode.png` (96×132) qui
+  est utilisée, le mot « RAPIA » étant composé à côté en texte.
+- **Ne pas empiler les `.section` sur une page de lecture.** `--section-gap`
+  vaut 96px en haut *et* en bas : deux sections empilées donnent 192px de vide,
+  un rythme fait pour la landing. Les pages À propos et FAQ utilisent **une**
+  `.section` avec `space-y-16 md:space-y-20` à l'intérieur.
+- **`datePublished` est écrit en dur**, jamais dérivé de la date de build : un
+  redéploiement sans changement de contenu ferait rajeunir la page à chaque
+  fois.
+- **TikTok n'est pas dans `SOCIALS`.** L'audit mentionne un compte « RapYOGO »,
+  mais TikTok répond 200 sur n'importe quel `@handle`, existant ou non : le
+  profil n'a pas pu être vérifié. Un `sameAs` qui pointe dans le vide affaiblit
+  l'entité au lieu de la confirmer.
+
+### À faire confirmer avant de communiquer dessus
+
+Les faits publiés sur la page « À propos » viennent de l'audit, pas de
+l'intéressé : **certifications Microsoft et Anthropic, Bac+5 psychologie ULPGL,
+alumni Orange Corners, GoGettaz Top 60 2024**. Ils sont dans `FOUNDER`
+(`lib/site.ts`) et dans `about.credentials` (`messages/*.json`). Une
+certification annoncée et non détenue coûte plus cher que l'absence de page.
+
+### Reste hors code
+
+Ces points de l'audit ne se corrigent pas dans le dépôt :
+
+- **Acheter `rapia.cd`** et le rediriger en 301 (nom de marque court), ou
+  l'abandonner définitivement.
+- **301 de `rapia.rapyogo.com` (Hostinger) et `car.rapyogo.com`** vers le
+  domaine principal — l'autorité de marque est diluée sur quatre domaines.
+- **Google Business Profile vérifié** à Goma, **LinkedIn company page**,
+  **YouTube**. Dès qu'une URL existe, l'ajouter à `SOCIALS` : elle part
+  automatiquement dans le `sameAs` et le pied de page.
+- **Annuaires IA** (Futurepedia, There's An AI For That).
+- **Articles de fond** : `components/sections/Content.tsx` rend une grille
+  complète mais retourne `null` tant que `ARTICLES` est vide.
 
 ## Emails (Brevo SMTP + Nodemailer)
 
@@ -591,7 +672,6 @@ filesystem avant d'appliquer les règles d'ignore.
 - Contenu réel pour les stats SocialProof, témoignages, articles (dès que vérifié)
 - Vidéo showpiece « La Transformation » si les crédits Higgsfield le permettent
 - Remplacer `equipe.webp` par une vraie photo d'équipe
-- Revoir `metadataBase` : le site utilise `rapia.cd` dans les canonicals mais
-  tourne sur `ia.rapyogo.com`
 - Statuer sur la longueur de page (~21 000 px)
-- Review EN par un locuteur natif
+- Review EN par un locuteur natif — **la FAQ et la page À propos ajoutent
+  ~1 800 mots d'anglais non relu**
