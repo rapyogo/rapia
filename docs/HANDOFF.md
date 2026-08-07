@@ -1,7 +1,7 @@
 # RAPIA — Handoff de session
 
 > À lire en premier au début de chaque session (voir CLAUDE.md).
-> Dernière mise à jour : 2026-08-07 (corrections de l'audit GEO — domaine, schema, llms.txt, pages E-E-A-T)
+> Dernière mise à jour : 2026-08-07 (audit GEO, pages Services/Formation, refonte navigation mobile, base Neon)
 
 ## État actuel
 
@@ -11,19 +11,23 @@ déployé en production sur [`https://ia.rapyogo.com`](https://ia.rapyogo.com).
 **Le formulaire de contact est opérationnel** : il envoie réellement des emails
 via Brevo SMTP, testé de bout en bout en production (voir « Emails »).
 
-**Ce qui tourne en production** (commit `3921359`) :
-- **Bilinguisme complet** FR/EN via `next-intl` v4, 184 clés, parité stricte
-- **Bibliothèque de composants UI** — Badge, Empty, ChoiceChips, Card composé
-- **Footer complet** — coordonnées légales, contraste AA, source unique partagée
-  avec les emails (`lib/company.ts`)
+**Ce qui tourne en production** (commit `7d03a10`) :
+- **Bilinguisme complet** FR/EN via `next-intl` v4, **266 clés**, parité stricte
+- **Sept pages** : accueil, Services, Formation, À propos, FAQ, Notre vision, Contact
+- **Signalisation IA saine** : `llms.txt`, sitemap, canonicals et `@graph` JSON-LD
+  sur `ia.rapyogo.com` (voir « Visibilité IA »)
+- **Bibliothèque de composants UI** — Badge, Empty, ChoiceChips, Card composé,
+  `PageShell` pour les pages de contenu
+- **Footer complet** — coordonnées légales, liens sortants, distinctions,
+  contraste AA, source unique partagée avec les emails (`lib/company.ts`)
 - **Design Corporate Clair** : Inter, fond clair `#F8F9FB`, zéro gradient/glow/blur,
   profondeur par bordures 1px et aplats
 - **Récit vidéo en 5 actes** au scroll (canvas + GSAP) avec 4 couches de parallaxe
 - **ProblemLevels** avec pin ScrollTrigger + rail de progression ambre
-- **SocialProof** avec compteurs CountUp et placeholders [À CONFIRMER]
+- **SocialProof** — grille masquée tant qu'aucun chiffre n'est confirmé
 - **28 photos corporate** (1,52 Mo) dérivées d'un master unique
 - **Lenis** smooth scroll synchronisé avec le ticker GSAP
-- **Page Notre Vision** immersive (GSAP ScrollTrigger pin/rotate)
+- **Base Neon** provisionnée, schéma appliqué — **pas encore branchée**
 
 **Production :** [`https://ia.rapyogo.com`](https://ia.rapyogo.com) (alias Vercel)
 **Repo GitHub :** [`https://github.com/rapyogo/rapia`](https://github.com/rapyogo/rapia)
@@ -32,6 +36,12 @@ via Brevo SMTP, testé de bout en bout en production (voir « Emails »).
 ## Commits récents (tout sur `master`, ordre chronologique)
 
 ```
+7d03a10 chore: lockfile apres ajout du pilote Neon
+1b0bc9c feat: base Neon — schema de l espace client, migrations et client SQL
+673a4fd feat: pages Services et Formation, burger repense, fondus, scrollbar masquee
+9852a5e fix: chapitres superposes au chargement, et biographie reelle du fondateur
+1775aba fix: corrections de l audit GEO — domaine mort, schema, llms.txt, E-E-A-T
+703b276 docs: handoff de fin de session + graphe de connaissances a jour
 3921359 feat: footer complet — coordonnees legales, contraste AA, i18n reparee
 04f24dd feat: primitives UI premium, preuves honnetes et formulaire durci
 8a6228d docs: authentification du domaine verifiee — SPF et DKIM actifs
@@ -129,6 +139,7 @@ chargement. Les primitives sont écrites à la main, en HTML natif accessible.
 | `Badge` | Chips et tags | Teintes 10 % ; amber et emerald utilisent les **encres**, jamais la couleur pleine |
 | `Empty` | État vide, en composition | `Empty` / `EmptyHeader` / `EmptyMedia` / `EmptyTitle` / `EmptyDescription` / `EmptyContent`. `EmptyTitle` prend `as="h3"` quand il porte un vrai niveau de titre |
 | `ChoiceChips` | Choix unique en chips | Boutons `aria-pressed`, **pas** un `radiogroup` : le champ est facultatif et doit pouvoir se désélectionner |
+| `PageShell` | Charpente des pages de contenu | `PageHeader` / `PageBody` / `BlockTitle` / `PageCta`. Voir « Navigation et interface » — c'est là que vit le rythme vertical |
 
 L'API de composition d'`Empty` reprend celle de shadcn/ui — la structure, pas le
 style ni le code. Les composants « premium » trouvés en ligne (21st.dev et
@@ -178,6 +189,48 @@ Ne pas réordonner les actes sans réécrire les textes.
   - `devicePixelRatio` plafonné à 2, rendu « cover », respect `prefers-reduced-motion`.
 - **`components/sections/HeroSequence.tsx`** — acte 1, avec les CTA.
 - **`components/sections/StoryFlow.tsx`** — actes 2 à 5 via `StoryAct`.
+
+### ⚠️ L'état initial des chapitres est en CSS, pas en JS
+
+Le défaut le plus visible du site, corrigé le 2026-08-07 : à l'ouverture, **les
+trois chapitres de la hero s'affichaient tous en même temps**, texte par-dessus
+texte. Ils sont positionnés en absolu les uns sur les autres, et le
+`gsap.set(chapters.slice(1), { autoAlpha: 0 })` qui les masque ne s'exécute
+qu'après l'hydratation — ~600 ms mesurés en local, plusieurs secondes sur une
+connexion lente, c'est-à-dire chez les visiteurs que le produit vise.
+
+L'état de départ est désormais posé dans `app/globals.css` :
+
+```css
+[data-chapter]:not([data-chapter="0"]) {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(40px);
+}
+```
+
+Trois choses à ne pas défaire :
+
+- **`visibility` accompagne `opacity`** parce que GSAP pilote `autoAlpha`, la
+  combinaison des deux. Un état initial qui n'en couvrirait qu'une produirait
+  un saut au premier frame.
+- **Les `gsap.set()` de `HeroSequence.tsx` et `StoryFlow.tsx` restent**, mais
+  ne sont plus la source de vérité. Si les valeurs changent d'un côté, les
+  changer de l'autre.
+- **Un `<noscript>` dans le layout de locale** remet les chapitres dans le flux
+  si JavaScript ne charge pas — sinon leur texte serait perdu.
+
+Chaque acte renumérote ses chapitres à partir de 0 : le sélecteur vaut pour la
+hero comme pour les quatre actes.
+
+### Longueur mobile — `scrollLengthMobile`
+
+`StoryAct` est passé de **2,2 à 1,5** écran de course par acte : la landing
+mesurait 38 écrans de haut sur un 390 px, elle en fait 35. Le contenu est
+identique, seule la course change. Le voile de lisibilité monte à **80 %** sur
+mobile (70 % au-dessus de 768 px) : l'image y est recadrée en « cover » sur une
+colonne étroite, donc bien plus dense, et le titre passait derrière les lignes
+de code du décor.
 
 ### Piège de timeline GSAP
 
@@ -320,6 +373,63 @@ plus stricte du projet.
 | `/[locale]/notre-vision` | Page immersive GSAP, 5 sections |
 | `/sitemap.xml`, `/robots.txt`, `/llms.txt` | Générés dynamiquement, bilingues |
 | `/[locale]/opengraph-image` | Image de partage 1200×630 générée par `next/og` |
+
+## Navigation et interface — refonte du 2026-08-07
+
+### Les deux navigations mobiles ne disent pas la même chose
+
+Le tiroir du burger reprenait **à l'identique** les quatre onglets déjà
+affichés en permanence par la barre du bas. L'ouvrir ne montrait rien de
+nouveau. Le partage est désormais celui que prescrit `CLAUDE.md` :
+
+| Surface | Contenu | Fichier |
+|---------|---------|---------|
+| Barre d'onglets (bas, fixe) | Accueil, Services, Formation, Contact | `MobileNav.tsx` |
+| Tiroir burger (haut) | À propos, FAQ, Notre vision, langue, CTA | `Header.tsx` (`secondaryLinks`) |
+| Nav desktop | Les 5 pages principales | `Header.tsx` (`navLinks`) |
+
+- **Ne pas remettre `navLinks` dans le tiroir mobile** : c'est exactement le
+  défaut corrigé.
+- Le tiroir est en `inset-x-0 bottom-0 top-16`, **pas** `inset-0` : avec
+  `top-16`, un `inset-0` faisait déborder le tiroir de 4 px.
+- `pb-20` réserve la hauteur de la barre d'onglets, qui reste au premier plan
+  (z-50 contre z-40) pour que la navigation principale reste atteignable.
+- Il y avait **deux landmarks** `aria-label="Navigation mobile"` — le tiroir
+  porte maintenant `nav.secondaryMenu`.
+
+### Les apparitions sont des fondus, rien d'autre
+
+Les quinze animations de la landing combinaient un fondu, un glissement
+vertical (`y: 24` à `y: 40`) et un décalage échelonné (`delay: i * 0.07`).
+C'est ce qui produisait l'impression de **texte en cascade**. Il ne reste que
+`opacity: 0 → 1`.
+
+**Ne pas réintroduire `y:`, `x:` ni `delay: i *` dans un `whileInView`.** Le
+contrôle est visuel : si un élément d'une grille arrive après ses voisins,
+c'est une régression.
+
+### Barre de défilement masquée
+
+`app/globals.css`, fin de fichier. Le défilement reste entier — molette,
+clavier, geste, Page Down ; seul l'indicateur disparaît, parce qu'il sautait à
+chaque section épinglée par ScrollTrigger. Les conteneurs qui défilent en
+interne prennent la classe `.scroll-hidden`, sinon une barre réapparaît au
+milieu de la page.
+
+C'est un **compromis assumé** : on perd un repère de position sur une page de
+~35 écrans.
+
+### Pages de contenu — `components/layout/PageShell.tsx`
+
+`PageHeader`, `PageBody`, `BlockTitle`, `PageCta`, `PageShell`. Utilisés par
+Services et Formation ; À propos et FAQ portent encore leur propre charpente,
+identique — **à faire converger si l'une d'elles est retouchée.**
+
+**Le rythme vertical vit là.** Empiler des `.section` donne 192 px de blanc
+entre deux blocs (`--section-gap` = 96 px, en haut *et* en bas) : le rythme de
+la landing, où chaque section occupe un écran. Sur une page qui se lit d'une
+traite, ce vide casse la lecture. Le corps est donc **une** `.section` dont les
+enfants directs sont espacés par `space-y-16 md:space-y-20`.
 
 ## Visibilité IA (GEO) — audit du 05/08/2026
 
@@ -686,6 +796,51 @@ environnements et dans `.env.local`.
 
 ## Prochaines pistes
 
+### Le chantier de la session suivante — l'espace client
+
+Décidé avec l'utilisateur le 2026-08-07. Le schéma Neon l'attend en entier
+(voir « Base de données ») ; **aucune ligne de code applicatif n'existe encore.**
+
+1. **Authentification par lien magique.** `users`, `auth_tokens`, `sessions`
+   sont prêtes. Brevo est déjà en service, donc pas de secret à stocker :
+   `sendEmail()` existe, le stub à écrire est l'envoi du lien. `password_hash`
+   reste nullable tant que ce choix tient.
+2. **Audit de workflow en libre-service** — `workflow_audits`. Réponses en
+   `jsonb` + `questionnaire_version` : sans ce numéro, les réponses d'avant un
+   changement de questionnaire deviennent illisibles. Le diagnostic rend un
+   `maturity_level` de 1 à 3, qui reprend les trois niveaux du site
+   (Discuter / Connecter / Déléguer).
+3. **Ressources** — `resources`, `resource_downloads`. `access` vaut
+   `public`, `account` ou `client`.
+4. **Formations** — `training_sessions`, `training_registrations`. Le catalogue
+   éditorial reste dans `messages/*.json` ; la table ne porte que ce qu'une
+   inscription exige.
+5. **Avancement de projet** — `projects`, `project_milestones`. Des étapes, pas
+   un pourcentage : un client veut savoir *ce qui* est fait.
+6. **Blog** — `posts`. `Content.tsx` rend déjà la grille et retourne `null`
+   faute de source ; c'est cette table qui la lui donne.
+7. **Newsletter** — `newsletter_subscribers`, double opt-in.
+
+**Trois décisions à prendre avant de coder** : la durée de session, ce qu'un
+compte non vérifié peut voir, et qui administre le contenu (un back-office ou
+du SQL direct au début).
+
+### À confirmer par l'utilisateur
+
+- **Certifications Microsoft et Anthropic** : publiées sur `/a-propos`, mais
+  elles viennent de l'audit GEO et **pas de la biographie transmise par
+  l'intéressé**. Confirmer ou retirer de `FOUNDER.certifications`
+  (`lib/site.ts`) et de `about.credentials` (`messages/*.json`).
+- **Liens sociaux** : `SOCIAL_PLATFORMS` réserve la place de LinkedIn, YouTube,
+  TikTok, Facebook, Instagram et X, toutes à `url: null`. Renseigner une URL
+  suffit à la publier dans le pied de page **et** dans le `sameAs`. Seul GitHub
+  est vérifié à ce jour.
+- **Domaine de Viteat** : aucun ne résout (`viteat.com`, `.cd`, `.app`,
+  `.africa`, `viteat.rapyogo.com`). Le service est cité sans lien sur
+  `/a-propos` ; `SIBLING_SERVICES` l'attend en `url: null`.
+- **Rotation du mot de passe Neon** — voir l'avertissement en tête de « Base de
+  données ».
+
 ### Email — à traiter en priorité
 
 - **Passer DMARC de `p=none` à `p=quarantine`.** SPF et DKIM sont en place
@@ -716,7 +871,12 @@ environnements et dans `.env.local`.
   incohérence pire que le défaut. **Chantier transverse, à décider en bloc.**
 - **Publier le premier article** : `components/sections/Content.tsx` rend une
   grille complète mais retourne `null` tant que le tableau `ARTICLES` est vide.
-  Ajouter une entrée suffit — la mise en page n'est plus à décider.
+  La table `posts` existe désormais pour l'alimenter.
+- **Faire converger À propos et FAQ sur `PageShell`** — elles portent encore
+  leur propre charpente, identique à celle du composant.
+- **Statuer sur la longueur de la landing** : ~35 écrans sur mobile après la
+  réduction des actes. Les leviers restants sont le nombre de sections, pas la
+  course de scroll.
 - Audit Lighthouse sur `/fr` et `/en` (LCP, CLS, INP)
 - CI/CD GitHub → Vercel automatique
 - Contenu réel pour les stats SocialProof, témoignages, articles (dès que vérifié)
